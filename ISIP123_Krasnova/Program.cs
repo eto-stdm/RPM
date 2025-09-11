@@ -23,5 +23,28 @@ void input()
         m_uslug[i] = temp_m[0];
         m_cost[i] = Convert.ToInt32(temp_m[1]);
     }
-}
 
+    int menu = 0;
+    do
+    {
+        Console.WriteLine("1. Вывод данных");
+        Console.WriteLine("2. Статистика");
+        Console.WriteLine("3. Сортировка по цене");
+        Console.WriteLine("4. Конвертация валюты");
+        Console.WriteLine("5. Поиск по названию ");
+        Console.WriteLine("0. Выход");
+        menu = Console.Read();
+
+        switch(menu)
+        {
+            case 1: break;
+            case 2: break;
+            case 3: break;
+            case 4: break;
+            case 5: break;
+            case 0: break;
+            default: break;
+        }
+    }
+    while(menu != 0);
+}
