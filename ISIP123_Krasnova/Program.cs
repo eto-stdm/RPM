@@ -27,12 +27,14 @@ void input()
     string menu = "0";
     do
     {
+        Console.WriteLine("/////////////////////");
         Console.WriteLine("1. Вывод данных");
         Console.WriteLine("2. Статистика");
         Console.WriteLine("3. Сортировка по цене");
         Console.WriteLine("4. Конвертация валюты");
         Console.WriteLine("5. Поиск по названию ");
         Console.WriteLine("0. Выход");
+        Console.WriteLine("/////////////////////");
 
         menu = Console.ReadLine();
 
@@ -113,10 +115,10 @@ void converting(string[] a, double[] arr)
             }
             break;
         case "3":
+            Console.Write("Введите свой курс: ");
+            int mine = Convert.ToInt32(Console.ReadLine());
             foreach (int i in arr)
             {
-                Console.Write("Введите свой курс: ");
-                int mine = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine(i * mine + "; " + a[c]);
                 c++;
             }
