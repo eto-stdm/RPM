@@ -12,8 +12,6 @@ Product p5 = new Product(4, "Салат листовой", 30, 0, false, "Ово
 list_prod.Add(p1);
 list_prod.Add(p2);
 list_prod.Add(p3);
-list_prod.Add(p4);
-list_prod.Add(p5);
 
 do
 {
@@ -25,8 +23,6 @@ do
     Console.WriteLine("4 - Заказ поставки товара (по ID)");
     Console.WriteLine("5 - Продажа товара (по ID)");
     Console.WriteLine("6 - Поиск товара (по ID, названию или категории)");
-    Console.WriteLine("7 - История продаж с отменой*");
-    Console.WriteLine("8 - Отчёт о продажах*");
     Console.WriteLine("0 - Выход");
     Console.WriteLine("-----------------------------");
     n = Console.ReadLine();
@@ -40,8 +36,6 @@ do
         case "4": call_for_delivery(); break;
         case "5": sell_Product(); break;
         case "6": search_for_Product(list_prod); break;
-        case "7": cancel_history(); break;
-        case "8": history_report(); break;
         default: continue;
 
     }
@@ -112,7 +106,7 @@ int add_Product(List<Product> list_prod, int id)
     Console.WriteLine($"Продукт {add.name} добавлен");
     id++;
     return id;
-}// готово
+}// готово*
 
 void remove_Product(List<Product> list_prod)
 {
@@ -155,7 +149,7 @@ void call_for_delivery()
             break;
         }
     }
-}// готово
+}// готово*
 
 void sell_Product()
 {
@@ -181,7 +175,7 @@ void sell_Product()
         }
     }
 
-}// готово
+}// готово*
 
 void search_for_Product(List<Product> list_prod)
 {
@@ -242,17 +236,7 @@ void search_for_Product(List<Product> list_prod)
 
         default: Console.WriteLine("Ошибка: Неверно набранная категория"); break;
     }
-}// готово
-
-void cancel_history()
-{
-
-}
-
-void history_report()
-{
-
-}
+}// готово*
 
 class Product
 {
