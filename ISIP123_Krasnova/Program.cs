@@ -12,6 +12,8 @@ Product p5 = new Product(4, "Салат листовой", 30, 0, false, "Ово
 list_prod.Add(p1);
 list_prod.Add(p2);
 list_prod.Add(p3);
+list_prod.Add(p4);
+list_prod.Add(p5);
 
 do
 {
@@ -23,6 +25,8 @@ do
     Console.WriteLine("4 - Заказ поставки товара (по ID)");
     Console.WriteLine("5 - Продажа товара (по ID)");
     Console.WriteLine("6 - Поиск товара (по ID, названию или категории)");
+    Console.WriteLine("7 - История продаж с отменой*");
+    Console.WriteLine("8 - Отчёт о продажах*");
     Console.WriteLine("0 - Выход");
     Console.WriteLine("-----------------------------");
     n = Console.ReadLine();
@@ -36,6 +40,8 @@ do
         case "4": call_for_delivery(); break;
         case "5": sell_Product(); break;
         case "6": search_for_Product(list_prod); break;
+        case "7": cancel_history(); break;
+        case "8": history_report(); break;
         default: continue;
 
     }
@@ -47,7 +53,7 @@ void print_for_each(List<Product> list_prod)
     {
         p.PrintInfo();
     }
-}// готово
+}
 
 int add_Product(List<Product> list_prod, int id)
 {
@@ -106,7 +112,7 @@ int add_Product(List<Product> list_prod, int id)
     Console.WriteLine($"Продукт {add.name} добавлен");
     id++;
     return id;
-}// готово*
+}
 
 void remove_Product(List<Product> list_prod)
 {
@@ -126,7 +132,7 @@ void remove_Product(List<Product> list_prod)
         }
         break;
     }
-}// готово
+}
 
 void call_for_delivery()
 {
@@ -149,7 +155,7 @@ void call_for_delivery()
             break;
         }
     }
-}// готово*
+}
 
 void sell_Product()
 {
@@ -175,7 +181,7 @@ void sell_Product()
         }
     }
 
-}// готово*
+}
 
 void search_for_Product(List<Product> list_prod)
 {
@@ -236,7 +242,17 @@ void search_for_Product(List<Product> list_prod)
 
         default: Console.WriteLine("Ошибка: Неверно набранная категория"); break;
     }
-}// готово*
+}
+
+void cancel_history()
+{
+    // История продаж с возможностью отмены последней продажи.Для реализации этой функции, используйте `Stack`.
+}
+
+void history_report()
+{
+    // Отчёт о продажах. Отчёт должен выводить все проданные товары, количество штук и общую сумму продажи.
+}
 
 class Product
 {
@@ -268,4 +284,4 @@ class Product
         Console.WriteLine($"Категория: {category}");
         Console.WriteLine("*************************");
     }
-}// готово
+}
