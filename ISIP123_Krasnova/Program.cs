@@ -117,6 +117,7 @@ int add_Product(List<Product> list_prod, int id)
 void remove_Product(List<Product> list_prod)
 {
     int id;
+    int count = 0;
     Console.WriteLine("Напишите ID продукта:");
     id = Convert.ToInt32(Console.ReadLine());
     foreach (Product p in list_prod.ToList())
@@ -125,12 +126,13 @@ void remove_Product(List<Product> list_prod)
         {
             Console.WriteLine($"Товар {p.name} с ID {p.productID} удалён");
             list_prod.Remove(p);
+            count++;
+            break;
         }
-        else
-        {
-            Console.WriteLine("Ошибка: Товара с таким ID не существует");
-        }
-        break;
+    }
+    if (count == 0)
+    {
+        Console.WriteLine("Ошибка: Товара с таким ID не существует");
     }
 }
 
@@ -139,7 +141,7 @@ void call_for_delivery()
     string call;
     Console.Write("Какой продукт вы хотите заказать?: ");
     call = Console.ReadLine();
-
+    int c = 0;
     foreach (Product p in list_prod)
     {
         if (p.productID == Convert.ToInt32(call))
@@ -148,12 +150,17 @@ void call_for_delivery()
             Console.WriteLine($"У вас в наличии {p.quantity} шт.");
             int count = Convert.ToInt32(Console.ReadLine());
 
+            c += 1;
             p.quantity += count;
             Console.WriteLine($"{p.name} {count} шт. заказано.");
 
             if (p.quantity > 0) { p.isleft = true; }
             break;
         }
+    }
+    if (c == 0)
+    {
+        Console.WriteLine("Ошибка: Товара с таким ID не существует");
     }
 }
 
