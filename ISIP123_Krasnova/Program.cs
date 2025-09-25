@@ -11,8 +11,9 @@ else
     //count_words(x1);
     //shortest_word(x1);
     //count_sentence(x1);
-    longest_word(x1);
-    count_vow_conson(x1);
+    //longest_word(x1);
+    //count_vow_conson(x1);
+    letter_stat(x1);
 }
 
 void count_words(string s) // подсчёт слов
@@ -124,7 +125,20 @@ void longest_word(string s) // длиннейшее слово
 }
 void letter_stat(string s) // статистика по частоте встречаемости каждой буквы
 {
+    string LETTERS = "абвгдеёжзийклмнопрстуфхцчшщэъыьюя";
 
+    for (int i = 0; i < LETTERS.Length; i++)
+    {
+        int temp = 0;
+        foreach (char c in s)
+        {
+            if (c == LETTERS[i])
+            {
+                temp++;
+            }
+        }
+        Console.WriteLine($"В тексте {temp} букв {LETTERS[i]}.");
+    }
 }
 
 
