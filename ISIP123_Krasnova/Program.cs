@@ -8,13 +8,15 @@ if (x1.Length < 100)
 }
 else
 {
-    count_words(x1);
-    shortest_word(x1);
-    count_sentence(x1);
+    //count_words(x1);
+    //shortest_word(x1);
+    //count_sentence(x1);
+    longest_word(x1);
+    count_vow_conson(x1);
 }
 
 void count_words(string s) // подсчёт слов
-{
+{ 
     int t_words = 0;
     char prev = ' '; 
     foreach (char c in s)
@@ -35,7 +37,7 @@ void shortest_word(string s) // кратчайшее слово
 {
     string res = "00000000000000000000000000000000000000000000000000000000";
     string temp = "";
-    string PUNCTUATION = ",.!\"\' ";
+    string PUNCTUATION = ",.!\"\'\n ";
 
     foreach (char c in s)
     {
@@ -68,11 +70,57 @@ void count_sentence(string s) // подсчёт предложений
 }
 void count_vow_conson(string s) // подсчёт гласных и согласных
 {
+    s = s.ToLower();
+    string VOWELS = "аоэеиыуёюя";
+    string CONSONANTS = "бвгджзйклмнпрстфхцчшщ";
+    string UNREADABLE = "ьъ";
+    int v_c = 0;
+    int c_c = 0;
+    int o_c = 0;
 
+    foreach (char c in s)
+    {
+        if (VOWELS.Contains(c))
+        {
+            v_c++;
+        }
+        if (CONSONANTS.Contains(c))
+        {
+            c_c++;
+        }
+        if (UNREADABLE.Contains(c))
+        {
+            o_c++;
+        }
+
+    }
+    Console.WriteLine($"Общее количество гласных: {v_c}");
+    Console.WriteLine($"Общее количество согласных: {c_c}");
+    Console.WriteLine($"Общее количество ь и ъ: {o_c}");
 }
-void longest_word(string s) // кратчайщее слово
+void longest_word(string s) // длиннейшее слово
 {
+    string res = "";
+    string temp = "";
+    string PUNCTUATION = "-,.!\"\'\n\r ";
+    string p = ".,- ";
 
+    foreach (char c in s)
+    {
+        if (PUNCTUATION.Contains(c))
+        {
+            if (temp.Length > res.Length)
+            {
+                res = temp;
+                temp = "";
+            }
+        }
+        else
+        {
+            temp += c;
+        }
+    }
+    Console.WriteLine($"Самое длинное слово: {res}");
 }
 void letter_stat(string s) // статистика по частоте встречаемости каждой буквы
 {
