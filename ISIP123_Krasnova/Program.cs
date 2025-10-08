@@ -1,10 +1,59 @@
-﻿List<Book> list_book = new List<Book>();
-int id = 0;
+﻿int id = 5;
+string n = "0";
+List<Book> list_book = new List<Book>();
 
+Book b1 = new Book(0, "Гамлет. Принц Датский", "Уильям Шекспир", "Трагедия", 1603, 220);
+Book b2 = new Book(1, "Недоросль", "Денис Фонвизин", "Комедия", 1783, 160);
+Book b3 = new Book(2, "На дне", "Максим Горький", "Драма", 1902, 205);
+Book b4 = new Book(3, "Горе от ума", "Александр Грибоедов", "Комедия", 1825, 230);
+Book b5 = new Book(4, "Портрет Дориана Грея", "Оскар Уайльд", "Трагедия", 1890, 310);
+
+list_book.Add(b1);
+list_book.Add(b2);
+list_book.Add(b3);
+list_book.Add(b4);
+list_book.Add(b5);
+
+do
+{
+    Console.WriteLine("----------------------------------------------------------");
+    Console.WriteLine("Выберите пункт меню:");
+    Console.WriteLine("1 - Вывод списка с книгами");
+    Console.WriteLine("2 - Добавление книги");
+    Console.WriteLine("3 - Удаление книги (по ID)");
+    Console.WriteLine("4 - Поиск книги (по названию, автору или жанру)");
+    Console.WriteLine("5 - Отсортировать книгу (по названию или году)");
+    Console.WriteLine("6 - Вывод самой дорогой и дешёвой книги");
+    Console.WriteLine("7 - Сгруппировать книги по авторам и вывести количество книг каждого автора.");
+    Console.WriteLine("0 - Выход");
+    Console.WriteLine("----------------------------------------------------------");
+    n = Console.ReadLine();
+
+    switch (n)
+    {
+        case "0": break;
+        case "1": print_for_each(list_book); break;
+        case "2": id = add_book(list_book, id); break;
+        case "3": delete_book(list_book); break;
+        case "4": search_for_books(list_book); break;
+        case "5": sort_books(); break;
+        case "6": print_expen_cheap(list_book); break;
+        case "7": auth_amm_books(); break;
+        default: continue;
+
+    }
+} while (n != "0");
+
+void print_for_each(List<Book> list_book)
+{
+    foreach (Book p in list_book)
+    {
+        p.PrintInfo();
+    }
+}
 int add_book(List<Book> list_book, int id) //  Добавить книгу (запросить все параметры у пользователя, идентификатор назначается автоматически).
 {
     string temp_ = "";
-    string temp2_ = "";
 
     string name = "";
     string author = "";
@@ -28,22 +77,28 @@ int add_book(List<Book> list_book, int id) //  Добавить книгу (за
         return id;
     }
 
-    Console.WriteLine("Напишите есть ли продукт на складе: (да или нет)");
+    Console.WriteLine("Выберите жанр книги:");
+    Console.WriteLine("1 - Драма");
+    Console.WriteLine("2 - Комедия");
+    Console.WriteLine("3 - Трагедия");
     temp_ = Console.ReadLine();
-    temp_.ToLower();
-    if (temp_ == "да") { isleft = true; }
-    else if (temp_ == "нет") { isleft = false; }
-    else { Console.WriteLine("Ошибка: Введено некорректное значение"); return id; }
+    if (temp_ == "1") { genre = "Драма"; }
+    else if (temp_ == "2") { genre = "Комедия"; }
+    else if (temp_ == "3") { genre = "Трагедия"; }
+    else { Console.WriteLine("Ошибка: Некорректный жанр"); return id; }
 
-    Console.WriteLine("Выберите категорию продукта:");
-    Console.WriteLine("1 - Молочные продукты");
-    Console.WriteLine("2 - Хлебобулочные изделия");
-    Console.WriteLine("3 - Овощи и фрукты");
-    temp2_ = Console.ReadLine();
-    if (temp2_ == "1") { category = "Молочные продукты"; }
-    else if (temp2_ == "2") { category = "Хлебобулочные изделия"; }
-    else if (temp2_ == "3") { category = "Овощи и фрукты"; }
-    else { Console.WriteLine("Ошибка: Некорректная категория"); return id; }
+    Console.WriteLine("Напишите год издания книги:");
+    year = Convert.ToInt32(Console.ReadLine());
+    if (year < 0)
+    {
+        Console.WriteLine("Ошибка: Год не может быть отрицательным");
+        return id;
+    }
+    if (year > 2025)
+    {
+        Console.WriteLine($"Ошибка: Года {year} ещё не было");
+        return id;
+    }
 
     Console.WriteLine("Напишите цену книги:");
     price = Convert.ToInt32(Console.ReadLine());
@@ -55,11 +110,11 @@ int add_book(List<Book> list_book, int id) //  Добавить книгу (за
 
     Book add = new Book(id, name, author, genre, year, price);
     list_book.Add(add);
-    Console.WriteLine($"Книга {add.name} добавлен");
+    Console.WriteLine($"Книга '{add.name}' добавлена");
     id++;
     return id;
 }
-void delete_book() // Удалить книгу по идентификатору.
+void delete_book(List<Book> list_book) // Удалить книгу по идентификатору.
 {
     int id;
     int count = 0;
@@ -80,19 +135,104 @@ void delete_book() // Удалить книгу по идентификатор�
         Console.WriteLine("Ошибка: Книги с таким ID не существует");
     }
 }
-void search_for_books() //  Найти книги (по названию, автору, жанру, должны быть все варианты поиска книги) и выводить полную информацию.
+void search_for_books(List<Book> list_book) //  Найти книги (по названию, автору, жанру, должны быть все варианты поиска книги) и выводить полную информацию.
+{
+    Console.WriteLine("Выберите, как вы хотите найти книгу:");
+    Console.WriteLine("1 - По названию");
+    Console.WriteLine("2 - По автору");
+    Console.WriteLine("3 - По жанру");
+    string search = Console.ReadLine();
+
+    switch (search)
+    {
+        case "1":
+            Console.Write("Введите название книги для поиска: ");
+            search = Console.ReadLine().ToLower();
+            int counter = 0;
+            foreach (Book b in list_book)
+            {
+                if (b.name.ToLower().Contains(search))
+                {
+                    b.PrintInfo();
+                    counter++;
+                }
+            }
+            if (counter == 0) { Console.WriteLine("Ошибка: Книга не найдена"); }
+            break;
+
+        case "2":
+            Console.Write("Введите автора книги для поиска: ");
+            search = Console.ReadLine().ToLower();
+            counter = 0;
+            foreach (Book b in list_book)
+            {
+                if (b.author.ToLower().Contains(search))
+                {
+                    b.PrintInfo();
+                    counter++;
+                }
+            }
+            if (counter == 0) { Console.WriteLine("Ошибка: Книга не найдена"); }
+            break;
+
+        case "3":
+            Console.Write("Введите категорию для поиска: ");
+            search = Console.ReadLine().ToLower();
+            counter = 0;
+            foreach (Book p in list_book)
+            {
+                if (p.genre.ToLower().Contains(search))
+                {
+                    p.PrintInfo();
+                    counter++;
+                }
+            }
+            if (counter == 0) { Console.WriteLine("Ошибка: Книга не найдена"); }
+            break;
+
+        default: Console.WriteLine("Ошибка: Неверно набранная категория"); break;
+    }
+}
+void sort_books() //  Отсортировать книги по названию или году (должны быть обе команды). LINQ
 {
 
 }
-void sort_books() //  Отсортировать книги по названию или году (должны быть обе команды).
+void print_expen_cheap(List<Book> list_book) // Вывести самую дорогую и самую дешёвую книгу.
 {
+    int count = 0;
 
-}
-void print_expen_cheap() // Вывести самую дорогую и самую дешёвую книгу.
-{
+    string expensive_s = "";
+    int expensive_i = 0;
+    string cheap_s = "";
+    int cheap_i = 0;
 
+    foreach (Book p in list_book.ToList())
+    {
+        if (count == 0)
+        {
+            expensive_s = p.name;
+            expensive_i = p.price;
+            cheap_s = p.name;
+            cheap_i = p.price;
+        }
+
+        if (p.price > expensive_i)
+        {
+            expensive_s = p.name;
+            expensive_i = p.price;
+        }
+
+        if (p.price < cheap_i)
+        {
+            cheap_s = p.name;
+            cheap_i = p.price;
+        }
+    }
+
+    Console.WriteLine($"Самая дорогая книга - {expensive_s} стоит {expensive_i} рублей");
+    Console.WriteLine($"Самая дешёвая книга - {cheap_s} стоит {cheap_i} рублей");
 }
-void auth_amm_books() // Сгруппировать книги по авторам и вывести количество книг каждого автора.
+void auth_amm_books() // Сгруппировать книги по авторам и вывести количество книг каждого автора. LINQ
 {
 
 }
