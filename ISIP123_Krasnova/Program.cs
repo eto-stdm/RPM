@@ -146,12 +146,13 @@ string statistika(string s)
 // функции, связанные с вводом текста
 string text_new(string s)
 {
+    string text = s;
     Console.WriteLine("Введите текст:");
     s = Console.ReadLine();
     if (s.Length < 100)
     {
         Console.WriteLine("Ошибка: строка короче 100 символов");
-        return s + "";
+        return text;
     }
     else
     {
@@ -183,7 +184,7 @@ void print_stat(List<string> ls)
 {
     for (int i = 0; i < ls.Count; i++)
     {
-        Console.WriteLine($"Текст {i}");
+        Console.WriteLine($"Текст {i + 1}");
         Console.WriteLine(ls[i]);
     }
 }
