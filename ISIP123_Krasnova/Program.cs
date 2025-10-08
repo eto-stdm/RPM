@@ -22,7 +22,7 @@ do
     Console.WriteLine("2 - Добавление книги");
     Console.WriteLine("3 - Удаление книги (по ID)");
     Console.WriteLine("4 - Поиск книги (по названию, автору или жанру)");
-    Console.WriteLine("5 - Отсортировать книгу (по названию или году)");
+    Console.WriteLine("5 - Отсортировать книги (по названию или году)");
     Console.WriteLine("6 - Вывод самой дорогой и дешёвой книги");
     Console.WriteLine("7 - Сгруппировать книги по авторам и вывести количество книг каждого автора.");
     Console.WriteLine("0 - Выход");
@@ -36,9 +36,9 @@ do
         case "2": id = add_book(list_book, id); break;
         case "3": delete_book(list_book); break;
         case "4": search_for_books(list_book); break;
-        case "5": sort_books(); break;
+        case "5": sort_books(list_book); break; ///////////////
         case "6": print_expen_cheap(list_book); break;
-        case "7": auth_amm_books(); break;
+        case "7": auth_amm_books(list_book); break; ////////////////////
         default: continue;
 
     }
@@ -46,9 +46,9 @@ do
 
 void print_for_each(List<Book> list_book)
 {
-    foreach (Book p in list_book)
+    foreach (Book b in list_book)
     {
-        p.PrintInfo();
+        b.PrintInfo();
     }
 }
 int add_book(List<Book> list_book, int id) //  Добавить книгу (запросить все параметры у пользователя, идентификатор назначается автоматически).
@@ -193,9 +193,35 @@ void search_for_books(List<Book> list_book) //  Найти книги (по на
         default: Console.WriteLine("Ошибка: Неверно набранная категория"); break;
     }
 }
-void sort_books() //  Отсортировать книги по названию или году (должны быть обе команды). LINQ
+void sort_books(List<Book> list_book) //  Отсортировать книги по названию или году (должны быть обе команды). LINQ
 {
+    Console.WriteLine("Выберите, по чему вы хотите отсортировать книги:");
+    Console.WriteLine("1 - По названию");
+    Console.WriteLine("2 - По автору");
+    string search = Console.ReadLine();
 
+    switch (search)
+    {
+        case "1":
+            var ordered_name = from i in list_book
+                               orderby i.name
+                               select i;
+            foreach (Book b in ordered_name)
+            {
+                b.PrintInfo();
+            }
+            break;
+        case "2":
+            var ordered_year = from i in list_book
+                               orderby i.year
+                               select i;
+            foreach (Book b in ordered_year)
+            {
+                b.PrintInfo();
+            }
+            break;
+        default: Console.WriteLine("Ошибка: Неверно набранная категория"); break;
+    }
 }
 void print_expen_cheap(List<Book> list_book) // Вывести самую дорогую и самую дешёвую книгу.
 {
@@ -227,14 +253,38 @@ void print_expen_cheap(List<Book> list_book) // Вывести самую дор
             cheap_s = p.name;
             cheap_i = p.price;
         }
+        count++;
     }
 
     Console.WriteLine($"Самая дорогая книга - {expensive_s} стоит {expensive_i} рублей");
     Console.WriteLine($"Самая дешёвая книга - {cheap_s} стоит {cheap_i} рублей");
 }
-void auth_amm_books() // Сгруппировать книги по авторам и вывести количество книг каждого автора. LINQ
+void auth_amm_books(List<Book> list_book) // Сгруппировать книги по авторам и вывести количество книг каждого автора. LINQ
 {
+    var ordered_author = from i in list_book
+                         orderby i.author
+                         select i;
+    foreach (Book b in ordered_author)
+    {
+        b.PrintInfo();
+    }
 
+    List<string> autr = new List<string>();
+    for (int i = 0; i < list_book.Count; i++)
+    {
+        foreach (Book b in list_book)
+        {
+            if (autr.Contains(b.name))
+            {
+                continue;
+            }
+            else
+            {
+                //////////////////////////////////////////
+            }
+            //b.PrintInfo();
+        }
+    }
 }
 class Book
 {
@@ -262,7 +312,7 @@ class Book
         Console.WriteLine($"Наименование: {name}");
         Console.WriteLine($"Автор: {author}");
         Console.WriteLine($"Жанр: {genre}");
-        Console.WriteLine($"Год выпуска: {year}");
+        Console.WriteLine($"Год выпуска: {year} год");
         Console.WriteLine($"Цена: {price} рублей");
         Console.WriteLine("*************************");
     }
