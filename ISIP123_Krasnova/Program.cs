@@ -1,18 +1,20 @@
-﻿int id = 5;
+﻿int id = 6;
 string n = "0";
 List<Book> list_book = new List<Book>();
 
 Book b1 = new Book(0, "Гамлет. Принц Датский", "Уильям Шекспир", "Трагедия", 1603, 220);
 Book b2 = new Book(1, "Недоросль", "Денис Фонвизин", "Комедия", 1783, 160);
 Book b3 = new Book(2, "На дне", "Максим Горький", "Драма", 1902, 205);
-Book b4 = new Book(3, "Горе от ума", "Александр Грибоедов", "Комедия", 1825, 230);
+Book b4 = new Book(3, "Горе от ума", "Денис Фонвизин", "Комедия", 1825, 230); // Александр Грибоедов
 Book b5 = new Book(4, "Портрет Дориана Грея", "Оскар Уайльд", "Трагедия", 1890, 310);
+Book b6 = new Book(5, "Портрет Дориана Грея", "Оскар Уайльд", "Трагедия", 1890, 310);
 
 list_book.Add(b1);
 list_book.Add(b2);
 list_book.Add(b3);
 list_book.Add(b4);
 list_book.Add(b5);
+list_book.Add(b6);
 
 do
 {
@@ -269,21 +271,15 @@ void auth_amm_books(List<Book> list_book) // Сгруппировать книг
         b.PrintInfo();
     }
 
-    List<string> autr = new List<string>();
-    for (int i = 0; i < list_book.Count; i++)
+    List<string> a = new List<string>();
+    foreach (Book b in ordered_author)
     {
-        foreach (Book b in list_book)
-        {
-            if (autr.Contains(b.name))
-            {
-                continue;
-            }
-            else
-            {
-                //////////////////////////////////////////
-            }
-            //b.PrintInfo();
-        }
+        a.Add(b.author);
+    }
+
+    foreach (string val_ in a.Distinct())
+    {
+        Console.WriteLine($"{val_} написал {a.Where(x => x == val_).Count()} книг из этого списка");
     }
 }
 class Book
