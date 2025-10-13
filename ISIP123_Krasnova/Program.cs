@@ -1,17 +1,19 @@
-﻿using System.Diagnostics.Metrics;
+﻿using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Reflection;
 using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 int id_course = 4;
-int id_stud = 1000;
-int id_teach = 5000;
+int id_stud = 1003;
+int id_teach = 5003;
 string n = "0";
 
 List<Student> students = new List<Student>();
 List<Teacher> teachers = new List<Teacher>();
 List<Course> courses = new List<Course>();
 
-Student student1 = new Student(1000, "Олег", 23, "Мужской", new List<string> { "sdadasd" });
-Student student2 = new Student(1001, "Наталья", 21, "Женский", new List<string> { "sdadasd" });
+Student student1 = new Student(1000, "Олег", 23, "Мужской", new List<string> { "ымцукмымкыум" });
+Student student2 = new Student(1001, "Наталья", 21, "Женский", new List<string> { "sdadasd", "ымцукмымкыум" });
 Student student3 = new Student(1002, "Дмитрий", 19, "Мужской", new List<string> { "sdadasd" });
 
 Teacher teacher1 = new Teacher(5000, "cewewedwd", 23, "Мужской", 4, "asdasdasd");
@@ -22,10 +24,20 @@ Course course1 = new Course(1, "ымцукмымкыум", "adsadadasas", 3);
 Course course2 = new Course(2, "sdfкыум", "adsadadasas", 3);
 Course course3 = new Course(3, "wewrкмымкыум", "adsadadasas", 3);
 
+students.Add(student1);
+students.Add(student2);
+students.Add(student3);
+
+teachers.Add(teacher1);
+teachers.Add(teacher2);
+teachers.Add(teacher3);
+
 courses.Add(course1);
 courses.Add(course2);
 courses.Add(course3);
 
+
+Console.WriteLine(students.GetType());
 
 do
 {
@@ -57,7 +69,7 @@ do
                 case "2": print_one_student(students); break;
                 case "3": print_all_students(students); break;
                 case "4": sign_stud_on_course(students);  break;
-                case "5": view_student_courses(students, courses); break;
+                case "5": view_student_courses(students); break;
                 default: Console.WriteLine("Категория не выбрана, возврат к основному меню"); break;
             }
             break;
@@ -101,142 +113,151 @@ do
 
     }
 } while (n != "0");
-
-int add_student(int id, List<Student> students)
+/*
+int type_all_select(List<Object> list)
 {
-    string temp_ = "";
-    int temp_i = 0;
+    string c_str = "";
 
-    string name = "";
-    int age = 0;
-    string gender = "";
-    List<string> course = new List<string> { };
+    if (list.GetType() == students.GetType()) { c_str = "студента"; List<Student> list_s = students; }
 
-    Console.WriteLine("Введите имя студента:");
-    name = Console.ReadLine();
-    if (name == "" || name == " ")
+
+
+
+    int temp = 0;
+    Console.WriteLine("Выберите :");
+
+    for (int i = 1; i < list.Count() + 1; i++)
     {
-        Console.WriteLine("Ошибка: Имя не может быть пустым");
-        return id;
+        Console.WriteLine($"{i}. {list[i - 1].Name}");
     }
+    temp = Convert.ToInt32(Console.ReadLine());
+    return 0;
+}
+*/
 
-    Console.WriteLine("Напишите возраст студента:");
-    age = Convert.ToInt32(Console.ReadLine());
-    if (age < 16)
+Student student_selector()
+{
+    int temp = 0;
+    Console.WriteLine("Выберите студента:");
+    for (int i = 1; i < students.Count() + 1; i++)
     {
-        Console.WriteLine("Ошибка: У нас не могут обучаться студенты младше 16 лет");
-        return id;
+        Console.WriteLine($"{i}. {students[i - 1].Name}");
     }
-    if (age >= 120)
+    temp = Convert.ToInt32(Console.ReadLine());
+    Student test = students[temp - 1];
+    return test;
+}
+Teacher teacher_selector()
+{
+    int temp = 0;
+    for (int i = 1; i < teachers.Count() + 1; i++)
     {
-        Console.WriteLine($"Ошибка: Недействительный возраст");
-        return id;
+        Console.WriteLine($"{i}. {teachers[i - 1].Name}");
     }
+    temp = Convert.ToInt32(Console.ReadLine());
+    Teacher test = teachers[temp - 1];
+    return test;
+}
 
-    Console.WriteLine("Выберите пол:");
-    Console.WriteLine("1 - Мужской");
-    Console.WriteLine("2 - Женский");
-    Console.WriteLine("3 - Боевой вертолет апач");
-    temp_ = Console.ReadLine();
-    if (temp_ == "1") { gender = "Мужской"; }
-    else if (temp_ == "2") { gender = "Женский"; }
-    else if (temp_ == "3") { gender = "Боевой вертолет апач"; }
-    else { Console.WriteLine("Ошибка: Некорректный пол"); return id; }
-
-    Console.WriteLine("Напишите номер курса, на который вы хотите записаться:");
-    for (int i = 1; i < courses.Count() + 1; i++)
+int course_selector()
+{
+    int temp = 0;
+    Console.WriteLine("Выберите курс:");
+    for (int i = 0; i < courses.Count(); i++)
     {
-        Console.WriteLine($"{i}. {courses[i - 1].Name }");
+        Console.WriteLine($"{i + 1}. {courses[i].Name}");
     }
-    temp_i = Convert.ToInt32(Console.ReadLine());
-    if (temp_i <= 0 || temp_i >= courses.Count() - 1)
+    temp = Convert.ToInt32(Console.ReadLine());
+    return --temp;
+}
+
+bool course_check(int num)
+{
+    if (num < 0 || num >= courses.Count())
     {
         Console.WriteLine("Ошибка: Введён неправильный номер курса");
-        return id;
+        return false;
     }
-    else
+    else { return true; }
+}
+
+string add_name()
+{
+    Console.WriteLine("Введите ФИО:");
+    string name = Console.ReadLine();
+    if (name == "" || name == " ") { Console.WriteLine("Ошибка: Имя не может быть пустым"); return ""; }
+    else { return name; }
+}
+
+int add_age()
+{
+    Console.WriteLine("Напишите свой возраст:");
+    int age = Convert.ToInt32(Console.ReadLine());
+    if (age < 16) { Console.WriteLine("Ошибка: Слишком молодой человек"); return 1; }
+    else if (age >= 120) { Console.WriteLine("Ошибка: Недействительный возраст"); return 1; }
+    else { return age; }
+}
+string add_gender()
+{
+    string temp_ = "";
+    string gender = "";
+    Console.WriteLine("Выберите пол:\n1 - Мужской\n2 - Женский\n3 - Боевой вертолет апач");
+    temp_ = Console.ReadLine();
+    switch(temp_)
     {
-        course.Add(courses[temp_i - 1].Name);
+        case "1": { gender = "Мужской"; return gender; }
+        case "2": { gender = "Женский"; return gender; }
+        case "3": { gender = "Боевой вертолет апач"; return gender; }
+        default: { Console.WriteLine("Ошибка: Некорректный пол"); return ""; }
     }
+}
+
+int add_student(int id, List<Student> students)
+{ 
+    List<string> course = new List<string> { };
+
+    string name = add_name();
+    if (name == "") { return id; }
+
+    int age = add_age();
+    if (age == 1) { return id; }
+
+    string gender = add_gender();
+    if (name == "") { return id; }
+
+    int temp = course_selector();
+    if (course_check(temp)) { course.Add(courses[temp].Name); }
 
     Student add = new Student(id, name, age, gender, course);
     students.Add(add);
     Console.WriteLine($"Студент '{add.Name}' добавлен");
-    id++;
-    return id;
+    return ++id;
 }
-
 int add_teachers(int id, List<Teacher> teachers)
 {
-    string temp_ = "";
-    int temp_i = 0;
-
-    string name = "";
-    int age = 0;
-    string gender = "";
     int years_in_practice = 0;
     string course_teach = "";
 
-    Console.WriteLine("Введите имя преподавателя:");
-    name = Console.ReadLine();
-    if (name == "" || name == " ")
-    {
-        Console.WriteLine("Ошибка: Имя не может быть пустым");
-        return id;
-    }
+    string name = add_name();
+    if (name == "") { return id; }
 
-    Console.WriteLine("Напишите возраст преподавателя:");
-    age = Convert.ToInt32(Console.ReadLine());
-    if (age < 20)
-    {
-        Console.WriteLine("Ошибка: У нас не могут преподавать люди младше 20 лет");
-        return id;
-    }
-    if (age >= 120)
-    {
-        Console.WriteLine($"Ошибка: Недействительный возраст");
-        return id;
-    }
+    int age = add_age();
+    if (age == 1) { return id; }
 
     Console.WriteLine("Напишите педагогический стаж:");
     years_in_practice = Convert.ToInt32(Console.ReadLine());
-    if (years_in_practice < 3)
-    {
-        Console.WriteLine("Ошибка: У преподавателя слишком маленький стаж работы");
-        return id;
-    }
+    if (years_in_practice < 3) { Console.WriteLine("Ошибка: У преподавателя слишком маленький стаж работы"); return id; }
 
-    Console.WriteLine("Выберите пол:");
-    Console.WriteLine("1 - Мужской");
-    Console.WriteLine("2 - Женский");
-    Console.WriteLine("3 - Боевой вертолет апач");
-    temp_ = Console.ReadLine();
-    if (temp_ == "1") { gender = "Мужской"; }
-    else if (temp_ == "2") { gender = "Женский"; }
-    else if (temp_ == "3") { gender = "Боевой вертолет апач"; }
-    else { Console.WriteLine("Ошибка: Некорректный пол"); return id; }
+    string gender = add_gender();
+    if (name == "") { return id; }
 
-    Console.WriteLine("Напишите номер курса, который вы хотите вести:");
-    for (int i = 1; i < courses.Count() + 1; i++)
-    {
-        Console.WriteLine($"{i}. {courses[i - 1].Name}");
-    }
-    temp_i = Convert.ToInt32(Console.ReadLine());
-    if (temp_i <= 0 || temp_i >= courses.Count() - 1)
-    {
-        Console.WriteLine("Ошибка: Введён неправильный номер курса");
-        return id;
-    }
-    else
-    {
-        course_teach = courses[temp_i - 1].Name;
-    }
+    int temp = course_selector();
+    if (course_check(temp)) { course_teach = courses[temp].Name; }
 
     Teacher add = new Teacher(id, name, age, gender, years_in_practice, course_teach);
     teachers.Add(add);
     Console.WriteLine($"Преподаватель '{add.Name}' добавлен");
-    id++;
-    return id;
+    return ++id;
 }
 
 int add_course(int id, List<Course> courses)
@@ -244,41 +265,23 @@ int add_course(int id, List<Course> courses)
     string temp_ = "";
     int temp_i = 0;
 
-    string name = "";
-    string description = "";
-    int duration = 0;
-
     Console.WriteLine("Введите название курса:");
-    name = Console.ReadLine();
-    if (name == "" || name == " ")
-    {
-        Console.WriteLine("Ошибка: Имя не может быть пустым");
-        return id;
-    }
+    string name = Console.ReadLine();
+    if (name == "" || name == " ") { Console.WriteLine("Ошибка: Имя не может быть пустым"); return id; }
 
     Console.WriteLine("Напишите краткое описание к курсу:");
-    name = Console.ReadLine();
-    if (description == "" || description == " ")
-    {
-        Console.WriteLine("Ошибка: Описание не может быть пустым");
-        return id;
-    }
+    string description = Console.ReadLine();
+    if (description == "" || description == " ") { Console.WriteLine("Ошибка: Описание не может быть пустым"); return id; }
 
     Console.WriteLine("Введите длительность курса (в часах):");
-    duration = Convert.ToInt32(Console.ReadLine());
-    if (duration <= 0)
-    {
-        Console.WriteLine("Ошибка: Длительность курса не может быть нулём или отрицательным числом");
-        return id;
-    }
+    int duration = Convert.ToInt32(Console.ReadLine());
+    if (duration <= 0) { Console.WriteLine("Ошибка: Длительность курса не может быть нулём или отрицательным числом"); return id; }
 
     Course add = new Course(id, name, description, duration);
     courses.Add(add);
     Console.WriteLine($"Курс '{add.Name}' добавлен");
-    id++;
-    return id;
+    return ++id;
 }
-
 void print_one_student(List<Student> students)
 {
     Console.WriteLine("Введите имя студента:");
@@ -287,15 +290,10 @@ void print_one_student(List<Student> students)
     int counter = 0;
     foreach (Student s in students)
     {
-        if (s.Name.ToLower().Contains(search))
-        {
-            s.Print();
-            counter++;
-        }
+        if (s.Name.ToLower().Contains(search)) { s.Print(); counter++; }
     }
     if (counter == 0) { Console.WriteLine("Ошибка: Студент не найден"); }
 }
-
 void print_one_teacher(List<Teacher> teachers)
 {
     Console.WriteLine("Введите имя преподавателя:");
@@ -304,15 +302,10 @@ void print_one_teacher(List<Teacher> teachers)
     int counter = 0;
     foreach (Teacher t in teachers)
     {
-        if (t.Name.ToLower().Contains(search))
-        {
-            t.Print();
-            counter++;
-        }
+        if (t.Name.ToLower().Contains(search)) { t.Print(); counter++; }
     }
     if (counter == 0) { Console.WriteLine("Ошибка: Преподаватель не найден"); }
 }
-
 void print_one_course(List<Course> courses)
 {
     Console.WriteLine("Введите название курса:");
@@ -321,111 +314,54 @@ void print_one_course(List<Course> courses)
     int counter = 0;
     foreach (Course c in courses)
     {
-        if (c.Name.ToLower().Contains(search))
-        {
-            c.Print();
-            counter++;
-        }
+        if (c.Name.ToLower().Contains(search)) { c.Print(); counter++; }
     }
     if (counter == 0) { Console.WriteLine("Ошибка: Курс не найден"); }
 }
-
 void print_all_students(List<Student> students)
 {
     foreach (Student s in students) { s.Print(); }
 }
-
 void print_all_teachers(List<Teacher> teachers)
 {
     foreach (Teacher t in teachers) { t.Print(); }
 }
-
 void print_all_courses(List<Course> courses)
 {
     foreach (Course c in courses) { c.Print(); }
 }
-
 void sign_stud_on_course(List<Student> students)
 {
-    int temp = 0;
-    Console.WriteLine("Выберите студента:");
-
-    for (int i = 1; i < students.Count() + 1; i++)
-    {
-        Console.WriteLine($"{i}. {students[i - 1].Name}");
-    }
-    temp = Convert.ToInt32(Console.ReadLine());
-    
-    Student test = students[temp - 1];
-
-    Console.WriteLine("На какой курс надо записать студента?");
-    for (int i = 1; i < courses.Count() + 1; i++)
-    {
-        Console.WriteLine($"{i}. {courses[i - 1].Name}");
-    }
-    temp = Convert.ToInt32(Console.ReadLine());
-    if (temp <= 0 || temp >= courses.Count() - 1)
-    {
-        Console.WriteLine("Ошибка: Введён неправильный номер курса");
-        return;
-    }
-    else
-    {
-        test.Course.Add(courses[temp - 1].Name);
-    }
+    Student stud = student_selector();
+    int temp = course_selector();
+    if (course_check(temp)) { stud.Course.Add(courses[temp].Name); }
 }
-
 void sign_teach_on_course(List<Teacher> teachers)
 {
-    int temp = 0;
     Console.WriteLine("Выберите преподавателя:");
-
-    for (int i = 1; i < teachers.Count() + 1; i++)
-    {
-        Console.WriteLine($"{i}. {teachers[i - 1].Name}");
-    }
-    temp = Convert.ToInt32(Console.ReadLine());
-
-    Teacher test = teachers[temp - 1];
-
-    Console.WriteLine("Какой курс будет вести этот учитель?");
-    for (int i = 1; i < courses.Count() + 1; i++)
-    {
-        Console.WriteLine($"{i}. {courses[i - 1].Name}");
-    }
-    temp = Convert.ToInt32(Console.ReadLine());
-    if (temp <= 0 || temp >= courses.Count() - 1)
-    {
-        Console.WriteLine("Ошибка: Введён неправильный номер курса");
-        return;
-    }
-    else
-    {
-        test.Course_teach = courses[temp - 1].Name;
-    }
+    Teacher teach = teacher_selector();
+    int temp = course_selector();
+    if (course_check(temp)) { teach.Course_teach = courses[temp].Name; }
 }
-
 void view_all_stud_on_spec_cour(List<Student> students, List<Course> courses)
 {
-    int temp = 0;
-    Console.WriteLine("Выберите курс:");
+    int temp = course_selector();
+    string t_s = courses[temp].Name;
 
-    for (int i = 1; i < courses.Count() + 1; i++)
+    Console.WriteLine("Студенты на курсе:");
+    foreach (Student s in students)
     {
-        Console.WriteLine($"{i}. {teachers[i - 1].Name}");
+        if (s.Course.Contains(t_s)) { Console.WriteLine(s.Name); }
     }
-    temp = Convert.ToInt32(Console.ReadLine());
 }
-
-void view_student_courses(List<Student> students, List<Course> courses)
+void view_student_courses(List<Student> students)
 {
-
+    Student stud = student_selector();
+    foreach (string s in stud.Course) { Console.WriteLine(s); }
 }
-
 
 class Person
 {
-    public int ID;
     public string Name;
     public int Age;
     public string Gender;
@@ -442,7 +378,6 @@ class Person
         Console.WriteLine($"Пол: {Gender}");
     }
 }
-
 class Student : Person
 {
     public int StudentID;
@@ -450,36 +385,34 @@ class Student : Person
     public Student(int s_id, string name, int age, string gender, List<string> course)
         : base(name, age, gender)
     {
-        StudentID = ID;
+        StudentID = s_id;
         Course = course;
     }
     public override void Print()
     {
         Console.WriteLine($"***************************");
-        Console.WriteLine($"Студент");
         Console.WriteLine($"ID студента: {StudentID}");
         base.Print();
-        Console.WriteLine($"Записан(а) на курс '{Course}'");
+        string temp = "";
+        Console.WriteLine($"Записан(а) на курсы: 'вывод в отдельной функции'");
         Console.WriteLine($"***************************");
     }
 }
-
 class Teacher : Person
 {
     public int TeacherID;
     public int Years_in_practice;
     public string Course_teach;
-    public Teacher(int s_id, string name, int age, string gender, int years_in_practice, string course_teach)
+    public Teacher(int t_id, string name, int age, string gender, int years_in_practice, string course_teach)
         : base(name, age, gender)
     {
-        TeacherID = ID;
+        TeacherID = t_id;
         Years_in_practice = years_in_practice;
         Course_teach = course_teach;
     }
     public override void Print()
     {
         Console.WriteLine($"*****************************");
-        Console.WriteLine($"Преподаватель");
         Console.WriteLine($"ID преподавателя: {TeacherID}");
         base.Print();
         Console.WriteLine($"Педагогический стаж: {Years_in_practice} лет");
@@ -487,14 +420,12 @@ class Teacher : Person
         Console.WriteLine($"*****************************");
     }
 }
-
 class Course
 {
     public int CourseID;
     public string Name;
     public string Description;
     public int Duration;
-
     public Course(int courseID, string name, string description, int duration)
     {
         CourseID = courseID;
@@ -505,7 +436,6 @@ class Course
     public void Print()
     {
         Console.WriteLine($"******************************");
-        Console.WriteLine($"Курс");
         Console.WriteLine($"ID курса: {CourseID}");
         Console.WriteLine($"Название: {Name}");
         Console.WriteLine($"Описание: {Description}");
