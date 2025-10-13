@@ -10,6 +10,14 @@ List<Student> students = new List<Student>();
 List<Teacher> teachers = new List<Teacher>();
 List<Course> courses = new List<Course>();
 
+Student student1 = new Student(1000, "Олег", 23, "Мужской", new List<string> { "sdadasd" });
+Student student2 = new Student(1001, "Наталья", 21, "Женский", new List<string> { "sdadasd" });
+Student student3 = new Student(1002, "Дмитрий", 19, "Мужской", new List<string> { "sdadasd" });
+
+Teacher teacher1 = new Teacher(5000, "cewewedwd", 23, "Мужской", 4, "asdasdasd");
+Teacher teacher2 = new Teacher(5001, "cewewedwd", 23, "Мужской", 4, "asdasdasd");
+Teacher teacher3 = new Teacher(5002, "cewewedwd", 23, "Мужской", 4, "asdasdasd");
+
 Course course1 = new Course(1, "ымцукмымкыум", "adsadadasas", 3);
 Course course2 = new Course(2, "sdfкыум", "adsadadasas", 3);
 Course course3 = new Course(3, "wewrкмымкыум", "adsadadasas", 3);
@@ -47,9 +55,9 @@ do
             {
                 case "1": id_stud = add_student(id_stud, students); break;
                 case "2": print_one_student(students); break;
-                case "3": break;
-                case "4": break;
-                case "5": break;
+                case "3": print_all_students(students); break;
+                case "4": sign_stud_on_course(students);  break;
+                case "5": view_student_courses(students, courses); break;
                 default: Console.WriteLine("Категория не выбрана, возврат к основному меню"); break;
             }
             break;
@@ -66,8 +74,8 @@ do
             {
                 case "1": id_teach = add_teachers(id_teach, teachers); break;
                 case "2": print_one_teacher(teachers); break;
-                case "3": break;
-                case "4": break;
+                case "3": print_all_teachers(teachers); break;
+                case "4": sign_teach_on_course(teachers); break;
                 default: Console.WriteLine("Категория не выбрана, возврат к основному меню"); break;
             }
             break;
@@ -84,8 +92,8 @@ do
             {
                 case "1": id_course = add_course(id_course, courses); break;
                 case "2": print_one_course(courses); break;
-                case "3": break;
-                case "4": break;
+                case "3": print_all_courses(courses); break;
+                case "4": view_all_stud_on_spec_cour(students, courses);  break;
                 default: Console.WriteLine("Категория не выбрана, возврат к основному меню"); break;
             }
             break;
@@ -102,7 +110,7 @@ int add_student(int id, List<Student> students)
     string name = "";
     int age = 0;
     string gender = "";
-    string course = "";
+    List<string> course = new List<string> { };
 
     Console.WriteLine("Введите имя студента:");
     name = Console.ReadLine();
@@ -148,7 +156,7 @@ int add_student(int id, List<Student> students)
     }
     else
     {
-        course = courses[temp_i - 1].Name;
+        course.Add(courses[temp_i - 1].Name);
     }
 
     Student add = new Student(id, name, age, gender, course);
@@ -322,8 +330,97 @@ void print_one_course(List<Course> courses)
     if (counter == 0) { Console.WriteLine("Ошибка: Курс не найден"); }
 }
 
+void print_all_students(List<Student> students)
+{
+    foreach (Student s in students) { s.Print(); }
+}
 
+void print_all_teachers(List<Teacher> teachers)
+{
+    foreach (Teacher t in teachers) { t.Print(); }
+}
 
+void print_all_courses(List<Course> courses)
+{
+    foreach (Course c in courses) { c.Print(); }
+}
+
+void sign_stud_on_course(List<Student> students)
+{
+    int temp = 0;
+    Console.WriteLine("Выберите студента:");
+
+    for (int i = 1; i < students.Count() + 1; i++)
+    {
+        Console.WriteLine($"{i}. {students[i - 1].Name}");
+    }
+    temp = Convert.ToInt32(Console.ReadLine());
+    
+    Student test = students[temp - 1];
+
+    Console.WriteLine("На какой курс надо записать студента?");
+    for (int i = 1; i < courses.Count() + 1; i++)
+    {
+        Console.WriteLine($"{i}. {courses[i - 1].Name}");
+    }
+    temp = Convert.ToInt32(Console.ReadLine());
+    if (temp <= 0 || temp >= courses.Count() - 1)
+    {
+        Console.WriteLine("Ошибка: Введён неправильный номер курса");
+        return;
+    }
+    else
+    {
+        test.Course.Add(courses[temp - 1].Name);
+    }
+}
+
+void sign_teach_on_course(List<Teacher> teachers)
+{
+    int temp = 0;
+    Console.WriteLine("Выберите преподавателя:");
+
+    for (int i = 1; i < teachers.Count() + 1; i++)
+    {
+        Console.WriteLine($"{i}. {teachers[i - 1].Name}");
+    }
+    temp = Convert.ToInt32(Console.ReadLine());
+
+    Teacher test = teachers[temp - 1];
+
+    Console.WriteLine("Какой курс будет вести этот учитель?");
+    for (int i = 1; i < courses.Count() + 1; i++)
+    {
+        Console.WriteLine($"{i}. {courses[i - 1].Name}");
+    }
+    temp = Convert.ToInt32(Console.ReadLine());
+    if (temp <= 0 || temp >= courses.Count() - 1)
+    {
+        Console.WriteLine("Ошибка: Введён неправильный номер курса");
+        return;
+    }
+    else
+    {
+        test.Course_teach = courses[temp - 1].Name;
+    }
+}
+
+void view_all_stud_on_spec_cour(List<Student> students, List<Course> courses)
+{
+    int temp = 0;
+    Console.WriteLine("Выберите курс:");
+
+    for (int i = 1; i < courses.Count() + 1; i++)
+    {
+        Console.WriteLine($"{i}. {teachers[i - 1].Name}");
+    }
+    temp = Convert.ToInt32(Console.ReadLine());
+}
+
+void view_student_courses(List<Student> students, List<Course> courses)
+{
+
+}
 
 
 class Person
@@ -349,8 +446,8 @@ class Person
 class Student : Person
 {
     public int StudentID;
-    public string Course;
-    public Student(int s_id, string name, int age, string gender, string course)
+    public List<string> Course;
+    public Student(int s_id, string name, int age, string gender, List<string> course)
         : base(name, age, gender)
     {
         StudentID = ID;
