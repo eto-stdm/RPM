@@ -36,9 +36,6 @@ courses.Add(course1);
 courses.Add(course2);
 courses.Add(course3);
 
-
-Console.WriteLine(students.GetType());
-
 do
 {
     Console.WriteLine("----------------------------");
@@ -113,28 +110,6 @@ do
 
     }
 } while (n != "0");
-/*
-int type_all_select(List<Object> list)
-{
-    string c_str = "";
-
-    if (list.GetType() == students.GetType()) { c_str = "студента"; List<Student> list_s = students; }
-
-
-
-
-    int temp = 0;
-    Console.WriteLine("Выберите :");
-
-    for (int i = 1; i < list.Count() + 1; i++)
-    {
-        Console.WriteLine($"{i}. {list[i - 1].Name}");
-    }
-    temp = Convert.ToInt32(Console.ReadLine());
-    return 0;
-}
-*/
-
 Student student_selector()
 {
     int temp = 0;
@@ -286,11 +261,10 @@ void print_one_student(List<Student> students)
 {
     Console.WriteLine("Введите имя студента:");
     string search = Console.ReadLine();
-    search = search.ToLower();
     int counter = 0;
     foreach (Student s in students)
     {
-        if (s.Name.ToLower().Contains(search)) { s.Print(); counter++; }
+        if (s.Name.ToLower().Contains(search.ToLower())) { s.Print(); counter++; }
     }
     if (counter == 0) { Console.WriteLine("Ошибка: Студент не найден"); }
 }
@@ -298,11 +272,10 @@ void print_one_teacher(List<Teacher> teachers)
 {
     Console.WriteLine("Введите имя преподавателя:");
     string search = Console.ReadLine();
-    search = search.ToLower();
     int counter = 0;
     foreach (Teacher t in teachers)
     {
-        if (t.Name.ToLower().Contains(search)) { t.Print(); counter++; }
+        if (t.Name.ToLower().Contains(search.ToLower())) { t.Print(); counter++; }
     }
     if (counter == 0) { Console.WriteLine("Ошибка: Преподаватель не найден"); }
 }
@@ -310,11 +283,10 @@ void print_one_course(List<Course> courses)
 {
     Console.WriteLine("Введите название курса:");
     string search = Console.ReadLine();
-    search = search.ToLower();
     int counter = 0;
     foreach (Course c in courses)
     {
-        if (c.Name.ToLower().Contains(search)) { c.Print(); counter++; }
+        if (c.Name.ToLower().Contains(search.ToLower())) { c.Print(); counter++; }
     }
     if (counter == 0) { Console.WriteLine("Ошибка: Курс не найден"); }
 }
