@@ -1,28 +1,27 @@
 ﻿using System;
 using System.Xml.Linq;
-// maglin - gob + mag
 
 int room_count = 1;
 int boss_count = 0;
 string fumo = "\r\n\r\n                                                                                                    \r\n ...........................:...................................................................::. \r\n .................................:..................:.....:...:..-.:-:...::::.:::::.:............. \r\n .........:.................::.:.::.:..:..:...........::::...:::.:.......................:::......: \r\n ..............::...:...:.....................:..::.:......:........::..........   ...-:::.......:. \r\n .................    ...........::.:-.....:..:.......:....:...............:.....@*   ........::.:. \r\n ..........::..   .@@*=- ........::.......:..........:...:.........:........:-.  @@@@@   .::-:.::.- \r\n ......:...   *@@+.   .....:::..............:.....:....:....::..:.....:....... .-.. .#@@@   ..:.:.: \r\n .......   @@%.         .....:::..:..:..:..:..:.......:.:.-...:...........:...-..       .%@@   -::- \r\n .:... .%@#     . @@@@@-...-...:............:....:................:....... ..+.:@@@@@@@@.  +@@. ... \r\n ..  :@@    .....       ........::::........:..........:..::..:.....:... .-+-:+.        .... .*@=   \r\n   ..                   ........:....:.:..........:.........::.:....   ++=-::...:: .                \r\n .@@@@@@@@@@@@@@@@@@@@=           .. ...:......:..:..:.....:...      ..              *@@@@@@@@@@@@@*\r\n @@@.      @* .    ..+@@@@@@@@@@@@ .:.:......:....:...:.......-=@@@@@@@@@@@@@@@@@@@@@@@@+:.      @  \r\n # .@@@@@@@#--*-##*%+**===*===--@@ ......:.............:=----=: .@@        @%#**@+**#**+*+****:-@@  \r\n :. :@:..*=+=:*::+===*++#:-:-..@@  ............................. @@@@@@@@@@#=+==*+#*%*=#@**+--+@@   \r\n ..   @@@#.  .+%-:=..==:*  .@@@@  ..............................   @@@*---***+##=#++==+-*-.#@@@#    \r\n :.       @@@@@@@@@@@@@@@@@@=    ................................    :@@@@@@@@@*@@@@@@@@@@@@     .= \r\n +*......                     ...........................:....:...:.         @@@@@@.         ....:= \r\n +**+.......................................................................        ..........:--*+ \r\n    :-=......................................................................................:----- \r\n.@@=        .........................*@.:..           ....-.@.............::....::........--==+-.   \r\n =*@@@@@@@#       ......................:..@#@@@@@@@@:% : ...........................:.         .*%.\r\n @@@@@@##@@@@@#*@#.---:::::.:::-:.                     ....................::..::::-...@@@@@@@@=  @ \r\n ..  ..%@:..:@@@@        ....-.   .%@@@@@@@@@#...                        .-*+++--:.            .@@@ \r\n  .#@.   ..      #@@@@@        %@@@@@#****#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+         *@@@@@@@%=+=.    \r\n                      .=@@@@@@@+*                                       .=@@@@@@@@#:      .         \r\n\r\n";
 
-Wearable i_weapon_def = new Wearable(Type_e.Weapon, "Меч героя", "Стандартное оружие персонажа. +3 к атаке", 3);
-Wearable i_armor_def = new Wearable(Type_e.Armor, "Броня героя", "Стандартная броня персонажа. +3 к защите", 3);
+Item i_weapon_def = new Item(Type_e.Weapon, "Меч героя", "Стандартное оружие персонажа. +3 к атаке", 3);
+Item i_armor_def = new Item(Type_e.Armor, "Броня героя", "Стандартная броня персонажа. +3 к защите", 3);
 
-Item i_heal = new Item (Type_e.Heal, "Зелье лечения", "Мгновенно лечит вас!");
-Wearable i_weapon_1 = new Wearable(Type_e.Weapon, "Меч цветов", "+4 к атаке", 4);
-Wearable i_weapon_2 = new Wearable(Type_e.Weapon, "Клинок света", "+5 к атаке", 5);
-Wearable i_weapon_3 = new Wearable(Type_e.Weapon, "Огненая булава", "+6 к атаке", 6);
-Wearable i_weapon_4 = new Wearable(Type_e.Weapon, "Теневой кинжал", "+7 к атаке", 7);
-Wearable i_weapon_5 = new Wearable(Type_e.Weapon, "Коготь тьмы", "+8 к атаке", 8);
-Wearable i_weapon_6 = new Wearable(Type_e.Weapon, "Нож хаоса", "+10 к атаке", 10);
-Wearable i_weapon_non = new Wearable(Type_e.Weapon, "Меч имба", "Имба", 100);
-Wearable i_armor_1 = new Wearable(Type_e.Armor, "Кленовый костюм", "+4 к защите", 4);
-Wearable i_armor_2 = new Wearable(Type_e.Armor, "Кираса солнца", "+5 к защите", 5);
-Wearable i_armor_3 = new Wearable(Type_e.Armor, "Железный панцирь", "+6 к защите", 6);
-Wearable i_armor_4 = new Wearable(Type_e.Armor, "Обсидиановая броня", "+7 к защите", 7);
-Wearable i_armor_5 = new Wearable(Type_e.Armor, "Доспехи рыцаря", "+8 к защите", 8);
-Wearable i_armor_6 = new Wearable(Type_e.Armor, "Облачение богов", "+10 к защите", 10);
+Item i_heal = new Item (Type_e.Heal, "Зелье лечения", "Мгновенно лечит вас!", 0);
+Item i_weapon_1 = new Item(Type_e.Weapon, "Меч цветов", "+4 к атаке", 4);
+Item i_weapon_2 = new Item(Type_e.Weapon, "Клинок света", "+5 к атаке", 5);
+Item i_weapon_3 = new Item(Type_e.Weapon, "Огненая булава", "+6 к атаке", 6);
+Item i_weapon_4 = new Item(Type_e.Weapon, "Теневой кинжал", "+7 к атаке", 7);
+Item i_weapon_5 = new Item(Type_e.Weapon, "Коготь тьмы", "+8 к атаке", 8);
+Item i_weapon_6 = new Item(Type_e.Weapon, "Нож хаоса", "+10 к атаке", 10);
+Item i_weapon_non = new Item(Type_e.Weapon, "Меч имба", "Имба", 100);
+Item i_armor_1 = new Item(Type_e.Armor, "Кленовый костюм", "+4 к защите", 4);
+Item i_armor_2 = new Item(Type_e.Armor, "Кираса солнца", "+5 к защите", 5);
+Item i_armor_3 = new Item(Type_e.Armor, "Железный панцирь", "+6 к защите", 6);
+Item i_armor_4 = new Item(Type_e.Armor, "Обсидиановая броня", "+7 к защите", 7);
+Item i_armor_5 = new Item(Type_e.Armor, "Доспехи рыцаря", "+8 к защите", 8);
+Item i_armor_6 = new Item(Type_e.Armor, "Облачение богов", "+10 к защите", 10);
 
 Goblin gob1 = new Goblin("Гоблин с мечом", 25, 2, 1.5, 10);
 Goblin gob2 = new Goblin("Гоблин с кувалдой", 20, 4, 1, 10);
@@ -43,46 +42,26 @@ List<Item> items = new List<Item> { i_heal, i_weapon_1, i_weapon_2, i_weapon_3, 
 List<Enemy> commons = new List<Enemy> { gob1, gob2, gob3, skel1, skel2, skel3, mag1, mag2, mag3 };
 List<Enemy> bosses = new List<Enemy> { gob_boss, skel_boss, mag_boss };
 
+
+
 Player play = start();
-
-
-
-chest();
-chest();
-chest();
-chest();
-chest();
-chest();
-chest();
-chest();
-chest();
-chest();
-chest();
-chest();
-chest();
-chest();
-chest();
-chest();
-chest();
-chest();
-chest();
-chest();
-chest();
-chest();
-chest();
-chest();
-chest();
-chest();
-chest();
-chest();
-
-
-
 
 do
 {
-    break;
+    if (boss_count >= 3)
+    {
+        end();
+        break;
+    }
+    room();
+    Console.WriteLine(room_count);
+    Console.WriteLine(boss_count);
 } while (true);
+
+//Сделайте так, чтобы все шансы и случайные величины
+//(встреча сундука/врага, тип врага,
+//крит. шанс/заморозка, величина блока 70–100%)
+//определялись генератором случайных чисел.
 
 Player start()
 {
@@ -93,36 +72,33 @@ Player start()
     play.Print();
     return play;
 }
-
-//Сделайте так, чтобы все шансы и случайные величины
-//(встреча сундука/врага, тип врага,
-//крит. шанс/заморозка, величина блока 70–100%)
-//определялись генератором случайных чисел.
-
 void room()
 {
     Random rnd = new Random();
-    if (rnd.Next(0, 2) == 1) { chest(); } // 50/50 враг/сундук
-    else { fight(false); }
 
     if (room_count % 10 == 0) { fight(true); } // каждые 10 шагов - босс
+    else if (rnd.Next(0, 2) == 1) { chest(); } // 50/50 враг/сундук
+    else { fight(false); }
 
-    room_count++;
+    room_count += 1;
 }
-
 void fight(bool is_boss)
 {
     Random rnd = new Random();
     if (is_boss)
     {
-        
-
+        //int sel_boss = rnd.Next(0, items.Count() - 1);
         //Console.WriteLine($"Вы встретили босса {}!");
+        Console.WriteLine("Битва с боссом");
+        boss_count += 1;
     }
     else
     {
-
+        Console.WriteLine("Битва с обычным врагом");
     }
+    
+
+
 //    -Игрок всегда ходит первым.
 //- Ход игрока: выбрать Атаку или Защиту.
 
@@ -135,16 +111,20 @@ void fight(bool is_boss)
 //-После хода игрока враг всегда совершает атаку по игроку,
 //применяя свои особенности(крит.шанс, игнор брони, заморозка).
 }
+void turn()
+{
 
+}
 void chest()
 {
-    Console.WriteLine("Вы наткнтулись на сундук");
+    Console.WriteLine("------------------------------");
+    Console.WriteLine("Вы наткнулись на сундук");
     Random random = new Random();
     int sel_item = random.Next(0, items.Count() - 1);
     Console.WriteLine($"Вы получили предмет '{items[sel_item].Name}'");
     if (items[sel_item].Type == Type_e.Heal)
     {
-        if (items.Count() == 1)
+        if (items.Count() - 1 == 1)
         {
             play.hp += 25;
             Console.WriteLine("Ваш запас HP был пополнен на 1/4!");
@@ -161,22 +141,18 @@ void chest()
         string temp = Console.ReadLine();
         if (temp == "да")
         {
-            if (items[sel_item].Type == Type_e.Weapon) { play.weapon = items[sel_item]; }
-            if (items[sel_item].Type == Type_e.Armor) { play.armor = items[sel_item]; }
+            if (items[sel_item].Type == Type_e.Weapon) { play.weapon = items[sel_item]; play.attack = items[sel_item].Num; }
+            if (items[sel_item].Type == Type_e.Armor) { play.armor = items[sel_item]; play.defense = items[sel_item].Num; }
         }
         items.Remove(items[sel_item]);
     }
-        
-//    Из сундука может выпасть лечебное зелье,
-//оружие или доспех(случайно).
-
-    //-Лечебное зелье мгновенно полностью лечит игрока.
-    //- При выпадении оружия или доспеха нужно:
-
-    //    -Показать характеристики нового предмета
-    //    и текущей экипировки.
-    //-Дать выбор: взять новый предмет(заменив текущий)
-    //или выбросить его.
+    Console.WriteLine("------------------------------");
+}
+void end()
+{
+    Console.WriteLine("Вы победили всех боссов!");
+    Console.WriteLine("Вы настоящий герой!");
+    Console.WriteLine(":)");
 }
 enum Type_e { Heal, Weapon, Armor }
 class Item
@@ -185,24 +161,14 @@ class Item
     public string Name;
     public string Description;
     public bool Is_deleted;
+    public int Num;
 
-    public Item(Type_e type, string name, string description)
+    public Item(Type_e type, string name, string description, int num)
     {
         Type = type; Name = name; Description = description; Is_deleted = false;
-    }
-}
-
-class Wearable : Item
-{
-    public int Num;
-    public Wearable(Type_e type, string name, string description, int num)
-        : base(type, name, description)
-    {
         Num = num;
     }
 }
-
-
 class Player
 {
     public string name;
@@ -222,12 +188,14 @@ class Player
     }
     public void Print()
     {
+        Console.WriteLine("**********************");
         Console.WriteLine($"Имя: {name}");
         Console.WriteLine($"Здоровье: {hp}");
         Console.WriteLine($"Урон: {attack}");
         Console.WriteLine($"Защита: {defense}");
         Console.WriteLine($"Оружие: {weapon.Name}");
         Console.WriteLine($"Броня: {armor.Name}");
+        Console.WriteLine("**********************");
     }
 }
 class Enemy
@@ -252,7 +220,6 @@ class Enemy
         Console.WriteLine($"Защита: {defense}");
     }
 }
-
 class Goblin : Enemy
 {
     public double crit;
@@ -271,7 +238,6 @@ class Goblin : Enemy
         Console.WriteLine($"Шанс крита: {crit}");
     }
 }
-
 class Skeleton : Enemy
 {
     public bool ignores_def;
