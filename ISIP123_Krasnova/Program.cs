@@ -43,20 +43,19 @@ List<Enemy> commons = new List<Enemy> { gob1, gob2, gob3, skel1, skel2, skel3, m
 List<Enemy> bosses = new List<Enemy> { gob_boss, skel_boss, mag_boss };
 
 
-
+Console.WriteLine(gob1.GetType());
+Console.WriteLine(commons[0].GetType());
 Player play = start();
 
-do
-{
-    if (boss_count >= 3)
-    {
-        end();
-        break;
-    }
-    room();
-    Console.WriteLine(room_count);
-    Console.WriteLine(boss_count);
-} while (true);
+//do
+//{
+//    if (boss_count >= 3)
+//    {
+//        end();
+//        break;
+//    }
+//    room();
+//} while (true);
 
 //Сделайте так, чтобы все шансы и случайные величины
 //(встреча сундука/врага, тип врага,
@@ -87,18 +86,19 @@ void fight(bool is_boss)
     Random rnd = new Random();
     if (is_boss)
     {
-        //int sel_boss = rnd.Next(0, items.Count() - 1);
-        //Console.WriteLine($"Вы встретили босса {}!");
-        Console.WriteLine("Битва с боссом");
+        int sel_boss = rnd.Next(0, bosses.Count());
+        Console.WriteLine($"Вы встретили босса {bosses[sel_boss].name}!");
+        turn(sel_boss, bosses);
+        bosses.Remove(bosses[sel_boss]);
         boss_count += 1;
     }
     else
     {
-        Console.WriteLine("Битва с обычным врагом");
+        int sel_commons = rnd.Next(0, commons.Count());
+        Console.WriteLine($"Вы встретили босса {commons[sel_commons].name}!");
+        turn(sel_commons, commons);
     }
-    
-
-
+}
 //    -Игрок всегда ходит первым.
 //- Ход игрока: выбрать Атаку или Защиту.
 
@@ -110,10 +110,26 @@ void fight(bool is_boss)
 
 //-После хода игрока враг всегда совершает атаку по игроку,
 //применяя свои особенности(крит.шанс, игнор брони, заморозка).
-}
-void turn()
+
+void player_turn()
 {
 
+}
+
+void turn(int id, List<Enemy> list)
+{
+    if (list[id].GetType() == typeof(Goblin))
+    {
+
+    }
+    if (list[id].GetType() == typeof(Skeleton))
+    {
+
+    }
+    if (list[id].GetType() == typeof(Magician))
+    {
+
+    }
 }
 void chest()
 {
