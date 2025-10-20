@@ -6,16 +6,16 @@ int boss_count = 0;
 bool end_game = false;
 string fumo = "\r\n\r\n                                                                                                    \r\n ...........................:...................................................................::. \r\n .................................:..................:.....:...:..-.:-:...::::.:::::.:............. \r\n .........:.................::.:.::.:..:..:...........::::...:::.:.......................:::......: \r\n ..............::...:...:.....................:..::.:......:........::..........   ...-:::.......:. \r\n .................    ...........::.:-.....:..:.......:....:...............:.....@*   ........::.:. \r\n ..........::..   .@@*=- ........::.......:..........:...:.........:........:-.  @@@@@   .::-:.::.- \r\n ......:...   *@@+.   .....:::..............:.....:....:....::..:.....:....... .-.. .#@@@   ..:.:.: \r\n .......   @@%.         .....:::..:..:..:..:..:.......:.:.-...:...........:...-..       .%@@   -::- \r\n .:... .%@#     . @@@@@-...-...:............:....:................:....... ..+.:@@@@@@@@.  +@@. ... \r\n ..  :@@    .....       ........::::........:..........:..::..:.....:... .-+-:+.        .... .*@=   \r\n   ..                   ........:....:.:..........:.........::.:....   ++=-::...:: .                \r\n .@@@@@@@@@@@@@@@@@@@@=           .. ...:......:..:..:.....:...      ..              *@@@@@@@@@@@@@*\r\n @@@.      @* .    ..+@@@@@@@@@@@@ .:.:......:....:...:.......-=@@@@@@@@@@@@@@@@@@@@@@@@+:.      @  \r\n # .@@@@@@@#--*-##*%+**===*===--@@ ......:.............:=----=: .@@        @%#**@+**#**+*+****:-@@  \r\n :. :@:..*=+=:*::+===*++#:-:-..@@  ............................. @@@@@@@@@@#=+==*+#*%*=#@**+--+@@   \r\n ..   @@@#.  .+%-:=..==:*  .@@@@  ..............................   @@@*---***+##=#++==+-*-.#@@@#    \r\n :.       @@@@@@@@@@@@@@@@@@=    ................................    :@@@@@@@@@*@@@@@@@@@@@@     .= \r\n +*......                     ...........................:....:...:.         @@@@@@.         ....:= \r\n +**+.......................................................................        ..........:--*+ \r\n    :-=......................................................................................:----- \r\n.@@=        .........................*@.:..           ....-.@.............::....::........--==+-.   \r\n =*@@@@@@@#       ......................:..@#@@@@@@@@:% : ...........................:.         .*%.\r\n @@@@@@##@@@@@#*@#.---:::::.:::-:.                     ....................::..::::-...@@@@@@@@=  @ \r\n ..  ..%@:..:@@@@        ....-.   .%@@@@@@@@@#...                        .-*+++--:.            .@@@ \r\n  .#@.   ..      #@@@@@        %@@@@@#****#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+         *@@@@@@@%=+=.    \r\n                      .=@@@@@@@+*                                       .=@@@@@@@@#:      .         \r\n\r\n";
 
-Item i_weapon_def = new Item(Type_e.Weapon, "Меч героя", "Стандартное оружие персонажа. +3 к атаке", 30);
+Item i_weapon_def = new Item(Type_e.Weapon, "Меч героя", "Стандартное оружие персонажа. +3 к атаке", 3);
 Item i_armor_def = new Item(Type_e.Armor, "Броня героя", "Стандартная броня персонажа. +3 к защите", 3);
 
 Item i_heal = new Item (Type_e.Heal, "Зелье лечения", "Мгновенно лечит вас!", 0);
-Item i_weapon_1 = new Item(Type_e.Weapon, "Меч цветов", "+4 к атаке", 40);
-Item i_weapon_2 = new Item(Type_e.Weapon, "Клинок света", "+5 к атаке", 50);
-Item i_weapon_3 = new Item(Type_e.Weapon, "Огненая булава", "+6 к атаке", 60);
-Item i_weapon_4 = new Item(Type_e.Weapon, "Теневой кинжал", "+7 к атаке", 70);
-Item i_weapon_5 = new Item(Type_e.Weapon, "Коготь тьмы", "+8 к атаке", 80);
-Item i_weapon_6 = new Item(Type_e.Weapon, "Нож хаоса", "+10 к атаке", 100);
+Item i_weapon_1 = new Item(Type_e.Weapon, "Меч цветов", "+4 к атаке", 4);
+Item i_weapon_2 = new Item(Type_e.Weapon, "Клинок света", "+5 к атаке", 5);
+Item i_weapon_3 = new Item(Type_e.Weapon, "Огненая булава", "+6 к атаке", 6);
+Item i_weapon_4 = new Item(Type_e.Weapon, "Теневой кинжал", "+7 к атаке", 7);
+Item i_weapon_5 = new Item(Type_e.Weapon, "Коготь тьмы", "+8 к атаке", 8);
+Item i_weapon_6 = new Item(Type_e.Weapon, "Нож хаоса", "+10 к атаке", 10);
 Item i_weapon_non = new Item(Type_e.Weapon, "Меч имба", "Имба", 100);
 Item i_armor_1 = new Item(Type_e.Armor, "Кленовый костюм", "+4 к защите", 4);
 Item i_armor_2 = new Item(Type_e.Armor, "Кираса солнца", "+5 к защите", 5);
@@ -24,18 +24,18 @@ Item i_armor_4 = new Item(Type_e.Armor, "Обсидиановая броня", "
 Item i_armor_5 = new Item(Type_e.Armor, "Доспехи рыцаря", "+8 к защите", 8);
 Item i_armor_6 = new Item(Type_e.Armor, "Облачение богов", "+10 к защите", 10);
 
-Goblin gob1 = new Goblin("Гоблин с мечом", 12, 1, 1.5, 10);
-Goblin gob2 = new Goblin("Гоблин с кувалдой", 10, 2, 1, 10);
-Goblin gob3 = new Goblin("Гоблин в лодке", 10, 1, 1.5, 10);
-Goblin gob_boss = new Goblin("Большой гоблин", (10 * 2), (2 * 1.5), (2 * 1.2), (10 * 2));
-Skeleton skel1 = new Skeleton("Скелет с луком", 16, 3, 1.5, true);
-Skeleton skel2 = new Skeleton("Скелет с арбалетом", 14, 2, 2, true);
-Skeleton skel3 = new Skeleton("Скелет с пистолетом", 15, 5, 0, true);
-Skeleton skel_boss = new Skeleton("Древний скелет", (20 * 2), (3 * 1.3), (2 * 1.4), true);
-Magician mag1 = new Magician("Маг земли", 10, 3, 3, 10);
-Magician mag2 = new Magician("Атакующий маг", 20, 3.5, 2, 10);
-Magician mag3 = new Magician("Защищённый маг", 16, 1.5, 2.5, 10);
-Magician mag_boss = new Magician("Архимаг 'Геннадий'", (18 * 2), (3.5 * 1.6), (3 * 1.1), (10 * 2));
+Goblin gob1 = new Goblin("Гоблин с мечом", 25, 2, 1.5, 10);
+Goblin gob2 = new Goblin("Гоблин с кувалдой", 20, 4, 1, 10);
+Goblin gob3 = new Goblin("Гоблин в лодке", 30, 1, 4, 10);
+Goblin gob_boss = new Goblin("Большой гоблин", (25 * 2), (2 * 1.5), (2 * 1.2), (10 * 2));
+Skeleton skel1 = new Skeleton("Скелет с луком", 20, 3, 1.5, true);
+Skeleton skel2 = new Skeleton("Скелет с арбалетом", 30, 4, 2, true);
+Skeleton skel3 = new Skeleton("Скелет с пистолетом", 30, 7, 0, true);
+Skeleton skel_boss = new Skeleton("Древний скелет", (35 * 2), (3 * 1.3), (2 * 1.4), true);
+Magician mag1 = new Magician("Маг земли", 25, 3, 3, 10);
+Magician mag2 = new Magician("Атакующий маг", 32, 3.5, 2, 10);
+Magician mag3 = new Magician("Защищённый маг", 20, 1.5, 5, 10);
+Magician mag_boss = new Magician("Архимаг 'Геннадий'", (32 * 2), (3.5 * 1.6), (3 * 1.1), (10 * 2));
 
 List<Item> items = new List<Item> { i_heal, i_weapon_1, i_weapon_2, i_weapon_3, i_weapon_4, i_weapon_5, i_weapon_6,
                  i_armor_1, i_armor_2, i_armor_3, i_armor_4, i_armor_5, i_armor_6 };
@@ -96,7 +96,7 @@ void player_turn(int id, List<Enemy> enem, bool isfrozen)
 {
 
     Enemy enemy = enem[id];
-    enemy.hp = Math.Abs(enemy.hp);
+    enemy.hp = Math.Abs(enemy.hp); // костыль - хп побеждённых мобов становится положительным
     double def = 0;
     bool flag_def = false;
     Console.WriteLine("------------------------------");
@@ -191,16 +191,9 @@ void enemy_turn(int id, List<Enemy> enem, bool flag_def, double def)
         Console.WriteLine($"Противник наносит {uron} единиц урона");
         Console.WriteLine($"Ваше HP: {play.hp}");
     }
-    else
-    {
-        Console.WriteLine("Противник не попал по вам");
-    }
+    else { Console.WriteLine("Противник не попал по вам"); }
 
-    if (play.hp <= 0)
-    {
-        end_game = true;
-        //end();
-    }
+    if (play.hp <= 0) { end_game = true; }
     else
     {
         Console.WriteLine("Теперь ваш ход!");
@@ -215,7 +208,8 @@ void chest()
     Random random = new Random();
     int sel_item = random.Next(0, items.Count() - 1);
     Console.WriteLine($"Вы получили предмет '{items[sel_item].Name}'");
-    Console.WriteLine($"Описание предмета {items[sel_item].Description}");
+    Console.WriteLine($"Описание предмета: {items[sel_item].Description}");
+    Console.WriteLine($"Ваша текущая атака '{play.attack}' и защита '{play.defense}'");
     if (items[sel_item].Type == Type_e.Heal)
     {
         if (items.Count() - 1 == 1)
@@ -263,13 +257,11 @@ class Item
     public Type_e Type;
     public string Name;
     public string Description;
-    public bool Is_deleted;
     public int Num;
 
     public Item(Type_e type, string name, string description, int num)
     {
-        Type = type; Name = name; Description = description; Is_deleted = false;
-        Num = num;
+        Type = type; Name = name; Description = description; Num = num;
     }
 }
 class Player
@@ -315,13 +307,6 @@ class Enemy
         this.defense = defense;
 
     }
-    //public virtual void Print()
-    //{
-    //    Console.WriteLine($"Имя: {name}");
-    //    Console.WriteLine($"Здоровье: {hp}");
-    //    Console.WriteLine($"Атака: {attack}");
-    //    Console.WriteLine($"Защита: {defense}");
-    //}
 }
 class Goblin : Enemy
 {
@@ -329,17 +314,8 @@ class Goblin : Enemy
     public Goblin(string name, double hp, double attack, double defense, double crit)
         : base(name, hp, attack, defense)
     {
-        this.name = name;
-        this.hp = 20;
-        this.attack = 2;
-        this.defense = 2;
-        this.crit = 10;
+        this.crit = crit;
     }
-    //public override void Print()
-    //{
-    //    base.Print();
-    //    Console.WriteLine($"Шанс крита: {crit}");
-    //}
 }
 class Skeleton : Enemy
 {
@@ -347,17 +323,8 @@ class Skeleton : Enemy
     public Skeleton(string name, double hp, double attack, double defense, bool ignores_def)
         : base(name, hp, attack, defense)
     {
-        this.name = name;
-        this.hp = 150;
-        this.attack = 3;
-        this.defense = 6;
-        this.ignores_def = true;
+        this.ignores_def = ignores_def;
     }
-    //public override void Print()
-    //{
-    //    base.Print();
-    //    Console.WriteLine($"Полностью игнорирует защиту игрока");
-    //}
 }
 class Magician : Enemy
 {
@@ -365,15 +332,6 @@ class Magician : Enemy
     public Magician(string name, double hp, double attack, double defense, double froze)
         : base(name, hp, attack, defense)
     {
-        this.name = name;
-        this.hp = 80;
-        this.attack = 7;
-        this.defense = 3;
-        this.froze = 10;
+        this.froze = froze;
     }
-    //public override void Print()
-    //{
-    //    base.Print();
-    //    Console.WriteLine($"Шанс заморозки: {froze}");
-    //}
 }
