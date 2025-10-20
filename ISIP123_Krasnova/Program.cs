@@ -47,20 +47,15 @@ Console.WriteLine(gob1.GetType());
 Console.WriteLine(commons[0].GetType());
 Player play = start();
 
-//do
-//{
-//    if (boss_count >= 3)
-//    {
-//        end();
-//        break;
-//    }
-//    room();
-//} while (true);
-
-//Сделайте так, чтобы все шансы и случайные величины
-//(встреча сундука/врага, тип врага,
-//крит. шанс/заморозка, величина блока 70–100%)
-//определялись генератором случайных чисел.
+do
+{
+    if (boss_count >= 3)
+    {
+        end();
+        break;
+    }
+    room();
+} while (true);
 
 Player start()
 {
@@ -88,7 +83,7 @@ void fight(bool is_boss)
     {
         int sel_boss = rnd.Next(0, bosses.Count());
         Console.WriteLine($"Вы встретили босса {bosses[sel_boss].name}!");
-        turn(sel_boss, bosses);
+        player_turn(sel_boss, bosses);
         bosses.Remove(bosses[sel_boss]);
         boss_count += 1;
     }
@@ -96,40 +91,83 @@ void fight(bool is_boss)
     {
         int sel_commons = rnd.Next(0, commons.Count());
         Console.WriteLine($"Вы встретили босса {commons[sel_commons].name}!");
-        turn(sel_commons, commons);
+        player_turn(sel_commons, commons);
     }
 }
-//    -Игрок всегда ходит первым.
-//- Ход игрока: выбрать Атаку или Защиту.
 
-//-Защита даёт 40 % шанс полностью уклониться
-//от следующей атаки врага.  
-//    Если уклониться не удалось, срабатывает блок:
-//    уменьшение получаемого урона на 70–100 %
-//    от характеристики защиты.
-
-//-После хода игрока враг всегда совершает атаку по игроку,
-//применяя свои особенности(крит.шанс, игнор брони, заморозка).
-
-void player_turn()
+void player_turn(int id, List<Enemy> enem)
 {
+    double def = 0;
+    bool flag_def = false ;
+    Console.WriteLine("------------------------------");
+    Console.WriteLine("Ваш ход:");
+    Console.WriteLine("1. Атака");
+    Console.WriteLine("2. Защита");
+    string t = Console.ReadLine();
+    switch(t)
+    {
+        case "1":
+            Console.WriteLine("Вы атакуете");
 
+            break;
+
+        default:
+            Console.WriteLine("Вы защищаетесь");
+            Random rnd = new Random();
+            if (rnd.Next(1, 101) <= 40)
+            {
+                Console.WriteLine("Вы увернулись от вражеской атаки!");
+                flag_def = true;
+            }
+            else
+            {
+                def = 50 + (play.defense * 3); //гарантированные 50% + защита игрока * 3
+                Console.WriteLine($"Сработал блок на {def}%");
+                flag_def = false;
+            }
+            break;
+    }   
+    if (enem[id].hp <= 0)
+    {
+        Console.WriteLine($"Вы одолели {enem[id].name}");
+        Console.WriteLine("Переход в следующую комнату...");
+    }
+    else
+    {
+        Console.WriteLine("Теперь ходит ваш противник");
+        enemy_turn(id, enem, flag_def, def);
+    }
+    Console.WriteLine("------------------------------");
 }
 
-void turn(int id, List<Enemy> list)
+void enemy_turn(int id, List<Enemy> enem, bool flag_def, double def)
 {
-    if (list[id].GetType() == typeof(Goblin))
-    {
+    Console.WriteLine("------------------------------");
+    Console.WriteLine("Противник атакует!");
 
-    }
-    if (list[id].GetType() == typeof(Skeleton))
+    if (enem[id].GetType() == typeof(Goblin))
     {
-
+        Goblin func_goblin = (Goblin)enem[id];
     }
-    if (list[id].GetType() == typeof(Magician))
+    if (enem[id].GetType() == typeof(Skeleton))
     {
-
+        Skeleton func_skele = (Skeleton)enem[id];
     }
+    if (enem[id].GetType() == typeof(Magician))
+    {
+        Magician func_magic = (Magician)enem[id];
+    }
+
+    if (play.hp <= 0)
+    {
+        end();
+    }
+    else
+    {
+        Console.WriteLine("Теперь ваш ход!");
+        player_turn(id, enem);
+    }
+    Console.WriteLine("------------------------------");
 }
 void chest()
 {
@@ -162,13 +200,22 @@ void chest()
         }
         items.Remove(items[sel_item]);
     }
+    Console.WriteLine("Переход в следующую комнату...");
     Console.WriteLine("------------------------------");
 }
 void end()
 {
-    Console.WriteLine("Вы победили всех боссов!");
-    Console.WriteLine("Вы настоящий герой!");
-    Console.WriteLine(":)");
+    if (play.hp > 0)
+    {
+        Console.WriteLine("Вы настоящий герой!");
+        Console.WriteLine("Вы победили всех боссов!");
+        Console.WriteLine(":)");
+    }
+    else
+    {
+        Console.WriteLine("К сожалению, вы проиграли в этой битве");
+        Console.WriteLine("Постарайтесь получше в следующий раз!");
+    }
 }
 enum Type_e { Heal, Weapon, Armor }
 class Item
