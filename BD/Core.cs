@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace BD
 {
-    internal class Program
+    internal class Core
     {
-        static void Main(string[] args)
-        {
-            
-        }
+        public static car_repairEntities Context = new car_repairEntities();
     }
 }
