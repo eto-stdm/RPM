@@ -11,6 +11,12 @@ namespace BD
     {
         static void Main(string[] args)
         {
+            //Core.Context.Car_repair_details.DeleteObject();
+            //Core.Context.SaveChanges();
+            //Core.Context.
+
+
+
             // добавление денег и деталей (мб сразу в бд сделать)
             List<Details> details = Core.Context.Details.ToList();
             //List<Shop_details> shop = Core.Context.Shop_details.ToList();
@@ -18,6 +24,7 @@ namespace BD
             List<Car_repair> repair = Core.Context.Car_repair.ToList();
 
             bool flag_game_over = false;
+            bool car_fixed = false;
             Console.WriteLine("Вам досталась автомастерская от вашего деда.");
             Console.WriteLine("Вы решили, что вы хотите работать здесь...");
             Console.WriteLine("...До тех пор, пока у вас не кончатся деньги.");
@@ -25,40 +32,41 @@ namespace BD
 
             while (true)
             {
-                client_arrives();
-                Console.WriteLine("1. Обслужить клиента");
-                Console.WriteLine("2. Закупить детали");
-                Console.WriteLine("3. Проверить баланс и детали");
-                Console.WriteLine("0. Выход");
-                string choice = Console.ReadLine();
-
-                switch(choice)
+                string client_detail = client_arrives();
+                while (car_fixed == false)
                 {
-                    case "1": break;
-                    case "2": buy_in_shop(); break;
-                    case "3": check_my_items(); break;
-                    case "0": return;
-                    default: break;
-                }
-                
+                    Console.WriteLine("1. Обслужить клиента");
+                    Console.WriteLine("2. Закупить детали");
+                    Console.WriteLine("3. Проверить баланс и детали");
+                    Console.WriteLine("0. Выход");
+                    string choice = Console.ReadLine();
 
+                    switch (choice)
+                    {
+                        case "1": break;
+                        case "2": buy_in_shop(); break;
+                        case "3": check_my_items(); break;
+                        case "0": return;
+                        default: break;
+                    }
 
-                //flag_game_over = true;
-                if (flag_game_over)
-                {
-                    end();
-                    break;
+                    if (flag_game_over) { end(); break; }
                 }
             }
 
-            void client_arrives()
+            string client_arrives()
             {
-                string d = "";
                 Random rnd = new Random();
-                int detail_id = rnd.Next(details.Count);
-                Console.WriteLine("К вам приехал клиент!");
-                Console.WriteLine($"У него сломан {details[detail_id]}");
+                int id = rnd.Next(1, 21);
+                Details selected = Core.Context.Details.First(x => x.Detail_id == id);
 
+                //var d = from i in details // стиль SQL
+                //        where i.Detail_id == id
+                //        select i;
+
+                Console.WriteLine("К вам приехал клиент!");
+                Console.WriteLine($"У него сломан {selected.Detail_name}");
+                return selected.Detail_name;
             }
             void fix_car()
             {
@@ -94,53 +102,36 @@ namespace BD
             }
             void buy_in_shop()
             {
-                foreach (var item in repair)
-                {
-                    Console.WriteLine($"Ваш баланс: {item.Balance}");
-                }
+                foreach (var item in repair) { Console.WriteLine($"Ваш баланс: {item.Balance}"); }
+
                 Console.WriteLine("Выберите деталь для покупки:");
-                int detail_c = Convert.ToInt32(Console.ReadLine());
                 foreach (var item in details)
                 {
                     Console.WriteLine($"ID детали: {item.Detail_id}, Название: {item.Detail_name}, Цена: {item.Detail_price};");
                 }
+                int detail_c = Convert.ToInt32(Console.ReadLine());
 
                 if (detail_c == 4) // если id детали в списке
                 {
                     Console.WriteLine("Укажите количество деталей:");
                     int am = Convert.ToInt32(Console.ReadLine());
-                    if (am <= 0)
-                    {
-                        Console.WriteLine("Количество деталей не может быть меньше одной!");
-                    }
+                    if (am <= 0) { Console.WriteLine("Количество деталей не может быть меньше одной!"); }
                     else
                     {
                         if (detail_c == 23) // если денег достаточно для покупки
                         {
                             Console.WriteLine($"Было куплено {am} шт {detail_c}"); // количество, имя детали
                         }
-                        else
-                        {
-                            Console.WriteLine("Недостаточно денег для покупки!");
-                        }
+                        else { Console.WriteLine("Недостаточно денег для покупки!"); }
                     }
                 }
-                else
-                {
-                    Console.WriteLine("Неверный индекс");
-                }
+                else { Console.WriteLine("Неверный индекс"); }
             }
 
             void check_my_items()
             {
-                foreach (var item in repair)
-                {
-                    Console.WriteLine($"Баланс: {item.Balance}");
-                }
-                foreach (var item in repair_details)
-                {
-                    Console.WriteLine($"Название детали: {item.Detail_id}, Количество: {item.Amount};");
-                }
+                foreach (var item in repair) { Console.WriteLine($"Баланс: {item.Balance}"); }
+                foreach (var item in repair_details) { Console.WriteLine($"Название детали: {item.Detail_id}, Количество: {item.Amount};"); }
             }
 
             void end()
