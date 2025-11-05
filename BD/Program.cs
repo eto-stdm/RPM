@@ -12,19 +12,7 @@ namespace BD
     {
         static void Main(string[] args)
         {
-            //Core.Context.Car_repair_details.DeleteObject();
-            //Core.Context.SaveChanges();
-            //Core.Context.
-
-
-            //var d = from i in details // стиль SQL
-            //        where i.Detail_id == id
-            //        select i;
-
-
-            // добавление денег и деталей (мб сразу в бд сделать)
             List<Details> details = Core.Context.Details.ToList();
-            //List<Shop_details> shop = Core.Context.Shop_details.ToList();
             List<Car_repair_details> repair_details = Core.Context.Car_repair_details.ToList();
             List<Car_repair> repair = Core.Context.Car_repair.ToList();
 
@@ -54,7 +42,7 @@ namespace BD
 
                     switch (choice)
                     {
-                        case "1": break;
+                        case "1": fix_car(client_detail);  break;
                         case "2": buy_in_shop(); break;
                         case "3": check_my_items(); break;
                         case "0": return;
@@ -74,41 +62,50 @@ namespace BD
                 Console.WriteLine($"У него сломан {selected.Detail_name}");
                 return selected.Detail_name;
             }
-            void fix_car()
+
+            void fix_car(string client_detail)
             {
+                
                 Console.WriteLine("Принять или отказать в починке?");
                 Console.WriteLine("1. Принять");
                 Console.WriteLine("2. Отказать");
                 string c = Console.ReadLine();
                 if (c == "1")
                 {
-                    Console.WriteLine("Вы приняли заказ");
-                    if (c == "0") // есть деталь
+                    Console.WriteLine("Вы приняли заказ.");
+                    if (client_detail == ) // есть деталь
                     {
+
+                        //Core.Context.User.Remove();
                         // удаление детали из инвентаря автосервиса
-                        Console.WriteLine($"Вы производите ремонт {c}"); // название детали
-                        // начисление денег на баланс
-                        Console.WriteLine($"Вы получили {c} рублей"); // + на счету
+                        Console.WriteLine($"Вы производите ремонт {client_detail}."); // название детали
+
+                        foreach (var item in repair) { item.Balance += 3000; }
+                        Console.WriteLine($"Вы получили {c} рублей."); // + на счету
                     }
                     else // нет детали
                     {
-                        Console.WriteLine("У вас нет подходящей детали");
-                        // удаление случайной детали из инвентаря автосервиса
-                        Console.WriteLine("Вы ставите случайную деталь на отвали");
-                        // вычет денег с баланса
-                        Console.WriteLine("Это замечают и вы платите штраф в размере 10000 рублей"); // - на счету
+                        Random rnd = new Random();
+                        Car_repair_details selected = Core.Context.Car_repair_details.First();
+                        Core.Context.Car_repair_details.Remove(selected);
+
+                        Console.WriteLine("У вас нет подходящей детали.");
+                        Console.WriteLine("Вы ставите случайную деталь на отвали.");
+                        foreach (var item in repair) { item.Balance -= 100000; }
+                        Console.WriteLine("Это замечают и вы платите штраф в размере 100000 рублей."); // - на счету
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Вы отказались от заказа");
-                    // бд изменение баланса
-                    Console.WriteLine("Вы выплачиваете штраф за отказ в обслуживании в размере 3000 рублей");
+                    Console.WriteLine("Вы отказались от заказа.");
+                    foreach (var item in repair) { item.Balance -= 3000; }
+                    Console.WriteLine("Вы выплачиваете штраф за отказ в обслуживании в размере 3000 рублей.");
                 }
             }
+
             void buy_in_shop()
             {
-                foreach (var item in repair) { Console.WriteLine($"Ваш баланс: {item.Balance} рублей"); }
+                foreach (var item in repair) { Console.WriteLine($"Ваш баланс: {item.Balance} рублей."); }
 
                 Console.WriteLine("Введите ID детали для покупки:");
                 Console.WriteLine("**************************************************************");
@@ -118,32 +115,19 @@ namespace BD
                 }
                 Console.WriteLine("**************************************************************");
                 int buy_detail;
-                try
-                { 
-                    buy_detail = Convert.ToInt32(Console.ReadLine());
-                }
-                catch
-                {
-                    Console.WriteLine("Введено не число");
-                    return;
-                }
+                try { buy_detail = Convert.ToInt32(Console.ReadLine()); }
+                catch { Console.WriteLine("Введено не число."); return; }
 
                 Details selected = new Details();
-                try
-                {
-                    selected = Core.Context.Details.First(x => x.Detail_id == buy_detail);
-                }
-                catch
-                {
-                    Console.WriteLine("Неверный индекс");
-                }
+                try { selected = Core.Context.Details.First(x => x.Detail_id == buy_detail); }
+                catch { Console.WriteLine("Неверный индекс."); }
 
                 if (buy_detail == selected.Detail_id) // если id детали в списке
                 {
                     Console.WriteLine("Укажите количество деталей:");
                     int amount;
                     try { amount = Convert.ToInt32(Console.ReadLine()); }
-                    catch { Console.WriteLine("Введено не число"); return; }
+                    catch { Console.WriteLine("Введено не число."); return; }
 
                     if (amount <= 0) { Console.WriteLine("Количество деталей не может быть меньше одной!"); }
                     else
@@ -152,10 +136,18 @@ namespace BD
                         { 
                             if (item.Balance >= buy_detail) // если денег достаточно для покупки
                             {
+                                foreach (var i in repair_details)
+                                {
+                                    if (i.Detail_id == selected.Detail_id)
+                                    {
+                                        i.Amount += 1;
+                                    }
+
+                                }
                                 item.Balance -= selected.Detail_price * amount;
                                 // + детали
-                                Console.WriteLine($"Было куплено {amount} шт {selected.Detail_name}"); // количество, имя детали
-                                Console.WriteLine($"Текущий баланс: {item.Balance} рублей");
+                                Console.WriteLine($"Было куплено {amount} шт {selected.Detail_name}."); // количество, имя детали
+                                Console.WriteLine($"Текущий баланс: {item.Balance} рублей.");
                             }
                             else { Console.WriteLine("Недостаточно денег для покупки!"); }
                         }
@@ -165,14 +157,23 @@ namespace BD
 
             void check_my_items()
             {
-                foreach (var item in repair) { Console.WriteLine($"Баланс: {item.Balance} рублей"); }
-                foreach (var item in repair_details) { Console.WriteLine($"Название детали: {item.Detail_id}, Количество: {item.Amount};"); }
+                foreach (var item in repair) { Console.WriteLine($"Баланс: {item.Balance} рублей."); }
+                foreach (var item in repair_details) 
+                {
+                    foreach (var rep in details)
+                    {
+                        if (item.Detail_id == rep.Detail_id)
+                        {
+                            Console.WriteLine($"Название детали: {rep.Detail_name}, Количество: {item.Amount};");
+                        }
+                    }
+                }
             }
 
             void end()
             {
                 Console.WriteLine("-----------------------------------------------------");
-                Console.WriteLine("Вы потратили все свои сбережения, пока чинили машинки");
+                Console.WriteLine("Вы потратили все свои сбережения, пока чинили машинки.");
                 Console.WriteLine("Кажется, пора идти на завод.");
                 Console.WriteLine("\r\n\r\n  ____                         ___                 \r\n / ___| __ _ _ __ ___   ___   / _ \\__   _____ _ __ \r\n| |  _ / _` | '_ ` _ \\ / _ \\ | | | \\ \\ / / _ \\ '__|\r\n| |_| | (_| | | | | | |  __/ | |_| |\\ V /  __/ |   \r\n \\____|\\__,_|_| |_| |_|\\___|  \\___/  \\_/ \\___|_|   \r\n\r\n");
                 Console.WriteLine("-----------------------------------------------------");
