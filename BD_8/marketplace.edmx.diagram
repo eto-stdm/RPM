@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1df88fb8491a46289b103dd448624b9b" Name="Diagram1">
+      <Diagram DiagramId="1df88fb8491a46289b103dd448624b9b" Name="Diagram1" ZoomLevel="74">
         <EntityTypeShape EntityType="marketplaceModel.Cart" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="marketplaceModel.CartProducts" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="marketplaceModel.Orders" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
@@ -18,6 +18,8 @@
         <AssociationConnector Association="marketplaceModel.FK_Orders_OrdersProducts" ManuallyRouted="false" />
         <AssociationConnector Association="marketplaceModel.FK_Orders_Users1" ManuallyRouted="false" />
         <AssociationConnector Association="marketplaceModel.FK_OrdersProducts_Products" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="marketplaceModel.PVZ" Width="1.5" PointX="5.375" PointY="5.875" />
+        <AssociationConnector Association="marketplaceModel.FK_Orders_PVZ" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

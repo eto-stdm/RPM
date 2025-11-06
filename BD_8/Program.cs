@@ -29,8 +29,8 @@ namespace BD_8
                     Console.WriteLine("*******************");
                     Console.WriteLine("Выберите действие");
                     Console.WriteLine("1. Вход");
-                    Console.WriteLine("2. Регистрация"); // с подтверждением пароля
-                    Console.WriteLine("3. Просмотр товаров"); // даже без регистрации
+                    Console.WriteLine("2. Регистрация");
+                    Console.WriteLine("3. Просмотр товаров");
                     Console.WriteLine("0. Выход");
                     Console.WriteLine("*******************");
                     select = Console.ReadLine();
@@ -67,8 +67,6 @@ namespace BD_8
                     }
                 }
             } while (select != "0");
-
-
 
             void sign_in() // вход
             {
@@ -121,10 +119,7 @@ namespace BD_8
                         flag_registr = true;
                     }
                 }
-                else
-                {
-                    Console.WriteLine("Неправильно введённый пароль.");
-                }
+                else { Console.WriteLine("Неправильно введённый пароль."); }
             }
 
             void look_for_products()
@@ -172,7 +167,7 @@ namespace BD_8
             void profile()
             {
                 Console.WriteLine("Данные текущего пользователя:");
-                Console.WriteLine($"Фамилия: {cur_user.Surname},\nИмя: {cur_user.Name},\nОтчество: {cur_user.MiddleName},\nЛогин: {cur_user.Login},\nПароль: {cur_user.Password}");
+                Console.WriteLine($"Фамилия: {cur_user.Surname}\nИмя: {cur_user.Name}\nОтчество: {cur_user.MiddleName}\nЛогин: {cur_user.Login}\nПароль: {cur_user.Password}");
             }
 
             void cart_func()

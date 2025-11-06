@@ -32,5 +32,6 @@ namespace BD_8
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<PVZ> PVZ { get; set; }
     }
 }
