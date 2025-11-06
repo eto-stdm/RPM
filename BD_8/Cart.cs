@@ -14,6 +14,7 @@ namespace BD_8
     
     public partial class Cart
     {
+        public int CartId { get; set; }
         public int CartProduct { get; set; }
         public int UserId { get; set; }
     

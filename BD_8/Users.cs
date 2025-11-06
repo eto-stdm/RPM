@@ -14,6 +14,13 @@ namespace BD_8
     
     public partial class Users
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Users()
+        {
+            this.Cart = new HashSet<Cart>();
+            this.Orders = new HashSet<Orders>();
+        }
+    
         public int UserID { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
@@ -21,7 +28,9 @@ namespace BD_8
         public string Surname { get; set; }
         public string MiddleName { get; set; }
     
-        public virtual Cart Cart { get; set; }
-        public virtual Orders Orders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cart> Cart { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Orders> Orders { get; set; }
     }
 }

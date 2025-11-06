@@ -17,7 +17,7 @@ namespace BD_8
             List<Orders> orders = Core.Context.Orders.ToList();
             List<OrdersProducts> orders_products = Core.Context.OrdersProducts.ToList();
 
-            Users current_user = null;
+            Users cur_user = new Users();
 
             string select;
             bool flag_registr = false;
@@ -81,8 +81,8 @@ namespace BD_8
                     // выбрать пользователя из таблицы
                     if (password == "ewdw") // если пароль выбранного пользователя совпадает с введёным паролем
                     {
-                        current_user.Login = login;
-                        current_user.Password = password;
+                        cur_user.Login = login;
+                        cur_user.Password = password;
                         flag_registr = true;
                     }
                     else
@@ -122,6 +122,8 @@ namespace BD_8
                         Core.Context.Users.Add(new_user);
                         Core.Context.SaveChanges();
                         Console.WriteLine($"Пользователь {login} создан!");
+                        cur_user = new_user;
+                        flag_registr = true;
                     }
                 }
                 else
@@ -132,12 +134,17 @@ namespace BD_8
 
             void look_for_products()
             {
-
+                Console.WriteLine("Товары:");
+                foreach (var item in products)
+                {
+                    Console.WriteLine($"Наименование: {item.Name}, Цена: {item.Price} рублей.");
+                }
             }
 
             void profile()
             {
-
+                Console.WriteLine("Данные текущего пользователя:");
+                Console.WriteLine($"Фамилия: {cur_user.Surname},\nИмя: {cur_user.Name},\nОтчество: {cur_user.MiddleName},\nЛогин: {cur_user.Login},\nПароль: {cur_user.Password}");
             }
 
             void cart_func()
