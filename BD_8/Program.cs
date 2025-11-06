@@ -76,24 +76,18 @@ namespace BD_8
                 string login = Console.ReadLine();
                 Console.WriteLine("Введите пароль:");
                 string password = Console.ReadLine();
-                if (login == "w") // если users содержит login
-                { 
-                    // выбрать пользователя из таблицы
-                    if (password == "ewdw") // если пароль выбранного пользователя совпадает с введёным паролем
-                    {
-                        cur_user.Login = login;
-                        cur_user.Password = password;
-                        flag_registr = true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Неверный пароль.");
-                    }
-                }
-                else // если users не содержит login
+                try
                 {
-                    Console.WriteLine("Такого пользователя не существует.");
+                    Users exist_user = Core.Context.Users.First(x => x.Login == login);
+                    if (exist_user.Password == password) // если пароль выбранного пользователя совпадает с введёным паролем
+                    {
+                        cur_user = exist_user;
+                        flag_registr = true;
+                        Console.WriteLine($"Добро пожаловать, {cur_user.Name}!");
+                    }
+                    else { Console.WriteLine("Неверный пароль."); }
                 }
+                catch { Console.WriteLine("Такого пользователя не существует."); }
             }
 
             void sign_up() // регистрация
@@ -119,6 +113,7 @@ namespace BD_8
                         new_user.Name = name;
                         new_user.Surname = surname;
                         new_user.MiddleName = midname;
+
                         Core.Context.Users.Add(new_user);
                         Core.Context.SaveChanges();
                         Console.WriteLine($"Пользователь {login} создан!");
@@ -128,17 +123,50 @@ namespace BD_8
                 }
                 else
                 {
-                    Console.WriteLine("Неправильно введённый пароль");
+                    Console.WriteLine("Неправильно введённый пароль.");
                 }
             }
 
             void look_for_products()
             {
                 Console.WriteLine("Товары:");
-                foreach (var item in products)
+                foreach (var item in products) { Console.WriteLine($"ID товара {item.ProductID}, Наименование: {item.Name}, Цена: {item.Price} рублей."); }
+                if (flag_registr == true)
                 {
-                    Console.WriteLine($"Наименование: {item.Name}, Цена: {item.Price} рублей.");
+                    Console.WriteLine("Желаете добавить какой-нибудь товар в корзину? (да/нет)");
+                    string selector = Console.ReadLine();
+                    if (selector.ToLower() == "да")
+                    {
+                        try
+                        {
+                            Console.WriteLine("Какой товар вы хотите добавить в корзину? (введите id товара)");
+                            int id = Convert.ToInt32(Console.ReadLine());
+                            Console.WriteLine("Сколько товара вы хотите добавить в корзину?");
+                            int amount = Convert.ToInt32(Console.ReadLine());
+                            try
+                            {
+                                Products new_prod = Core.Context.Products.First(x => x.ProductID == id);
+                                CartProducts new_cart_pr = new CartProducts
+                                {
+                                    ProductID = id,
+                                    Amount = amount
+                                };
+                                Core.Context.CartProducts.Add(new_cart_pr);
+                                Cart new_cart = new Cart
+                                {
+                                    CartProduct = new_cart_pr.CartProduct,
+                                    UserId = cur_user.UserID
+                                };
+                                Core.Context.Cart.Add(new_cart);
+                                Console.WriteLine($"Товар {new_prod.Name} добавлен в корзину в количестве {amount} штук");
+                            }
+                            catch { Console.WriteLine("Введен товар с несуществующим ID. Возврат в меню."); }
+                        }
+                        catch { Console.WriteLine("Введено не число. Возврат в меню."); }
+                    }
+                    else { Console.WriteLine("Возврат в меню."); }
                 }
+                else { Console.WriteLine("Вы должны зайти в аккаунт для добавления товаров в корзину."); }
             }
 
             void profile()
