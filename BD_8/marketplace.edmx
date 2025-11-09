@@ -7,17 +7,12 @@
     <Schema Namespace="Хранилище marketplaceModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cart">
           <Key>
-            <PropertyRef Name="CartId" />
+            <PropertyRef Name="CartID" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="ProductID" />
           </Key>
-          <Property Name="CartId" Type="int" Nullable="false" />
-          <Property Name="CartProduct" Type="int" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="CartProducts">
-          <Key>
-            <PropertyRef Name="CartProduct" />
-          </Key>
-          <Property Name="CartProduct" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CartID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="ProductID" Type="int" Nullable="false" />
           <Property Name="Amount" Type="int" Nullable="false" />
         </EntityType>
@@ -51,7 +46,7 @@
           <Key>
             <PropertyRef Name="PVZID" />
           </Key>
-          <Property Name="PVZID" Type="int" Nullable="false" />
+          <Property Name="PVZID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -75,39 +70,31 @@
           <Property Name="Surname" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="MiddleName" Type="nvarchar" MaxLength="30" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Cart_CartProducts">
-          <End Role="CartProducts" Type="Self.CartProducts" Multiplicity="1" />
+        <Association Name="FK_Cart_Product">
+          <End Role="Products" Type="Self.Products" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CartProducts">
-              <PropertyRef Name="CartProduct" />
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
             </Principal>
             <Dependent Role="Cart">
-              <PropertyRef Name="CartProduct" />
+              <PropertyRef Name="ProductID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Cart_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="UserID" />
             </Principal>
             <Dependent Role="Cart">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CartProducts_Products">
-          <End Role="Products" Type="Self.Products" Multiplicity="1" />
-          <End Role="CartProducts" Type="Self.CartProducts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Products">
-              <PropertyRef Name="ProductID" />
-            </Principal>
-            <Dependent Role="CartProducts">
-              <PropertyRef Name="ProductID" />
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -163,24 +150,19 @@
         </Association>
         <EntityContainer Name="Хранилище marketplaceModelContainer">
           <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CartProducts" EntityType="Self.CartProducts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrdersProducts" EntityType="Self.OrdersProducts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PVZ" EntityType="Self.PVZ" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Cart_CartProducts" Association="Self.FK_Cart_CartProducts">
-            <End Role="CartProducts" EntitySet="CartProducts" />
+          <AssociationSet Name="FK_Cart_Product" Association="Self.FK_Cart_Product">
+            <End Role="Products" EntitySet="Products" />
             <End Role="Cart" EntitySet="Cart" />
           </AssociationSet>
           <AssociationSet Name="FK_Cart_Users" Association="Self.FK_Cart_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="Cart" EntitySet="Cart" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CartProducts_Products" Association="Self.FK_CartProducts_Products">
-            <End Role="Products" EntitySet="Products" />
-            <End Role="CartProducts" EntitySet="CartProducts" />
           </AssociationSet>
           <AssociationSet Name="FK_Orders_OrdersProducts" Association="Self.FK_Orders_OrdersProducts">
             <End Role="OrdersProducts" EntitySet="OrdersProducts" />
@@ -205,23 +187,16 @@
       <Schema Namespace="marketplaceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Cart">
           <Key>
-            <PropertyRef Name="CartId" />
+            <PropertyRef Name="CartID" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="ProductID" />
           </Key>
-          <Property Name="CartId" Type="Int32" Nullable="false" />
-          <Property Name="CartProduct" Type="Int32" Nullable="false" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CartProducts" Relationship="Self.FK_Cart_CartProducts" FromRole="Cart" ToRole="CartProducts" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_Cart_Users" FromRole="Cart" ToRole="Users" />
-        </EntityType>
-        <EntityType Name="CartProducts">
-          <Key>
-            <PropertyRef Name="CartProduct" />
-          </Key>
-          <Property Name="CartProduct" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CartID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="ProductID" Type="Int32" Nullable="false" />
           <Property Name="Amount" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Cart" Relationship="Self.FK_Cart_CartProducts" FromRole="CartProducts" ToRole="Cart" />
-          <NavigationProperty Name="Products" Relationship="Self.FK_CartProducts_Products" FromRole="CartProducts" ToRole="Products" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Cart_Product" FromRole="Cart" ToRole="Products" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Cart_Users" FromRole="Cart" ToRole="Users" />
         </EntityType>
         <EntityType Name="Orders">
           <Key>
@@ -230,10 +205,10 @@
           <Property Name="OrderNum" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="OrdersProducts" Relationship="Self.FK_Orders_OrdersProducts" FromRole="Orders" ToRole="OrdersProducts" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_Orders_Users1" FromRole="Orders" ToRole="Users" />
           <Property Name="PVZID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="PVZ" Relationship="marketplaceModel.FK_Orders_PVZ" FromRole="Orders" ToRole="PVZ" />
+          <NavigationProperty Name="OrdersProducts" Relationship="Self.FK_Orders_OrdersProducts" FromRole="Orders" ToRole="OrdersProducts" />
+          <NavigationProperty Name="PVZ" Relationship="Self.FK_Orders_PVZ" FromRole="Orders" ToRole="PVZ" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Orders_Users1" FromRole="Orders" ToRole="Users" />
         </EntityType>
         <EntityType Name="OrdersProducts">
           <Key>
@@ -253,8 +228,16 @@
           <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <NavigationProperty Name="CartProducts" Relationship="Self.FK_CartProducts_Products" FromRole="Products" ToRole="CartProducts" />
+          <NavigationProperty Name="Cart" Relationship="Self.FK_Cart_Product" FromRole="Products" ToRole="Cart" />
           <NavigationProperty Name="OrdersProducts" Relationship="Self.FK_OrdersProducts_Products" FromRole="Products" ToRole="OrdersProducts" />
+        </EntityType>
+        <EntityType Name="PVZ">
+          <Key>
+            <PropertyRef Name="PVZID" />
+          </Key>
+          <Property Name="PVZID" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_PVZ" FromRole="PVZ" ToRole="Orders" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -279,39 +262,31 @@
           <NavigationProperty Name="Cart" Relationship="Self.FK_Cart_Users" FromRole="Users" ToRole="Cart" />
           <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Users1" FromRole="Users" ToRole="Orders" />
         </EntityType>
-        <Association Name="FK_Cart_CartProducts">
-          <End Role="CartProducts" Type="Self.CartProducts" Multiplicity="1" />
+        <Association Name="FK_Cart_Product">
+          <End Role="Products" Type="Self.Products" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CartProducts">
-              <PropertyRef Name="CartProduct" />
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
             </Principal>
             <Dependent Role="Cart">
-              <PropertyRef Name="CartProduct" />
+              <PropertyRef Name="ProductID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Cart_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="UserID" />
             </Principal>
             <Dependent Role="Cart">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CartProducts_Products">
-          <End Role="Products" Type="Self.Products" Multiplicity="1" />
-          <End Role="CartProducts" Type="Self.CartProducts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Products">
-              <PropertyRef Name="ProductID" />
-            </Principal>
-            <Dependent Role="CartProducts">
-              <PropertyRef Name="ProductID" />
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -324,6 +299,18 @@
             </Principal>
             <Dependent Role="Orders">
               <PropertyRef Name="OrderNum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_PVZ">
+          <End Role="PVZ" Type="Self.PVZ" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PVZ">
+              <PropertyRef Name="PVZID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="PVZID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -355,26 +342,26 @@
         </Association>
         <EntityContainer Name="marketplaceEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Cart" EntityType="Self.Cart" />
-          <EntitySet Name="CartProducts" EntityType="Self.CartProducts" />
           <EntitySet Name="Orders" EntityType="Self.Orders" />
           <EntitySet Name="OrdersProducts" EntityType="Self.OrdersProducts" />
           <EntitySet Name="Products" EntityType="Self.Products" />
+          <EntitySet Name="PVZ" EntityType="Self.PVZ" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Users" EntityType="Self.Users" />
-          <AssociationSet Name="FK_Cart_CartProducts" Association="Self.FK_Cart_CartProducts">
-            <End Role="CartProducts" EntitySet="CartProducts" />
+          <AssociationSet Name="FK_Cart_Product" Association="Self.FK_Cart_Product">
+            <End Role="Products" EntitySet="Products" />
             <End Role="Cart" EntitySet="Cart" />
           </AssociationSet>
           <AssociationSet Name="FK_Cart_Users" Association="Self.FK_Cart_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="Cart" EntitySet="Cart" />
           </AssociationSet>
-          <AssociationSet Name="FK_CartProducts_Products" Association="Self.FK_CartProducts_Products">
-            <End Role="Products" EntitySet="Products" />
-            <End Role="CartProducts" EntitySet="CartProducts" />
-          </AssociationSet>
           <AssociationSet Name="FK_Orders_OrdersProducts" Association="Self.FK_Orders_OrdersProducts">
             <End Role="OrdersProducts" EntitySet="OrdersProducts" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_PVZ" Association="Self.FK_Orders_PVZ">
+            <End Role="PVZ" EntitySet="PVZ" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK_Orders_Users1" Association="Self.FK_Orders_Users1">
@@ -385,32 +372,7 @@
             <End Role="Products" EntitySet="Products" />
             <End Role="OrdersProducts" EntitySet="OrdersProducts" />
           </AssociationSet>
-          <EntitySet Name="PVZ" EntityType="marketplaceModel.PVZ" />
-          <AssociationSet Name="FK_Orders_PVZ" Association="marketplaceModel.FK_Orders_PVZ">
-            <End Role="PVZ" EntitySet="PVZ" />
-            <End Role="Orders" EntitySet="Orders" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="PVZ">
-          <Key>
-            <PropertyRef Name="PVZID" />
-          </Key>
-          <Property Name="PVZID" Type="Int32" Nullable="false" />
-          <Property Name="Address" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Orders" Relationship="marketplaceModel.FK_Orders_PVZ" FromRole="PVZ" ToRole="Orders" />
-        </EntityType>
-        <Association Name="FK_Orders_PVZ">
-          <End Type="marketplaceModel.PVZ" Role="PVZ" Multiplicity="1" />
-          <End Type="marketplaceModel.Orders" Role="Orders" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PVZ">
-              <PropertyRef Name="PVZID" />
-            </Principal>
-            <Dependent Role="Orders">
-              <PropertyRef Name="PVZID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -420,16 +382,8 @@
           <EntitySetMapping Name="Cart">
             <EntityTypeMapping TypeName="marketplaceModel.Cart">
               <MappingFragment StoreEntitySet="Cart">
-                <ScalarProperty Name="CartId" ColumnName="CartId" />
-                <ScalarProperty Name="CartProduct" ColumnName="CartProduct" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CartProducts">
-            <EntityTypeMapping TypeName="marketplaceModel.CartProducts">
-              <MappingFragment StoreEntitySet="CartProducts">
-                <ScalarProperty Name="CartProduct" ColumnName="CartProduct" />
+                <ScalarProperty Name="CartID" ColumnName="CartID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
               </MappingFragment>
@@ -438,10 +392,10 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="marketplaceModel.Orders">
               <MappingFragment StoreEntitySet="Orders">
-                <ScalarProperty Name="PVZID" ColumnName="PVZID" />
                 <ScalarProperty Name="OrderNum" ColumnName="OrderNum" />
                 <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="PVZID" ColumnName="PVZID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -461,6 +415,14 @@
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PVZ">
+            <EntityTypeMapping TypeName="marketplaceModel.PVZ">
+              <MappingFragment StoreEntitySet="PVZ">
+                <ScalarProperty Name="PVZID" ColumnName="PVZID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -484,14 +446,6 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
                 <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PVZ">
-            <EntityTypeMapping TypeName="marketplaceModel.PVZ">
-              <MappingFragment StoreEntitySet="PVZ">
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="PVZID" ColumnName="PVZID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

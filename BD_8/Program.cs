@@ -13,14 +13,15 @@ namespace BD_8
             List<Users> users = Core.Context.Users.ToList();
             List<Products> products = Core.Context.Products.ToList();
             List<Cart> cart = Core.Context.Cart.ToList();
-            List<CartProducts> cart_products = Core.Context.CartProducts.ToList();
             List<Orders> orders = Core.Context.Orders.ToList();
             List<OrdersProducts> orders_products = Core.Context.OrdersProducts.ToList();
+            List<PVZ> pvz = Core.Context.PVZ.ToList();
 
             Users cur_user = new Users();
 
             string select;
             bool flag_registr = false;
+
             Console.WriteLine("Маркетплейс GMWOG||GG.MOW||WONGG");
             do
             {
@@ -141,18 +142,15 @@ namespace BD_8
                             try
                             {
                                 Products new_prod = Core.Context.Products.First(x => x.ProductID == id);
-                                CartProducts new_cart_pr = new CartProducts
-                                {
-                                    ProductID = id,
-                                    Amount = amount
-                                };
-                                Core.Context.CartProducts.Add(new_cart_pr);
                                 Cart new_cart = new Cart
                                 {
-                                    CartProduct = new_cart_pr.CartProduct,
-                                    UserId = cur_user.UserID
+                                    CartID = cur_user.UserID,
+                                    UserID = cur_user.UserID,
+                                    ProductID = id,
+                                    Amount = amount,
                                 };
                                 Core.Context.Cart.Add(new_cart);
+                                Core.Context.SaveChanges();
                                 Console.WriteLine($"Товар {new_prod.Name} добавлен в корзину в количестве {amount} штук");
                             }
                             catch { Console.WriteLine("Введен товар с несуществующим ID. Возврат в меню."); }
@@ -172,12 +170,104 @@ namespace BD_8
 
             void cart_func()
             {
+                foreach (var item in cart)
+                {
+                    item.ProductID -= 1;
+                    if (item.CartID == cur_user.UserID)
+                    {
+                        Console.WriteLine($"ID товара {item.ProductID + 1}, Наименование: {products[item.ProductID].Name}, Цена: {products[item.ProductID].Price} рублей, Количество: {item.Amount} штук.");      
+                    }
 
+
+
+
+
+
+                    Console.WriteLine("Хотите заказать товары? (да/нет)");
+                    string selector = Console.ReadLine();
+                    if (selector.ToLower() == "да")
+                    {
+                        Console.WriteLine("Сколько товаров вы хотите заказать?");
+                        Console.WriteLine("1. Всю корзину");
+                        Console.WriteLine("2. Один товар");
+                        string menu = Console.ReadLine();
+                        
+                        switch(menu)
+                        {
+                            case "1":
+                                select_pvz();
+                                Console.WriteLine("Произведён заказ всех товаров!");
+                                break;
+                            case "2":
+                                try
+                                {
+                                    Console.WriteLine("Какой товар вы хотите добавить в корзину? (введите id товара)");
+                                    int id = Convert.ToInt32(Console.ReadLine());
+
+                                }
+                                catch
+                                {
+
+                                }
+                                break;
+                            default: Console.WriteLine("Введена несуществующая команда. Возврат в меню."); break;
+                        }
+                    }
+                    else { Console.WriteLine("Заказ отменён. Возврат в меню."); }
+
+
+
+
+
+
+
+
+
+
+                    //Cart cur_cart = Core.Context.Cart(x => x.UserID == cur_user.UserID);
+                }
+            }
+
+            PVZ select_pvz()
+            {
+                Console.WriteLine("Выберите ПВЗ");
+                foreach (var item in pvz) { Console.WriteLine($"Номер ПВЗ: {item.PVZID}, Адрес: {item.Address}"); }
+                int selected_pvz = Convert.ToInt32(Console.ReadLine());
+
+
+                PVZ order_pvz = new PVZ();
+                //order_pvz = pvz.PVZID[]
+                return order_pvz;
             }
 
             void orders_func()
             {
-
+                Console.WriteLine("Ваши заказы:");
+                foreach (var item in orders) 
+                {
+                    Console.WriteLine("***************************");
+                    Console.WriteLine($"Номер заказа: {item.OrderNum}");
+                    Console.WriteLine($"Дата заказа: {item.OrderDate}");
+                    Console.WriteLine($"ПВЗ: {item.PVZID}");
+                    foreach (var i in orders_products)
+                    {
+                        if (item.OrderNum == i.OrderNum)
+                        {
+                            Console.WriteLine("---------------------------");
+                            Console.WriteLine($"Номер товара: {i.ProductID}");
+                            foreach (var pr in products)
+                            {
+                                if (i.ProductID == pr.ProductID)
+                                {
+                                    Console.WriteLine($"Название: {pr.Name}");
+                                    Console.WriteLine($"Количество: {i.Amount}");
+                                    Console.WriteLine("---------------------------");
+                                }
+                            }
+                        }
+                    }
+                    Console.WriteLine("***************************");
+                }
             }
         }
     }

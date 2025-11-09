@@ -58,9 +58,6 @@
     <Compile Include="Cart.cs">
       <DependentUpon>marketplace.tt</DependentUpon>
     </Compile>
-    <Compile Include="CartProducts.cs">
-      <DependentUpon>marketplace.tt</DependentUpon>
-    </Compile>
     <Compile Include="Core.cs" />
     <Compile Include="marketplace.Context.cs">
       <AutoGen>True</AutoGen>
@@ -115,8 +112,8 @@
   <ItemGroup>
     <Content Include="marketplace.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>marketplace.Context.cs</LastGenOutput>
       <DependentUpon>marketplace.edmx</DependentUpon>
+      <LastGenOutput>marketplace.Context.cs</LastGenOutput>
     </Content>
     <Content Include="marketplace.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

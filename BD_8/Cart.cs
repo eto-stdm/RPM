@@ -14,11 +14,12 @@ namespace BD_8
     
     public partial class Cart
     {
-        public int CartId { get; set; }
-        public int CartProduct { get; set; }
-        public int UserId { get; set; }
+        public int CartID { get; set; }
+        public int UserID { get; set; }
+        public int ProductID { get; set; }
+        public int Amount { get; set; }
     
-        public virtual CartProducts CartProducts { get; set; }
+        public virtual Products Products { get; set; }
         public virtual Users Users { get; set; }
     }
 }

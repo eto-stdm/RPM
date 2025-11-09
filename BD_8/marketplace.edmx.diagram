@@ -4,22 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1df88fb8491a46289b103dd448624b9b" Name="Diagram1" ZoomLevel="74">
-        <EntityTypeShape EntityType="marketplaceModel.Cart" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="marketplaceModel.CartProducts" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="marketplaceModel.Orders" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="marketplaceModel.OrdersProducts" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="marketplaceModel.Products" Width="1.5" PointX="1.5" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="marketplaceModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="marketplaceModel.Users" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
-        <AssociationConnector Association="marketplaceModel.FK_Cart_CartProducts" ManuallyRouted="false" />
+      <Diagram DiagramId="6c8bb4b1c0ae4200a1163b6a3ba6ccae" Name="Diagram1">
+        <EntityTypeShape EntityType="marketplaceModel.Cart" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="marketplaceModel.Orders" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="marketplaceModel.OrdersProducts" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="marketplaceModel.Products" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="marketplaceModel.PVZ" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="marketplaceModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="marketplaceModel.Users" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <AssociationConnector Association="marketplaceModel.FK_Cart_Product" ManuallyRouted="false" />
         <AssociationConnector Association="marketplaceModel.FK_Cart_Users" ManuallyRouted="false" />
-        <AssociationConnector Association="marketplaceModel.FK_CartProducts_Products" ManuallyRouted="false" />
         <AssociationConnector Association="marketplaceModel.FK_Orders_OrdersProducts" ManuallyRouted="false" />
+        <AssociationConnector Association="marketplaceModel.FK_Orders_PVZ" ManuallyRouted="false" />
         <AssociationConnector Association="marketplaceModel.FK_Orders_Users1" ManuallyRouted="false" />
         <AssociationConnector Association="marketplaceModel.FK_OrdersProducts_Products" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="marketplaceModel.PVZ" Width="1.5" PointX="5.375" PointY="5.875" />
-        <AssociationConnector Association="marketplaceModel.FK_Orders_PVZ" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

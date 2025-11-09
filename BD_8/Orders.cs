@@ -20,7 +20,7 @@ namespace BD_8
         public int PVZID { get; set; }
     
         public virtual OrdersProducts OrdersProducts { get; set; }
-        public virtual Users Users { get; set; }
         public virtual PVZ PVZ { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

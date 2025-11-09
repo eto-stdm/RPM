@@ -17,7 +17,7 @@ namespace BD_8
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Products()
         {
-            this.CartProducts = new HashSet<CartProducts>();
+            this.Cart = new HashSet<Cart>();
             this.OrdersProducts = new HashSet<OrdersProducts>();
         }
     
@@ -26,7 +26,7 @@ namespace BD_8
         public decimal Price { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CartProducts> CartProducts { get; set; }
+        public virtual ICollection<Cart> Cart { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrdersProducts> OrdersProducts { get; set; }
     }
