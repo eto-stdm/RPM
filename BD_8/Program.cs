@@ -46,13 +46,13 @@ namespace BD_8
                     }
                 }
                 else
-                { // При покупке, пользователь должен выбирать ПВЗ (пункт выдачи заказов) из доступных
+                {
                     Console.WriteLine("*******************");
                     Console.WriteLine("Выберите действие:");
                     Console.WriteLine("1. Профиль");
-                    Console.WriteLine("2. Корзина"); // покупка как одного предмета, так и всех предметов из всей корзины сразу
+                    Console.WriteLine("2. Корзина");
                     Console.WriteLine("3. Просмотр товаров");
-                    Console.WriteLine("4. Заказы"); // просмотра заказов с сортировкой по дате, когда был сделан заказ
+                    Console.WriteLine("4. Заказы");
                     Console.WriteLine("0. Выход");
                     Console.WriteLine("*******************");
                     select = Console.ReadLine();
@@ -200,12 +200,11 @@ namespace BD_8
                                 }
                                 break;
                             case "2":
-
                                 try
                                 {
                                     Console.WriteLine("Какой товар вы хотите добавить в корзину? (введите id товара)");
                                     int id = Convert.ToInt32(Console.ReadLine());
-
+                                    Cart cur_cart = Core.Context.Cart.First(x => x.UserID == cur_user.UserID);
                                 }
                                 catch
                                 {
@@ -223,17 +222,6 @@ namespace BD_8
                         }
                     }
                     else { Console.WriteLine("Заказ отменён. Возврат в меню."); }
-
-
-
-
-
-
-
-
-
-
-                    //Cart cur_cart = Core.Context.Cart(x => x.UserID == cur_user.UserID);
                 }
             }
 
