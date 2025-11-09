@@ -175,9 +175,10 @@ namespace BD_8
                     item.ProductID -= 1;
                     if (item.CartID == cur_user.UserID)
                     {
-                        Console.WriteLine($"ID товара {item.ProductID + 1}, Наименование: {products[item.ProductID].Name}, Цена: {products[item.ProductID].Price} рублей, Количество: {item.Amount} штук.");      
+                        Console.WriteLine($"ID товара {item.ProductID + 1}, Наименование: {products[item.ProductID].Name}, Цена: {products[item.ProductID].Price} рублей, Количество: {item.Amount} штук.");
                     }
-
+                    item.ProductID += 1;
+                } 
                     Console.WriteLine("Хотите заказать товары? (да/нет)");
                     string selector = Console.ReadLine();
                     if (selector.ToLower() == "да")
@@ -205,24 +206,24 @@ namespace BD_8
                                     Console.WriteLine("Какой товар вы хотите добавить в корзину? (введите id товара)");
                                     int id = Convert.ToInt32(Console.ReadLine());
                                     Cart cur_cart = Core.Context.Cart.First(x => x.UserID == cur_user.UserID);
+
+                                    order_pvz = select_pvz();
+                                    if (order_pvz == null) { Console.WriteLine("Введён неверный номер ПВЗ. Возврат в меню"); }
+                                    else
+                                    {
+                                        int o = new_orders(order_pvz);
+                                        new_ordersproducts(o, cur_cart);
+                                    }
                                 }
                                 catch
                                 {
-
-                                }
-
-                                order_pvz = select_pvz();
-                                if (order_pvz == null) { Console.WriteLine("Введён неверный номер ПВЗ. Возврат в меню"); }
-                                else
-                                {
-
+                                    Console.WriteLine("Введен товар с несуществующим ID. Возврат в меню.");
                                 }
                                 break;
                             default: Console.WriteLine("Введена несуществующая команда. Возврат в меню."); break;
                         }
                     }
                     else { Console.WriteLine("Заказ отменён. Возврат в меню."); }
-                }
             }
 
             PVZ select_pvz()
@@ -259,6 +260,7 @@ namespace BD_8
                     Amount = c.Amount,
                 };
                 Core.Context.OrdersProducts.Add(new_ord_prod);
+                Core.Context.Cart.Remove(c);
                 Core.Context.SaveChanges();
             }
 
