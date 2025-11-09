@@ -178,11 +178,6 @@ namespace BD_8
                         Console.WriteLine($"ID товара {item.ProductID + 1}, Наименование: {products[item.ProductID].Name}, Цена: {products[item.ProductID].Price} рублей, Количество: {item.Amount} штук.");      
                     }
 
-
-
-
-
-
                     Console.WriteLine("Хотите заказать товары? (да/нет)");
                     string selector = Console.ReadLine();
                     if (selector.ToLower() == "да")
@@ -195,10 +190,15 @@ namespace BD_8
                         switch(menu)
                         {
                             case "1":
-                                select_pvz();
-                                Console.WriteLine("Произведён заказ всех товаров!");
+                                PVZ order_pvz = select_pvz();
+                                if (order_pvz == null) { Console.WriteLine("Введён неверный номер ПВЗ. Возврат в меню"); }
+                                else
+                                { 
+                                    Console.WriteLine("Произведён заказ всех товаров!"); 
+                                }
                                 break;
                             case "2":
+
                                 try
                                 {
                                     Console.WriteLine("Какой товар вы хотите добавить в корзину? (введите id товара)");
@@ -206,6 +206,13 @@ namespace BD_8
 
                                 }
                                 catch
+                                {
+
+                                }
+
+                                order_pvz = select_pvz();
+                                if (order_pvz == null) { Console.WriteLine("Введён неверный номер ПВЗ. Возврат в меню"); }
+                                else
                                 {
 
                                 }
@@ -233,12 +240,12 @@ namespace BD_8
                 Console.WriteLine("Выберите ПВЗ");
                 foreach (var item in pvz) { Console.WriteLine($"Номер ПВЗ: {item.PVZID}, Адрес: {item.Address}"); }
                 int selected_pvz = Convert.ToInt32(Console.ReadLine());
-
-
                 PVZ order_pvz = new PVZ();
-                //order_pvz = pvz.PVZID[]
+
+                try { order_pvz = Core.Context.PVZ.First(x => x.PVZID == selected_pvz); }
+                catch { order_pvz = null; }
                 return order_pvz;
-            }
+                }
 
             void orders_func()
             {
