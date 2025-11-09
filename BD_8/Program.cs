@@ -193,7 +193,9 @@ namespace BD_8
                                 PVZ order_pvz = select_pvz();
                                 if (order_pvz == null) { Console.WriteLine("Введён неверный номер ПВЗ. Возврат в меню"); }
                                 else
-                                { 
+                                {
+                                    int o = new_orders(order_pvz);
+                                    foreach (var c in cart) { new_ordersproducts(o, c); }
                                     Console.WriteLine("Произведён заказ всех товаров!"); 
                                 }
                                 break;
@@ -246,6 +248,31 @@ namespace BD_8
                 catch { order_pvz = null; }
                 return order_pvz;
                 }
+
+            int new_orders(PVZ order_pvz)
+            {
+                Orders new_ord = new Orders
+                {
+                    OrderDate = DateTime.Now,
+                    UserID = cur_user.UserID,
+                    PVZID = order_pvz.PVZID,
+                };
+                Core.Context.Orders.Add(new_ord);
+                Core.Context.SaveChanges();
+                return new_ord.OrderNum;
+            }
+
+            void new_ordersproducts(int o, Cart c)
+            {
+                OrdersProducts new_ord_prod = new OrdersProducts
+                {
+                    OrderNum = o,
+                    ProductID = c.ProductID,
+                    Amount = c.Amount,
+                };
+                Core.Context.OrdersProducts.Add(new_ord_prod);
+                Core.Context.SaveChanges();
+            }
 
             void orders_func()
             {
