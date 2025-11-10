@@ -66,6 +66,7 @@ namespace BD_8
                         case "0": break;
                         default: continue;
                     }
+                    //int rowsAffected = command.ExecuteNonQuery();
                 }
             } while (select != "0");
 
@@ -272,7 +273,10 @@ namespace BD_8
                     Console.WriteLine("***************************");
                     Console.WriteLine($"Номер заказа: {item.OrderNum}");
                     Console.WriteLine($"Дата заказа: {item.OrderDate}");
-                    Console.WriteLine($"ПВЗ: {item.PVZID}");
+
+                    PVZ p = Core.Context.PVZ.First(x => x.PVZID == item.PVZID);
+                    Console.WriteLine($"ПВЗ: {p.Address}");
+                    
                     foreach (var i in orders_products)
                     {
                         if (item.OrderNum == i.OrderNum)
