@@ -18,7 +18,7 @@ namespace BD_8
         public Users()
         {
             this.Cart = new HashSet<Cart>();
-            this.Orderr = new HashSet<Orderr>();
+            this.Order = new HashSet<Order>();
         }
     
         public int UserID { get; set; }
@@ -31,6 +31,6 @@ namespace BD_8
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Cart { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Orderr> Orderr { get; set; }
+        public virtual ICollection<Order> Order { get; set; }
     }
 }

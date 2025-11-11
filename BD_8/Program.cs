@@ -13,12 +13,9 @@ namespace BD_8
             List<Users> users = Core.Context.Users.ToList();
             List<Products> products = Core.Context.Products.ToList();
             List<Cart> cart = Core.Context.Cart.ToList();
-            List<Orderr> order = Core.Context.Orderr.ToList();
-            //List<Orders> orders = Core.Context.Orders.ToList();
-            //List<OrdersProducts> orders_products = Core.Context.OrdersProducts.ToList();
+            List<Order> order = Core.Context.Order.ToList();
+            List<OrderProduct> order_product = Core.Context.OrderProduct.ToList();
             List<PVZ> pvz = Core.Context.PVZ.ToList();
-
-            int orderid = 0;
 
             Users cur_user = new Users();
 
@@ -56,6 +53,7 @@ namespace BD_8
                     Console.WriteLine("2. Корзина");
                     Console.WriteLine("3. Просмотр товаров");
                     Console.WriteLine("4. Заказы");
+                    Console.WriteLine("5. Выход из аккаунта");
                     Console.WriteLine("0. Выход");
                     Console.WriteLine("*******************");
                     select = Console.ReadLine();
@@ -66,10 +64,10 @@ namespace BD_8
                         case "2": cart_func();  break;
                         case "3": look_for_products(); break;
                         case "4": orders_func(); break;
+                        case "5": exit_acc(); break;
                         case "0": break;
                         default: continue;
                     }
-                    //int rowsAffected = command.ExecuteNonQuery();
                 }
             } while (select != "0");
 
@@ -119,12 +117,19 @@ namespace BD_8
 
                         Core.Context.Users.Add(new_user);
                         Core.Context.SaveChanges();
+                        users = Core.Context.Users.ToList();
                         Console.WriteLine($"Пользователь {login} создан!");
                         cur_user = new_user;
                         flag_registr = true;
                     }
                 }
                 else { Console.WriteLine("Неправильно введённый пароль."); }
+            }
+
+            void exit_acc()
+            {
+                cur_user = null;
+                flag_registr = false;
             }
 
             void look_for_products()
@@ -155,6 +160,7 @@ namespace BD_8
                                 };
                                 Core.Context.Cart.Add(new_cart);
                                 Core.Context.SaveChanges();
+                                cart = Core.Context.Cart.ToList();
                                 Console.WriteLine($"Товар {new_prod.Name} добавлен в корзину в количестве {amount} штук");
                             }
                             catch { Console.WriteLine("Введен товар с несуществующим ID. Возврат в меню."); }
@@ -174,15 +180,21 @@ namespace BD_8
 
             void cart_func()
             {
-                foreach (var item in cart)
+                try
                 {
-                    item.ProductID -= 1;
-                    if (item.CartID == cur_user.UserID)
+                    Cart check_is_empty = Core.Context.Cart.First(x => x.UserID == cur_user.UserID); // is_empty
+
+                    Console.WriteLine("Ваша корзина:");
+                    foreach (var item in cart)
                     {
-                        Console.WriteLine($"ID товара {item.ProductID + 1}, Наименование: {products[item.ProductID].Name}, Цена: {products[item.ProductID].Price} рублей, Количество: {item.Amount} штук.");
+                        item.ProductID -= 1;
+                        if (item.UserID == cur_user.UserID)
+                        {
+                            Console.WriteLine($"ID товара {item.ProductID + 1}, Наименование: {products[item.ProductID].Name}, Цена: {products[item.ProductID].Price} рублей, Количество: {item.Amount} штук.");
+                        }
+                        item.ProductID += 1;
                     }
-                    item.ProductID += 1;
-                } 
+
                     Console.WriteLine("Хотите заказать товары? (да/нет)");
                     string selector = Console.ReadLine();
                     if (selector.ToLower() == "да")
@@ -191,17 +203,17 @@ namespace BD_8
                         Console.WriteLine("1. Всю корзину");
                         Console.WriteLine("2. Один товар");
                         string menu = Console.ReadLine();
-                        
-                        switch(menu)
+
+                        switch (menu)
                         {
                             case "1":
                                 PVZ order_pvz = select_pvz();
                                 if (order_pvz == null) { Console.WriteLine("Введён неверный номер ПВЗ. Возврат в меню"); }
                                 else
                                 {
-                                    //int o = new_orders(order_pvz);
-                                    foreach (var c in cart) { new_order(order_pvz, c); }
-                                    Console.WriteLine("Произведён заказ всех товаров!"); 
+                                    int ord = new_order(order_pvz);
+                                    foreach (var c in cart) { new_orderproduct(ord, c); }
+                                    Console.WriteLine("Произведён заказ всех товаров!");
                                 }
                                 break;
                             case "2":
@@ -215,9 +227,9 @@ namespace BD_8
                                     if (order_pvz == null) { Console.WriteLine("Введён неверный номер ПВЗ. Возврат в меню"); }
                                     else
                                     {
-                                        //int o = new_orders(order_pvz);
-                                        new_order(order_pvz, cur_cart);
-                                        Console.WriteLine("Заказан 1 товар!!!!!!!!");
+                                        int ord = new_order(order_pvz);
+                                        new_orderproduct(ord, cur_cart);
+                                        Console.WriteLine("Заказан 1 товар!");
                                     }
                                 }
                                 catch
@@ -229,6 +241,11 @@ namespace BD_8
                         }
                     }
                     else { Console.WriteLine("Заказ отменён. Возврат в меню."); }
+                }
+                catch
+                {
+                    Console.WriteLine("Корзина пустая!");
+                }
             }
 
             PVZ select_pvz()
@@ -241,62 +258,78 @@ namespace BD_8
                 try { order_pvz = Core.Context.PVZ.First(x => x.PVZID == selected_pvz); }
                 catch { order_pvz = null; }
                 return order_pvz;
-                }
+            }
 
-            //int new_orders(PVZ order_pvz)
-            //{
-            //    Orderr new_ord = new Orderr
-            //    {
-            //        OrderDate = DateTime.Now,
-            //        UserID = cur_user.UserID,
-            //        
-            //    };
-            //    Core.Context.Orders.Add(new_ord);
-            //    Core.Context.SaveChanges();
-            //    return new_ord.OrderNum;
-            //}
-
-            void new_order(PVZ order_pvz, Cart c)
+            int new_order(PVZ order_pvz)
             {
-                Orderr new_ord = new Orderr
+                Order new_ord = new Order
                 {
                     UserID = cur_user.UserID,
-                    OrderDate = DateTime.Now,
                     PVZID = order_pvz.PVZID,
+                    OrderDate = DateTime.Now,
+                };
+                Core.Context.Order.Add(new_ord);
+                Core.Context.SaveChanges();
+                order = Core.Context.Order.ToList();
+                cart = Core.Context.Cart.ToList();
+                return new_ord.OrderID;
+            }
+
+            void new_orderproduct(int ord, Cart c)
+            {
+                OrderProduct new_prod = new OrderProduct
+                {
+                    OrderID = ord,
                     ProductID = c.ProductID,
                     Amount = c.Amount,
                 };
-                Core.Context.Orderr.Add(new_ord);
+                Core.Context.OrderProduct.Add(new_prod);
                 Core.Context.Cart.Remove(c);
                 Core.Context.SaveChanges();
+                order_product = Core.Context.OrderProduct.ToList();
+                cart = Core.Context.Cart.ToList();
             }
 
             void orders_func()
             {
-                Console.WriteLine("Ваши заказы:");
                 foreach (var item in order) 
                 {
-                    if (item.UserID == cur_user.UserID)
+                    try
                     {
-                        Console.WriteLine("***************************");
-                        Console.WriteLine($"Номер заказа: {item.ID}");
-                        Console.WriteLine($"Дата заказа: {item.OrderDate}");
+                        Order check_is_empty = Core.Context.Order.First(x => x.UserID == cur_user.UserID); // is_empty
 
-                        PVZ p = Core.Context.PVZ.First(x => x.PVZID == item.PVZID);
-                        Console.WriteLine($"ПВЗ: {p.Address}");
-                    
-                        Console.WriteLine("---------------------------");
-                        Console.WriteLine($"Номер товара: {item.ProductID}");
-                        foreach (var pr in products)
+                        if (item.UserID == cur_user.UserID)
                         {
-                            if (item.ProductID == pr.ProductID)
+
+                            Console.WriteLine("Ваши заказы:");
+                            Console.WriteLine("***************************");
+                            Console.WriteLine($"Номер заказа: {item.OrderID}");
+                            Console.WriteLine($"Дата заказа: {item.OrderDate}");
+
+                            PVZ p = Core.Context.PVZ.First(x => x.PVZID == item.PVZID);
+                            Console.WriteLine($"ПВЗ: {p.Address}");
+
+                            foreach (var ordprod in order_product)
                             {
-                                Console.WriteLine($"Название: {pr.Name}");
-                                Console.WriteLine($"Количество: {item.Amount}");
                                 Console.WriteLine("---------------------------");
+                                Console.WriteLine($"Номер товара: {ordprod.ProductID}");
+                                foreach (var pr in products)
+                                {
+                                    if (ordprod.ProductID == pr.ProductID)
+                                    {
+                                        Console.WriteLine($"Название: {pr.Name}");
+                                        Console.WriteLine($"Количество: {ordprod.Amount}");
+                                        Console.WriteLine("---------------------------");
+                                    }
+                                }
                             }
+                            Console.WriteLine("***************************");
                         }
-                        Console.WriteLine("***************************");
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Заказов нет!");
+                        return;
                     }
                 }
             }

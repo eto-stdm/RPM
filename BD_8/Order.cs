@@ -12,18 +12,22 @@ namespace BD_8
     using System;
     using System.Collections.Generic;
     
-    public partial class PVZ
+    public partial class Order
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PVZ()
+        public Order()
         {
-            this.Order = new HashSet<Order>();
+            this.OrderProduct = new HashSet<OrderProduct>();
         }
     
+        public int OrderID { get; set; }
+        public int UserID { get; set; }
         public int PVZID { get; set; }
-        public string Address { get; set; }
+        public System.DateTime OrderDate { get; set; }
     
+        public virtual PVZ PVZ { get; set; }
+        public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Order { get; set; }
+        public virtual ICollection<OrderProduct> OrderProduct { get; set; }
     }
 }

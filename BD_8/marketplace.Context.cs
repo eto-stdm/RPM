@@ -26,7 +26,8 @@ namespace BD_8
         }
     
         public virtual DbSet<Cart> Cart { get; set; }
-        public virtual DbSet<Orderr> Orderr { get; set; }
+        public virtual DbSet<Order> Order { get; set; }
+        public virtual DbSet<OrderProduct> OrderProduct { get; set; }
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<PVZ> PVZ { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }

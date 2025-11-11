@@ -74,7 +74,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>marketplace.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Orderr.cs">
+    <Compile Include="Order.cs">
+      <DependentUpon>marketplace.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderProduct.cs">
       <DependentUpon>marketplace.tt</DependentUpon>
     </Compile>
     <Compile Include="Products.cs">
