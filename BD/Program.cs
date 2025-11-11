@@ -80,16 +80,7 @@ namespace BD
                     try
                     {
                         Car_repair_details selected = Core.Context.Car_repair_details.First(x => x.Detail_id == client_detail.Detail_id);
-                        if (selected.Amount == 1) 
-                        { 
-                            Core.Context.Car_repair_details.Remove(selected); 
-                            Core.Context.SaveChanges(); 
-                        }
-                        else
-                        {
-                            selected.Amount -= 1;
-                            Core.Context.SaveChanges();
-                        }
+                        otnyat_detal(selected);
 
                         Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++++++");
                         Console.WriteLine($"Вы производите ремонт {client_detail.Detail_name}."); // название детали
@@ -103,7 +94,7 @@ namespace BD
                     {
                         Random rnd = new Random();
                         Car_repair_details selected = Core.Context.Car_repair_details.First();
-                        Core.Context.Car_repair_details.Remove(selected);
+                        otnyat_detal(selected);
 
                         Console.WriteLine("--------------------------------------------------");
                         Console.WriteLine("У вас нет подходящей детали.");
@@ -122,6 +113,22 @@ namespace BD
                     Console.WriteLine("Вы выплачиваете штраф за отказ в обслуживании в размере 3000 рублей.");
                     car_fixed = true;
                     Console.WriteLine("--------------------------------------------------");
+                }
+            }
+
+            void otnyat_detal(Car_repair_details selected)
+            {
+                if (selected.Amount == 1)
+                {
+                    Core.Context.Car_repair_details.Remove(selected);
+                    Core.Context.SaveChanges();
+                    repair_details = Core.Context.Car_repair_details.ToList();
+                }
+                else
+                {
+                    selected.Amount -= 1;
+                    Core.Context.SaveChanges();
+                    repair_details = Core.Context.Car_repair_details.ToList();
                 }
             }
 
@@ -169,6 +176,7 @@ namespace BD
                                     };
                                     Core.Context.Car_repair_details.Add(new_detail);
                                     Core.Context.SaveChanges();
+                                    repair_details = Core.Context.Car_repair_details.ToList();
                                 }
                                 catch
                                 {
