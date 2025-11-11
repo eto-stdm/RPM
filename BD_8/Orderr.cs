@@ -12,14 +12,18 @@ namespace BD_8
     using System;
     using System.Collections.Generic;
     
-    public partial class OrdersProducts
+    public partial class Orderr
     {
         public int ID { get; set; }
-        public int OrderNum { get; set; }
+        public int UserID { get; set; }
+        public System.DateTime OrderDate { get; set; }
+        public int PVZID { get; set; }
         public int ProductID { get; set; }
         public int Amount { get; set; }
+        public int OrderID { get; set; }
     
-        public virtual Orders Orders { get; set; }
         public virtual Products Products { get; set; }
+        public virtual PVZ PVZ { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

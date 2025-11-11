@@ -13,9 +13,12 @@ namespace BD_8
             List<Users> users = Core.Context.Users.ToList();
             List<Products> products = Core.Context.Products.ToList();
             List<Cart> cart = Core.Context.Cart.ToList();
-            List<Orders> orders = Core.Context.Orders.ToList();
-            List<OrdersProducts> orders_products = Core.Context.OrdersProducts.ToList();
+            List<Orderr> order = Core.Context.Orderr.ToList();
+            //List<Orders> orders = Core.Context.Orders.ToList();
+            //List<OrdersProducts> orders_products = Core.Context.OrdersProducts.ToList();
             List<PVZ> pvz = Core.Context.PVZ.ToList();
+
+            int orderid = 0;
 
             Users cur_user = new Users();
 
@@ -196,8 +199,8 @@ namespace BD_8
                                 if (order_pvz == null) { Console.WriteLine("Введён неверный номер ПВЗ. Возврат в меню"); }
                                 else
                                 {
-                                    int o = new_orders(order_pvz);
-                                    foreach (var c in cart) { new_ordersproducts(o, c); }
+                                    //int o = new_orders(order_pvz);
+                                    foreach (var c in cart) { new_order(order_pvz, c); }
                                     Console.WriteLine("Произведён заказ всех товаров!"); 
                                 }
                                 break;
@@ -212,8 +215,9 @@ namespace BD_8
                                     if (order_pvz == null) { Console.WriteLine("Введён неверный номер ПВЗ. Возврат в меню"); }
                                     else
                                     {
-                                        int o = new_orders(order_pvz);
-                                        new_ordersproducts(o, cur_cart);
+                                        //int o = new_orders(order_pvz);
+                                        new_order(order_pvz, cur_cart);
+                                        Console.WriteLine("Заказан 1 товар!!!!!!!!");
                                     }
                                 }
                                 catch
@@ -239,28 +243,30 @@ namespace BD_8
                 return order_pvz;
                 }
 
-            int new_orders(PVZ order_pvz)
-            {
-                Orders new_ord = new Orders
-                {
-                    OrderDate = DateTime.Now,
-                    UserID = cur_user.UserID,
-                    PVZID = order_pvz.PVZID,
-                };
-                Core.Context.Orders.Add(new_ord);
-                Core.Context.SaveChanges();
-                return new_ord.OrderNum;
-            }
+            //int new_orders(PVZ order_pvz)
+            //{
+            //    Orderr new_ord = new Orderr
+            //    {
+            //        OrderDate = DateTime.Now,
+            //        UserID = cur_user.UserID,
+            //        
+            //    };
+            //    Core.Context.Orders.Add(new_ord);
+            //    Core.Context.SaveChanges();
+            //    return new_ord.OrderNum;
+            //}
 
-            void new_ordersproducts(int o, Cart c)
+            void new_order(PVZ order_pvz, Cart c)
             {
-                OrdersProducts new_ord_prod = new OrdersProducts
+                Orderr new_ord = new Orderr
                 {
-                    OrderNum = o,
+                    UserID = cur_user.UserID,
+                    OrderDate = DateTime.Now,
+                    PVZID = order_pvz.PVZID,
                     ProductID = c.ProductID,
                     Amount = c.Amount,
                 };
-                Core.Context.OrdersProducts.Add(new_ord_prod);
+                Core.Context.Orderr.Add(new_ord);
                 Core.Context.Cart.Remove(c);
                 Core.Context.SaveChanges();
             }
@@ -268,33 +274,30 @@ namespace BD_8
             void orders_func()
             {
                 Console.WriteLine("Ваши заказы:");
-                foreach (var item in orders) 
+                foreach (var item in order) 
                 {
-                    Console.WriteLine("***************************");
-                    Console.WriteLine($"Номер заказа: {item.OrderNum}");
-                    Console.WriteLine($"Дата заказа: {item.OrderDate}");
-
-                    PVZ p = Core.Context.PVZ.First(x => x.PVZID == item.PVZID);
-                    Console.WriteLine($"ПВЗ: {p.Address}");
-                    
-                    foreach (var i in orders_products)
+                    if (item.UserID == cur_user.UserID)
                     {
-                        if (item.OrderNum == i.OrderNum)
+                        Console.WriteLine("***************************");
+                        Console.WriteLine($"Номер заказа: {item.ID}");
+                        Console.WriteLine($"Дата заказа: {item.OrderDate}");
+
+                        PVZ p = Core.Context.PVZ.First(x => x.PVZID == item.PVZID);
+                        Console.WriteLine($"ПВЗ: {p.Address}");
+                    
+                        Console.WriteLine("---------------------------");
+                        Console.WriteLine($"Номер товара: {item.ProductID}");
+                        foreach (var pr in products)
                         {
-                            Console.WriteLine("---------------------------");
-                            Console.WriteLine($"Номер товара: {i.ProductID}");
-                            foreach (var pr in products)
+                            if (item.ProductID == pr.ProductID)
                             {
-                                if (i.ProductID == pr.ProductID)
-                                {
-                                    Console.WriteLine($"Название: {pr.Name}");
-                                    Console.WriteLine($"Количество: {i.Amount}");
-                                    Console.WriteLine("---------------------------");
-                                }
+                                Console.WriteLine($"Название: {pr.Name}");
+                                Console.WriteLine($"Количество: {item.Amount}");
+                                Console.WriteLine("---------------------------");
                             }
                         }
+                        Console.WriteLine("***************************");
                     }
-                    Console.WriteLine("***************************");
                 }
             }
         }
