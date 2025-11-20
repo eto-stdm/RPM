@@ -28,7 +28,7 @@ namespace BD_8
                 if (flag_registr == false)
                 {
                     Console.WriteLine("*******************");
-                    Console.WriteLine("Выберите действие");
+                    Console.WriteLine("Выберите действие:");
                     Console.WriteLine("1. Вход");
                     Console.WriteLine("2. Регистрация");
                     Console.WriteLine("3. Просмотр товаров");
@@ -311,15 +311,18 @@ namespace BD_8
 
                             foreach (var ordprod in order_product)
                             {
-                                Console.WriteLine("---------------------------");
-                                Console.WriteLine($"Номер товара: {ordprod.ProductID}");
-                                foreach (var pr in products)
-                                {
-                                    if (ordprod.ProductID == pr.ProductID)
+                                if (ordprod.OrderID == item.OrderID)
+                                { 
+                                    Console.WriteLine("---------------------------");
+                                    Console.WriteLine($"Номер товара: {ordprod.ProductID}");
+                                    foreach (var pr in products)
                                     {
-                                        Console.WriteLine($"Название: {pr.Name}");
-                                        Console.WriteLine($"Количество: {ordprod.Amount}");
-                                        Console.WriteLine("---------------------------");
+                                        if (ordprod.ProductID == pr.ProductID)
+                                        {
+                                            Console.WriteLine($"Название: {pr.Name}");
+                                            Console.WriteLine($"Количество: {ordprod.Amount}");
+                                            Console.WriteLine("---------------------------");
+                                        }
                                     }
                                 }
                             }
