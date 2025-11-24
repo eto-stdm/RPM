@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Xml.Linq;
 
+using ISIP123_Krasnova.Classes;
+
 int room_count = 1;
 int boss_count = 0;
 bool end_game = false;
@@ -252,86 +254,27 @@ void end()
     }
 }
 enum Type_e { Heal, Weapon, Armor }
-class Item
-{
-    public Type_e Type;
-    public string Name;
-    public string Description;
-    public int Num;
+//class Item
+//{
 
-    public Item(Type_e type, string name, string description, int num)
-    {
-        Type = type; Name = name; Description = description; Num = num;
-    }
-}
-class Player
-{
-    public string name;
-    public double hp;
-    public int attack;
-    public int defense;
-    public Item weapon;
-    public Item armor;
-    public Player(string name, double hp, int attack, int defense, Item weapon, Item armor)
-    {
-        this.name = name;
-        this.hp = hp;
-        this.attack = attack;
-        this.defense = defense;
-        this.weapon = weapon;
-        this.armor = armor;
-    }
-    public void Print()
-    {
-        Console.WriteLine("**********************");
-        Console.WriteLine($"Имя: {name}");
-        Console.WriteLine($"Здоровье: {hp}");
-        Console.WriteLine($"Урон: {attack}");
-        Console.WriteLine($"Защита: {defense}");
-        Console.WriteLine($"Оружие: {weapon.Name}");
-        Console.WriteLine($"Броня: {armor.Name}");
-        Console.WriteLine("**********************");
-    }
-}
-abstract class Enemy
-{
-    private string name;
-    private double hp;
-    private double attack;
-    private double defense;
-    protected Enemy(string name, double hp, double attack, double defense)
-    {
-        this.name = name;
-        this.hp = hp;
-        this.attack = attack;
-        this.defense = defense;
+//}
+//class Player
+//{
 
-    }
-}
-class Goblin : Enemy
-{
-    public double crit;
-    public Goblin(string name, double hp, double attack, double defense, double crit)
-        : base(name, hp, attack, defense)
-    {
-        this.crit = crit;
-    }
-}
-class Skeleton : Enemy
-{
-    public bool ignores_def;
-    public Skeleton(string name, double hp, double attack, double defense, bool ignores_def)
-        : base(name, hp, attack, defense)
-    {
-        this.ignores_def = ignores_def;
-    }
-}
-class Magician : Enemy
-{
-    public double froze;
-    public Magician(string name, double hp, double attack, double defense, double froze)
-        : base(name, hp, attack, defense)
-    {
-        this.froze = froze;
-    }
-}
+//}
+//class Enemy
+//{
+
+//}
+//class Goblin : Enemy
+//{
+
+//}
+//class Skeleton : Enemy
+//{
+
+//}
+//class Magician : Enemy
+//{
+
+//}
