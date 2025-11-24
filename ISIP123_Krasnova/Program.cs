@@ -293,13 +293,13 @@ class Player
         Console.WriteLine("**********************");
     }
 }
-class Enemy
+abstract class Enemy
 {
-    public string name;
-    public double hp;
-    public double attack;
-    public double defense;
-    public Enemy(string name, double hp, double attack, double defense)
+    private string name;
+    private double hp;
+    private double attack;
+    private double defense;
+    protected Enemy(string name, double hp, double attack, double defense)
     {
         this.name = name;
         this.hp = hp;
