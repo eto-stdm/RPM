@@ -18,7 +18,6 @@ namespace ISIP123_Krasnova.Classes
             this.hp = hp;
             this.attack = attack;
             this.defense = defense;
-
         }
     }
 }
