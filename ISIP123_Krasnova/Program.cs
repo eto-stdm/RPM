@@ -46,7 +46,7 @@ Player start()
     Console.WriteLine(fumo);
     Console.Write("Выберите имя игрока: ");
     string n = Console.ReadLine();
-    Player play = new Player(n, 100, i_weapon_def.Num, i_armor_def.Num, i_weapon_def, i_armor_def);
+    Player play = new Player(n, 1000, i_weapon_def.Num, i_armor_def.Num, i_weapon_def, i_armor_def);
     play.Print();
     return play;
 }

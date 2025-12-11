@@ -25,9 +25,9 @@ namespace ISIP123_Krasnova.Classes
                 case 6: return new Goblin("Гоблин с мечом", 25, 2, 1.5, 10);
                 case 7: return new Goblin("Гоблин с кувалдой", 20, 4, 1, 10);
                 case 8: return new Goblin("Гоблин в лодке", 30, 1, 4, 10);
-                case 9: return new Slime("Огненный слайм", 20, 2, 0.1);
-                case 10: return new Slime("Ледяной слайм", 15, 3, 0.1);
-                case 11: return new Slime("Водный слайм", 17, 1, 0.1);
+                case 9: return new Slime("Огненный слайм", 3, 2, 0.1);
+                case 10: return new Slime("Ледяной слайм", 4, 3, 0.1);
+                case 11: return new Slime("Водный слайм", 5, 1, 0.1);
                 default: return null;
             }
         }
