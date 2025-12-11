@@ -28,7 +28,8 @@ namespace ISIP123_Krasnova
         //Goblin gob_boss = new Goblin("Большой гоблин", (25 * 2), (2 * 1.5), (2 * 1.2), (10 * 2));
         //Skeleton skel_boss = new Skeleton("Древний скелет", (35 * 2), (3 * 1.3), (2 * 1.4), true);
         //Magician mag_boss = new Magician("Архимаг 'Геннадий'", (32 * 2), (3.5 * 1.6), (3 * 1.1), (10 * 2));
-        //List<Enemy> bosses = new List<Enemy> { gob_boss, skel_boss, mag_boss };
+        //Slime slm_boss = new Slime("Большой слайм", (27 * 2), (2.5 * 1.7), (2.5 * 1.5));
+        //List<Enemy> bosses = new List<Enemy> { gob_boss, skel_boss, mag_boss, slm_boss };
 
         //предметы
         //Item i_heal = new Item(Type_e.Heal, "Зелье лечения", "Мгновенно лечит вас!", 0);
@@ -48,5 +49,4 @@ namespace ISIP123_Krasnova
         //List<Item> items = new List<Item> { i_heal, i_weapon_1, i_weapon_2, i_weapon_3, i_weapon_4, i_weapon_5, i_weapon_6, i_armor_1, i_armor_2, i_armor_3, i_armor_4, i_armor_5, i_armor_6
     };
 
-}
 }

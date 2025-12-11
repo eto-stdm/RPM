@@ -25,30 +25,36 @@ namespace ISIP123_Krasnova.Classes
                 case 6: return new Goblin("Гоблин с мечом", 25, 2, 1.5, 10);
                 case 7: return new Goblin("Гоблин с кувалдой", 20, 4, 1, 10);
                 case 8: return new Goblin("Гоблин в лодке", 30, 1, 4, 10);
-                case 9: return new Slime("Огненный слайм", 20, 2, 1);
-                case 10: return new Slime("Ледяной слайм", 15, 3, 3);
-                case 11: return new Slime("Водный слайм", 17, 1, 2);
+                case 9: return new Slime("Огненный слайм", 20, 2, 0.1);
+                case 10: return new Slime("Ледяной слайм", 15, 3, 0.1);
+                case 11: return new Slime("Водный слайм", 17, 1, 0.1);
                 default: return null;
             }
         }
 
-
-
-        public static void GenerateRoom(int room_count)
+        public static Enemy GenerateBossEnemy(List<Enemy> bosses)
         {
             Random rnd = new Random();
+            return bosses[rnd.Next(0, bosses.Count())];
+        }
 
-            if (room_count % 10 == 0) { fight(true); } // каждые 10 шагов - босс
-            else if (rnd.Next(0, 2) == 1) { chest(); } // 50/50 враг/сундук
-            else { fight(false); }
-
-            room_count += 1;
+        public static int ChestRandom(List<Item> items)
+        {
+            Random random = new Random();
+            return random.Next(0, items.Count() - 1);
         }
 
         public static int HundredChance()
         {
             Random rnd = new Random();
             return rnd.Next(1, 101);
+        }
+
+
+        public static int FiftyChance()
+        {
+            Random rnd = new Random();
+            return rnd.Next(0, 2);
         }
     }
 }
