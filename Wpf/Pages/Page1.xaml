@@ -5,18 +5,18 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Wpf.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="400"
       Title="Page1">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-    </Grid>
+    <StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="10,20,10,20">
+            <TextBlock Text="Выберите модель автомобиля:"/>
+            <ComboBox x:Name="ComboBox_Model" Margin="10,0,0,0"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="10,0,10,20">
+            <TextBlock Text="Выберите тип двигателя:"/>
+            <ComboBox x:Name="ComboBox_Engine" Margin="10,0,0,0"/>
+            <TextBlock Text="л.с." Margin="10,0,0,0"/>
+        </StackPanel>
+        <Button x:Name="Forward1Button" Content="Вперёд" Margin="300,0,0,0" Height="30" Width="60" Click="Forward1Button_Click"/>
+    </StackPanel>
 </Page>

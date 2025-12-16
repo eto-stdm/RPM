@@ -5,10 +5,21 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Wpf.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="400"
       Title="Page2">
 
-    <Grid>
-        
-    </Grid>
+    <StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="10,20,10,20">
+            <TextBlock Text="Выберите цвет автомобиля:"/>
+            <ComboBox x:Name="ComboBox_Color" Margin="10,0,0,0"/>
+        </StackPanel>
+        <TextBlock Text="Дополнительные опции:" Margin="10,0,10,10"/>
+        <StackPanel Orientation="Vertical" Margin="10,0,10,20">
+            <CheckBox Content="Система стабилизации курсовой устойчивости (+10000₽)" Margin="0,0,0,5"/>
+            <CheckBox Content="Дополнительные подушки безопасности (+3000₽)" Margin="0,0,0,5"/>
+            <CheckBox Content="Подогрев сидений (+1500₽)" Margin="0,0,0,5"/>
+            <CheckBox Content="Задний спойлер (+1000₽)" Margin="0,0,0,5"/>
+            <CheckBox Content="Хромированная насадка на выхлопную трубу (+50₽)"/>
+        </StackPanel>
+        <Button x:Name="Forward2Button" Content="Вперёд" Margin="300,0,0,0" Height="30" Width="60" Click="Forward2Button_Click"/>
+    </StackPanel>
 </Page>

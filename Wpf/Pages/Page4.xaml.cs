@@ -24,5 +24,10 @@ namespace Wpf.Pages
         {
             InitializeComponent();
         }
+
+        private void Forward4Button_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Page5());
+        }
     }
 }

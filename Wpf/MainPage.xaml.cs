@@ -16,18 +16,18 @@ using System.Windows.Shapes;
 namespace Wpf.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для Page3.xaml
+    /// Логика взаимодействия для MainPage.xaml
     /// </summary>
-    public partial class Page3 : Page
+    public partial class MainPage : Page
     {
-        public Page3()
+        public MainPage()
         {
             InitializeComponent();
         }
 
-        private void Forward3Button_Click(object sender, RoutedEventArgs e)
+        private void Start_Button_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Page4());
+            NavigationService.Navigate(new Page1());
         }
     }
 }

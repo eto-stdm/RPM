@@ -5,10 +5,11 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Wpf.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="400"
       Title="Page4">
 
-    <Grid>
-        
-    </Grid>
+    <StackPanel>
+        <TextBlock Text="Итоговая сумма: 0₽" Margin="10,20,10,20"/>
+        <TextBlock Text="Выбранные компоненты:" Margin="10,0,10,10"/>
+        <Button x:Name="Forward4Button" Content="Вперёд" Margin="300,0,0,0" Height="30" Width="60" Click="Forward4Button_Click"/>
+    </StackPanel>
 </Page>
