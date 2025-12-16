@@ -29,5 +29,14 @@ namespace Wpf.Pages
         {
             NavigationService.Navigate(new Page5());
         }
+
+        private void SrokSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (ValuesTB == null)
+                return;
+            double oldValue = e.OldValue;
+            double newValue = e.NewValue;
+            ValuesTB.Text = $"{SrokSlider.Value} месяцев";
+        }
     }
 }

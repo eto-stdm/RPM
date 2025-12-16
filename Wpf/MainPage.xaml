@@ -9,7 +9,7 @@
       Title="MainPage">
 
     <Grid>
-        <TextBlock Text="Собери машину! (сам)" HorizontalAlignment="Center" FontSize="20" Margin="0,100,0,0"/>
+        <TextBlock Text="Собери машину! (сам)" HorizontalAlignment="Center" FontSize="20" Margin="0,100,0,10"/>
         <Button x:Name="Start_Button" Content="Начать" FontSize="18" Width="70" Height="40" Click="Start_Button_Click"/>
         
     </Grid>

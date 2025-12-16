@@ -7,7 +7,19 @@
       mc:Ignorable="d"
       Title="Page5">
 
-    <Grid>
-        
-    </Grid>
+    <StackPanel>
+        <TextBlock Text="Валидация ввода и оформление заявки" TextAlignment="Center" Margin="10,20,10,20"/>
+        <StackPanel Orientation="Horizontal" Margin="10,0,10,10">
+            <TextBlock Text="Имя: "/>
+            <TextBox x:Name="NameTB" Width="100"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="10,0,10,10">
+            <TextBlock Text="Телефон: "/>
+            <TextBox x:Name="PhoneTB" Width="120"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="10,0,10,10">
+            <TextBlock Text="Адрес электронной почты: "/>
+            <TextBox x:Name="EmailTB" Width="150"/>
+        </StackPanel>
+    </StackPanel>
 </Page>

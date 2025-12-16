@@ -21,14 +21,14 @@ namespace Wpf
     /// </summary>
     public partial class MainWindow : Window
     {
+        class Car()
+        {
+
+        }
+
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void MainFrame_Navigated(object sender, NavigationEventArgs e)
-        {
-
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

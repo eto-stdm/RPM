@@ -8,8 +8,22 @@
       Title="Page4">
 
     <StackPanel>
-        <TextBlock Text="Итоговая сумма: 0₽" Margin="10,20,10,20"/>
-        <TextBlock Text="Выбранные компоненты:" Margin="10,0,10,10"/>
+        <StackPanel Orientation="Horizontal" Margin="10,20,10,20">
+            <TextBlock Text="Процент первоначального взноса:" Margin="0,0,5,0"/>
+            <TextBox x:Name="PercentTB" Width="30" Margin="0,0,5,0"/>
+            <TextBlock Text="%" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Margin="10,0,10,20">
+            <TextBlock Text="Срок кредита в месяцах: " Margin="0,0,5,0"/>
+            <Slider x:Name="SrokSlider" Minimum="12" Maximum="96" Value="12" IsSnapToTickEnabled="True" Width="150" ValueChanged="SrokSlider_ValueChanged" Margin="0,0,5,0"/>
+            <TextBlock x:Name="ValuesTB"/>        
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Margin="10,0,10,20">
+            <TextBlock Text="Сумма первоначального взноса: 0₽" Margin="0,0,0,5"/>
+            <TextBlock Text="Сумма, берущаяся в кредит: 0₽" Margin="0,0,0,5"/>
+            <TextBlock Text="Ориентировочный ежемесячный платёж: 0₽" Margin="0,0,0,0"/>
+        </StackPanel>
         <Button x:Name="Forward4Button" Content="Вперёд" Margin="300,0,0,0" Height="30" Width="60" Click="Forward4Button_Click"/>
     </StackPanel>
 </Page>
