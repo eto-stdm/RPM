@@ -26,7 +26,7 @@ namespace Wpf.Pages
         }
 
         private void Start_Button_Click(object sender, RoutedEventArgs e)
-        {
+        {            
             NavigationService.Navigate(new Page1());
         }
     }

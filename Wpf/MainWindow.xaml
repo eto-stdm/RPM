@@ -9,5 +9,6 @@
     <Grid>
         <Button x:Name="BackButton" Content="Назад" Margin="0,300,300,0" Height="30" Width="60" Click="BackButton_Click" />
         <Frame x:Name="MainFrame" Source="MainPage.xaml" VerticalAlignment="Top" Height="300"/>
+        <ProgressBar x:Name="ProgessPG" Margin="200,320,20,20" Height="30" Minimum="0" Maximum="5" Value="0"/>
     </Grid>
 </Window>

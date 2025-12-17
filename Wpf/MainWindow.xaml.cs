@@ -21,20 +21,17 @@ namespace Wpf
     /// </summary>
     public partial class MainWindow : Window
     {
-        class Car()
-        {
-
-        }
-
         public MainWindow()
         {
             InitializeComponent();
+            var curr = VisualTreeHelper.GetParent(this);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             if (MainFrame.CanGoBack)
             {
+                ProgessPG.Value -= 1;
                 MainFrame.GoBack();
             }
         }

@@ -10,7 +10,13 @@
     <StackPanel>
         <StackPanel Orientation="Horizontal" Margin="10,20,10,20">
             <TextBlock Text="Выберите цвет автомобиля:"/>
-            <ComboBox x:Name="ComboBox_Color" Margin="10,0,0,0"/>
+            <ComboBox x:Name="ComboBox_Color" Margin="10,0,0,0" SelectionChanged="ComboBox_Color_SelectionChanged">
+                <ComboBoxItem> Чёрный графит </ComboBoxItem>
+                <ComboBoxItem> Альпийский снег </ComboBoxItem>
+                <ComboBoxItem> Мальборо </ComboBoxItem>
+                <ComboBoxItem> Мускат </ComboBoxItem>
+                <ComboBoxItem> Лазурь </ComboBoxItem>
+            </ComboBox>
         </StackPanel>
         <TextBlock Text="Дополнительные опции:" Margin="10,0,10,10"/>
         <StackPanel Orientation="Vertical" Margin="10,0,10,20">
@@ -18,7 +24,8 @@
             <CheckBox Content="Дополнительные подушки безопасности (+3000₽)" Margin="0,0,0,5"/>
             <CheckBox Content="Подогрев сидений (+1500₽)" Margin="0,0,0,5"/>
             <CheckBox Content="Задний спойлер (+1000₽)" Margin="0,0,0,5"/>
-            <CheckBox Content="Хромированная насадка на выхлопную трубу (+50₽)"/>
+            <CheckBox Content="Хромированная насадка на выхлопную трубу (+50₽)" Margin="0,0,0,5"/>
+            <CheckBox Content="Ёлочка (вонючка) (+555₽)"/>
         </StackPanel>
         <Button x:Name="Forward2Button" Content="Вперёд" Margin="300,0,0,0" Height="30" Width="60" Click="Forward2Button_Click"/>
     </StackPanel>

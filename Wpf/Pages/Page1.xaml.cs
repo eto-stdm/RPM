@@ -22,72 +22,64 @@ namespace Wpf.Pages
     /// </summary>
     public partial class Page1 : Page
     {
-        public class Model
-        {
-            public int ID { get; set; }
-            public string model { get; set; }
-        }
+        string _model;
+        int _model_price;
+        string _engine;
+        int _engine_price;
 
-        public class Engine
-        {
-            public int ID { get; set; }
-            public string engine { get; set; }
-        }
         public Page1()
         {
-            InitializeComponent();
-            List<Model> models = new List<Model>()
+            InitializeComponent();            
+        }
+
+        private void ComboBox_Model_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox ComboBox_Model = sender as ComboBox;
+            ComboBoxItem item = ComboBox_Model.SelectedItem as ComboBoxItem;
+            _model = item.Content as string;
+        }
+
+        private void ComboBox_Engine_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox ComboBox_Engine = sender as ComboBox;
+            ComboBoxItem item = ComboBox_Engine.SelectedItem as ComboBoxItem;
+            _engine = item.Content as string;
+        }
+
+        private void PriceCount()
+        {
+            switch(_model)
             {
-                new Model
-                {
-                    ID = 1,
-                    model = "Hyundai Creta"
-                },
-                new Model
-                {
-                    ID = 2,
-                    model = "Toyota RAV4"
-                },
-                new Model
-                {
-                    ID = 3,
-                    model = "Lada Iskra"
-                }
-            };
+                case "Hyundai Creta": _model_price = 1000000; break;
+                case "Toyota RAV4": _model_price = 1500000; break;
+                case "Lada Iskra": _model_price = 1300000; break;
+            }
 
-            ComboBox_Model.ItemsSource = models;
-            ComboBox_Model.DisplayMemberPath = "model";
-            ComboBox_Model.SelectedIndex = 1;
-
-
-
-            List<Engine> engines = new List<Engine>()
+            switch (_engine)
             {
-                new Engine
-                {
-                    ID = 1,
-                    engine = "62"
-                },
-                new Engine
-                {
-                    ID = 2,
-                    engine = "23"
-                },
-                new Engine
-                {
-                    ID = 3,
-                    engine = "102"
-                }
-            };
-
-            ComboBox_Engine.ItemsSource = engines;
-            ComboBox_Engine.DisplayMemberPath = "engine";
-            ComboBox_Engine.SelectedIndex = 1;
+                case "Тепловой": _engine_price = 50000; break;
+                case "Электрический": _engine_price = 30000; break;
+                case "Гидравлический": _engine_price = 40000; break;
+            }
         }
 
         private void Forward1Button_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Page2());
+            if (_model == null || _engine == null)
+            {
+                MessageBox.Show("Поля не заполнены", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            else
+            {
+                PriceCount();
+                Buyer.model_price = _model_price;
+                Buyer.engine_price = _engine_price;
+                Buyer.model = _model;
+                Buyer.engine = _engine;
+                //ProgessPG.Value += 1;
+                NavigationService.Navigate(new Page2());
+            }
         }
     }
 }
