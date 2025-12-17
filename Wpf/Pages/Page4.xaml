@@ -10,8 +10,8 @@
     <StackPanel>
         <StackPanel Orientation="Horizontal" Margin="10,20,10,20">
             <TextBlock Text="Процент первоначального взноса:" Margin="0,0,5,0"/>
-            <TextBox x:Name="PercentTB" Width="30" Margin="0,0,5,0"/>
-            <TextBlock Text="%" />
+            <TextBox x:Name="PercentTB" Width="30" Margin="0,0,5,0" TextChanged="PercentTB_TextChanged"/>
+            <TextBlock Text="%"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Margin="10,0,10,20">
@@ -20,9 +20,10 @@
             <TextBlock x:Name="ValuesTB"/>        
         </StackPanel>
         <StackPanel Orientation="Vertical" Margin="10,0,10,20">
-            <TextBlock Text="Сумма первоначального взноса: 0₽" Margin="0,0,0,5"/>
-            <TextBlock Text="Сумма, берущаяся в кредит: 0₽" Margin="0,0,0,5"/>
-            <TextBlock Text="Ориентировочный ежемесячный платёж: 0₽" Margin="0,0,0,0"/>
+            <TextBlock x:Name="TotalSum" Text="Общая сумма: 0₽" Margin="0,0,0,5"/>
+            <TextBlock x:Name="SumPervonach" Text="Сумма первоначального взноса: 0₽" Margin="0,0,0,5"/>
+            <TextBlock x:Name="SumCredit" Text="Сумма, берущаяся в кредит: 0₽" Margin="0,0,0,5"/>
+            <TextBlock x:Name="PerMonth" Text="Ориентировочный ежемесячный платёж: 0₽" Margin="0,0,0,0"/>
         </StackPanel>
         <Button x:Name="Forward4Button" Content="Вперёд" Margin="300,0,0,0" Height="30" Width="60" Click="Forward4Button_Click"/>
     </StackPanel>
