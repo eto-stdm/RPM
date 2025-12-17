@@ -23,7 +23,7 @@ namespace Wpf.Pages
         public Page3()
         {
             InitializeComponent();
-            Buyer.price = Buyer.model_price + Buyer.engine_price + Buyer.color_price + Buyer.additional_price ;
+            Buyer.price = Buyer.model_price + Buyer.engine_price + Buyer.color_price + Buyer.additional_price;
             TotalSumTB.Text = $"Итоговая сумма: {Buyer.price.ToString()}₽";
 
             string additional = "";

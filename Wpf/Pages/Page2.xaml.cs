@@ -23,9 +23,9 @@ namespace Wpf.Pages
     public partial class Page2 : Page
     {
         string _color;
-        int _color_price;
+        int _color_price = 0;
         List<string> _additional = new List<string> { };
-        int _additional_price;
+        int _additional_price = 0;
 
         public Page2()
         {

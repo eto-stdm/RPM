@@ -23,9 +23,9 @@ namespace Wpf.Pages
     public partial class Page1 : Page
     {
         string _model;
-        int _model_price;
+        int _model_price = 0;
         string _engine;
-        int _engine_price;
+        int _engine_price = 0;
 
         public Page1()
         {
@@ -46,7 +46,7 @@ namespace Wpf.Pages
             _engine = item.Content as string;
         }
 
-        private void PriceCount()
+        public void PriceCount()
         {
             switch(_model)
             {
@@ -78,7 +78,8 @@ namespace Wpf.Pages
                 Buyer.model = _model;
                 Buyer.engine = _engine;
                 //ProgessPG.Value += 1;
-                NavigationService.Navigate(new Page2());
+                Page2 page2 = new Page2();
+                NavigationService.Navigate(page2);
             }
         }
     }

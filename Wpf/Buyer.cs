@@ -9,10 +9,10 @@ namespace Wpf
     static internal class Buyer
     {
         public static double price;
-        public static int model_price;
-        public static int engine_price;
-        public static int color_price;
-        public static int additional_price;
+        public static double model_price;
+        public static double engine_price;
+        public static double color_price;
+        public static double additional_price;
 
         public static string model;
         public static string engine;
