@@ -8,8 +8,8 @@
       Title="Page3">
 
     <StackPanel>
-        <TextBlock Text="Итоговая сумма: 0₽" Margin="10,20,10,20"/>
-        <TextBlock Text="Выбранные компоненты:" Margin="10,0,10,10"/>
+        <TextBlock x:Name="TotalSumTB" Text="Итоговая сумма: 0₽" Margin="10,20,10,20"/>
+        <TextBlock x:Name="SelectedTB" Text="Выбранные компоненты:" Margin="10,0,10,10"/>
         <Button x:Name="Forward3Button" Content="Вперёд" Margin="300,0,0,0" Height="30" Width="60" Click="Forward3Button_Click"/>
     </StackPanel>
 </Page>

@@ -23,6 +23,19 @@ namespace Wpf.Pages
         public Page3()
         {
             InitializeComponent();
+            Buyer.price = Buyer.model_price + Buyer.engine_price + Buyer.color_price + Buyer.additional_price ;
+            TotalSumTB.Text = $"Итоговая сумма: {Buyer.price.ToString()}₽";
+
+            string additional = "";
+            foreach (string str in Buyer.additional)
+            {
+                additional += "  -  " + str + "\n";
+            }
+            SelectedTB.Text = $"Выбранные компоненты:\n" +
+                $"Модель: {Buyer.model}\n" +
+                $"Двигатель: {Buyer.engine}\n" +
+                $"Цвет: {Buyer.color}\n" +
+                $"Дополнительные опции:\n{additional}";
         }
 
         private void Forward3Button_Click(object sender, RoutedEventArgs e)

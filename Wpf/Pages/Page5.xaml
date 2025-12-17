@@ -10,16 +10,17 @@
     <StackPanel>
         <TextBlock Text="Валидация ввода и оформление заявки" TextAlignment="Center" Margin="10,20,10,20"/>
         <StackPanel Orientation="Horizontal" Margin="10,0,10,10">
-            <TextBlock Text="Имя: "/>
-            <TextBox x:Name="NameTB" Width="100"/>
+            <TextBlock Text="ФИО: "/>
+            <TextBox x:Name="NameTB" Width="330" MaxLength="50" TextChanged="NameTB_TextChanged"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="10,0,10,10">
             <TextBlock Text="Телефон: "/>
-            <TextBox x:Name="PhoneTB" Width="120"/>
+            <TextBox x:Name="PhoneTB" Width="120" PreviewTextInput="PhoneTB_OnPreviewTextInput" MaxLength="11" TextChanged="PhoneTB_TextChanged"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="10,0,10,10">
             <TextBlock Text="Адрес электронной почты: "/>
-            <TextBox x:Name="EmailTB" Width="150"/>
+            <TextBox x:Name="EmailTB" Width="150" TextChanged="EmailTB_TextChanged"/>
         </StackPanel>
+        <Button x:Name="Exit" Content="Оформить заказ" Margin="10,0,10,10" Click="Exit_Click"/>
     </StackPanel>
 </Page>

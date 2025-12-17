@@ -20,9 +20,51 @@ namespace Wpf.Pages
     /// </summary>
     public partial class Page5 : Page
     {
+        string _name;
+        string _phone;
+        string _email;
         public Page5()
         {
             InitializeComponent();
+        }
+
+        private void PhoneTB_OnPreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.Text[0]);
+        }
+
+        private void NameTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            
+        }
+
+        private void PhoneTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void EmailTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            if (_name == null || _phone == null || _email == null)
+            {
+                MessageBox.Show("Поля не заполнены", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            else if (_name.Length <= 10)
+            {
+                MessageBox.Show("Слишком короткое имя", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            else
+            {
+                MessageBox.Show("Заявка оформлена. Далее последует выход из программы", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                System.Windows.Application.Current.Shutdown();
+            }
         }
     }
 }

@@ -11,17 +11,17 @@
         <StackPanel Orientation="Horizontal" Margin="10,20,10,20">
             <TextBlock Text="Выберите модель автомобиля:"/>
             <ComboBox x:Name="ComboBox_Model" Margin="10,0,0,0" SelectionChanged="ComboBox_Model_SelectionChanged">
-                <ComboBoxItem> Hyundai Creta </ComboBoxItem>
-                <ComboBoxItem> Toyota RAV4 </ComboBoxItem>
-                <ComboBoxItem> Lada Iskra </ComboBoxItem>
+                <ComboBoxItem>Hyundai Creta (+1000000₽)</ComboBoxItem>
+                <ComboBoxItem>Toyota RAV4 (+1500000₽)</ComboBoxItem>
+                <ComboBoxItem>Lada Iskra (+1300000₽)</ComboBoxItem>
             </ComboBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="10,0,10,20">
             <TextBlock Text="Выберите тип двигателя:"/>
             <ComboBox x:Name="ComboBox_Engine" Margin="10,0,0,0" SelectionChanged="ComboBox_Engine_SelectionChanged">
-                <ComboBoxItem>Тепловой</ComboBoxItem>
-                <ComboBoxItem>Электрический</ComboBoxItem>
-                <ComboBoxItem>Гидравлический</ComboBoxItem>
+                <ComboBoxItem>Тепловой (+50000₽)</ComboBoxItem>
+                <ComboBoxItem>Электрический (+30000₽)</ComboBoxItem>
+                <ComboBoxItem>Гидравлический (+40000₽)</ComboBoxItem>
             </ComboBox>
         </StackPanel>
         <Button x:Name="Forward1Button" Content="Вперёд" Margin="300,0,0,0" Height="30" Width="60" Click="Forward1Button_Click"/>
