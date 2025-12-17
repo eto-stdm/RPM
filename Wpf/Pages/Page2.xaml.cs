@@ -24,7 +24,7 @@ namespace Wpf.Pages
     {
         string _color;
         int _color_price;
-        List<string> _additional;
+        List<string> _additional = new List<string> { };
         int _additional_price;
 
         public Page2()
@@ -65,6 +65,18 @@ namespace Wpf.Pages
             }
         }
 
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            CheckBox checkBox = sender as CheckBox;
+            _additional.Add(Convert.ToString(checkBox.Content)); 
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            CheckBox checkBox = sender as CheckBox;
+            _additional.Remove(checkBox.Content as string);
+        }
+
         private void Forward2Button_Click(object sender, RoutedEventArgs e)
         {
             if (_color == null || _additional == null)
@@ -82,5 +94,6 @@ namespace Wpf.Pages
                 NavigationService.Navigate(new Page3());
             }
         }
+
     }
 }

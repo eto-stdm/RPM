@@ -20,12 +20,12 @@
         </StackPanel>
         <TextBlock Text="Дополнительные опции:" Margin="10,0,10,10"/>
         <StackPanel Orientation="Vertical" Margin="10,0,10,20">
-            <CheckBox Content="Система стабилизации курсовой устойчивости (+10000₽)" Margin="0,0,0,5"/>
-            <CheckBox Content="Дополнительные подушки безопасности (+3000₽)" Margin="0,0,0,5"/>
-            <CheckBox Content="Подогрев сидений (+1500₽)" Margin="0,0,0,5"/>
-            <CheckBox Content="Задний спойлер (+1000₽)" Margin="0,0,0,5"/>
-            <CheckBox Content="Хромированная насадка на выхлопную трубу (+50₽)" Margin="0,0,0,5"/>
-            <CheckBox Content="Ёлочка (вонючка) (+555₽)"/>
+            <CheckBox Content="Система стабилизации курсовой устойчивости (+10000₽)" Margin="0,0,0,5" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+            <CheckBox Content="Дополнительные подушки безопасности (+3000₽)" Margin="0,0,0,5" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+            <CheckBox Content="Подогрев сидений (+1500₽)" Margin="0,0,0,5" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+            <CheckBox Content="Задний спойлер (+1000₽)" Margin="0,0,0,5" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+            <CheckBox Content="Хромированная насадка на выхлопную трубу (+50₽)" Margin="0,0,0,5" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+            <CheckBox Content="Ёлочка (вонючка) (+555₽)" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
         </StackPanel>
         <Button x:Name="Forward2Button" Content="Вперёд" Margin="300,0,0,0" Height="30" Width="60" Click="Forward2Button_Click"/>
     </StackPanel>
