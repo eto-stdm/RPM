@@ -35,17 +35,17 @@ namespace Wpf.Pages
 
         private void NameTB_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
+            _name = NameTB.Text;
         }
 
         private void PhoneTB_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            _phone= PhoneTB.Text;
         }
 
         private void EmailTB_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            _email = EmailTB.Text;
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
@@ -55,14 +55,14 @@ namespace Wpf.Pages
                 MessageBox.Show("Поля не заполнены", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            else if (_name.Length <= 10)
+            else if (_name.Length < 10)
             {
                 MessageBox.Show("Слишком короткое имя", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             else
             {
-                MessageBox.Show("Заявка оформлена. Далее последует выход из программы", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Заявка оформлена. Далее последует выход из программы.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                 System.Windows.Application.Current.Shutdown();
             }
         }

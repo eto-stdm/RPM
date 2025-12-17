@@ -19,7 +19,7 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="10,0,10,10">
             <TextBlock Text="Адрес электронной почты: "/>
-            <TextBox x:Name="EmailTB" Width="150" TextChanged="EmailTB_TextChanged"/>
+            <TextBox x:Name="EmailTB" Width="200" TextChanged="EmailTB_TextChanged"/>
         </StackPanel>
         <Button x:Name="Exit" Content="Оформить заказ" Margin="10,0,10,10" Click="Exit_Click"/>
     </StackPanel>
