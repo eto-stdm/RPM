@@ -20,9 +20,13 @@ namespace Wpf_13
     /// </summary>
     public partial class ItemsPage : Page
     {
+        
         public ItemsPage()
         {
             InitializeComponent();
+
+            List<String> products = new List<string> { "\\Pics\\nuggets.png", "\\Pics\\ice-cream.png", "\\Pics\\waffle.png", "\\Pics\\fried-chicken.png", "\\Pics\\spaghetti.png", "\\Pics\\burrito.png", "\\Pics\\burger.png", "\\Pics\\junk-food.png", "\\Pics\\croissant.png", "\\Pics\\healthy-food.png" };
+            Products_LB.ItemsSource = products;
         }
     }
 }

@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wpf_13"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="200">
+        Title="MainWindow" Height="400" Width="400">
     <Grid>
-        <Frame x:Name="MainFrame" />
+        <Frame x:Name="MainFrame" Source="/Pages/ItemsPage.xaml"/>
     </Grid>
 </Window>

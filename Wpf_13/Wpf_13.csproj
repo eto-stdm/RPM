@@ -179,7 +179,18 @@
       <DependentUpon>ozon_sliv.edmx</DependentUpon>
       <LastGenOutput>ozon_sliv.cs</LastGenOutput>
     </Content>
+    <Resource Include="Pics\burger.png" />
+    <Resource Include="Pics\burrito.png" />
+    <Resource Include="Pics\croissant.png" />
+    <Resource Include="Pics\fried-chicken.png" />
+    <Resource Include="Pics\healthy-food.png" />
+    <Resource Include="Pics\ice-cream.png" />
+    <Resource Include="Pics\junk-food.png" />
+    <Resource Include="Pics\nuggets.png" />
+    <Resource Include="Pics\spaghetti.png" />
+    <Resource Include="Pics\waffle.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
