@@ -25,7 +25,7 @@
             </StackPanel>
             <TextBlock x:Name="Products_TB" Text="Товары:" Margin="10, 0, 10, 10"/>
             <TextBlock x:Name="Total_TB" Text="Общая цена:" Margin="10, 0, 10, 10"/>
-            <Button x:Name="Order_Btn" Content="Заказать" Width="60" Margin="10, 0, 10, 10"/>
+            <Button x:Name="Order_Btn" Content="Заказать" Width="60" Margin="10, 0, 10, 10" Click="Order_Btn_Click"/>
         </StackPanel>
         <Button x:Name="Cart_Btn" Content="Корзина" Width="60" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="Cart_Btn_Click"/>
     </Grid>

@@ -37,19 +37,22 @@ namespace Wpf_13
             int ID = Convert.ToInt32(senderBtn.Content.ToString());
 
             List<Cart> cart = Core.Context.Cart.ToList();
+            List<Items> items = Core.Context.Items.ToList();
 
-
-
-
-            Cart newCart = new Cart
+            if (cart.Where(x => x.ItemID == ID).Count() == 0)
             {
-                ItemID = ID
-            };
-            Core.Context.Cart.Add(newCart);
-
-            Core.Context.SaveChanges();
-
-            MessageBox.Show($"Товар {ID} добавлен в корзину!");
+                Cart newCart = new Cart
+                {
+                    ItemID = ID
+                };
+                Core.Context.Cart.Add(newCart);
+                Core.Context.SaveChanges();
+                MessageBox.Show($"Товар '{(items.First(x => x.ID == ID)).Name}' добавлен в корзину!");
+            }
+            else
+            {
+                MessageBox.Show($"Ошибка! Товар '{(items.First(x => x.ID == ID)).Name}' уже добавлен в корзину!");
+            }     
         }
 
         private void Cart_Btn_Click(object sender, RoutedEventArgs e)
