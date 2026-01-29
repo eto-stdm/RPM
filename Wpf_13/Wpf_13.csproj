@@ -70,6 +70,7 @@
     <Compile Include="Cart.cs">
       <DependentUpon>ozon_sliv.tt</DependentUpon>
     </Compile>
+    <Compile Include="Core.cs" />
     <Compile Include="Items.cs">
       <DependentUpon>ozon_sliv.tt</DependentUpon>
     </Compile>
