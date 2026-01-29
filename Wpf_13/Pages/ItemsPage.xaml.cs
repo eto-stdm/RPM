@@ -33,7 +33,23 @@ namespace Wpf_13
 
         private void AddToCart_Btn_Click(object sender, RoutedEventArgs e)
         {
+            var senderBtn = sender as Button;
+            int ID = Convert.ToInt32(senderBtn.Content.ToString());
 
+            List<Cart> cart = Core.Context.Cart.ToList();
+
+
+
+
+            Cart newCart = new Cart
+            {
+                ItemID = ID
+            };
+            Core.Context.Cart.Add(newCart);
+
+            Core.Context.SaveChanges();
+
+            MessageBox.Show($"Товар {ID} добавлен в корзину!");
         }
 
         private void Cart_Btn_Click(object sender, RoutedEventArgs e)

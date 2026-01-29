@@ -23,6 +23,9 @@ namespace Wpf_13.Pages
         public CartPage()
         {
             InitializeComponent();
+
+            List<Cart> cart = Core.Context.Cart.ToList(); // лист с итемами из бд
+            Products_LB.ItemsSource = cart; // брать инфу из items
         }
 
         private void Items_Btn_Click(object sender, RoutedEventArgs e)
