@@ -5,10 +5,31 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Wpf_13.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="400" d:DesignWidth="400"
       Title="CartPage">
 
     <Grid>
-        
+        <TextBlock Text="Корзина:" HorizontalAlignment="Center"/>
+
+        <ListBox x:Name="Products_LB" ItemsSource="{Binding Path=items}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Height="300" VerticalAlignment="Center">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Image Width="100" Height="100" Source="{Binding Picture}"/>
+                        <TextBlock x:Name="Name_TB" Text="{Binding Name}" HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="Price_TB" Text="{Binding Price, StringFormat=Цена: {0}₽}" HorizontalAlignment="Center"/>
+                      
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+
+        <Button x:Name="Items_Btn" Content="Товары" Width="60" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="50,0,0,0" Click="Items_Btn_Click"/>
+        <Button x:Name="Order_Btn" Content="Заказ" Width="60" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,50,0" Click="Order_Btn_Click"/>
     </Grid>
 </Page>

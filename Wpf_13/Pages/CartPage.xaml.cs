@@ -24,5 +24,15 @@ namespace Wpf_13.Pages
         {
             InitializeComponent();
         }
+
+        private void Items_Btn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ItemsPage());
+        }
+
+        private void Order_Btn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new OrderPage());
+        }
     }
 }

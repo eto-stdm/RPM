@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Wpf_13.Pages;
 
 namespace Wpf_13
 {
@@ -20,44 +22,23 @@ namespace Wpf_13
     /// </summary>
     public partial class ItemsPage : Page
     {
-        
         public ItemsPage()
         {
             InitializeComponent();
             
-            List<Items> items = Core.Context.Items.ToList();
-
-            //List<String> products = new List<string>();
-            //List<String> name = new List<string>();
-            //List<int> price = new List<int>();
-
-            List<Itm> im = new List<Itm>();
-
-            foreach (Items i in items)
-            {
-                Itm test = new Itm(i.Picture, i.Name, i.Price);
-                im.Add(test);
-            }
-            //Name_TB.ItemsSource = name;
-
-            Products_LB.ItemsSource = im;
-
-            // рабочее
-            //List<String> products = new List<string> { "\\Pics\\nuggets.png", "\\Pics\\ice-cream.png", "\\Pics\\waffle.png", "\\Pics\\fried-chicken.png", "\\Pics\\spaghetti.png", "\\Pics\\burrito.png", "\\Pics\\burger.png", "\\Pics\\junk-food.png", "\\Pics\\croissant.png", "\\Pics\\healthy-food.png" };
-            //Products_LB.ItemsSource = products;
+            List<Items> items = Core.Context.Items.ToList(); // лист с итемами из бд
+            Products_LB.ItemsSource = items; // брать инфу из items
+            // на сокращение кода до двух строк, я потратила неприлично много времени...  
         }
-        
-        public class Itm
+
+        private void AddToCart_Btn_Click(object sender, RoutedEventArgs e)
         {
-            public string Picture { get; set; }
-            public string Name { get; set; }
-            public int Price { get; set; }
-            public Itm(string Picture, string Name, int Price)
-            {
-                this.Picture = Picture;
-                this.Name = Name;
-                this.Price = Price;
-            }
+
+        }
+
+        private void Cart_Btn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new CartPage());
         }
     }
 }

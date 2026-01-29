@@ -24,5 +24,10 @@ namespace Wpf_13.Pages
         {
             InitializeComponent();
         }
+
+        private void Cart_Btn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new CartPage());
+        }
     }
 }

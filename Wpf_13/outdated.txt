@@ -1,0 +1,36 @@
+﻿ItemPage:
+
+            //List<String> products = new List<string>();
+            //List<String> name = new List<string>();
+            //List<int> price = new List<int>();
+
+                        //Name_TB.ItemsSource = name;
+                        
+            // рабочее
+            //List<String> products = new List<string> { "\\Pics\\nuggets.png", "\\Pics\\ice-cream.png", "\\Pics\\waffle.png", "\\Pics\\fried-chicken.png", "\\Pics\\spaghetti.png", "\\Pics\\burrito.png", "\\Pics\\burger.png", "\\Pics\\junk-food.png", "\\Pics\\croissant.png", "\\Pics\\healthy-food.png" };
+            //Products_LB.ItemsSource = products;
+
+
+
+
+            //List<Products> products = new List<Products>(); // лист с переделанными итемами
+
+            //foreach (Items i in items) // заполняем лист
+            //{
+            //    Products test = new Products(i.Picture, i.Name, i.Price);
+            //    products.Add(test);
+            //}
+            //Products_LB.ItemsSource = products; // брать инфу из products
+
+                    public class Products // класс тут для того, что бы можно было удобно брать инфу из бд
+        {
+            public string Picture { get; set; }
+            public string Name { get; set; }
+            public int Price { get; set; }
+            public Products(string Picture, string Name, int Price)
+            {
+                this.Picture = Picture;
+                this.Name = Name;
+                this.Price = Price;
+            }
+        }

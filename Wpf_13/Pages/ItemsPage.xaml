@@ -11,24 +11,23 @@
     <Grid>
         <TextBlock Text="Товары:" HorizontalAlignment="Center"/>
 
-        <ListBox x:Name="Products_LB" ItemsSource="{Binding Path=im}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Height="360" VerticalAlignment="Center">
+        <ListBox x:Name="Products_LB" ItemsSource="{Binding Path=items}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Height="300" VerticalAlignment="Center">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
                         <Image Width="100" Height="100" Source="{Binding Picture}"/>
                         <TextBlock x:Name="Name_TB" Text="{Binding Name}" HorizontalAlignment="Center"/>
                         <TextBlock x:Name="Price_TB" Text="{Binding Price, StringFormat=Цена: {0}₽}" HorizontalAlignment="Center"/>
-                        <Button x:Name="AddToCart_Btn" Content="В корзину"/>
+                        <Button x:Name="AddToCart_Btn" Content="В корзину" Click="AddToCart_Btn_Click"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-            <ListBox.ItemsPanel >
+            <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel />
+                    <WrapPanel/>
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
-        <Button x:Name="Back_Btn" Content="Назад" Width="60" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="50,0,0,0"/>
-        <Button x:Name="Forward_Btn" Content="Вперёд" Width="60" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,50,0"/>
+        <Button x:Name="Cart_Btn" Content="Корзина" Width="60" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="Cart_Btn_Click"/>
     </Grid>
 </Page>
