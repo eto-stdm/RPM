@@ -15,7 +15,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock x:Name="Cart_TB" Text="{Binding ItemID, StringFormat=ID: {0}₽}" HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="Cart_TB" Text="{Binding ItemID, StringFormat=Товар: {0}}" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

@@ -23,7 +23,7 @@
                 <TextBlock Text="Адрес доставки:"  Margin="0, 0, 10, 0"/>
                 <TextBox x:Name="Address_TB" Width="200"/>
             </StackPanel>
-            <TextBlock x:Name="Products_TB" Text="Товары:" Margin="10, 0, 10, 10"/>
+            <TextBlock x:Name="Products_TB" Text="Товары:" Margin="10, 0, 10, 10" TextWrapping="Wrap"/>
             <TextBlock x:Name="Total_TB" Text="Общая цена:" Margin="10, 0, 10, 10"/>
             <Button x:Name="Order_Btn" Content="Заказать" Width="60" Margin="10, 0, 10, 10" Click="Order_Btn_Click"/>
         </StackPanel>

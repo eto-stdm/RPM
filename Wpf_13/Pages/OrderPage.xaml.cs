@@ -24,7 +24,26 @@ namespace Wpf_13.Pages
         {
             InitializeComponent();
 
+            Index_TB.MaxLength = 6;
 
+            List<Cart> cart = Core.Context.Cart.ToList();
+            List<Items> items = Core.Context.Items.ToList();
+            Products_TB.Text = "Товары: ";
+            Total_TB.Text = "Общая цена: ";
+            int tt_sum = 0;
+            foreach (Cart i in cart)
+            {
+                try
+                {
+                    var n = (items.First(x => x.ID == i.ItemID));
+                    Products_TB.Text += $"{n.Name}, ";
+                    tt_sum += n.Price;
+                }
+                catch { /* ничего */ }
+            }
+            Products_TB.Text = Products_TB.Text.Remove(Products_TB.Text.Length - 2); // удаляют пробел с запятой
+            //Products_TB.Text.Remove(Products_TB.Text.Length - 1);
+            Total_TB.Text += $"{tt_sum}₽";
         }
 
         private void Order_Btn_Click(object sender, RoutedEventArgs e)
