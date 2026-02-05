@@ -18,7 +18,7 @@
                         <Image Width="100" Height="100" Source="{Binding Picture}"/>
                         <TextBlock x:Name="Name_TB" Text="{Binding Name}" HorizontalAlignment="Center"/>
                         <TextBlock x:Name="Price_TB" Text="{Binding Price, StringFormat=Цена: {0}₽}" HorizontalAlignment="Center"/>
-                        <Button x:Name="AddToCart_Btn" Content="{Binding ID, StringFormat=В корзину {0}}" Click="AddToCart_Btn_Click"/>
+                        <Button x:Name="AddToCart_Btn" Content="Добавить в карзину" Click="AddToCart_Btn_Click"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

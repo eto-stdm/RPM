@@ -11,11 +11,11 @@
     <Grid>
         <TextBlock Text="Корзина:" HorizontalAlignment="Center"/>
 
-        <ListBox x:Name="Products_LB" ItemsSource="{Binding Path=cart}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Height="300" VerticalAlignment="Center">
+        <ListBox x:Name="Products_LB" ItemsSource="{Binding Path=name}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Height="300" VerticalAlignment="Center">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock x:Name="Cart_TB" Text="{Binding ItemID, StringFormat=Товар: {0}}" HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="Cart_TB" Text="{Binding StringFormat=Товар: {0}}" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

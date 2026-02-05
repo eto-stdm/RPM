@@ -34,25 +34,31 @@ namespace Wpf_13
         private void AddToCart_Btn_Click(object sender, RoutedEventArgs e)
         {
             var senderBtn = sender as Button;
-            int ID = Convert.ToInt32(senderBtn.Content.ToString());
-
-            List<Cart> cart = Core.Context.Cart.ToList();
-            List<Items> items = Core.Context.Items.ToList();
-
-            if (cart.Where(x => x.ItemID == ID).Count() == 0)
+            Items newit = senderBtn.DataContext as Items;
+            if (newit != null)
             {
-                Cart newCart = new Cart
+                List<Cart> cart = Core.Context.Cart.ToList();
+                List<Items> items = Core.Context.Items.ToList();
+
+                if (cart.Where(x => x.ItemID == newit.ID).Count() == 0)
                 {
-                    ItemID = ID
-                };
-                Core.Context.Cart.Add(newCart);
-                Core.Context.SaveChanges();
-                MessageBox.Show($"Товар '{(items.First(x => x.ID == ID)).Name}' добавлен в корзину!");
+                    Cart newCart = new Cart
+                    {
+                        ItemID = newit.ID
+                    };
+                    Core.Context.Cart.Add(newCart);
+                    Core.Context.SaveChanges();
+                    MessageBox.Show($"Товар '{(items.First(x => x.ID == newit.ID)).Name}' добавлен в корзину!");
+                }
+                else
+                {
+                    MessageBox.Show($"Ошибка! Товар '{(items.First(x => x.ID == newit.ID)).Name}' уже добавлен в корзину!");
+                }
             }
             else
             {
-                MessageBox.Show($"Ошибка! Товар '{(items.First(x => x.ID == ID)).Name}' уже добавлен в корзину!");
-            }     
+                MessageBox.Show($"newit = null (я не знаю, как получается эта ошибка, но лана)");
+            }
         }
 
         private void Cart_Btn_Click(object sender, RoutedEventArgs e)

@@ -26,7 +26,14 @@ namespace Wpf_13.Pages
 
             List<Cart> cart = Core.Context.Cart.ToList(); // лист с итемами из бд
             List<Items> items = Core.Context.Items.ToList();
-            Products_LB.ItemsSource = cart; // брать инфу из items
+            List<String> name = new List<String>();
+
+            foreach (Cart item in cart)
+            {
+                name.Add(items.First(i => i.ID == item.ItemID).Name);
+            }
+
+            Products_LB.ItemsSource = name; // брать инфу из items
         }
 
         private void Items_Btn_Click(object sender, RoutedEventArgs e)

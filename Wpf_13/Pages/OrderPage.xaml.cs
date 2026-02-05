@@ -84,6 +84,11 @@ namespace Wpf_13.Pages
                 Core.Context.SaveChanges();
 
                 MessageBox.Show($"Заказ оформлен!");
+                FIO_TB.Clear();
+                Index_TB.Clear();
+                Address_TB.Clear();
+                Products_TB.Text = "Товары:";
+                Total_TB.Text = "Общая цена: 0₽";
             }
         }
 
