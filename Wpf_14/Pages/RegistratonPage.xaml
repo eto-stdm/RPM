@@ -1,0 +1,36 @@
+﻿<Page x:Class="Wpf_14.Pages.RegistratonPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Wpf_14.Pages"
+      mc:Ignorable="d" 
+      Title="RegistratonPage">
+
+    <StackPanel>
+        <TextBlock Text="Регистрация" Margin="10, 10, 10, 10" HorizontalAlignment="Center"/>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Логин:" Margin="10, 10, 10, 10"/>
+            <TextBox x:Name="LoginTB" Width="150" Margin="0, 10, 10, 10"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Пароль:" Margin="10, 10, 10, 10"/>
+            <TextBox x:Name="PasswordTB" Width="150" Margin="0, 10, 10, 10"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Имя:" Margin="10, 10, 10, 10"/>
+            <TextBox x:Name="FirstNameTB" Width="150" Margin="0, 10, 10, 10"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Фамилия:" Margin="10, 10, 10, 10"/>
+            <TextBox x:Name="LastNameTB" Width="150" Margin="0, 10, 10, 10"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Дата рождения:" Margin="10, 10, 10, 10"/>
+            <TextBox x:Name="BirthDateTB" Width="150" Margin="0, 10, 10, 10"/>
+        </StackPanel>
+        <Button x:Name="RegistrBtn" Content="Зарегистрироваться" Height="20" Width="150" Margin="10, 10, 10, 10"/>
+        <Button x:Name="RedirectBtn" Content="Уже есть аккаунт" Height="20" Width="150" Margin="10, 10, 10, 10" Click="RedirectBtn_Click"/>
+        <Button x:Name="MainBtn" Content="На главную" Height="20" Width="100" Margin="10, 10, 10, 10" Click="MainBtn_Click"/>
+    </StackPanel>
+</Page>

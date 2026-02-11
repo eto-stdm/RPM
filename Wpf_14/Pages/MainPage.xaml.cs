@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,36 @@ namespace Wpf_14.Pages
     /// </summary>
     public partial class MainPage : Page
     {
+
         public MainPage()
         {
             InitializeComponent();
+
+            List<Films> films = Core.Context.Films.ToList();
+            List<Rating> ratings = Core.Context.Rating.ToList();
+            FilmsLB.ItemsSource = films;
+        }
+
+        private void SerachBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SortBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AccountBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (State.is_registered)
+            {
+                NavigationService.Navigate(new ProfilePage());
+            }
+            else
+            {
+                NavigationService.Navigate(new AuthorizationPage());
+            }
         }
     }
 }
