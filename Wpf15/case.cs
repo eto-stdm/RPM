@@ -12,19 +12,22 @@ namespace Wpf15
     using System;
     using System.Collections.Generic;
     
-    public partial class Categories
+    public partial class @case
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Categories()
+        public @case()
         {
-            this.Products = new HashSet<Products>();
+            this.boardformfactorcase = new HashSet<boardformfactorcase>();
         }
     
-        public int CategoryID { get; set; }
-        public string CategoryName { get; set; }
-        public string Description { get; set; }
+        public int id { get; set; }
+        public int sizeid { get; set; }
+        public int expansionslots { get; set; }
+        public int fans { get; set; }
     
+        public virtual basepart basepart { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Products> Products { get; set; }
+        public virtual ICollection<boardformfactorcase> boardformfactorcase { get; set; }
+        public virtual casesize casesize { get; set; }
     }
 }

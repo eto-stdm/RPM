@@ -67,34 +67,114 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AuditLog.cs">
-      <DependentUpon>ElectronicsStore.tt</DependentUpon>
+    <Compile Include="assembly.cs">
+      <DependentUpon>computerstore.tt</DependentUpon>
     </Compile>
-    <Compile Include="Categories.cs">
-      <DependentUpon>ElectronicsStore.tt</DependentUpon>
+    <Compile Include="basepart.cs">
+      <DependentUpon>computerstore.tt</DependentUpon>
     </Compile>
-    <Compile Include="Customers.cs">
-      <DependentUpon>ElectronicsStore.tt</DependentUpon>
+    <Compile Include="boardformfactorcase.cs">
+      <DependentUpon>computerstore.tt</DependentUpon>
     </Compile>
-    <Compile Include="ElectronicsStore.cs">
+    <Compile Include="case.cs">
+      <DependentUpon>computerstore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="casesize.cs">
+      <DependentUpon>computerstore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="certificate.cs">
+      <DependentUpon>computerstore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="computerstore.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ElectronicsStore.tt</DependentUpon>
+      <DependentUpon>computerstore.tt</DependentUpon>
     </Compile>
-    <Compile Include="OrderDetails.cs">
-      <DependentUpon>ElectronicsStore.tt</DependentUpon>
+    <Compile Include="cpu.cs">
+      <DependentUpon>computerstore.tt</DependentUpon>
     </Compile>
-    <Compile Include="Orders.cs">
-      <DependentUpon>ElectronicsStore.tt</DependentUpon>
+    <Compile Include="fandimension.cs">
+      <DependentUpon>computerstore.tt</DependentUpon>
     </Compile>
-    <Compile Include="PriceHistory.cs">
-      <DependentUpon>ElectronicsStore.tt</DependentUpon>
+    <Compile Include="formfactor.cs">
+      <DependentUpon>computerstore.tt</DependentUpon>
     </Compile>
-    <Compile Include="Products.cs">
-      <DependentUpon>ElectronicsStore.tt</DependentUpon>
+    <Compile Include="gpu.cs">
+      <DependentUpon>computerstore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="gpuinterface.cs">
+      <DependentUpon>computerstore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hdd.cs">
+      <DependentUpon>computerstore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="igpu.cs">
+      <DependentUpon>computerstore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="manufacturer.cs">
+      <DependentUpon>computerstore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="memorytype.cs">
+      <DependentUpon>computerstore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="motherboard.cs">
+      <DependentUpon>computerstore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SaveAssemblyPage.xaml.cs">
+      <DependentUpon>SaveAssemblyPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SelectPartPage.xaml.cs">
+      <DependentUpon>SelectPartPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ShowAllAssemblyPage.xaml.cs">
+      <DependentUpon>ShowAllAssemblyPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ShowSelectedPartsPage.xaml.cs">
+      <DependentUpon>ShowSelectedPartsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Partal\manufacturerget.cs" />
+    <Compile Include="Partal\parttypeget.cs" />
+    <Compile Include="partassembly.cs">
+      <DependentUpon>computerstore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="parttype.cs">
+      <DependentUpon>computerstore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="powersupply.cs">
+      <DependentUpon>computerstore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="processorcooler.cs">
+      <DependentUpon>computerstore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ram.cs">
+      <DependentUpon>computerstore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="socket.cs">
+      <DependentUpon>computerstore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="socketprocessorcooler.cs">
+      <DependentUpon>computerstore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ssd.cs">
+      <DependentUpon>computerstore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="storagedevice.cs">
+      <DependentUpon>computerstore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="storagedeviceinterface.cs">
+      <DependentUpon>computerstore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="storagedevicetype.cs">
+      <DependentUpon>computerstore.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagrams.cs">
-      <DependentUpon>ElectronicsStore.tt</DependentUpon>
+      <DependentUpon>computerstore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="videoconnector.cs">
+      <DependentUpon>computerstore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="videoconnectorgpu.cs">
+      <DependentUpon>computerstore.tt</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -104,20 +184,37 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ElectronicsStore.Context.cs">
+    <Compile Include="computerstore.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ElectronicsStore.Context.tt</DependentUpon>
+      <DependentUpon>computerstore.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ElectronicsStore.Designer.cs">
+    <Compile Include="computerstore.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ElectronicsStore.edmx</DependentUpon>
+      <DependentUpon>computerstore.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Core.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\SaveAssemblyPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SelectPartPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ShowAllAssemblyPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ShowSelectedPartsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -137,12 +234,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="ElectronicsStore.edmx">
+    <EntityDeploy Include="computerstore.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ElectronicsStore.Designer.cs</LastGenOutput>
+      <LastGenOutput>computerstore.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ElectronicsStore.edmx.diagram">
-      <DependentUpon>ElectronicsStore.edmx</DependentUpon>
+    <None Include="computerstore.edmx.diagram">
+      <DependentUpon>computerstore.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -154,19 +251,20 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ElectronicsStore.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ElectronicsStore.Context.cs</LastGenOutput>
-      <DependentUpon>ElectronicsStore.edmx</DependentUpon>
-    </Content>
-    <Content Include="ElectronicsStore.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ElectronicsStore.edmx</DependentUpon>
-      <LastGenOutput>ElectronicsStore.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="computerstore.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>computerstore.Context.cs</LastGenOutput>
+      <DependentUpon>computerstore.edmx</DependentUpon>
+    </Content>
+    <Content Include="computerstore.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>computerstore.edmx</DependentUpon>
+      <LastGenOutput>computerstore.cs</LastGenOutput>
+    </Content>
+    <Resource Include="Images\dns.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -12,15 +12,13 @@ namespace Wpf15
     using System;
     using System.Collections.Generic;
     
-    public partial class PriceHistory
+    public partial class boardformfactorcase
     {
-        public int HistoryID { get; set; }
-        public Nullable<int> ProductID { get; set; }
-        public Nullable<decimal> OldPrice { get; set; }
-        public Nullable<decimal> NewPrice { get; set; }
-        public Nullable<System.DateTime> ChangeDate { get; set; }
-        public string ChangedBy { get; set; }
+        public int id { get; set; }
+        public int caseid { get; set; }
+        public int formfactorid { get; set; }
     
-        public virtual Products Products { get; set; }
+        public virtual @case @case { get; set; }
+        public virtual formfactor formfactor { get; set; }
     }
 }

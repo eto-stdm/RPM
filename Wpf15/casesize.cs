@@ -12,23 +12,18 @@ namespace Wpf15
     using System;
     using System.Collections.Generic;
     
-    public partial class Customers
+    public partial class casesize
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Customers()
+        public casesize()
         {
-            this.Orders = new HashSet<Orders>();
+            this.@case = new HashSet<@case>();
         }
     
-        public int CustomerID { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public Nullable<System.DateTime> BirthDate { get; set; }
-        public Nullable<System.DateTime> RegistrationDate { get; set; }
-        public Nullable<bool> IsActive { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Orders> Orders { get; set; }
+        public virtual ICollection<@case> @case { get; set; }
     }
 }

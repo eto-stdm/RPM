@@ -12,22 +12,18 @@ namespace Wpf15
     using System;
     using System.Collections.Generic;
     
-    public partial class Orders
+    public partial class manufacturer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Orders()
+        public manufacturer()
         {
-            this.OrderDetails = new HashSet<OrderDetails>();
+            this.basepart = new HashSet<basepart>();
         }
     
-        public int OrderID { get; set; }
-        public Nullable<int> CustomerID { get; set; }
-        public Nullable<System.DateTime> OrderDate { get; set; }
-        public Nullable<decimal> TotalAmount { get; set; }
-        public string Status { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
     
-        public virtual Customers Customers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetails> OrderDetails { get; set; }
+        public virtual ICollection<basepart> basepart { get; set; }
     }
 }

@@ -12,16 +12,13 @@ namespace Wpf15
     using System;
     using System.Collections.Generic;
     
-    public partial class OrderDetails
+    public partial class videoconnectorgpu
     {
-        public int OrderDetailID { get; set; }
-        public Nullable<int> OrderID { get; set; }
-        public Nullable<int> ProductID { get; set; }
-        public int Quantity { get; set; }
-        public decimal UnitPrice { get; set; }
-        public Nullable<decimal> Discount { get; set; }
+        public int id { get; set; }
+        public int gpuid { get; set; }
+        public int videoconnectorid { get; set; }
     
-        public virtual Orders Orders { get; set; }
-        public virtual Products Products { get; set; }
+        public virtual gpu gpu { get; set; }
+        public virtual videoconnector videoconnector { get; set; }
     }
 }

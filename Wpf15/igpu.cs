@@ -12,15 +12,18 @@ namespace Wpf15
     using System;
     using System.Collections.Generic;
     
-    public partial class AuditLog
+    public partial class igpu
     {
-        public int LogID { get; set; }
-        public string TableName { get; set; }
-        public Nullable<int> RecordID { get; set; }
-        public string OperationType { get; set; }
-        public string OldValue { get; set; }
-        public string NewValue { get; set; }
-        public string ChangedBy { get; set; }
-        public Nullable<System.DateTime> ChangeDate { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public igpu()
+        {
+            this.cpu = new HashSet<cpu>();
+        }
+    
+        public int id { get; set; }
+        public string name { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<cpu> cpu { get; set; }
     }
 }

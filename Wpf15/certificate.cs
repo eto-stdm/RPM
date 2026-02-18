@@ -12,27 +12,18 @@ namespace Wpf15
     using System;
     using System.Collections.Generic;
     
-    public partial class Products
+    public partial class certificate
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Products()
+        public certificate()
         {
-            this.OrderDetails = new HashSet<OrderDetails>();
-            this.PriceHistory = new HashSet<PriceHistory>();
+            this.powersupply = new HashSet<powersupply>();
         }
     
-        public int ProductID { get; set; }
-        public string ProductName { get; set; }
-        public Nullable<int> CategoryID { get; set; }
-        public decimal Price { get; set; }
-        public int StockQuantity { get; set; }
-        public Nullable<bool> IsActive { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
     
-        public virtual Categories Categories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetails> OrderDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PriceHistory> PriceHistory { get; set; }
+        public virtual ICollection<powersupply> powersupply { get; set; }
     }
 }
