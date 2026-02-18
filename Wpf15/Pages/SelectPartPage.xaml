@@ -11,9 +11,10 @@
     <Grid>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" MinHeight="50" MaxHeight="50">
             <Image Source="/Images/dns.png" Margin="10,10,10,10"/>
-            <TextBox x:Name="SearchTB" Width="600"  Margin="0,10,10,10"/>
-            <Button x:Name="SerachBtn" Width="40" Content="🔍" Margin="0,10,10,10"/>
-            <Button x:Name="SortBtn" Width="40" Content="🍸" Margin="0,10,10,10"/>
+            <TextBox x:Name="SearchTB" Width="600" Margin="0,10,10,10" VerticalContentAlignment="Center"/>
+            <Button x:Name="SerachBtn" Width="40" Content="🔍" Margin="0,10,10,10" Click="SerachBtn_Click"/>
+            <TextBlock Width="20" Text="🍸" VerticalAlignment="Center" Margin="0,10,0,10"/>
+            <ComboBox x:Name="ManufCB" Width="20" Margin="0,10,10,10" SelectionChanged="ManufCB_SelectionChanged"/>
         </StackPanel>
         <ListBox x:Name="PartsLB" Background="#fffcfa" ItemsSource="{Binding Path=baseparts}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Bottom" Margin="10,0,10,10" MinHeight="100" MaxHeight="350">
             <ListBox.ItemTemplate>
