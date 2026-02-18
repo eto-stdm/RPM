@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid Background="#ffd4b8">
-        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Source="/Pages/SelectPartPage.xaml"/>
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Source="/Pages/MainPage.xaml"/>
     </Grid>
 </Window>

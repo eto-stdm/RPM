@@ -120,6 +120,9 @@
     <Compile Include="motherboard.cs">
       <DependentUpon>computerstore.tt</DependentUpon>
     </Compile>
+    <Compile Include="Pages\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\SaveAssemblyPage.xaml.cs">
       <DependentUpon>SaveAssemblyPage.xaml</DependentUpon>
     </Compile>
@@ -170,6 +173,7 @@
     <Compile Include="sysdiagrams.cs">
       <DependentUpon>computerstore.tt</DependentUpon>
     </Compile>
+    <Compile Include="tip.cs" />
     <Compile Include="videoconnector.cs">
       <DependentUpon>computerstore.tt</DependentUpon>
     </Compile>
@@ -199,6 +203,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\SaveAssemblyPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -264,6 +272,14 @@
       <DependentUpon>computerstore.edmx</DependentUpon>
       <LastGenOutput>computerstore.cs</LastGenOutput>
     </Content>
+    <Resource Include="Images\case.png" />
+    <Resource Include="Images\gpu.png" />
+    <Resource Include="Images\motherboard.png" />
+    <Resource Include="Images\powersupply.png" />
+    <Resource Include="Images\processorcooler.png" />
+    <Resource Include="Images\ram.png" />
+    <Resource Include="Images\storagedevice.png" />
+    <Resource Include="Images\cpu.png" />
     <Resource Include="Images\dns.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

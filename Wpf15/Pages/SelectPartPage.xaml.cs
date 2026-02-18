@@ -20,20 +20,27 @@ namespace Wpf15.Pages
     /// </summary>
     public partial class SelectPartPage : Page
     {
+        public int idCategory { get; set; }
+
         int manufSel = 0;
         List<basepart> baseparts = Core.Context.basepart.ToList();
         List<manufacturer> manufacturers = Core.Context.manufacturer.ToList();
-        public SelectPartPage()
+        public SelectPartPage(int idCategory)
         {
             InitializeComponent();
+
+            this.idCategory = idCategory;
+
             List<string> manufName = new List<string>();
 
-            foreach (manufacturer m  in manufacturers)
+            foreach (manufacturer m in manufacturers)
             {
                 manufName.Add(m.name);
             }
             manufName.Add("(нет)");
             manufName.Sort();
+
+            baseparts = baseparts.Where(part => part.parttypeid == idCategory).ToList();
 
             PartsLB.ItemsSource = baseparts;
             ManufCB.ItemsSource = manufName;
@@ -59,6 +66,8 @@ namespace Wpf15.Pages
             {
                 baseparts = baseparts.Where(part => part.manufacturerid == manufSel && part.name.ToLower().Contains(search)).ToList();
             }
+
+            baseparts = baseparts.Where(part => part.parttypeid == idCategory).ToList();
             PartsLB.ItemsSource = baseparts;
         }
 
@@ -83,7 +92,13 @@ namespace Wpf15.Pages
                 manufSel = manufacturers.First(man => man.name == tempstr).id;
                 baseparts = baseparts.Where(part => part.manufacturerid == manufSel && part.name.ToLower().Contains(search)).ToList();
             }
+            baseparts = baseparts.Where(part => part.parttypeid == idCategory).ToList();
             PartsLB.ItemsSource = baseparts;
+        }
+
+        private void MainBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new MainPage());
         }
     }
 }
