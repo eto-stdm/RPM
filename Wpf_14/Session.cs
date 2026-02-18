@@ -17,6 +17,7 @@ namespace Wpf_14
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Session()
         {
+            this.HallSeat = new HashSet<HallSeat>();
             this.Tickets = new HashSet<Tickets>();
         }
     
@@ -28,6 +29,8 @@ namespace Wpf_14
     
         public virtual Films Films { get; set; }
         public virtual Hall Hall { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HallSeat> HallSeat { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tickets> Tickets { get; set; }
     }

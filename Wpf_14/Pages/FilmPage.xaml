@@ -9,6 +9,6 @@
       Title="FilmPage">
 
     <Grid>
-        
+        <Button x:Name="MainBtn" Content="На главную" Height="20" Width="100" Margin="10, 10, 10, 10" Click="MainBtn_Click"/>
     </Grid>
 </Page>

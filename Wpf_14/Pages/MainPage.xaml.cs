@@ -52,5 +52,16 @@ namespace Wpf_14.Pages
                 NavigationService.Navigate(new AuthorizationPage());
             }
         }
+
+        private void MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var selectFilm = FilmsLB.SelectedItem as Films;
+
+            if (selectFilm == null) return;
+
+            FilmPage page = new FilmPage(selectFilm);
+
+            NavigationService.Navigate(page);
+        }
     }
 }

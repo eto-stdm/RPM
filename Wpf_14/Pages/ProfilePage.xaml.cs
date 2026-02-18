@@ -23,6 +23,26 @@ namespace Wpf_14.Pages
         public ProfilePage()
         {
             InitializeComponent();
+
+            List<Users> users = Core.Context.Users.ToList();
+            Users curUser = users.First(x => x.ID == State.curr_user_id);
+            LoginTB.Text = "Логин: " + curUser.Login;
+            FirstNameTB.Text = "Имя: " + curUser.FirstName;
+            LastNameTB.Text = "Фамилия: " + curUser.LastName;
+            BirthDateTB.Text = "День рождения: " + Convert.ToDateTime(curUser.BirthDate).ToString("dd/MM/yyyy");
+        }
+
+        private void MainBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new MainPage());
+        }
+
+        private void ExitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            State.is_registered = false;
+            State.curr_user_id = 0;
+            MessageBox.Show("Вы вышли из аккаунта");
+            NavigationService.Navigate(new MainPage());
         }
     }
 }

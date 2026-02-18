@@ -38,12 +38,18 @@ namespace Wpf_14.Pages
         private void AuthorizBtn_Click(object sender, RoutedEventArgs e)
         {
             List<Users> users = Core.Context.Users.ToList();
-            if (users.Contains(new Users() { Login = LoginTB.Text, Password = PasswordTB.Text }))
+            try
             {
-                State.is_registered = true;
-                NavigationService.Navigate(new ProfilePage());
+                Users curruser = users.First(u => u.Login.Contains(LoginTB.Text));
+                if (curruser.Password == PasswordTB.Text)
+                {
+                    State.is_registered = true;
+                    State.curr_user_id = curruser.ID;
+                    NavigationService.Navigate(new ProfilePage());
+                }
+                else { MessageBox.Show("Неправильный логин или пароль"); }
             }
-            else { MessageBox.Show("Неправильный логин или пароль"); }
+            catch { MessageBox.Show("Неправильный логин или пароль"); }
         }
     }
 }

@@ -25,6 +25,39 @@ namespace Wpf_14.Pages
             InitializeComponent();
         }
 
+        private void RegistrBtn_Click(object sender, RoutedEventArgs e)
+        {
+            List<Users> users = Core.Context.Users.ToList();
+            if (LoginTB.Text != "" && PasswordTB.Text != "" && FirstNameTB.Text != "" && LastNameTB.Text != "" && BirthDateCa != null)
+            {
+                try
+                {
+                    Users failUser = users.First(x => x.Login == LoginTB.Text);
+                    MessageBox.Show("Пользователь с данным логином уже существует");
+                }
+                catch
+                {
+                    Users newUser = new Users()
+                    {
+                        Login = LoginTB.Text,
+                        Password = PasswordTB.Text,
+                        FirstName = FirstNameTB.Text,
+                        LastName = LastNameTB.Text,
+                        BirthDate = BirthDateCa.SelectedDate
+                    };
+                    Core.Context.Users.Add(newUser);
+                    Core.Context.SaveChanges();
+
+                    users = Core.Context.Users.ToList();
+
+                    State.is_registered = true;
+                    State.curr_user_id = newUser.ID;
+                    NavigationService.Navigate(new ProfilePage());
+                }
+            }
+            else { MessageBox.Show("Данные не заполнены!"); }
+        }
+
         private void RedirectBtn_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AuthorizationPage());

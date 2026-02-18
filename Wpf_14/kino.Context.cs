@@ -29,12 +29,12 @@ namespace Wpf_14
         public virtual DbSet<Films> Films { get; set; }
         public virtual DbSet<Genres> Genres { get; set; }
         public virtual DbSet<Hall> Hall { get; set; }
+        public virtual DbSet<HallSeat> HallSeat { get; set; }
         public virtual DbSet<Rating> Rating { get; set; }
+        public virtual DbSet<Seats> Seats { get; set; }
         public virtual DbSet<Session> Session { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<Users> Users { get; set; }
-        public virtual DbSet<HallSeat> HallSeat { get; set; }
-        public virtual DbSet<Seats> Seats { get; set; }
         public virtual DbSet<Tickets> Tickets { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
     }
 }

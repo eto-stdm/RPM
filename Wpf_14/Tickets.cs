@@ -16,7 +16,7 @@ namespace Wpf_14
     {
         public int ID { get; set; }
         public int SessionID { get; set; }
-        public int Seat { get; set; }
+        public int SeatID { get; set; }
         public int UserID { get; set; }
         public decimal Price { get; set; }
     

@@ -17,19 +17,19 @@ namespace Wpf_14
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Hall()
         {
-            this.Session = new HashSet<Session>();
             this.HallSeat = new HashSet<HallSeat>();
+            this.Session = new HashSet<Session>();
         }
     
         public int ID { get; set; }
         public int Number { get; set; }
-        public int RatingID { get; set; }
         public int SeatsCount { get; set; }
+        public int RatingID { get; set; }
     
         public virtual Rating Rating { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Session> Session { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HallSeat> HallSeat { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Session> Session { get; set; }
     }
 }

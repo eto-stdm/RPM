@@ -82,10 +82,20 @@
     <Compile Include="HallSeat.cs">
       <DependentUpon>kino.tt</DependentUpon>
     </Compile>
+    <Compile Include="kino.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>kino.Context.tt</DependentUpon>
+    </Compile>
     <Compile Include="kino.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>kino.tt</DependentUpon>
+    </Compile>
+    <Compile Include="kino.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>kino.edmx</DependentUpon>
     </Compile>
     <Compile Include="Pages\AuthorizationPage.xaml.cs">
       <DependentUpon>AuthorizationPage.xaml</DependentUpon>
@@ -121,16 +131,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Core.cs" />
-    <Compile Include="kino.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>kino.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="kino.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>kino.edmx</DependentUpon>
-    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -217,6 +217,17 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Covers\fast1.jpg" />
+    <Resource Include="Covers\fast10.jpg" />
+    <Resource Include="Covers\fast2.jpg" />
+    <Resource Include="Covers\fast3.jpg" />
+    <Resource Include="Covers\fast4.jpg" />
+    <Resource Include="Covers\fast5.jpg" />
+    <Resource Include="Covers\fast6.jpg" />
+    <Resource Include="Covers\fast7.jpg" />
+    <Resource Include="Covers\fast8.5.jpg" />
+    <Resource Include="Covers\fast8.jpg" />
+    <Resource Include="Covers\fast9.jpg" />
     <Content Include="kino.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>kino.edmx</DependentUpon>
@@ -227,18 +238,6 @@
       <DependentUpon>kino.edmx</DependentUpon>
       <LastGenOutput>kino.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Covers\book.png" />
-    <Resource Include="Covers\eye.png" />
-    <Resource Include="Covers\grim-reaper.png" />
-    <Resource Include="Covers\haunted-house.png" />
-    <Resource Include="Covers\horror.png" />
-    <Resource Include="Covers\shark.png" />
-    <Resource Include="Covers\skull.png" />
-    <Resource Include="Covers\slasher.png" />
-    <Resource Include="Covers\thriller.png" />
-    <Resource Include="Covers\voodoo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

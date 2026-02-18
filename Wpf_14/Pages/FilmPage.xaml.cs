@@ -20,9 +20,18 @@ namespace Wpf_14.Pages
     /// </summary>
     public partial class FilmPage : Page
     {
-        public FilmPage()
+        public Films selFilm { get; set; }
+        public string genres;
+
+        public FilmPage(Films selFilm)
         {
             InitializeComponent();
+
+        }
+
+        private void MainBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new MainPage());
         }
     }
 }

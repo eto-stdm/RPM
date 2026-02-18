@@ -27,9 +27,9 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="Дата рождения:" Margin="10, 10, 10, 10"/>
-            <TextBox x:Name="BirthDateTB" Width="150" Margin="0, 10, 10, 10"/>
+            <Calendar x:Name="BirthDateCa" Margin="0, 10, 10, 10"/>
         </StackPanel>
-        <Button x:Name="RegistrBtn" Content="Зарегистрироваться" Height="20" Width="150" Margin="10, 10, 10, 10"/>
+        <Button x:Name="RegistrBtn" Content="Зарегистрироваться" Height="20" Width="150" Margin="10, 10, 10, 10" Click="RegistrBtn_Click"/>
         <Button x:Name="RedirectBtn" Content="Уже есть аккаунт" Height="20" Width="150" Margin="10, 10, 10, 10" Click="RedirectBtn_Click"/>
         <Button x:Name="MainBtn" Content="На главную" Height="20" Width="100" Margin="10, 10, 10, 10" Click="MainBtn_Click"/>
     </StackPanel>

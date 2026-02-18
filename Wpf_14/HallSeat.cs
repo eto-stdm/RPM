@@ -14,12 +14,13 @@ namespace Wpf_14
     
     public partial class HallSeat
     {
-        public int ID { get; set; }
         public int HallID { get; set; }
         public int SeatID { get; set; }
+        public int SessionID { get; set; }
         public bool IsTaken { get; set; }
     
         public virtual Hall Hall { get; set; }
         public virtual Seats Seats { get; set; }
+        public virtual Session Session { get; set; }
     }
 }

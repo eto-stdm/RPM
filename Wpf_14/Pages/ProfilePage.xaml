@@ -5,10 +5,15 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Wpf_14.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
       Title="ProfilePage">
 
-    <Grid>
-        
-    </Grid>
+    <StackPanel>
+        <TextBlock Text="Профиль" Margin="10, 10, 10, 10" HorizontalAlignment="Center"/>
+        <TextBlock x:Name="LoginTB" Text="Логин:" Margin="10, 10, 10, 10"/>
+        <TextBlock x:Name="FirstNameTB" Text="Имя:" Margin="10, 0, 10, 10"/>
+        <TextBlock x:Name="LastNameTB" Text="Фамилия:" Margin="10, 0, 10, 10"/>
+        <TextBlock x:Name="BirthDateTB" Text="День рождения:" Margin="10, 0, 10, 10"/>
+        <Button x:Name="ExitBtn" Content="Выйти из аккаунта" Height="20" Width="110" Margin="10, 10, 10, 10" Click="ExitBtn_Click" />
+        <Button x:Name="MainBtn" Content="На главную" Height="20" Width="100" Margin="10, 10, 10, 10" Click="MainBtn_Click"/>
+    </StackPanel>
 </Page>
