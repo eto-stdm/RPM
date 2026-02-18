@@ -10,12 +10,5 @@ namespace Wpf15
     {
             public string image { get; set; }
             public string typed { get; set; }
-
-            //public t(string image, string typed)
-            //{
-            //    this.image = image;
-            //    this.typed = typed;
-            //}
-        
     }
 }

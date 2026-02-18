@@ -84,7 +84,6 @@ namespace Wpf15.Pages
             }
             else if (tempstr == "(нет)" && search == "")
             {
-                //manufSel = manufacturers.First(man => man.name == tempstr).id;
                 baseparts = baseparts.Where(part => part.name.ToLower().Contains(search)).ToList();
             }
             else if (tempstr != "(нет)")
