@@ -52,5 +52,15 @@ namespace Wpf15.Pages
 
             NavigationService.Navigate(page);
         }
+
+        private void MyAssemblyBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ShowSelectedPartsPage());
+        }
+
+        private void SavedAssemblyBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ShowAllAssemblyPage());
+        }
     }
 }

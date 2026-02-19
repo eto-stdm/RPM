@@ -8,10 +8,10 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MainPage">
 
-    <Grid>
+    <StackPanel>
         <StackPanel>
-            <Image Source="/Images/dns.png" Height="60" Margin="10, 20, 10, 10"/>
-            <TextBlock Text="Конфигуратор ПК" HorizontalAlignment="Center" Margin="10, 10, 10, 10"/>
+            <Image Source="/Images/dns.png" Height="40" Margin="10, 10, 10, 10"/>
+            <TextBlock Text="Конфигуратор ПК" HorizontalAlignment="Center" Margin="10, 0, 10, 10"/>
         </StackPanel>
         <ListBox x:Name="TypesLB" MouseDoubleClick="MouseDoubleClick" Background="#fffcfa" ItemsSource="{Binding Path=types}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Bottom" Margin="10,0,10,20" MinHeight="265" MaxHeight="265" Width="545">
             <ListBox.ItemTemplate>
@@ -30,5 +30,9 @@
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
-    </Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="MyAssemblyBtn" Content="Моя сборка" Width="150" Margin="0, 0, 60, 0" Click="MyAssemblyBtn_Click"/>
+            <Button x:Name="SavedAssemblyBtn" Content="Сохранённые сборки" Width="150" Margin="60, 0, 0, 0" Click="SavedAssemblyBtn_Click"/>
+        </StackPanel>
+    </StackPanel>
 </Page>

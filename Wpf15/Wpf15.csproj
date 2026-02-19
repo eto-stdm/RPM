@@ -180,6 +180,9 @@
     <Compile Include="videoconnectorgpu.cs">
       <DependentUpon>computerstore.tt</DependentUpon>
     </Compile>
+    <Compile Include="Windows\AssemblyPartsWindow.xaml.cs">
+      <DependentUpon>AssemblyPartsWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -220,6 +223,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ShowSelectedPartsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\AssemblyPartsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

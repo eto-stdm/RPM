@@ -9,6 +9,29 @@
       Title="ShowAllAssemblyPage">
 
     <Grid>
-        
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" MinHeight="50" MaxHeight="50">
+            <Button x:Name="MainBtn" Margin="10,10,10,10" Click="MainBtn_Click">
+                <Image Source="/Images/dns.png"/>
+            </Button>
+            <TextBlock Margin="260,0,0,0"/>
+            <TextBlock Text="Сохранённые сборки" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,10,10,10"/>
+        </StackPanel>
+        <ListBox x:Name="AssemblyLB" MouseDoubleClick="MouseDoubleClick" Background="#fffcfa" ItemsSource="{Binding Path=assemblies}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Bottom" Margin="150,0,150,30" MinHeight="330" MaxHeight="330">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="500" Height="50">
+                        <StackPanel>
+                            <TextBlock x:Name="NameTB" Text="{Binding name, StringFormat=Название сборки: {0}}" TextWrapping="Wrap"/>
+                            <TextBlock x:Name="AuthorTB" Text="{Binding author, StringFormat=Автор: {0}}"/>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
     </Grid>
 </Page>
