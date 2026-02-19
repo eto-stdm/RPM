@@ -120,11 +120,9 @@
     <Compile Include="motherboard.cs">
       <DependentUpon>computerstore.tt</DependentUpon>
     </Compile>
+    <Compile Include="MyAssembly.cs" />
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\SaveAssemblyPage.xaml.cs">
-      <DependentUpon>SaveAssemblyPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\SelectPartPage.xaml.cs">
       <DependentUpon>SelectPartPage.xaml</DependentUpon>
@@ -183,6 +181,9 @@
     <Compile Include="Windows\AssemblyPartsWindow.xaml.cs">
       <DependentUpon>AssemblyPartsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\SaveAssemblyWindow.xaml.cs">
+      <DependentUpon>SaveAssemblyWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -210,10 +211,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\SaveAssemblyPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\SelectPartPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -227,6 +224,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\AssemblyPartsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\SaveAssemblyWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

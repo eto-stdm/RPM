@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Wpf15.Pages
+namespace Wpf15.Windows
 {
     /// <summary>
-    /// Логика взаимодействия для SaveAssemblyPage.xaml
+    /// Логика взаимодействия для SaveAssemblyWindow.xaml
     /// </summary>
-    public partial class SaveAssemblyPage : Page
+    public partial class SaveAssemblyWindow : Window
     {
-        public SaveAssemblyPage()
+        public SaveAssemblyWindow()
         {
             InitializeComponent();
         }

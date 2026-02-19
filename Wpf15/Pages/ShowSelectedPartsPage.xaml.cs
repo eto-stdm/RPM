@@ -24,5 +24,15 @@ namespace Wpf15.Pages
         {
             InitializeComponent();
         }
+
+        private void MainBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new MainPage());
+        }
+
+        private void SaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

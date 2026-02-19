@@ -8,7 +8,35 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ShowSelectedPartsPage">
 
-    <Grid>
-        
-    </Grid>
+    <StackPanel>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" MinHeight="50" MaxHeight="50">
+            <Button x:Name="MainBtn" Margin="10,10,0,10" Click="MainBtn_Click">
+                <Image Source="/Images/dns.png"/>
+            </Button>
+        </StackPanel>
+        <TextBlock Text="Моя сборка" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,0,10,0"/>
+        <ListBox x:Name="DataLB" Background="#fffcfa" ItemsSource="{Binding Path=assemlys}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Bottom" Margin="10,10,10,0" Width="700" MinHeight="300" MaxHeight="350">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="150" Width="280" Margin="15,10,10,15">
+                        <StackPanel Margin="10,10,10,10">
+                            <Image/>
+                            <TextBlock x:Name="DataTB" Text="{Binding manufacturer.data}" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                            <TextBlock x:Name="PriceTB" Text="{Binding price, StringFormat=Цена: {0}}" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10,10,10,10">
+            <TextBlock x:Name="PriceTB" Text="Цена:"  Margin="0,0,200,0"/>
+            <Button x:Name="SaveBtn" Content="Сохранить сборку" Margin="200,0,0,0" Click="SaveBtn_Click"/>
+        </StackPanel>
+    </StackPanel>
+    
 </Page>
