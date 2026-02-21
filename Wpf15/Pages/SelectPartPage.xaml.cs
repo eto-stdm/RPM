@@ -50,6 +50,43 @@ namespace Wpf15.Pages
         {
             var senderBtn = sender as Button;
             basepart newit = senderBtn.DataContext as basepart;
+
+            List<parttype> parttypes = Core.Context.parttype.ToList();
+            string type = parttypes.First(part => part.id == idCategory).name;
+            int oldid = -1;
+
+            switch (type)
+            {
+                case "CPU":
+                    oldid = MyAssembly.cpu_;
+                    MyAssembly.cpu_ = newit.id; break;
+                case "GPU":
+                    oldid = MyAssembly.gpu_;
+                    MyAssembly.gpu_ = newit.id; break;
+                case "RAM":
+                    oldid = MyAssembly.ram_;
+                    MyAssembly.ram_ = newit.id; break;
+                case "Motherboard":
+                    oldid = MyAssembly.motherboard_;
+                    MyAssembly.motherboard_ = newit.id; break;
+                case "Case":
+                    oldid = MyAssembly.case_;
+                    MyAssembly.case_ = newit.id; break;
+                case "PowerSupply":
+                    oldid = MyAssembly.powersupply_;
+                    MyAssembly.powersupply_ = newit.id; break;
+                case "ProcessorCooler":
+                    oldid = MyAssembly.processorcooler_;
+                    MyAssembly.processorcooler_ = newit.id; break;
+                case "StorageDevice":
+                    oldid = MyAssembly.storagedevice_;
+                    MyAssembly.storagedevice_ = newit.id; break;
+                default: MessageBox.Show("Ошибка! Неизвестный тип товара."); break;
+            }
+
+            if (oldid == 0) { MessageBox.Show($"В категорию '{type}' добавлен товар '{newit.name}'"); }
+            else if (oldid == newit.id) { MessageBox.Show($"В сборку уже добавлен товар '{newit.name}'!"); }
+            else { MessageBox.Show($"В категории '{type}' товар '{baseparts.First(part => part.id == oldid).name}' был заменён на '{newit.name}'"); }
         }
 
         private void SerachBtn_Click(object sender, RoutedEventArgs e)

@@ -23,5 +23,18 @@ namespace Wpf15.Windows
         {
             InitializeComponent();
         }
+
+        private void SaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (NameTB.Text != "" && AuthorTB.Text != "")
+            {
+                MessageBox.Show("Сборка сохранена!");
+            }
+            else
+            {
+                MessageBox.Show("Значения не заполнены!");
+            }
+            
+        }
     }
 }

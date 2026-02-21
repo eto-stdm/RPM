@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Wpf15.Windows;
 
 namespace Wpf15.Pages
 {
@@ -32,7 +33,9 @@ namespace Wpf15.Pages
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
+            SaveAssemblyWindow window = new SaveAssemblyWindow();
 
+            window.Show();
         }
     }
 }

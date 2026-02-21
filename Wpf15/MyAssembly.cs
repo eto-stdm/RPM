@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Wpf15
 {
-    public class MyAssembly
+    public static class MyAssembly
     {
-        public int cpu_;
-        public int gpu_;
-        public int ram_;
-        public int motherboard_;
-        public int case_;
-        public int powersupply_;
-        public int processorcooler_;
-        public int storagedevice_;
+        public static int cpu_ = 0;
+        public static int gpu_ = 0;
+        public static int ram_ = 0;
+        public static int motherboard_ = 0;
+        public static int case_ = 0;
+        public static int powersupply_ = 0;
+        public static int processorcooler_ = 0;
+        public static int storagedevice_ = 0;
     }
 }
