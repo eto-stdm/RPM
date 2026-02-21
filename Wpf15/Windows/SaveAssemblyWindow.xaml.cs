@@ -50,26 +50,33 @@ namespace Wpf15.Windows
         {
             if (NameTB.Text != "" && AuthorTB.Text != "")
             {
-                assembly assemblytemp = new assembly
-                {
-                    name = NameTB.Text,
-                    author = AuthorTB.Text,
-                };
-                Core.Context.assembly.Add(assemblytemp); // добавление сборки
+                bool condition = MyAssembly.cpu_ != 0 && MyAssembly.gpu_ != 0 && MyAssembly.ram_ != 0
+                              && MyAssembly.motherboard_ != 0 && MyAssembly.case_ != 0 && MyAssembly.powersupply_ != 0
+                              && MyAssembly.processorcooler_ != 0 && MyAssembly.storagedevice_ != 0;
 
-                List<assembly> assemblies = Core.Context.assembly.ToList();
-                int idAssembly = assemblies.Last().id;
-                AddAll(idAssembly); // добавление элементов сборки
+                if (condition)
+                { 
+                    assembly assemblytemp = new assembly
+                    {
+                        name = NameTB.Text,
+                        author = AuthorTB.Text,
+                    };
+                    Core.Context.assembly.Add(assemblytemp); // добавление сборки
 
-                MyAssembly.SetDefaultMyAssembly(); // сброс элементов сборки
+                    List<assembly> assemblies = Core.Context.assembly.ToList();
+                    int idAssembly = assemblies.Last().id;
+                    AddAll(idAssembly); // добавление элементов сборки
 
-                MessageBox.Show("Сборка сохранена!");
+                    MyAssembly.SetDefaultMyAssembly(); // сброс элементов сборки
+
+                    MessageBox.Show("Сборка сохранена!");
+                    Close();
+                }
+                else { MessageBox.Show("Сборка заполнена не до конца!"); }
             }
-            else
-            {
-                MessageBox.Show("Значения не заполнены!");
-            }
-            Close();
+            else { MessageBox.Show("Значения не заполнены!"); }
+
+            
         }
     }
 }
