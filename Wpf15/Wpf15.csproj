@@ -133,8 +133,16 @@
     <Compile Include="Pages\ShowSelectedPartsPage.xaml.cs">
       <DependentUpon>ShowSelectedPartsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Partal\caseget.cs" />
+    <Compile Include="Partal\cpuget.cs" />
+    <Compile Include="Partal\gpuget.cs" />
     <Compile Include="Partal\manufacturerget.cs" />
+    <Compile Include="Partal\motherboardget.cs" />
     <Compile Include="Partal\parttypeget.cs" />
+    <Compile Include="Partal\powersupplyget.cs" />
+    <Compile Include="Partal\processorcoolerget.cs" />
+    <Compile Include="Partal\ramget.cs" />
+    <Compile Include="Partal\storagedeviceget.cs" />
     <Compile Include="partassembly.cs">
       <DependentUpon>computerstore.tt</DependentUpon>
     </Compile>

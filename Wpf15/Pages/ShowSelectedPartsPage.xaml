@@ -13,16 +13,16 @@
             <Button x:Name="MainBtn" Margin="10,10,0,10" Click="MainBtn_Click">
                 <Image Source="/Images/dns.png"/>
             </Button>
+            <TextBlock Text="Моя сборка" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="300,10,10,10"/>
         </StackPanel>
-        <TextBlock Text="Моя сборка" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,0,10,0"/>
-        <ListBox x:Name="DataLB" Background="#fffcfa" ItemsSource="{Binding Path=assemlys}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Bottom" Margin="10,10,10,0" Width="700" MinHeight="300" MaxHeight="350">
+        <ListBox x:Name="DataLB" Background="#fffcfa" ItemsSource="{Binding Path=listassembly}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="700" MinHeight="330" MaxHeight="350">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid Height="150" Width="280" Margin="15,10,10,15">
-                        <StackPanel Margin="10,10,10,10">
-                            <Image/>
-                            <TextBlock x:Name="DataTB" Text="{Binding manufacturer.data}" HorizontalAlignment="Center" TextWrapping="Wrap"/>
-                            <TextBlock x:Name="PriceTB" Text="{Binding price, StringFormat=Цена: {0}}" HorizontalAlignment="Center"/>
+                    <Grid Height="77" Width="325">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="30" Height="30" Source="{Binding image}"/>
+                            <TextBlock x:Name="DataTB" Text="{Binding data}" TextWrapping="Wrap" Width="260"/>
+                            <TextBlock x:Name="PriceTB" Text="{Binding price, StringFormat=Цена:&#13;{0}}" HorizontalAlignment="Center" TextWrapping="Wrap"/>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
@@ -33,8 +33,8 @@
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10,10,10,10">
-            <TextBlock x:Name="PriceTB" Text="Цена:"  Margin="0,0,200,0"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10,10,10,0" VerticalAlignment="Bottom">
+            <TextBlock x:Name="PriceTB" Text="Цена:" Margin="0,0,200,0"/>
             <Button x:Name="SaveBtn" Content="Сохранить сборку" Margin="200,0,0,0" Click="SaveBtn_Click"/>
         </StackPanel>
     </StackPanel>

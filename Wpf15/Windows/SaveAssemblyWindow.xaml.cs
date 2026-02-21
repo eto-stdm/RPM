@@ -32,6 +32,7 @@ namespace Wpf15.Windows
                 assemblyid = assemblyid_
             };
             Core.Context.partassembly.Add(partassemblytemp);
+            Core.Context.SaveChanges();
         }
 
         public void AddAll(int idAssembly)
@@ -62,6 +63,7 @@ namespace Wpf15.Windows
                         author = AuthorTB.Text,
                     };
                     Core.Context.assembly.Add(assemblytemp); // добавление сборки
+                    Core.Context.SaveChanges();
 
                     List<assembly> assemblies = Core.Context.assembly.ToList();
                     int idAssembly = assemblies.Last().id;
