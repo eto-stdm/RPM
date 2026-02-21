@@ -58,29 +58,45 @@ namespace Wpf15.Pages
             switch (type)
             {
                 case "CPU":
+                { 
                     oldid = MyAssembly.cpu_;
                     MyAssembly.cpu_ = newit.id; break;
+                }
                 case "GPU":
+                { 
                     oldid = MyAssembly.gpu_;
                     MyAssembly.gpu_ = newit.id; break;
+                }
                 case "RAM":
+                { 
                     oldid = MyAssembly.ram_;
                     MyAssembly.ram_ = newit.id; break;
+                }
                 case "Motherboard":
+                { 
                     oldid = MyAssembly.motherboard_;
                     MyAssembly.motherboard_ = newit.id; break;
+                }
                 case "Case":
+                { 
                     oldid = MyAssembly.case_;
                     MyAssembly.case_ = newit.id; break;
+                }
                 case "PowerSupply":
+                { 
                     oldid = MyAssembly.powersupply_;
                     MyAssembly.powersupply_ = newit.id; break;
+                }
                 case "ProcessorCooler":
+                { 
                     oldid = MyAssembly.processorcooler_;
                     MyAssembly.processorcooler_ = newit.id; break;
+                }
                 case "StorageDevice":
+                { 
                     oldid = MyAssembly.storagedevice_;
                     MyAssembly.storagedevice_ = newit.id; break;
+                }
                 default: MessageBox.Show("Ошибка! Неизвестный тип товара."); break;
             }
 
