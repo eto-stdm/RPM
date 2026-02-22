@@ -56,12 +56,7 @@ namespace Wpf15.Pages
         {
             InitializeComponent();
 
-            //if (MyAssembly.cpu_ == 0 && MyAssembly.gpu_ == 0 && MyAssembly.ram_ == 0
-            //  && MyAssembly.motherboard_ == 0 && MyAssembly.case_ == 0 && MyAssembly.powersupply_ == 0
-            //  && MyAssembly.processorcooler_ == 0 && MyAssembly.storagedevice_ == 0)
-            //{
-                DefaultValues(); 
-            //}
+            DefaultValues(); 
 
             int price = 0;
 
@@ -294,10 +289,7 @@ namespace Wpf15.Pages
                 foreach (string i in badchecks) { msbadchecks += i; }
                 MessageBox.Show(msbadchecks);
             }
-            else
-            {
-                iscompatable = true;
-            }
+            else { iscompatable = true; }
         }
 
         private void MainBtn_Click(object sender, RoutedEventArgs e)
@@ -322,5 +314,19 @@ namespace Wpf15.Pages
             }
             else { MessageBox.Show("Сборка заполнена не до конца!"); }
         }
+
+        //<Button x:Name="RefreshBth" Content="Обновить" Margin="240,10,0,10" Click="RefreshBth_Click" Width="100"/>
+        //private void RefreshBth_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (MyAssembly.cpu_ == 0 && MyAssembly.gpu_ == 0 && MyAssembly.ram_ == 0
+        //      && MyAssembly.motherboard_ == 0 && MyAssembly.case_ == 0 && MyAssembly.powersupply_ == 0
+        //      && MyAssembly.processorcooler_ == 0 && MyAssembly.storagedevice_ == 0)
+        //    {
+        //        listassembly.Clear();
+
+        //        DefaultValues();
+        //        DataLB.ItemsSource = listassembly;
+        //    }
+        //}
     }
 }
