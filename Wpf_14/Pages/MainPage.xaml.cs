@@ -21,19 +21,23 @@ namespace Wpf_14.Pages
     /// </summary>
     public partial class MainPage : Page
     {
-
+        List<Films> films = Core.Context.Films.ToList();
+        List<Rating> ratings = Core.Context.Rating.ToList();
         public MainPage()
         {
             InitializeComponent();
 
-            List<Films> films = Core.Context.Films.ToList();
-            List<Rating> ratings = Core.Context.Rating.ToList();
             FilmsLB.ItemsSource = films;
         }
 
         private void SerachBtn_Click(object sender, RoutedEventArgs e)
         {
+            films = Core.Context.Films.ToList();
+            string search = SearchTB.Text.ToLower();
 
+            films = films.Where(f => f.Name.ToLower().Contains(search)).ToList();
+            
+            FilmsLB.ItemsSource = films;
         }
 
         private void SortBtn_Click(object sender, RoutedEventArgs e)
@@ -43,14 +47,8 @@ namespace Wpf_14.Pages
 
         private void AccountBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (State.is_registered)
-            {
-                NavigationService.Navigate(new ProfilePage());
-            }
-            else
-            {
-                NavigationService.Navigate(new AuthorizationPage());
-            }
+            if (State.is_registered) { NavigationService.Navigate(new ProfilePage()); }
+            else { NavigationService.Navigate(new AuthorizationPage()); }
         }
 
         private void MouseDoubleClick(object sender, MouseButtonEventArgs e)

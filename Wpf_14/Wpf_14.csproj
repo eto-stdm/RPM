@@ -228,6 +228,9 @@
     <Resource Include="Covers\fast8.5.jpg" />
     <Resource Include="Covers\fast8.jpg" />
     <Resource Include="Covers\fast9.jpg" />
+    <Resource Include="Covers\mlp.jpg" />
+    <Resource Include="Covers\pr14.png" />
+    <Resource Include="Covers\perdulia.jpg" />
     <Content Include="kino.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>kino.edmx</DependentUpon>

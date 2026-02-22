@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Wpf_14"
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="500">
-    <Grid>
+    <Grid Background="#fbf1fe">
         <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Source="/Pages/MainPage.xaml"/>
     </Grid>
 </Window>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,7 +29,7 @@ namespace Wpf_14.Pages
         private void RegistrBtn_Click(object sender, RoutedEventArgs e)
         {
             List<Users> users = Core.Context.Users.ToList();
-            if (LoginTB.Text != "" && PasswordTB.Text != "" && FirstNameTB.Text != "" && LastNameTB.Text != "" && BirthDateCa != null)
+            if (LoginTB.Text != "" && PasswordTB.Text != "" && FirstNameTB.Text != "" && LastNameTB.Text != "" && BirthDateTB != null)
             {
                 try
                 {
@@ -37,22 +38,27 @@ namespace Wpf_14.Pages
                 }
                 catch
                 {
-                    Users newUser = new Users()
+                    DateTime tempdt;
+                    if (DateTime.TryParse(BirthDateTB.Text, out tempdt))
                     {
-                        Login = LoginTB.Text,
-                        Password = PasswordTB.Text,
-                        FirstName = FirstNameTB.Text,
-                        LastName = LastNameTB.Text,
-                        BirthDate = BirthDateCa.SelectedDate
-                    };
-                    Core.Context.Users.Add(newUser);
-                    Core.Context.SaveChanges();
+                        Users newUser = new Users()
+                        {
+                            Login = LoginTB.Text,
+                            Password = PasswordTB.Text,
+                            FirstName = FirstNameTB.Text,
+                            LastName = LastNameTB.Text,
+                            BirthDate = tempdt,
+                        };
+                        Core.Context.Users.Add(newUser);
+                        Core.Context.SaveChanges();
 
-                    users = Core.Context.Users.ToList();
+                        users = Core.Context.Users.ToList();
 
-                    State.is_registered = true;
-                    State.curr_user_id = newUser.ID;
-                    NavigationService.Navigate(new ProfilePage());
+                        State.is_registered = true;
+                        State.curr_user_id = newUser.ID;
+                        NavigationService.Navigate(new ProfilePage());
+                    }
+                    else { }
                 }
             }
             else { MessageBox.Show("Данные не заполнены!"); }
