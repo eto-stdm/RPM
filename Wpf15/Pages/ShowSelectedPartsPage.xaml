@@ -18,7 +18,7 @@
         <ListBox x:Name="DataLB" Background="#fffcfa" ItemsSource="{Binding Path=listassembly}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="700" MinHeight="330" MaxHeight="350">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid Height="77" Width="325">
+                    <Grid Height="77" Width="330">
                         <StackPanel Orientation="Horizontal">
                             <Image Width="30" Height="30" Source="{Binding image}"/>
                             <TextBlock x:Name="DataTB" Text="{Binding data}" TextWrapping="Wrap" Width="260"/>
