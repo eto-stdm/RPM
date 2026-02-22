@@ -40,11 +40,6 @@ namespace Wpf_14.Pages
             FilmsLB.ItemsSource = films;
         }
 
-        private void SortBtn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void AccountBtn_Click(object sender, RoutedEventArgs e)
         {
             if (State.is_registered) { NavigationService.Navigate(new ProfilePage()); }
@@ -60,6 +55,52 @@ namespace Wpf_14.Pages
             FilmPage page = new FilmPage(selectFilm);
 
             NavigationService.Navigate(page);
+        }
+
+        private void Default_Click(object sender, RoutedEventArgs e)
+        {
+            films = Core.Context.Films.ToList();
+            string search = SearchTB.Text.ToLower();
+
+            films = films.Where(f => f.Name.ToLower().Contains(search)).ToList();
+
+            FilmsLB.ItemsSource = films;
+        }
+
+        private void NameSortUp_Click(object sender, RoutedEventArgs e)
+        {
+            films = films.OrderBy(f => f.Name).ToList();
+            FilmsLB.ItemsSource = films;
+        }
+
+        private void NameSortDown_Click(object sender, RoutedEventArgs e)
+        {
+            films = films.OrderByDescending(f => f.Name).ToList();
+            FilmsLB.ItemsSource = films;
+        }
+
+        private void RatingSortUp_Click(object sender, RoutedEventArgs e)
+        {
+            films = films.OrderBy(f => f.RatingID).ToList();
+            FilmsLB.ItemsSource = films;
+        }
+
+        private void RatingSortDown_Click(object sender, RoutedEventArgs e)
+        {
+            films = films.OrderByDescending(f => f.RatingID).ToList();
+            FilmsLB.ItemsSource = films;
+        }
+
+        private void AgeRestrSortUp_Click(object sender, RoutedEventArgs e)
+        {
+            films = films.OrderBy(f => f.AgeRestrID).ToList();
+            FilmsLB.ItemsSource = films;
+        }
+
+        private void AgeRestrSortDown_Click(object sender, RoutedEventArgs e)
+        {
+            films = films.OrderByDescending(f => f.AgeRestrID).ToList();
+            FilmsLB.ItemsSource = films;
         }
     }
 }

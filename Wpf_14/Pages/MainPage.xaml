@@ -15,14 +15,16 @@
 
             <Menu Width="40" Margin="0,10,10,10">
                 <MenuItem Header=" 🍸" VerticalContentAlignment="Center" Width="40" Height="30" Background="#dddddd" BorderBrush="Black" BorderThickness="1">
-                    <MenuItem Header="Название (по возрастанию)"/>
-                    <MenuItem Header="Название (по убыванию)"/>
+                    <MenuItem x:Name="Default" Header="(нет)" Click="Default_Click"/>
                     <Separator/>
-                    <MenuItem Header="Рейтинг (по возрастанию)"/>
-                    <MenuItem Header="Рейтинг (по убыванию)"/>
+                    <MenuItem x:Name="NameSortUp" Header="Название (по возрастанию)" Click="NameSortUp_Click"/>
+                    <MenuItem x:Name="NameSortDown" Header="Название (по убыванию)" Click="NameSortDown_Click"/>
                     <Separator/>
-                    <MenuItem Header="Возрастной рейтинг (по возрастанию)"/>
-                    <MenuItem Header="Возрастной рейтинг (по убыванию)"/>
+                    <MenuItem x:Name="RatingSortUp" Header="Рейтинг (по возрастанию)" Click="RatingSortUp_Click"/>
+                    <MenuItem x:Name="RatingSortDown" Header="Рейтинг (по убыванию)" Click="RatingSortDown_Click"/>
+                    <Separator/>
+                    <MenuItem x:Name="AgeRestrSortUp" Header="Возрастной рейтинг (по возрастанию)" Click="AgeRestrSortUp_Click"/>
+                    <MenuItem x:Name="AgeRestrSortDown" Header="Возрастной рейтинг (по убыванию)" Click="AgeRestrSortDown_Click"/>
                 </MenuItem>
             </Menu>
             <Button x:Name="AccountBtn" Content="👤" Width="40" Margin="0,10,10,10" Click="AccountBtn_Click"/>
