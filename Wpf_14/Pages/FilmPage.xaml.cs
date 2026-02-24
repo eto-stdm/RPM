@@ -24,6 +24,7 @@ namespace Wpf_14.Pages
         public string genres;
 
         List<Films> f = new List<Films>();
+        List<Session> sessions = Core.Context.Session.ToList();
 
         public FilmPage(Films selFilm)
         {
@@ -31,6 +32,17 @@ namespace Wpf_14.Pages
 
             f.Add(selFilm);
             FilmLB.ItemsSource = f;
+
+            List<Session> filmsessions = sessions.Where(f => f.FilmID == selFilm.ID).ToList();
+            SessionLB.ItemsSource = filmsessions;
+        }
+
+        private void SessionLB_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (State.is_registered == false)
+            {
+                MessageBox.Show("Войдите в аккаунт, чтобы иметь возможность покупать билеты!");
+            }
         }
 
         private void MainBtn_Click(object sender, RoutedEventArgs e)

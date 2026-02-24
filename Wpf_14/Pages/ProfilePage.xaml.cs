@@ -34,17 +34,17 @@ namespace Wpf_14.Pages
             BirthDateTB.Text = "День рождения: " + Convert.ToDateTime(curUser.BirthDate).ToString("dd/MM/yyyy");
             
             List<Tickets> tickets = Core.Context.Tickets.ToList();
-            string usertickets = "Билеты: ";
+            string usertickets = "Билеты:\n";
             foreach (Tickets t in tickets)
             {
                 if (t.UserID == State.curr_user_id) { 
                     //string curfilm = 
 
-                    usertickets += $"Название фильма: {t.Session.FilmID}, Время: {t}, Зал: {t}, Кресло: {t.SeatID}, Цена: {t.Price}₽\n"; 
+                    usertickets += $"Название фильма: {t.Session.Films.Name}, Время: {t.Session.Time}, Зал: {t.Session.Hall.ID}, Кресло: {t.SeatID}, Цена: {t.Price}₽\n"; 
                 }
             }
 
-            if (usertickets == "Билеты:") { usertickets += "нет"; }
+            if (usertickets == "Билеты:\n") { usertickets = "Билеты: нет"; }
 
             TicketsTB.Text = usertickets;
         }
