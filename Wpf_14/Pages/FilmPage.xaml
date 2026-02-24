@@ -5,10 +5,40 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Wpf_14.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="500" d:DesignWidth="500"
       Title="FilmPage">
 
     <Grid>
-        <Button x:Name="MainBtn" Content="На главную" Height="20" Width="100" Margin="10, 10, 10, 10" Click="MainBtn_Click"/>
+        <StackPanel>
+            <ListBox x:Name="FilmLB" Background="#fffcfa" ItemsSource="{Binding Path=f}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Top" Margin="10,20,10,0" Width="460" MinHeight="200" MaxHeight="400" IsHitTestVisible="False">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Height="390" Width="460">
+                            <StackPanel Orientation="Horizontal">
+                                <Image x:Name="CoverImg" Source="{Binding Cover}" Width="130" Height="200" VerticalAlignment="Top" Margin="20,20,0,0"/>
+                                <StackPanel Margin="20,20,0,0">
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                        <TextBlock x:Name="NameTB" Text="{Binding Name}" Margin="0,0,0,0"/>
+                                        <TextBlock x:Name="RatingTB" Text="{Binding Rating.Amount}" Margin="10,0,0,0"/>
+                                        <TextBlock x:Name="AgeRestrTB" Text="{Binding AgeRestr.Restriction}" Margin="10,0,0,0"/>
+                                    </StackPanel>
+                                    <TextBlock x:Name="DateTB" Text="{Binding Date, StringFormat=Начало показа: dd.MM.yyyy}" Margin="0,0,0,10"/>
+                                    <TextBlock x:Name="DescriptTB" Text="{Binding Description, StringFormat=Описание: {0}}" Width="250" TextWrapping="Wrap" HorizontalAlignment="Left"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+                <Button x:Name="SessionBtn" Content="Выбор сеанса" Height="20" Width="100" Margin="0, 0, 50, 0" Click="MainBtn_Click" VerticalAlignment="Bottom"/>
+                <Button x:Name="MainBtn" Content="На главную" Height="20" Width="100" Margin="50, 0, 0, 0" Click="MainBtn_Click" VerticalAlignment="Bottom"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>

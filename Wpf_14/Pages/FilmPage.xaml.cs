@@ -23,10 +23,14 @@ namespace Wpf_14.Pages
         public Films selFilm { get; set; }
         public string genres;
 
+        List<Films> f = new List<Films>();
+
         public FilmPage(Films selFilm)
         {
             InitializeComponent();
 
+            f.Add(selFilm);
+            FilmLB.ItemsSource = f;
         }
 
         private void MainBtn_Click(object sender, RoutedEventArgs e)

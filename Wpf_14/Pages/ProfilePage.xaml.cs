@@ -25,11 +25,28 @@ namespace Wpf_14.Pages
             InitializeComponent();
 
             List<Users> users = Core.Context.Users.ToList();
+            
+
             Users curUser = users.First(x => x.ID == State.curr_user_id);
             LoginTB.Text = "Логин: " + curUser.Login;
             FirstNameTB.Text = "Имя: " + curUser.FirstName;
             LastNameTB.Text = "Фамилия: " + curUser.LastName;
             BirthDateTB.Text = "День рождения: " + Convert.ToDateTime(curUser.BirthDate).ToString("dd/MM/yyyy");
+            
+            List<Tickets> tickets = Core.Context.Tickets.ToList();
+            string usertickets = "Билеты: ";
+            foreach (Tickets t in tickets)
+            {
+                if (t.UserID == State.curr_user_id) { 
+                    //string curfilm = 
+
+                    usertickets += $"Название фильма: {t.Session.FilmID}, Время: {t}, Зал: {t}, Кресло: {t.SeatID}, Цена: {t.Price}₽\n"; 
+                }
+            }
+
+            if (usertickets == "Билеты:") { usertickets += "нет"; }
+
+            TicketsTB.Text = usertickets;
         }
 
         private void MainBtn_Click(object sender, RoutedEventArgs e)
