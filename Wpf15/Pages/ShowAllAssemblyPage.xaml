@@ -9,14 +9,22 @@
       Title="ShowAllAssemblyPage">
 
     <Grid>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" MinHeight="50" MaxHeight="50">
-            <Button x:Name="MainBtn" Margin="10,10,10,10" Click="MainBtn_Click">
+        <Grid VerticalAlignment="Top" MinHeight="50" MaxHeight="50">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Button x:Name="MainBtn" Margin="10,10,10,10" Click="MainBtn_Click" Grid.Row="0" Grid.Column="0">
                 <Image Source="/Images/dns.png"/>
             </Button>
-            <TextBlock Margin="260,0,0,0"/>
-            <TextBlock Text="Сохранённые сборки" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,10,10,10"/>
-        </StackPanel>
-        <ListBox x:Name="AssemblyLB" MouseDoubleClick="MouseDoubleClick" Background="#fffcfa" ItemsSource="{Binding Path=assemblies}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Bottom" Margin="150,0,150,30" MinHeight="330" MaxHeight="330">
+            <TextBlock Text="Сохранённые сборки" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,10,100,10" Grid.Row="0" Grid.Column="1"/>
+        </Grid>
+        <ListBox x:Name="AssemblyLB" MouseDoubleClick="MouseDoubleClick" Background="#fffcfa" ItemsSource="{Binding Path=assemblies}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Top" Margin="150,60,150,30" MinHeight="330" MaxHeight="1000">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="500" Height="50">

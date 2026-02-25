@@ -9,12 +9,21 @@
       Title="ShowSelectedPartsPage">
 
     <StackPanel>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" MinHeight="50" MaxHeight="50">
-            <Button x:Name="MainBtn" Margin="10,10,0,10" Click="MainBtn_Click">
+        <Grid VerticalAlignment="Top" MinHeight="50" MaxHeight="50">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Button x:Name="MainBtn" Margin="10,10,0,10" Click="MainBtn_Click" Grid.Row="0" Grid.Column="0">
                 <Image Source="/Images/dns.png"/>
             </Button>
-            <TextBlock Text="Моя сборка" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="300,10,10,10"/>
-        </StackPanel>
+            <TextBlock Text="Моя сборка" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,10,100,10" Grid.Row="0" Grid.Column="1"/>
+        </Grid>
         <ListBox x:Name="DataLB" Background="#fffcfa" ItemsSource="{Binding Path=listassembly}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="700" MinHeight="330" MaxHeight="350">
             <ListBox.ItemTemplate>
                 <DataTemplate>

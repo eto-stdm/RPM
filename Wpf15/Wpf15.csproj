@@ -86,6 +86,7 @@
       <DependentUpon>computerstore.tt</DependentUpon>
     </Compile>
     <Compile Include="Classes\ListAssembly.cs" />
+    <Compile Include="Partal\basepartget.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="computerstore.cs">
       <AutoGen>True</AutoGen>

@@ -9,19 +9,31 @@
       Title="SelectPartPage">
 
     <Grid>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" MinHeight="50" MaxHeight="50">
-            <Button x:Name="MainBtn" Margin="10,10,10,10" Click="MainBtn_Click">
+        <Grid VerticalAlignment="Top" HorizontalAlignment="Stretch" MinHeight="50" MaxHeight="50" Width="Auto">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="50"></ColumnDefinition>
+                <ColumnDefinition Width="20"></ColumnDefinition>
+                <ColumnDefinition Width="30"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Button x:Name="MainBtn" Margin="10,10,10,10" Click="MainBtn_Click" Width="50" Grid.Row="0" Grid.Column="0">
                 <Image Source="/Images/dns.png"/>
             </Button>
-            <TextBox x:Name="SearchTB" Width="600" Margin="0,10,10,10" VerticalContentAlignment="Center"/>
-            <Button x:Name="SerachBtn" Width="40" Content="🔍" Margin="0,10,10,10" Click="SerachBtn_Click"/>
-            <TextBlock Width="20" Text="🍸" VerticalAlignment="Center" Margin="0,10,0,10"/>
-            <ComboBox x:Name="ManufCB" Width="20" Margin="0,10,10,10" SelectionChanged="ManufCB_SelectionChanged"/>
-        </StackPanel>
-        <ListBox x:Name="PartsLB" Background="#fffcfa" ItemsSource="{Binding Path=baseparts}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Bottom" Margin="10,0,10,10" MinHeight="100" MaxHeight="350">
+            <TextBox x:Name="SearchTB"  Margin="0,10,10,10" VerticalContentAlignment="Center" Grid.Row="0" Grid.Column="1"/>
+            <Button x:Name="SerachBtn" Width="40" Content="🔍" Margin="0,10,10,10" Click="SerachBtn_Click" Grid.Row="0" Grid.Column="2"/>
+            <TextBlock Width="20" Text="🍸" VerticalAlignment="Center" Margin="0,10,0,10" Grid.Row="0" Grid.Column="3"/>
+            <ComboBox x:Name="ManufCB" Width="20" Margin="0,10,10,10" SelectionChanged="ManufCB_SelectionChanged" Grid.Row="0" Grid.Column="4"/>
+        </Grid>
+        <ListBox x:Name="PartsLB" Background="#fffcfa" ItemsSource="{Binding Path=baseparts}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Top" Margin="10,60,10,10" MinHeight="300" MaxHeight="630">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid Height="280" Width="150" Margin="15,10,10,15">
+                    <Grid Height="280" Width="150" Margin="15,10,10,15" ToolTip="{Binding getall}">
                         <StackPanel Margin="10,10,10,10">
                             <Image Width="130" Height="130" Source="{Binding image}"/>
                             <TextBlock x:Name="NameTB" Text="{Binding name}" HorizontalAlignment="Center" TextWrapping="Wrap"/>

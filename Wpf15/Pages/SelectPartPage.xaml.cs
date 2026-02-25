@@ -103,6 +103,7 @@ namespace Wpf15.Pages
             if (oldid == 0) { MessageBox.Show($"В категорию '{type}' добавлен товар '{newit.name}'"); }
             else if (oldid == newit.id) { MessageBox.Show($"В сборку уже добавлен товар '{newit.name}'!"); }
             else { MessageBox.Show($"В категории '{type}' товар '{baseparts.First(part => part.id == oldid).name}' был заменён на '{newit.name}'"); }
+            NavigationService.GoBack();
         }
 
         private void SerachBtn_Click(object sender, RoutedEventArgs e)
