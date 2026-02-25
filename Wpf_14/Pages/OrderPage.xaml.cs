@@ -26,6 +26,9 @@ namespace Wpf_14.Pages
         {
             InitializeComponent();
 
+            this.selSession = selSession;
+            this.selectedSeats = selectedSeats;
+
             int seatsSum = selectedSeats.Count * 1000;
             string seatsText = "";
             foreach (int seat in selectedSeats) { seatsText += $"{seat.ToString()}, "; }
@@ -35,12 +38,39 @@ namespace Wpf_14.Pages
 
             SeatsTB.Text = $"Выбранные места: {seatsText}";
 
-            PriceTB.Text = $"Цена: {seatsSum}";
+            PriceTB.Text = $"Цена: {seatsSum} ₽";
         }
 
         private void AcceptBtn_Click(object sender, RoutedEventArgs e)
         {
+            //List<HallSeat> hallSeats = Core.Context.HallSeat.ToList();
+            //List<Tickets> tickets = Core.Context.Tickets.ToList();
 
+            foreach (int s in selectedSeats)
+            {
+                HallSeat hs = new HallSeat()
+                {
+                    HallID = selSession.HallID,
+                    SeatID = s,
+                    SessionID = selSession.ID,
+                    IsTaken = true
+                };
+
+                Tickets t = new Tickets
+                {
+                    SessionID = selSession.ID,
+                    SeatID = s,
+                    UserID = State.curr_user_id,
+                    Price = 1000
+                };
+
+                Core.Context.HallSeat.Add(hs);
+                Core.Context.Tickets.Add(t);
+                Core.Context.SaveChanges();
+            }
+            MessageBox.Show("Билеты куплены!");
+
+            NavigationService.Navigate(new MainPage());
         }
 
         private void GoBackBtn_Click(object sender, RoutedEventArgs e)

@@ -73,6 +73,7 @@
     <Compile Include="Films.cs">
       <DependentUpon>kino.tt</DependentUpon>
     </Compile>
+    <Compile Include="Classes\filmsget.cs" />
     <Compile Include="Genres.cs">
       <DependentUpon>kino.tt</DependentUpon>
     </Compile>
@@ -112,7 +113,7 @@
     <Compile Include="Session.cs">
       <DependentUpon>kino.tt</DependentUpon>
     </Compile>
-    <Compile Include="State.cs" />
+    <Compile Include="Classes\State.cs" />
     <Compile Include="sysdiagrams.cs">
       <DependentUpon>kino.tt</DependentUpon>
     </Compile>
@@ -231,6 +232,8 @@
     <Resource Include="Covers\mlp.jpg" />
     <Resource Include="Covers\pr14.png" />
     <Resource Include="Covers\perdulia.jpg" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="kino.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>kino.edmx</DependentUpon>

@@ -10,7 +10,7 @@
 
     <Grid>
         <StackPanel>
-            <ListBox x:Name="FilmLB" Background="#fffcfa" ItemsSource="{Binding Path=f}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Top" Margin="10,20,10,0" Width="460" MinHeight="200" MaxHeight="260" IsHitTestVisible="False">
+            <ListBox x:Name="FilmLB" Background="#fffcfa" ItemsSource="{Binding Path=f}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Top" Margin="10,20,10,0" Width="460" MinHeight="200" MaxHeight="270" IsHitTestVisible="False">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Height="390" Width="460">
@@ -22,6 +22,7 @@
                                         <TextBlock x:Name="RatingTB" Text="{Binding Rating.Amount}" Margin="10,0,0,0"/>
                                         <TextBlock x:Name="AgeRestrTB" Text="{Binding AgeRestr.Restriction}" Margin="10,0,0,0"/>
                                     </StackPanel>
+                                    <TextBlock x:Name="GenreTB" Text="{Binding getgenres}" Margin="0,0,0,10" TextWrapping="Wrap"/>
                                     <TextBlock x:Name="DateTB" Text="{Binding Date, StringFormat=Начало показа: dd.MM.yyyy}" Margin="0,0,0,10"/>
                                     <TextBlock x:Name="DescriptTB" Text="{Binding Description, StringFormat=Описание: {0}}" Width="250" TextWrapping="Wrap" HorizontalAlignment="Left"/>
                                 </StackPanel>

@@ -29,6 +29,8 @@ namespace Wpf_14.Pages
         {
             InitializeComponent();
 
+            this.selSession = selSession;
+
             SessionTB.Text = $"Сеанс: Фильм - {selSession.Films.Name}, Дата - {selSession.Date.ToString("dd.MM")}, Время - {selSession.Time}, Зал - {selSession.HallID}";
 
             List<Box> box = new List<Box>();
@@ -89,6 +91,8 @@ namespace Wpf_14.Pages
             }
             else
             {
+                //Session session = selSession;
+
                 OrderPage page = new OrderPage(selSession, selectedSeats);
                 NavigationService.Navigate(page);
             }
