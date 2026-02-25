@@ -5,10 +5,28 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Wpf_14.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="500" d:DesignWidth="500"
       Title="SelectedTimePage">
 
-    <Grid>
-        
-    </Grid>
+    <StackPanel>
+        <TextBlock x:Name="SessionTB" Text="Сеанс: " Margin="10,10,10,10" HorizontalAlignment="Center"/>
+        <ListBox x:Name="CheckLB" Background="#fffcfa" ItemsSource="{Binding Path=box}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Top" Margin="10,0,10,0" Width="430" MinHeight="330" MaxHeight="350">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="50" Width="50">
+                        <CheckBox Content="{Binding id}" IsChecked="{Binding check}" IsEnabled="{Binding enable}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="CheckBox_Click"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="OrderBtn" Content="Оформить заказ" Width="100" Margin="10,10,10,10" Click="OrderBtn_Click"/>
+            <Button x:Name="GoBackBtn" Content="Назад" Width="100" Margin="10,10,10,10" Click="GoBackBtn_Click"/>
+        </StackPanel>
+    </StackPanel>
 </Page>

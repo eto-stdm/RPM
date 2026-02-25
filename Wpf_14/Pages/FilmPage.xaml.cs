@@ -21,7 +21,6 @@ namespace Wpf_14.Pages
     public partial class FilmPage : Page
     {
         public Films selFilm { get; set; }
-        public string genres;
 
         List<Films> f = new List<Films>();
         List<Session> sessions = Core.Context.Session.ToList();
@@ -42,6 +41,16 @@ namespace Wpf_14.Pages
             if (State.is_registered == false)
             {
                 MessageBox.Show("Войдите в аккаунт, чтобы иметь возможность покупать билеты!");
+            }
+            else
+            {
+                var selectSession = SessionLB.SelectedItem as Session;
+
+                if (selectSession == null) return;
+
+                SelectedTimePage page = new SelectedTimePage(selectSession);
+
+                NavigationService.Navigate(page);
             }
         }
 
