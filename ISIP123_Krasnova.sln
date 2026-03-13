@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISIP123_Krasnova", "ISIP123
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpf_14", "Wpf_14\Wpf_14.csproj", "{AC8B7B52-1DF5-4D86-B4D8-1E07DC92AC5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject", "UnitTestProject\UnitTestProject.csproj", "{8744E206-AFE8-4693-A170-A2A6729F2DC8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject_Auth", "UnitTestProject\UnitTestProject_Auth.csproj", "{8744E206-AFE8-4693-A170-A2A6729F2DC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
