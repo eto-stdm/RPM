@@ -12,7 +12,6 @@ namespace UnitTestProject_Auth
         [TestMethod]
         public void AuthTestSuccess() 
         {
-        
         }
 
         [TestMethod]
