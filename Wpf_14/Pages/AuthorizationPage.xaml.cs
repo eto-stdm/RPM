@@ -35,7 +35,7 @@ namespace Wpf_14.Pages
             NavigationService.Navigate(new MainPage());
         }
 
-        private void AuthorizBtn_Click(object sender, RoutedEventArgs e)
+        public bool Auth(string login, string password)
         {
             List<Users> users = Core.Context.Users.ToList();
             try
@@ -46,10 +46,16 @@ namespace Wpf_14.Pages
                     State.is_registered = true;
                     State.curr_user_id = curruser.ID;
                     NavigationService.Navigate(new ProfilePage());
+                    return true;
                 }
-                else { MessageBox.Show("Неправильный логин или пароль"); }
+                else { MessageBox.Show("Неправильный логин или пароль"); return false; }
             }
-            catch { MessageBox.Show("Неправильный логин или пароль"); }
+            catch { MessageBox.Show("Неправильный логин или пароль"); return false; }
+        }
+
+        private void AuthorizBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Auth(LoginTB.Text, PasswordTB.Text);
         }
     }
 }
