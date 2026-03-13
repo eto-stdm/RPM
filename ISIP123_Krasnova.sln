@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpf_14", "Wpf_14\Wpf_14.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject_Auth", "UnitTestProject\UnitTestProject_Auth.csproj", "{8744E206-AFE8-4693-A170-A2A6729F2DC8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject_Reg", "UnitTestProject_Reg\UnitTestProject_Reg.csproj", "{B66D56A8-6956-4726-9D78-3D2F9FBB4C5D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{8744E206-AFE8-4693-A170-A2A6729F2DC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8744E206-AFE8-4693-A170-A2A6729F2DC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8744E206-AFE8-4693-A170-A2A6729F2DC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B66D56A8-6956-4726-9D78-3D2F9FBB4C5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B66D56A8-6956-4726-9D78-3D2F9FBB4C5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B66D56A8-6956-4726-9D78-3D2F9FBB4C5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B66D56A8-6956-4726-9D78-3D2F9FBB4C5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
