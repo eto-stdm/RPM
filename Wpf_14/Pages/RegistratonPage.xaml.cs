@@ -26,42 +26,57 @@ namespace Wpf_14.Pages
             InitializeComponent();
         }
 
-        private void RegistrBtn_Click(object sender, RoutedEventArgs e)
+        public bool Registr(string login, string password, string firstname, string lastname, string birthdate)
         {
             List<Users> users = Core.Context.Users.ToList();
-            if (LoginTB.Text != "" && PasswordTB.Text != "" && FirstNameTB.Text != "" && LastNameTB.Text != "" && BirthDateTB != null)
+            if (login != "" && password != "" && firstname != "" && lastname != "" && birthdate != null)
             {
                 try
                 {
-                    Users failUser = users.First(x => x.Login == LoginTB.Text);
+                    Users failUser = users.First(x => x.Login == login);
                     MessageBox.Show("Пользователь с данным логином уже существует");
+                    return false;
                 }
                 catch
                 {
                     DateTime tempdt;
-                    if (DateTime.TryParse(BirthDateTB.Text, out tempdt))
+                    if (DateTime.TryParse(birthdate, out tempdt))
                     {
-                        Users newUser = new Users()
+                        if (login.Length > 20 || password.Length > 20)
                         {
-                            Login = LoginTB.Text,
-                            Password = PasswordTB.Text,
-                            FirstName = FirstNameTB.Text,
-                            LastName = LastNameTB.Text,
-                            BirthDate = tempdt,
-                        };
-                        Core.Context.Users.Add(newUser);
-                        Core.Context.SaveChanges();
-
-                        users = Core.Context.Users.ToList();
-
-                        State.is_registered = true;
-                        State.curr_user_id = newUser.ID;
-                        NavigationService.Navigate(new ProfilePage());
+                            MessageBox.Show("Слишком длинный логин или пароль!"); return false;
+                        }
+                        return true;
                     }
-                    else { }
+                    else { MessageBox.Show("Дата введена в неправильном формате!"); return false; }
                 }
             }
-            else { MessageBox.Show("Данные не заполнены!"); }
+            else { MessageBox.Show("Данные не заполнены!"); return false; }
+        }
+
+        private void RegistrBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (Registr(LoginTB.Text, PasswordTB.Text, FirstNameTB.Text, LastNameTB.Text, BirthDateTB.Text)) {
+                DateTime tempdt;
+                DateTime.TryParse(BirthDateTB.Text, out tempdt);
+                Users newUser = new Users()
+                {
+                    Login = LoginTB.Text,
+                    Password = PasswordTB.Text,
+                    FirstName = FirstNameTB.Text,
+                    LastName = LastNameTB.Text,
+                    BirthDate = tempdt,
+                };
+                Core.Context.Users.Add(newUser);
+                Core.Context.SaveChanges();
+
+                List<Users> users = Core.Context.Users.ToList();
+                users = Core.Context.Users.ToList();
+
+                State.is_registered = true;
+                State.curr_user_id = newUser.ID;
+                NavigationService.Navigate(new ProfilePage());
+            }
         }
 
         private void RedirectBtn_Click(object sender, RoutedEventArgs e)

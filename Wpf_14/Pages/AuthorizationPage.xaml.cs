@@ -40,12 +40,11 @@ namespace Wpf_14.Pages
             List<Users> users = Core.Context.Users.ToList();
             try
             {
-                Users curruser = users.First(u => u.Login.Contains(LoginTB.Text));
-                if (curruser.Password == PasswordTB.Text)
+                Users curruser = users.First(u => u.Login == login);
+                if (curruser.Password == password)
                 {
                     State.is_registered = true;
                     State.curr_user_id = curruser.ID;
-                    NavigationService.Navigate(new ProfilePage());
                     return true;
                 }
                 else { MessageBox.Show("Неправильный логин или пароль"); return false; }
@@ -55,7 +54,7 @@ namespace Wpf_14.Pages
 
         private void AuthorizBtn_Click(object sender, RoutedEventArgs e)
         {
-            Auth(LoginTB.Text, PasswordTB.Text);
+            if (Auth(LoginTB.Text, PasswordTB.Text)) { NavigationService.Navigate(new ProfilePage()); }
         }
     }
 }

@@ -12,6 +12,12 @@ namespace UnitTestProject_Auth
         [TestMethod]
         public void AuthTestSuccess() 
         {
+            var page = new AuthorizationPage();
+            Assert.IsTrue(page.Auth("ewe", "ewe"));
+            Assert.IsTrue(page.Auth("a", "a"));
+            Assert.IsTrue(page.Auth("d3", "3d"));
+            Assert.IsTrue(page.Auth("qwe", "qwe"));
+            Assert.IsTrue(page.Auth("ew", "ew"));
         }
 
         [TestMethod]
