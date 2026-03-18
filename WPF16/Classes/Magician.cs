@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ISIP123_Krasnova.Classes
 {
-    internal class Magician : Enemy
+    public class Magician : Enemy
     {
         public double froze;
         public Magician(string name, double hp, double attack, double defense, double froze)

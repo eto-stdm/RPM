@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ISIP123_Krasnova.Classes
 {
-    internal class Enemy
+    public class Enemy
     {
         public string name;
         public double hp;

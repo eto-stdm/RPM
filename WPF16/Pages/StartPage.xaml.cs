@@ -27,7 +27,7 @@ namespace WPF16.Pages
 
         private void StartBtn_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new GamePage());
+            NavigationService.Navigate(new NamePage());
         }
     }
 }

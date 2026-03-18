@@ -19,13 +19,14 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="120"></RowDefinition>
         </Grid.RowDefinitions>
-        
-        
 
         <TextBlock Text="Крутая игра" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, 10, 10, 10" Grid.Row="0" Grid.ColumnSpan="2"/>
         <TextBlock x:Name="FloorTB" Text="Этаж:" Margin="10,0,10,0" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
         <TextBlock x:Name="HPTB" Text="Здоровье:" Margin="10,0,10,0" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"/>
 
-        
+        <TextBlock x:Name="ItemsTB" Text="Вещи:" Margin="10,0,10,0" VerticalAlignment="Top" Grid.Row="3" Grid.Column="0"/>
+        <ScrollViewer x:Name="LogScroll" Grid.Row="3" Grid.Column="1">
+            <TextBlock x:Name="LogTB" Text="Лог:" Margin="10,0,10,0" />
+        </ScrollViewer>
     </Grid>
 </Page>

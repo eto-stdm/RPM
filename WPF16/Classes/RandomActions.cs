@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ISIP123_Krasnova.Classes
 {
-    internal class RandomActions
+    public class RandomActions
     {
         public static Enemy GenerateCommonEnemy()
         {

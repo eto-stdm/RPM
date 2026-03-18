@@ -1,0 +1,1 @@
+﻿public enum Type_e { Heal, Weapon, Armor }

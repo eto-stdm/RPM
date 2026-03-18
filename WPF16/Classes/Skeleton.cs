@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ISIP123_Krasnova.Classes
 {
-    internal class Skeleton : Enemy
+    public class Skeleton : Enemy
     {
         public bool ignores_def;
         public Skeleton(string name, double hp, double attack, double defense, bool ignores_def)

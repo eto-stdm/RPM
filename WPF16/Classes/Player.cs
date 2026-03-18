@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ISIP123_Krasnova.Classes
 {
-    internal class Player
+    public class Player
     {
         public string name;
         public double hp;
@@ -23,16 +23,16 @@ namespace ISIP123_Krasnova.Classes
             this.weapon = weapon;
             this.armor = armor;
         }
-        public void Print()
+        public string Print()
         {
-            Console.WriteLine("**********************");
-            Console.WriteLine($"Имя: {name}");
-            Console.WriteLine($"Здоровье: {hp}");
-            Console.WriteLine($"Урон: {attack}");
-            Console.WriteLine($"Защита: {defense}");
-            Console.WriteLine($"Оружие: {weapon.Name}");
-            Console.WriteLine($"Броня: {armor.Name}");
-            Console.WriteLine("**********************");
+            return "**********************\n" +
+                   $"Имя: {name}\n" +
+                   $"Здоровье: {hp}\n" +
+                   $"Урон: {attack}\n" +
+                   $"Защита: {defense}\n" +
+                   $"Оружие: {weapon.Name}\n" +
+                   $"Броня: {armor.Name}\n" +
+                   "**********************\n";
         }
 
         public void DealDamage()

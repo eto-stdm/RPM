@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ISIP123_Krasnova.Classes
 {
-    internal class Item
+    public class Item
     {
         public Type_e Type;
         public string Name;

@@ -20,9 +20,30 @@ namespace WPF16.Pages
     /// </summary>
     public partial class EndPage : Page
     {
-        public EndPage()
+        public EndPage(bool status)
         {
             InitializeComponent();
+
+            if (status)
+            {
+                StatusTB.Text = "Вы настоящий герой!";
+                DescriptionTB.Text = "Вы победили всех боссов!\n:)";
+            }
+            else
+            {
+                StatusTB.Text = "Вы проиграли!";
+                DescriptionTB.Text = "Постарайтесь получше в следующий раз!";
+            }
+        }
+
+        private void RestartBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new StartPage());
+        }
+
+        private void ExitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }
