@@ -37,6 +37,10 @@ namespace WPF16.Pages
             do
             {
                 if (end_game == true || boss_count >= 3) { end(player); break; }
+
+                FloorTB.Text = "Этаж: " + room_count;
+                HPTB.Text = "Здоровье: " + player.hp;
+
                 room_count = room(room_count);
             } while (true);
         }
@@ -82,6 +86,16 @@ namespace WPF16.Pages
         {
             if (player.hp > 0) { Console.WriteLine("Вы настоящий герой!\nВы победили всех боссов!\n:)"); }
             else { Console.WriteLine("К сожалению, вы проиграли в этой битве.\nПостарайтесь получше в следующий раз!"); }
+        }
+
+        private void AttackBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DefendBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

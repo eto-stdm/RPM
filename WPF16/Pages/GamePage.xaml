@@ -24,9 +24,30 @@
         <TextBlock x:Name="FloorTB" Text="Этаж:" Margin="10,0,10,0" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
         <TextBlock x:Name="HPTB" Text="Здоровье:" Margin="10,0,10,0" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"/>
 
-        <TextBlock x:Name="ItemsTB" Text="Вещи:" Margin="10,0,10,0" VerticalAlignment="Top" Grid.Row="3" Grid.Column="0"/>
+        <StackPanel  Grid.Row="3" Grid.Column="0">
+            <TextBlock x:Name="ItemsTB" Text="Вещи:" Margin="10,0,10,0" VerticalAlignment="Top"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Image x:Name="Item1" Source="/Imgs/placeholder.jpg" Width="80" Height="80" Margin="10" ToolTip="123"/>
+                <Image x:Name="Item2" Source="/Imgs/placeholder.jpg" Width="80" Height="80" Margin="10" ToolTip="456"/>
+            </StackPanel>
+        </StackPanel>
+
         <ScrollViewer x:Name="LogScroll" Grid.Row="3" Grid.Column="1">
             <TextBlock x:Name="LogTB" Text="Лог:" Margin="10,0,10,0" />
         </ScrollViewer>
+
+
+        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <Image x:Name="Enemy1" Source="/Imgs/placeholder.jpg" Width="180" Height="180" Margin="10"/>
+                <Image x:Name="Enemy2" Source="/Imgs/placeholder.jpg" Width="180" Height="180" Margin="10"/>
+                <Image x:Name="Enemy3" Source="/Imgs/placeholder.jpg" Width="180" Height="180" Margin="10"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="AttackBtn" Content="Атаковать" Width="70" Height="30" Margin="10" Click="AttackBtn_Click"/>
+                <Button x:Name="DefendBtn" Content="Защищаться" Width="70" Height="30" Margin="10" Click="DefendBtn_Click"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>
