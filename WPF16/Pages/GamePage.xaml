@@ -19,6 +19,14 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="120"></RowDefinition>
         </Grid.RowDefinitions>
+        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="#eeeefc"/>
+        <Border Grid.Row="1" Grid.Column="0" Background="#f8eefc"/>
+        <Border Grid.Row="1" Grid.Column="1" Background="#fceef1"/>
+        <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="#fcfcee"/>
+        <Border Grid.Row="3" Grid.Column="0" Background="#eefcfc"/>
+        <Border Grid.Row="3" Grid.Column="1" Background="#eefcef"/>
+
+
 
         <TextBlock Text="Крутая игра" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, 10, 10, 10" Grid.Row="0" Grid.ColumnSpan="2"/>
         <TextBlock x:Name="FloorTB" Text="Этаж:" Margin="10,0,10,0" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>

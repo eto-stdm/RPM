@@ -12,6 +12,7 @@ namespace ISIP123_Krasnova.Classes
         public double hp;
         public double attack;
         public double defense;
+
         protected Enemy(string name, double hp, double attack, double defense)
         {
             this.name = name;
@@ -19,14 +20,15 @@ namespace ISIP123_Krasnova.Classes
             this.attack = attack;
             this.defense = defense;
         }
-        public void DealDamage()
+        //public void DealDamage(Player player) { }
+
+        public void TakeDamage(double damage)
         {
-
-        }
-
-        public void TakeDamage()
-        {
-
+            if (GetType() == typeof(Slime))
+            {
+                damage -= 2;
+            }
+            hp -= damage;
         }
     }
 }

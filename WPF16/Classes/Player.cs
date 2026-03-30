@@ -35,14 +35,16 @@ namespace ISIP123_Krasnova.Classes
                    "**********************\n";
         }
 
-        public void DealDamage()
+        public double DealDamage(Enemy enemy)
         {
-
+            double damage = attack - (enemy.defense * 0.5); // защита противника снижает урон на 0.5 единиц
+            enemy.TakeDamage(damage);
+            return damage;
         }
 
-        public void TakeDamage()
+        public void TakeDamage(double damage)
         {
-            
+            hp -= damage;
         }
     }
 }

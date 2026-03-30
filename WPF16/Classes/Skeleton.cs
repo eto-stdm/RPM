@@ -14,5 +14,11 @@ namespace ISIP123_Krasnova.Classes
         {
             this.ignores_def = ignores_def;
         }
+
+        public double DealDamage(Player player)
+        {
+            double damage = attack;
+            return damage;
+        }
     }
 }
