@@ -9,13 +9,14 @@ namespace ISIP123_Krasnova.Classes
     public class Item
     {
         public Type_e Type;
+        public string Image;
         public string Name;
         public string Description;
         public int Num;
 
-        public Item(Type_e type, string name, string description, int num)
+        public Item(Type_e type, string image, string name, string description, int num)
         {
-            Type = type; Name = name; Description = description; Num = num;
+            Type = type; Image = image; Name = name; Description = description; Num = num;
         }
     }
 }

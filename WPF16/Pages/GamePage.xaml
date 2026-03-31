@@ -36,8 +36,8 @@
         <StackPanel Grid.Row="3" Grid.Column="0">
             <TextBlock x:Name="ItemsTB" Text="Вещи:" Margin="10,0,10,0" VerticalAlignment="Top"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Image x:Name="Item1" Source="/Imgs/placeholder.jpg" Width="80" Height="80" Margin="10" ToolTip="123"/>
-                <Image x:Name="Item2" Source="/Imgs/placeholder.jpg" Width="80" Height="80" Margin="10" ToolTip="456"/>
+                <Image x:Name="WeaponImg" Width="80" Height="80" Margin="10,10,50,10" ToolTip="123"/>
+                <Image x:Name="ArmorImg" Width="80" Height="80" Margin="10" ToolTip="456"/>
             </StackPanel>
         </StackPanel>
 
@@ -48,7 +48,7 @@
 
         <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Image x:Name="Enemy1" Source="/Imgs/placeholder.jpg" Width="150" Height="150" Margin="10" Visibility="Visible"/>
+                <Image x:Name="ItemImg" Width="150" Height="150" Margin="10" Visibility="Hidden"/>
                 <!-- <Image x:Name="Enemy2" Source="/Imgs/placeholder.jpg" Width="180" Height="180" Margin="10"/> -->
                 <!-- <Image x:Name="Enemy3" Source="/Imgs/placeholder.jpg" Width="180" Height="180" Margin="10"/> -->
             </StackPanel>

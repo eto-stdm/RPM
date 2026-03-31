@@ -139,5 +139,22 @@
   <ItemGroup>
     <Resource Include="Imgs\placeholder.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imgs\armor1.png" />
+    <Resource Include="Imgs\armor2.png" />
+    <Resource Include="Imgs\armor3.png" />
+    <Resource Include="Imgs\armor4.png" />
+    <Resource Include="Imgs\armor5.png" />
+    <Resource Include="Imgs\armor6.png" />
+    <Resource Include="Imgs\armor7.png" />
+    <Resource Include="Imgs\heal1.png" />
+    <Resource Include="Imgs\weapon1.png" />
+    <Resource Include="Imgs\weapon2.png" />
+    <Resource Include="Imgs\weapon3.png" />
+    <Resource Include="Imgs\weapon4.png" />
+    <Resource Include="Imgs\weapon5.png" />
+    <Resource Include="Imgs\weapon6.png" />
+    <Resource Include="Imgs\weapon7.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
