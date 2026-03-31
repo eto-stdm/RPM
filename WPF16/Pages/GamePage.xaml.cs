@@ -65,7 +65,7 @@ namespace WPF16.Pages
             LogTB.Text = "";
         }
 
-        int room(int room_count)
+        int room(int count)
         {
             FloorTB.Text = "Этаж: " + room_count;
             //if (room_count % 10 == 0) // каждые 10 шагов - босс
@@ -88,7 +88,7 @@ namespace WPF16.Pages
             room_type = RoomType.Chest;
             chest();
 
-            return room_count++;
+            return count + 1;
         }
 
         void fight()
