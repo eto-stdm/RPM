@@ -1,0 +1,1 @@
+﻿public enum RoomType { Null, Chest, EnemyCommon, EnemyBoss }

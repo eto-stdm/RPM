@@ -24,8 +24,14 @@ namespace WPF16.Pages
     public partial class GamePage : Page
     {
         int room_count = 1;
+        RoomType room_type = RoomType.Null;
+        Enemy cur_enemy = null;
+        Item cur_item = null;
+        int item_id = 99;
+
         int boss_count = 0;
         bool end_game = false;
+
         public Player player { set; get; } 
         public GamePage(Player player)
         {
@@ -35,11 +41,18 @@ namespace WPF16.Pages
             AddLog(Fumo.fumo);
             AddLog(player.Print());
 
-            do
-            {
-                if (end_game == true || boss_count >= 3) { end(player); break; }
-                room_count = room();
-            } while (true);
+            //room_count = room(room_count);
+
+            FloorTB.Text = "Этаж: " + room_count;
+            HPTB.Text = "Здоровье: " + player.hp;
+            RoomBtn.Visibility = Visibility.Visible;
+
+            //do
+            //{
+            //    if (end_game == true || boss_count >= 3) { end(player); break; }
+            //    FloorTB.Text = "Этаж: " + room_count;
+            //    HPTB.Text = "Здоровье: " + player.hp;
+            //} while (true);
         }
         private void AddLog(string addition)
         {
@@ -52,179 +65,127 @@ namespace WPF16.Pages
             LogTB.Text = "";
         }
 
-        int room()
+        int room(int room_count)
         {
-            if (room_count % 10 == 0) { fight(true); ClearLog(); } // каждые 10 шагов - босс
-            else if (RandomActions.FiftyChance() == 1) { chest(); } // 50/50 враг/сундук
-            else { fight(false); }
+            FloorTB.Text = "Этаж: " + room_count;
+            //if (room_count % 10 == 0) // каждые 10 шагов - босс
+            //{
+            //    room_type = RoomType.EnemyBoss;
+            //    fight();
+            //    ClearLog(); 
+            //}
+            //else if (RandomActions.FiftyChance() == 1) // 50/50 враг/сундук
+            //{
+            //    room_type = RoomType.Chest;
+            //    chest();
+            //}
+            //else
+            //{
+            //    room_type = RoomType.EnemyCommon;
+            //    fight();
+            //}
+
+            room_type = RoomType.Chest;
+            chest();
+
             return room_count++;
         }
 
-        void fight(bool is_boss)
+        void fight()
         {
-            if (is_boss)
+            if (room_type == RoomType.EnemyBoss)
             {
                 Enemy boss = RandomActions.GenerateBossEnemy(CreatedUnits.bosses);
                 AddLog($"Вы встретили босса {boss.name}!");
-                player_turn(boss, false);
-                CreatedUnits.bosses.Remove(boss);
-                boss_count += 1;
+                //player_turn(boss, false);
+                //CreatedUnits.bosses.Remove(boss);
+                //boss_count += 1;
             }
-            else
+            else if (room_type == RoomType.EnemyCommon)
             {
                 Enemy common = RandomActions.GenerateCommonEnemy();
                 AddLog($"Вы встретили {common.name}!");
-                player_turn(common, false);
+                //player_turn(common, false);
             }
-
         }
 
-        void player_turn(Enemy enemy, bool isfrozen) 
-        {
-            enemy.hp = Math.Abs(enemy.hp); // костыль - хп побеждённых мобов становится положительным
-            double def = 0;
-            bool flag_def = false;
-            AddLog("------------------------------");
-            if (isfrozen == false)
-            {
-                AddLog("Ваш ход:");
-                AddLog($"HP противника {enemy.hp}");
-
-                //AddLog("1. Атака");
-                //AddLog("Вы атакуете");
-                //AddLog($"Вы нанесли {player.DealDamage(enemy)} единиц урона");
-
-                //AddLog("2. Защита");
-                //AddLog("Вы защищаетесь");
-                if (RandomActions.HundredChance() <= 40)
-                {
-                    AddLog("Вы увернулись от вражеской атаки!");
-                    flag_def = true;
-                }
-                else
-                {
-                    def = 50 + (player.defense * 3); //гарантированные 50% + защита игрока * 3
-                    AddLog($"Сработал блок на {def}%");
-                    flag_def = false;
-                }
-            }
-            else { AddLog("Вы заморожены! Пропуск хода"); }
-
-
-            if (enemy.hp <= 0)
-            {
-                AddLog($"Вы одолели {enemy.name}");
-                AddLog("Переход в следующую комнату...");
-            }
-            else
-            {
-                AddLog("Теперь ходит ваш противник");
-                enemy_turn(enemy, flag_def, def);
-            }
-            AddLog("------------------------------");
-        }
-        void enemy_turn(Enemy enemy, bool flag_def, double def)
-        {
-            AddLog("------------------------------\nПротивник атакует!");
-            double damage = 0;
-            bool isfrozen = false;
-            if (flag_def == false)
-            {
-                if (enemy is Goblin)
-                {
-                    Goblin func_goblin = (Goblin)enemy;
-                    AddLog("Гоблин атакует!");
-                    damage = func_goblin.DealDamage(player, def);
-                }
-                if (enemy is Skeleton)
-                {
-                    Skeleton func_skele = (Skeleton)enemy;
-                    AddLog("Скелет пробивает насквозь!");
-                    damage = func_skele.DealDamage(player);
-                }
-                if (enemy.GetType() == typeof(Magician))
-                {
-                    Magician func_magic = (Magician)enemy;
-                    isfrozen = func_magic.FrozeOrNot();
-                    if (isfrozen) { AddLog("Маг замораживает вас!"); }
-                    damage = func_magic.DealDamage(player, def);
-                }
-                if (enemy.GetType() == typeof(Slime))
-                {
-                    Slime func_slime = (Slime)enemy;
-                    AddLog("Слайм прыгает на вас!");
-                    damage = func_slime.DealDamage(player, def);
-                }
-
-                player.TakeDamage(damage);
-                AddLog($"Противник наносит {damage} единиц урона");
-                AddLog($"Ваше HP: {player.hp}");
-            }
-            else { AddLog("Противник не попал по вам"); }
-
-            if (player.hp <= 0) { end_game = true; }
-            else
-            {
-                AddLog("Теперь ваш ход!");
-                player_turn(enemy, false);
-            }
-            AddLog("------------------------------");
-        }
-
-        void chest() 
+        void chest()
         {
             AddLog("------------------------------\nВы наткнулись на сундук");
-            int sel_item = RandomActions.ChestRandom(CreatedUnits.items);
-            AddLog($"Вы получили предмет '{CreatedUnits.items[sel_item].Name}'");
-            AddLog($"Описание предмета: {CreatedUnits.items[sel_item].Description}");
+
+            item_id = RandomActions.ChestRandom(CreatedUnits.items);
+            cur_item = CreatedUnits.items[item_id];
+
+            AddLog($"Вы нашли предмет '{cur_item.Name}'");
+            AddLog($"Описание предмета: {cur_item.Description}");
             AddLog($"Ваша текущая атака '{player.attack}' и защита '{player.defense}'");
-            if (CreatedUnits.items[sel_item].Type == Type_e.Heal)
+
+            if (cur_item.Type == Type_e.Heal)
             {
-                if (CreatedUnits.items.Count() - 1 == 1)
+                if (CreatedUnits.items.Count() - 1 == 1) // все предметы уже встретились
                 {
                     player.hp += 25;
                     AddLog("Ваш запас HP был пополнен на 1/4!");
+                    RoomBtn.Visibility = Visibility.Visible;
                 }
                 else
                 {
                     player.hp = 100;
                     AddLog("Ваше HP стало максимальным!");
+                    RoomBtn.Visibility = Visibility.Visible;
                 }
             }
             else
             {
-                AddLog("Хотите забрать предмет? (да/нет)");
-                string temp = Console.ReadLine();
-                if (temp == "да")
-                {
-                    if (CreatedUnits.items[sel_item].Type == Type_e.Weapon)
-                    { 
-                        player.weapon = CreatedUnits.items[sel_item];
-                        player.attack = CreatedUnits.items[sel_item].Num;
-                    }
-                    if (CreatedUnits.items[sel_item].Type == Type_e.Armor)
-                    {
-                        player.armor = CreatedUnits.items[sel_item];
-                        player.defense = CreatedUnits.items[sel_item].Num;
-                    }
-                }
-                CreatedUnits.items.Remove(CreatedUnits.items[sel_item]);
+                AddLog("Хотите забрать предмет?");
+                TakeItemBtn.Visibility = Visibility.Visible;
+                LeaveItemBtn.Visibility = Visibility.Visible;
             }
-            AddLog("Переход в следующую комнату...\n------------------------------");
         }
 
-        void end(Player player)
+        private void RoomBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (player.hp > 0) 
+            RoomBtn.Visibility = Visibility.Collapsed;
+            AddLog("Переход в следующую комнату...\n------------------------------");
+            room_count = room(room_count);
+        }
+
+        private void AttackBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //player_turn();
+        }
+
+        private void DefendBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TakeItemBtn_Click(object sender, RoutedEventArgs e)
+        {
+            TakeItemBtn.Visibility = Visibility.Collapsed;
+            LeaveItemBtn.Visibility = Visibility.Collapsed;
+            if (cur_item.Type == Type_e.Weapon)
             {
-                EndPage page = new EndPage(true);
-                NavigationService.Navigate(page);
+                AddLog($"Вы заменили {player.weapon.Name} на {cur_item.Name}");
+                player.weapon = cur_item;
+                player.attack = cur_item.Num;
             }
-            else 
+            if (cur_item.Type == Type_e.Armor)
             {
-                EndPage page = new EndPage(false);
-                NavigationService.Navigate(page);
+                AddLog($"Вы заменили {player.armor.Name} на {cur_item.Name}");
+                player.armor = cur_item;
+                player.defense = cur_item.Num;
             }
+            CreatedUnits.items.Remove(CreatedUnits.items[item_id]);
+            RoomBtn.Visibility = Visibility.Visible;
+        }
+
+        private void LeaveItemBtn_Click(object sender, RoutedEventArgs e)
+        {
+            TakeItemBtn.Visibility = Visibility.Collapsed;
+            LeaveItemBtn.Visibility = Visibility.Collapsed;
+            AddLog($"Вы решили не брать {cur_item.Name}.");
+            RoomBtn.Visibility = Visibility.Visible;
         }
     }
 }

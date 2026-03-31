@@ -19,20 +19,21 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="120"></RowDefinition>
         </Grid.RowDefinitions>
+        
         <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="#eeeefc"/>
         <Border Grid.Row="1" Grid.Column="0" Background="#f8eefc"/>
         <Border Grid.Row="1" Grid.Column="1" Background="#fceef1"/>
         <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="#fcfcee"/>
         <Border Grid.Row="3" Grid.Column="0" Background="#eefcfc"/>
         <Border Grid.Row="3" Grid.Column="1" Background="#eefcef"/>
-
+        
 
 
         <TextBlock Text="Крутая игра" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10, 10, 10, 10" Grid.Row="0" Grid.ColumnSpan="2"/>
         <TextBlock x:Name="FloorTB" Text="Этаж:" Margin="10,0,10,0" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
         <TextBlock x:Name="HPTB" Text="Здоровье:" Margin="10,0,10,0" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"/>
 
-        <StackPanel  Grid.Row="3" Grid.Column="0">
+        <StackPanel Grid.Row="3" Grid.Column="0">
             <TextBlock x:Name="ItemsTB" Text="Вещи:" Margin="10,0,10,0" VerticalAlignment="Top"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Image x:Name="Item1" Source="/Imgs/placeholder.jpg" Width="80" Height="80" Margin="10" ToolTip="123"/>
@@ -46,15 +47,18 @@
 
 
         <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
-            <StackPanel Orientation="Horizontal">
-                <Image x:Name="Enemy1" Source="/Imgs/placeholder.jpg" Width="180" Height="180" Margin="10"/>
-                <Image x:Name="Enemy2" Source="/Imgs/placeholder.jpg" Width="180" Height="180" Margin="10"/>
-                <Image x:Name="Enemy3" Source="/Imgs/placeholder.jpg" Width="180" Height="180" Margin="10"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Image x:Name="Enemy1" Source="/Imgs/placeholder.jpg" Width="150" Height="150" Margin="10" Visibility="Visible"/>
+                <!-- <Image x:Name="Enemy2" Source="/Imgs/placeholder.jpg" Width="180" Height="180" Margin="10"/> -->
+                <!-- <Image x:Name="Enemy3" Source="/Imgs/placeholder.jpg" Width="180" Height="180" Margin="10"/> -->
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="AttackBtn" Content="Атаковать" Width="70" Height="30" Margin="10" Click="AttackBtn_Click"/>
-                <Button x:Name="DefendBtn" Content="Защищаться" Width="70" Height="30" Margin="10" Click="DefendBtn_Click"/>
+                <Button x:Name="AttackBtn" Content="Атаковать" Width="70" Height="25" Margin="10,0,10,10" Click="AttackBtn_Click" Visibility="Collapsed"/>
+                <Button x:Name="DefendBtn" Content="Защищаться" Width="70" Height="25" Margin="10,0,10,10" Click="DefendBtn_Click" Visibility="Collapsed"/>
+                <Button x:Name="RoomBtn" Content="Войти в комнату" Width="100" Height="25" Margin="10,0,10,10" Click="RoomBtn_Click" Visibility="Collapsed"/>
+                <Button x:Name="TakeItemBtn" Content="Взять предмет" Width="100" Height="25" Margin="10,0,10,10" Click="TakeItemBtn_Click" Visibility="Collapsed"/>
+                <Button x:Name="LeaveItemBtn" Content="Оставить предмет" Width="110" Height="25" Margin="10,0,10,10" Click="LeaveItemBtn_Click" Visibility="Collapsed"/>
             </StackPanel>
         </StackPanel>
     </Grid>

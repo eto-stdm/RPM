@@ -70,6 +70,7 @@
     <Compile Include="Classes\Item.cs" />
     <Compile Include="Classes\Magician.cs" />
     <Compile Include="Classes\Player.cs" />
+    <Compile Include="Classes\RoomType.cs" />
     <Compile Include="Classes\Type_e.cs" />
     <Compile Include="Classes\RandomActions.cs" />
     <Compile Include="Classes\Skeleton.cs" />
