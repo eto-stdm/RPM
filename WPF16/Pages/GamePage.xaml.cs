@@ -48,9 +48,6 @@ namespace WPF16.Pages
             RoomBtn.Visibility = Visibility.Visible;
             WeaponImg.Source = new BitmapImage(new Uri(CreatedUnits.standard_weapon.Image, UriKind.Relative));
             ArmorImg.Source = new BitmapImage(new Uri(CreatedUnits.standard_armor.Image, UriKind.Relative));
-
-
-            //    if (end_game == true || boss_count >= 3) { end(player); break; }
         }
         private void AddLog(string addition)
         {
@@ -66,25 +63,22 @@ namespace WPF16.Pages
         private int room(int count)
         {
             FloorTB.Text = "Этаж: " + room_count;
-            //if (room_count % 10 == 0) // каждые 10 шагов - босс
-            //{
-            //    room_type = RoomType.EnemyBoss;
-            //    fight();
-            //    ClearLog(); 
-            //}
+            if (room_count % 10 == 0) // каждые 10 шагов - босс
+            {
+                room_type = RoomType.EnemyBoss;
+                fight();
+                ClearLog();
+            }
             //else if (RandomActions.FiftyChance() == 1) // 50/50 враг/сундук
             //{
             //    room_type = RoomType.Chest;
             //    chest();
             //}
-            //else
-            //{
-            //    room_type = RoomType.EnemyCommon;
-            //    fight();
-            //}
-
-            room_type = RoomType.Chest;
-            chest();
+            else
+            {
+                room_type = RoomType.EnemyCommon;
+                fight();
+            }
 
             return count + 1;
         }
@@ -118,8 +112,8 @@ namespace WPF16.Pages
             AddLog($"Описание предмета: {cur_item.Description}");
             AddLog($"Ваша текущая атака '{player.attack}' и защита '{player.defense}'");
             
-            ItemImg.Source = new BitmapImage(new Uri(cur_item.Image, UriKind.Relative));
-            ItemImg.Visibility = Visibility.Visible;
+            ObjectImg.Source = new BitmapImage(new Uri(cur_item.Image, UriKind.Relative));
+            ObjectImg.Visibility = Visibility.Visible;
 
             if (cur_item.Type == Type_e.Heal)
             {
@@ -135,13 +129,27 @@ namespace WPF16.Pages
                 }
                 await Task.Delay(1000);
                 RoomBtn.Visibility = Visibility.Visible;
-                ItemImg.Visibility = Visibility.Hidden;
+                ObjectImg.Visibility = Visibility.Hidden;
             }
             else
             {
                 AddLog("Хотите забрать предмет?\n------------------------------");
                 TakeItemBtn.Visibility = Visibility.Visible;
                 LeaveItemBtn.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void end(Player player)
+        {
+            if (player.hp > 0)
+            {
+                EndPage page = new EndPage(true);
+                NavigationService.Navigate(page);
+            }
+            else
+            {
+                EndPage page = new EndPage(false);
+                NavigationService.Navigate(page);
             }
         }
 
@@ -156,11 +164,13 @@ namespace WPF16.Pages
         private void AttackBtn_Click(object sender, RoutedEventArgs e)
         {
             //player_turn();
+            if (end_game == true || boss_count >= 3) { end(player); }
         }
 
         private void DefendBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            //player_turn();
+            if (end_game == true || boss_count >= 3) { end(player); }
         }
 
         private void TakeItemBtn_Click(object sender, RoutedEventArgs e)
@@ -191,7 +201,7 @@ namespace WPF16.Pages
             CreatedUnits.items.Remove(CreatedUnits.items[item_id]);
 
             RoomBtn.Visibility = Visibility.Visible;
-            ItemImg.Visibility = Visibility.Hidden;
+            ObjectImg.Visibility = Visibility.Hidden;
         }
 
         private void LeaveItemBtn_Click(object sender, RoutedEventArgs e)
@@ -202,7 +212,7 @@ namespace WPF16.Pages
             AddLog($"Вы решили не брать {cur_item.Name}.");
 
             RoomBtn.Visibility = Visibility.Visible;
-            ItemImg.Visibility = Visibility.Hidden;
+            ObjectImg.Visibility = Visibility.Hidden;
         }
     }
 }

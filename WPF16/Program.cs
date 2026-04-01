@@ -1,44 +1,4 @@
-﻿using ISIP123_Krasnova.Classes;
-using System;
-using System.Collections.Generic;
-using System.Windows.Navigation;
-using System.Xml.Linq;
-using WPF16.Classes;
-using WPF16.Pages;
-
-//int room_count = 1;
-//int boss_count = 0;
-//bool end_game = false;
-//string fumo = "\r\n\r\n                                                                                                    \r\n ...........................:...................................................................::. \r\n .................................:..................:.....:...:..-.:-:...::::.:::::.:............. \r\n .........:.................::.:.::.:..:..:...........::::...:::.:.......................:::......: \r\n ..............::...:...:.....................:..::.:......:........::..........   ...-:::.......:. \r\n .................    ...........::.:-.....:..:.......:....:...............:.....@*   ........::.:. \r\n ..........::..   .@@*=- ........::.......:..........:...:.........:........:-.  @@@@@   .::-:.::.- \r\n ......:...   *@@+.   .....:::..............:.....:....:....::..:.....:....... .-.. .#@@@   ..:.:.: \r\n .......   @@%.         .....:::..:..:..:..:..:.......:.:.-...:...........:...-..       .%@@   -::- \r\n .:... .%@#     . @@@@@-...-...:............:....:................:....... ..+.:@@@@@@@@.  +@@. ... \r\n ..  :@@    .....       ........::::........:..........:..::..:.....:... .-+-:+.        .... .*@=   \r\n   ..                   ........:....:.:..........:.........::.:....   ++=-::...:: .                \r\n .@@@@@@@@@@@@@@@@@@@@=           .. ...:......:..:..:.....:...      ..              *@@@@@@@@@@@@@*\r\n @@@.      @* .    ..+@@@@@@@@@@@@ .:.:......:....:...:.......-=@@@@@@@@@@@@@@@@@@@@@@@@+:.      @  \r\n # .@@@@@@@#--*-##*%+**===*===--@@ ......:.............:=----=: .@@        @%#**@+**#**+*+****:-@@  \r\n :. :@:..*=+=:*::+===*++#:-:-..@@  ............................. @@@@@@@@@@#=+==*+#*%*=#@**+--+@@   \r\n ..   @@@#.  .+%-:=..==:*  .@@@@  ..............................   @@@*---***+##=#++==+-*-.#@@@#    \r\n :.       @@@@@@@@@@@@@@@@@@=    ................................    :@@@@@@@@@*@@@@@@@@@@@@     .= \r\n +*......                     ...........................:....:...:.         @@@@@@.         ....:= \r\n +**+.......................................................................        ..........:--*+ \r\n    :-=......................................................................................:----- \r\n.@@=        .........................*@.:..           ....-.@.............::....::........--==+-.   \r\n =*@@@@@@@#       ......................:..@#@@@@@@@@:% : ...........................:.         .*%.\r\n @@@@@@##@@@@@#*@#.---:::::.:::-:.                     ....................::..::::-...@@@@@@@@=  @ \r\n ..  ..%@:..:@@@@        ....-.   .%@@@@@@@@@#...                        .-*+++--:.            .@@@ \r\n  .#@.   ..      #@@@@@        %@@@@@#****#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+         *@@@@@@@%=+=.    \r\n                      .=@@@@@@@+*                                       .=@@@@@@@@#:      .         \r\n\r\n";
-
-//Player play = start();
-
-//do
-//{
-//    if (end_game == true || boss_count >= 3) { end(); break; }
-//    room();
-//} while (true);
-
-//Player start()
-//{
-//    Console.WriteLine(fumo);
-//    Console.Write("Выберите имя игрока: ");
-//    string n = Console.ReadLine();
-//    Player play = new Player(n, 1000, i_weapon_def.Num, i_armor_def.Num, i_weapon_def, i_armor_def);
-//    play.Print();
-//    return play;
-//}
-
-//void room()
-//{
-//    if (room_count % 10 == 0) { fight(true); } // каждые 10 шагов - босс
-//    else if (RandomActions.FiftyChance() == 1) { chest(); } // 50/50 враг/сундук
-//    else { fight(false); }
-
-//    room_count += 1;
-//}
-
-//void fight(bool is_boss)
+﻿//void fight(bool is_boss)
 //{
 //    if (is_boss)
 //    {
@@ -162,45 +122,6 @@ using WPF16.Pages;
 //    }
 //    Console.WriteLine("------------------------------");
 //}
-//void chest()
-//{
-//    Console.WriteLine("------------------------------\nВы наткнулись на сундук");
-//    int sel_item = RandomActions.ChestRandom(items);
-//    Console.WriteLine($"Вы получили предмет '{items[sel_item].Name}'");
-//    Console.WriteLine($"Описание предмета: {items[sel_item].Description}");
-//    Console.WriteLine($"Ваша текущая атака '{play.attack}' и защита '{play.defense}'");
-//    if (items[sel_item].Type == Type_e.Heal)
-//    {
-//        if (items.Count() - 1 == 1)
-//        {
-//            play.hp += 25;
-//            Console.WriteLine("Ваш запас HP был пополнен на 1/4!");
-//        }
-//        else
-//        {
-//            play.hp = 100;
-//            Console.WriteLine("Ваше HP стало максимальным!");
-//        }
-//    }
-//    else
-//    {
-//        Console.WriteLine("Хотите забрать предмет? (да/нет)");
-//        string temp = Console.ReadLine();
-//        if (temp == "да")
-//        {
-//            if (items[sel_item].Type == Type_e.Weapon) { play.weapon = items[sel_item]; play.attack = items[sel_item].Num; }
-//            if (items[sel_item].Type == Type_e.Armor) { play.armor = items[sel_item]; play.defense = items[sel_item].Num; }
-//        }
-//        items.Remove(items[sel_item]);
-//    }
-//    Console.WriteLine("Переход в следующую комнату...\n------------------------------");
-//}
-//void end()
-//{
-//    if (play.hp > 0) { Console.WriteLine("Вы настоящий герой!\nВы победили всех боссов!\n:)"); }
-//    else { Console.WriteLine("К сожалению, вы проиграли в этой битве.\nПостарайтесь получше в следующий раз!"); }
-//}
-
 
 
 
@@ -300,60 +221,4 @@ using WPF16.Pages;
 //        //player_turn(enemy, false);
 //    }
 //    AddLog("------------------------------");
-//}
-
-//void chest()
-//{
-//    AddLog("------------------------------\nВы наткнулись на сундук");
-//    int sel_item = RandomActions.ChestRandom(CreatedUnits.items);
-//    AddLog($"Вы получили предмет '{CreatedUnits.items[sel_item].Name}'");
-//    AddLog($"Описание предмета: {CreatedUnits.items[sel_item].Description}");
-//    AddLog($"Ваша текущая атака '{player.attack}' и защита '{player.defense}'");
-//    if (CreatedUnits.items[sel_item].Type == Type_e.Heal)
-//    {
-//        if (CreatedUnits.items.Count() - 1 == 1)
-//        {
-//            player.hp += 25;
-//            AddLog("Ваш запас HP был пополнен на 1/4!");
-//        }
-//        else
-//        {
-//            player.hp = 100;
-//            AddLog("Ваше HP стало максимальным!");
-//        }
-//    }
-//    else
-//    {
-//        AddLog("Хотите забрать предмет? (да/нет)");
-//        string temp = Console.ReadLine();
-//        if (temp == "да")
-//        {
-//            if (CreatedUnits.items[sel_item].Type == Type_e.Weapon)
-//            {
-//                player.weapon = CreatedUnits.items[sel_item];
-//                player.attack = CreatedUnits.items[sel_item].Num;
-//            }
-//            if (CreatedUnits.items[sel_item].Type == Type_e.Armor)
-//            {
-//                player.armor = CreatedUnits.items[sel_item];
-//                player.defense = CreatedUnits.items[sel_item].Num;
-//            }
-//        }
-//        CreatedUnits.items.Remove(CreatedUnits.items[sel_item]);
-//    }
-//    AddLog("Переход в следующую комнату...\n------------------------------");
-//}
-
-//void end(Player player)
-//{
-//    if (player.hp > 0)
-//    {
-//        EndPage page = new EndPage(true);
-//        NavigationService.Navigate(page);
-//    }
-//    else
-//    {
-//        EndPage page = new EndPage(false);
-//        NavigationService.Navigate(page);
-//    }
 //}

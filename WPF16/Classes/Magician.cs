@@ -10,8 +10,8 @@ namespace ISIP123_Krasnova.Classes
     public class Magician : Enemy
     {
         public double froze;
-        public Magician(string name, double hp, double attack, double defense, double froze)
-            : base(name, hp, attack, defense)
+        public Magician(string image, string name, double hp, double attack, double defense, double froze)
+            : base(image, name, hp, attack, defense)
         {
             this.froze = froze;
         }

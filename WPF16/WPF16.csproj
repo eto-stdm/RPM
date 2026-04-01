@@ -156,5 +156,15 @@
     <Resource Include="Imgs\weapon6.png" />
     <Resource Include="Imgs\weapon7.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imgs\goblin.png" />
+    <Resource Include="Imgs\goblinboss.png" />
+    <Resource Include="Imgs\magician.png" />
+    <Resource Include="Imgs\magicianboss.png" />
+    <Resource Include="Imgs\skeleton.png" />
+    <Resource Include="Imgs\skeletonboss.png" />
+    <Resource Include="Imgs\slime.png" />
+    <Resource Include="Imgs\slimeboss.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

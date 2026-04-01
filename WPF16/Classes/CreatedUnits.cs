@@ -32,10 +32,10 @@ namespace WPF16.Classes
 
         public static List<Enemy> bosses = new List<Enemy>
         { 
-            new Goblin("Большой гоблин", (25 * 2), (2 * 1.5), (2 * 1.2), (10 * 2)),
-            new Skeleton("Древний скелет", (35 * 2), (3 * 1.3), (2 * 1.4), true),
-            new Magician("Архимаг 'Геннадий'", (32 * 2), (3.5 * 1.6), (3 * 1.1), (10 * 2)),
-            new Slime("Большой слайм", (27 * 2), (2.5 * 1.7), (0.1 * 1.5)),
+            new Goblin("/Imgs/goblinboss.png", "Большой гоблин", (25 * 2), (2 * 1.5), (2 * 1.2), (10 * 2)),
+            new Skeleton("/Imgs/skeletonboss.png", "Древний скелет", (35 * 2), (3 * 1.3), (2 * 1.4), true),
+            new Magician("/Imgs/magicianboss.png", "Архимаг 'Геннадий'", (32 * 2), (3.5 * 1.6), (3 * 1.1), (10 * 2)),
+            new Slime("/Imgs/slimeboss.png", "Большой слайм", (27 * 2), (2.5 * 1.7), (0.1 * 1.5)),
         };
     }
 }

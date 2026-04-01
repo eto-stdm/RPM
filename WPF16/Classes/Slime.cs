@@ -9,8 +9,8 @@ namespace ISIP123_Krasnova.Classes
 {
     public class Slime : Enemy
     {
-        public Slime(string name, double hp, double attack, double defense)
-            : base(name, hp, attack, defense) { }
+        public Slime(string image, string name, double hp, double attack, double defense)
+            : base(image, name, hp, attack, defense) { }
 
         public double DealDamage(Player player, double def)
         {

@@ -8,13 +8,15 @@ namespace ISIP123_Krasnova.Classes
 {
     public class Enemy
     {
+        public string image;
         public string name;
         public double hp;
         public double attack;
         public double defense;
 
-        protected Enemy(string name, double hp, double attack, double defense)
+        protected Enemy(string image, string name, double hp, double attack, double defense)
         {
+            this.image = image;
             this.name = name;
             this.hp = hp;
             this.attack = attack;
