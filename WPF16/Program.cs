@@ -131,50 +131,7 @@
 
 
 
-//void player_turn(Enemy enemy, bool isfrozen)
-//{
-//    enemy.hp = Math.Abs(enemy.hp); // костыль - хп побеждённых мобов становится положительным
-//    double def = 0;
-//    bool flag_def = false;
-//    AddLog("------------------------------");
-//    if (isfrozen == false)
-//    {
-//        AddLog("Ваш ход:");
-//        AddLog($"HP противника {enemy.hp}");
 
-//        //AddLog("1. Атака");
-//        //AddLog("Вы атакуете");
-//        //AddLog($"Вы нанесли {player.DealDamage(enemy)} единиц урона");
-
-//        //AddLog("2. Защита");
-//        //AddLog("Вы защищаетесь");
-//        if (RandomActions.HundredChance() <= 40)
-//        {
-//            AddLog("Вы увернулись от вражеской атаки!");
-//            flag_def = true;
-//        }
-//        else
-//        {
-//            def = 50 + (player.defense * 3); //гарантированные 50% + защита игрока * 3
-//            AddLog($"Сработал блок на {def}%");
-//            flag_def = false;
-//        }
-//    }
-//    else { AddLog("Вы заморожены! Пропуск хода"); }
-
-
-//    if (enemy.hp <= 0)
-//    {
-//        AddLog($"Вы одолели {enemy.name}");
-//        AddLog("Переход в следующую комнату...");
-//    }
-//    else
-//    {
-//        AddLog("Теперь ходит ваш противник");
-//        enemy_turn(enemy, flag_def, def);
-//    }
-//    AddLog("------------------------------");
-//}
 //void enemy_turn(Enemy enemy, bool flag_def, double def)
 //{
 //    AddLog("------------------------------\nПротивник атакует!");
