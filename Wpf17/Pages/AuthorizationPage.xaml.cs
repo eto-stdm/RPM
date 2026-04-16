@@ -24,5 +24,24 @@ namespace Wpf17.Pages
         {
             InitializeComponent();
         }
+
+        private void RedirectBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new RegistrationPage());
+        }
+
+        private void AuthorizBtn_Click(object sender, RoutedEventArgs e)
+        {
+            List<User> users = Core.Context.User.ToList();
+
+            User curruser = users.FirstOrDefault(u => u.Login == LoginTB.Text);
+            if (curruser != null && curruser.Password == PasswordTB.Text)
+            {
+                State.CurrentUserID = curruser.UserID;
+                MessageBox.Show($"Вы вошли как {curruser.Role.Name}");
+                NavigationService.Navigate(new StartPage());
+            }
+            else { MessageBox.Show("Неправильный логин или пароль"); }
+        }
     }
 }

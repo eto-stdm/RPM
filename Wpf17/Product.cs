@@ -19,6 +19,7 @@ namespace Wpf17
         {
             this.ProductCart = new HashSet<ProductCart>();
             this.ProductOrder = new HashSet<ProductOrder>();
+            this.Rating = new HashSet<Rating>();
         }
     
         public int ProductID { get; set; }
@@ -27,16 +28,16 @@ namespace Wpf17
         public string Description { get; set; }
         public Nullable<int> DiscountID { get; set; }
         public int ManufacturerID { get; set; }
-        public int RatingID { get; set; }
         public int ProductTypeID { get; set; }
     
         public virtual Discount Discount { get; set; }
         public virtual Manufacturer Manufacturer { get; set; }
         public virtual ProductType ProductType { get; set; }
-        public virtual Rating Rating { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductCart> ProductCart { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductOrder> ProductOrder { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Rating> Rating { get; set; }
     }
 }

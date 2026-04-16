@@ -4,22 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="77a41558633f489a9e3c1824f2330b17" Name="Diagram1">
-        <EntityTypeShape EntityType="nogotochkiModel.Cart" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="nogotochkiModel.Discount" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="nogotochkiModel.Manufacturer" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="nogotochkiModel.Order" Width="1.5" PointX="3" PointY="15.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="nogotochkiModel.PaymentType" Width="1.5" PointX="3.75" PointY="12.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="nogotochkiModel.Product" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="nogotochkiModel.ProductCart" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="nogotochkiModel.ProductOrder" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="nogotochkiModel.ProductType" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="nogotochkiModel.Rating" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="nogotochkiModel.Record" Width="1.5" PointX="6" PointY="15" IsExpanded="true" />
-        <EntityTypeShape EntityType="nogotochkiModel.Role" Width="1.5" PointX="1.5" PointY="19.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="nogotochkiModel.ServiceType" Width="1.5" PointX="3.75" PointY="19" IsExpanded="true" />
-        <EntityTypeShape EntityType="nogotochkiModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="nogotochkiModel.User" Width="1.5" PointX="0.75" PointY="14.75" IsExpanded="true" />
+      <Diagram DiagramId="10fe4e0e3cc64db2a78ac2a3a930995c" Name="Diagram1">
+        <EntityTypeShape EntityType="nogotochkiModel.Cart" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="nogotochkiModel.Discount" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="nogotochkiModel.Manufacturer" Width="1.5" PointX="0.75" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="nogotochkiModel.Order" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="nogotochkiModel.PaymentType" Width="1.5" PointX="3" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="nogotochkiModel.Product" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="nogotochkiModel.ProductCart" Width="1.5" PointX="7.5" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="nogotochkiModel.ProductOrder" Width="1.5" PointX="7.5" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="nogotochkiModel.ProductType" Width="1.5" PointX="0.75" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="nogotochkiModel.Rating" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="nogotochkiModel.Record" Width="1.5" PointX="5.25" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="nogotochkiModel.Role" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="nogotochkiModel.ServiceType" Width="1.5" PointX="3" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="nogotochkiModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="nogotochkiModel.User" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
         <AssociationConnector Association="nogotochkiModel.FK_Cart_User" ManuallyRouted="false" />
         <AssociationConnector Association="nogotochkiModel.FK_ProductCart_Cart" ManuallyRouted="false" />
         <AssociationConnector Association="nogotochkiModel.FK_Product_Discount" ManuallyRouted="false" />
@@ -28,9 +28,10 @@
         <AssociationConnector Association="nogotochkiModel.FK_ProductOrder_Order" ManuallyRouted="false" />
         <AssociationConnector Association="nogotochkiModel.FK_Record_PaymentType" ManuallyRouted="false" />
         <AssociationConnector Association="nogotochkiModel.FK_Product_ProductType" ManuallyRouted="false" />
-        <AssociationConnector Association="nogotochkiModel.FK_Product_Rating" ManuallyRouted="false" />
         <AssociationConnector Association="nogotochkiModel.FK_ProductCart_Product" ManuallyRouted="false" />
         <AssociationConnector Association="nogotochkiModel.FK_ProductOrder_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="nogotochkiModel.FK_Rating_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="nogotochkiModel.FK_Rating_User" ManuallyRouted="false" />
         <AssociationConnector Association="nogotochkiModel.FK_Record_ServiceType" ManuallyRouted="false" />
         <AssociationConnector Association="nogotochkiModel.FK_Record_User" ManuallyRouted="false" />
         <AssociationConnector Association="nogotochkiModel.FK_Record_User1" ManuallyRouted="false" />

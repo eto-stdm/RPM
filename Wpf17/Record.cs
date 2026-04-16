@@ -22,6 +22,7 @@ namespace Wpf17
         public decimal Price { get; set; }
         public int PaymentTypeID { get; set; }
         public string Comment { get; set; }
+        public bool IsDone { get; set; }
     
         public virtual PaymentType PaymentType { get; set; }
         public virtual ServiceType ServiceType { get; set; }

@@ -53,7 +53,6 @@
           <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="DiscountID" Type="int" />
           <Property Name="ManufacturerID" Type="int" Nullable="false" />
-          <Property Name="RatingID" Type="int" Nullable="false" />
           <Property Name="ProductTypeID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductCart">
@@ -81,14 +80,16 @@
             <PropertyRef Name="ProductTypeID" />
           </Key>
           <Property Name="ProductTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="Rating">
           <Key>
-            <PropertyRef Name="RatingID" />
+            <PropertyRef Name="ProductID" />
+            <PropertyRef Name="UserID" />
           </Key>
-          <Property Name="RatingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Value" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Value" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Record">
           <Key>
@@ -102,13 +103,14 @@
           <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="PaymentTypeID" Type="int" Nullable="false" />
           <Property Name="Comment" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="IsDone" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="RoleID" />
           </Key>
           <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Role" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="ServiceType">
           <Key>
@@ -201,18 +203,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Product_Rating">
-          <End Role="Rating" Type="Self.Rating" Multiplicity="1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rating">
-              <PropertyRef Name="RatingID" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="RatingID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ProductCart_Cart">
           <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
           <End Role="ProductCart" Type="Self.ProductCart" Multiplicity="*" />
@@ -258,6 +248,30 @@
             </Principal>
             <Dependent Role="ProductOrder">
               <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rating_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Rating" Type="Self.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rating_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Rating" Type="Self.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -357,10 +371,6 @@
             <End Role="ProductType" EntitySet="ProductType" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
-          <AssociationSet Name="FK_Product_Rating" Association="Self.FK_Product_Rating">
-            <End Role="Rating" EntitySet="Rating" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
           <AssociationSet Name="FK_ProductCart_Cart" Association="Self.FK_ProductCart_Cart">
             <End Role="Cart" EntitySet="Cart" />
             <End Role="ProductCart" EntitySet="ProductCart" />
@@ -376,6 +386,14 @@
           <AssociationSet Name="FK_ProductOrder_Product" Association="Self.FK_ProductOrder_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="ProductOrder" EntitySet="ProductOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rating_Product" Association="Self.FK_Rating_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Rating" EntitySet="Rating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rating_User" Association="Self.FK_Rating_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Rating" EntitySet="Rating" />
           </AssociationSet>
           <AssociationSet Name="FK_Record_PaymentType" Association="Self.FK_Record_PaymentType">
             <End Role="PaymentType" EntitySet="PaymentType" />
@@ -458,14 +476,13 @@
           <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DiscountID" Type="Int32" />
           <Property Name="ManufacturerID" Type="Int32" Nullable="false" />
-          <Property Name="RatingID" Type="Int32" Nullable="false" />
           <Property Name="ProductTypeID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Discount" Relationship="Self.FK_Product_Discount" FromRole="Product" ToRole="Discount" />
           <NavigationProperty Name="Manufacturer" Relationship="Self.FK_Product_Manufacturer" FromRole="Product" ToRole="Manufacturer" />
           <NavigationProperty Name="ProductType" Relationship="Self.FK_Product_ProductType" FromRole="Product" ToRole="ProductType" />
-          <NavigationProperty Name="Rating" Relationship="Self.FK_Product_Rating" FromRole="Product" ToRole="Rating" />
           <NavigationProperty Name="ProductCart" Relationship="Self.FK_ProductCart_Product" FromRole="Product" ToRole="ProductCart" />
           <NavigationProperty Name="ProductOrder" Relationship="Self.FK_ProductOrder_Product" FromRole="Product" ToRole="ProductOrder" />
+          <NavigationProperty Name="Rating" Relationship="Self.FK_Rating_Product" FromRole="Product" ToRole="Rating" />
         </EntityType>
         <EntityType Name="ProductCart">
           <Key>
@@ -496,16 +513,19 @@
             <PropertyRef Name="ProductTypeID" />
           </Key>
           <Property Name="ProductTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Product_ProductType" FromRole="ProductType" ToRole="Product" />
         </EntityType>
         <EntityType Name="Rating">
           <Key>
-            <PropertyRef Name="RatingID" />
+            <PropertyRef Name="ProductID" />
+            <PropertyRef Name="UserID" />
           </Key>
-          <Property Name="RatingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Value" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Rating" FromRole="Rating" ToRole="Product" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Rating_Product" FromRole="Rating" ToRole="Product" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Rating_User" FromRole="Rating" ToRole="User" />
         </EntityType>
         <EntityType Name="Record">
           <Key>
@@ -519,6 +539,7 @@
           <Property Name="Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="PaymentTypeID" Type="Int32" Nullable="false" />
           <Property Name="Comment" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsDone" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="PaymentType" Relationship="Self.FK_Record_PaymentType" FromRole="Record" ToRole="PaymentType" />
           <NavigationProperty Name="ServiceType" Relationship="Self.FK_Record_ServiceType" FromRole="Record" ToRole="ServiceType" />
           <NavigationProperty Name="User" Relationship="Self.FK_Record_User" FromRole="Record" ToRole="User" />
@@ -529,7 +550,7 @@
             <PropertyRef Name="RoleID" />
           </Key>
           <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Role1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
         </EntityType>
         <EntityType Name="ServiceType">
@@ -565,6 +586,7 @@
           <Property Name="PhoneNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Cart" Relationship="Self.FK_Cart_User" FromRole="User" ToRole="Cart" />
           <NavigationProperty Name="Order" Relationship="Self.FK_Order_User" FromRole="User" ToRole="Order" />
+          <NavigationProperty Name="Rating" Relationship="Self.FK_Rating_User" FromRole="User" ToRole="Rating" />
           <NavigationProperty Name="Record" Relationship="Self.FK_Record_User" FromRole="User" ToRole="Record" />
           <NavigationProperty Name="Record1" Relationship="Self.FK_Record_User1" FromRole="User" ToRole="Record" />
           <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
@@ -665,18 +687,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Product_Rating">
-          <End Role="Rating" Type="Self.Rating" Multiplicity="1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rating">
-              <PropertyRef Name="RatingID" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="RatingID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ProductCart_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="ProductCart" Type="Self.ProductCart" Multiplicity="*" />
@@ -698,6 +708,30 @@
             </Principal>
             <Dependent Role="ProductOrder">
               <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rating_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Rating" Type="Self.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rating_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Rating" Type="Self.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -797,10 +831,6 @@
             <End Role="ProductType" EntitySet="ProductType" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
-          <AssociationSet Name="FK_Product_Rating" Association="Self.FK_Product_Rating">
-            <End Role="Rating" EntitySet="Rating" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
           <AssociationSet Name="FK_ProductCart_Product" Association="Self.FK_ProductCart_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="ProductCart" EntitySet="ProductCart" />
@@ -808,6 +838,14 @@
           <AssociationSet Name="FK_ProductOrder_Product" Association="Self.FK_ProductOrder_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="ProductOrder" EntitySet="ProductOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rating_Product" Association="Self.FK_Rating_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Rating" EntitySet="Rating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rating_User" Association="Self.FK_Rating_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Rating" EntitySet="Rating" />
           </AssociationSet>
           <AssociationSet Name="FK_Record_ServiceType" Association="Self.FK_Record_ServiceType">
             <End Role="ServiceType" EntitySet="ServiceType" />
@@ -884,7 +922,6 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="DiscountID" ColumnName="DiscountID" />
                 <ScalarProperty Name="ManufacturerID" ColumnName="ManufacturerID" />
-                <ScalarProperty Name="RatingID" ColumnName="RatingID" />
                 <ScalarProperty Name="ProductTypeID" ColumnName="ProductTypeID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -920,7 +957,8 @@
           <EntitySetMapping Name="Rating">
             <EntityTypeMapping TypeName="nogotochkiModel.Rating">
               <MappingFragment StoreEntitySet="Rating">
-                <ScalarProperty Name="RatingID" ColumnName="RatingID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -936,6 +974,7 @@
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="PaymentTypeID" ColumnName="PaymentTypeID" />
                 <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="IsDone" ColumnName="IsDone" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -943,7 +982,7 @@
             <EntityTypeMapping TypeName="nogotochkiModel.Role">
               <MappingFragment StoreEntitySet="Role">
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
-                <ScalarProperty Name="Role1" ColumnName="Role" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

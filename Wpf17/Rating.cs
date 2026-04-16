@@ -14,16 +14,11 @@ namespace Wpf17
     
     public partial class Rating
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Rating()
-        {
-            this.Product = new HashSet<Product>();
-        }
+        public int ProductID { get; set; }
+        public int UserID { get; set; }
+        public int Value { get; set; }
     
-        public int RatingID { get; set; }
-        public decimal Value { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Product { get; set; }
+        public virtual Product Product { get; set; }
+        public virtual User User { get; set; }
     }
 }
