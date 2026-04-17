@@ -20,9 +20,15 @@ namespace Wpf17.Pages
     /// </summary>
     public partial class RegistrationPage : Page
     {
-        public RegistrationPage()
+        public int selRole { get; set; } = 1;
+        public bool isAdmin { get; set; } = false;
+        public RegistrationPage(int selRole, bool isAdmin)
         {
             InitializeComponent();
+            this.selRole = selRole;
+            this.isAdmin = isAdmin;
+            if (isAdmin) { RedirectBtn.Visibility = Visibility.Collapsed; }
+            else { RedirectBtn.Visibility = Visibility.Visible; }
         }
 
         private void RegistrBtn_Click(object sender, RoutedEventArgs e)
@@ -47,7 +53,7 @@ namespace Wpf17.Pages
                         {
                             Login = LoginTB.Text,
                             Password = PasswordTB.Text,
-                            RoleID = 1,
+                            RoleID = selRole,
                             Surname = SurnameTB.Text,
                             Name = NameTB.Text,
                             Patronym = PatronymTB.Text,
@@ -59,9 +65,17 @@ namespace Wpf17.Pages
 
                         users = Core.Context.User.ToList();
 
-                        State.CurrentUserID = newUser.UserID;
-                        MessageBox.Show($"Вы зарегистрировались как Пользователь!");
-                        NavigationService.Navigate(new StartPage());
+                        if (isAdmin)
+                        {
+                            MessageBox.Show($"Создан новый пользователь!");
+                            NavigationService.Navigate(new AdminPage());
+                        }
+                        else
+                        {
+                            State.CurrentUserID = newUser.UserID;
+                            MessageBox.Show($"Вы зарегистрировались как Пользователь!");
+                            NavigationService.Navigate(new StartPage());
+                        }
                     }
                     else { MessageBox.Show("Дата введена в некорректном формате!"); }
                 }

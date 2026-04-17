@@ -20,6 +20,7 @@ namespace Wpf17.Pages
     /// </summary>
     public partial class AuthorizationPage : Page
     {
+
         public AuthorizationPage()
         {
             InitializeComponent();
@@ -27,7 +28,7 @@ namespace Wpf17.Pages
 
         private void RedirectBtn_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new RegistrationPage());
+            NavigationService.Navigate(new RegistrationPage(1, false));
         }
 
         private void AuthorizBtn_Click(object sender, RoutedEventArgs e)
@@ -39,7 +40,15 @@ namespace Wpf17.Pages
             {
                 State.CurrentUserID = curruser.UserID;
                 MessageBox.Show($"Вы вошли как {curruser.Role.Name}");
-                NavigationService.Navigate(new StartPage());
+
+                switch(curruser.Role.Name)
+                {
+                    case "Клиент": NavigationService.Navigate(new StartPage()); break;
+                    case "Мастер": NavigationService.Navigate(new MasterPage()); break;
+                    case "Менеджер": NavigationService.Navigate(new ManagerPage()); break;
+                    case "Администратор": NavigationService.Navigate(new AdminPage()); break;
+                    default: MessageBox.Show("Роль пользователя неизвестна!"); break;
+                }
             }
             else { MessageBox.Show("Неправильный логин или пароль"); }
         }
