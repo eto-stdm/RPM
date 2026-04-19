@@ -9,6 +9,283 @@
       Title="ManagerPage">
 
     <Grid>
-        
+        <StackPanel>
+            <StackPanel>
+                <TextBlock Text="Страница менеджера" HorizontalAlignment="Center" FontSize="30" Margin="10"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="Списки:" FontSize="16" Margin="10"/>
+                <Button x:Name="RecordBtn" Content="Список записей" Margin="0, 10, 10, 10" Click="ListBtn_Click"/>
+                <Button x:Name="OrderBtn" Content="Список заказов" Margin="0, 10, 10, 10" Click="ListBtn_Click"/>
+                <Button x:Name="ProductsBtn" Content="Список товаров" Margin="0, 10, 10, 10" Click="ListBtn_Click"/>
+                <Button x:Name="ManufactorersBtn" Content="Список производителей" Margin="0, 10, 10, 10" Click="ListBtn_Click"/>
+                <Button x:Name="ProductTypesBtn" Content="Список типов товаров" Margin="0, 10, 10, 10" Click="ListBtn_Click"/>
+                <Button x:Name="ServiceTypesBtn" Content="Список услуг" Margin="0, 10, 10, 10" Click="ListBtn_Click"/>
+            </StackPanel>
+
+            <ListBox x:Name="RecordsLB" ItemsSource="{Binding Path=records}" Visibility="Collapsed" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalAlignment="Center" Margin="10" MinHeight="250" MaxHeight="250" Width="700">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Height="50" Width="640" Margin="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="540"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+
+                            <WrapPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="0">
+                                <TextBlock Text="{Binding RecordID, StringFormat=ID: {0}}" Margin="0, 10, 10, 0"/>
+                                <TextBlock Text="{Binding User.Login, StringFormat=Клиент: {0}}" Margin="0, 10, 10, 0"/>
+                                <TextBlock Text="{Binding User1.Login, StringFormat=Мастер: {0}}" Margin="0, 10, 10, 0"/>
+                                <TextBlock Text="{Binding DateTime, StringFormat=Дата: dd.mm.yyyy}" Margin="0, 10, 10, 0"/>
+                                <TextBlock Text="{Binding ServiceType.Name, StringFormat=Тип услуги: {0}}" Margin="0, 10, 10, 0"/>
+                                <TextBlock Text="{Binding PaymentType.Name, StringFormat=Тип оплаты: {0}}" Margin="0, 10, 10, 10"/>
+                            </WrapPanel>
+                            <StackPanel Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <Button x:Name="DeleteBtn" Content="Отменить запись" FontSize="9" Height="20" Click="DeleteButtons_Click"/>
+                                <Button x:Name="ChangeDateBtn" Content="Перенести запись" FontSize="9" Height="20" Click="ChangeButtons_Click"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+
+            <ListBox x:Name="OrdersLB" ItemsSource="{Binding Path=orders}" Visibility="Collapsed" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalAlignment="Center" Margin="10" MinHeight="250" MaxHeight="250" Width="700">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Height="50" Width="640" Margin="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="540"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+
+                            <WrapPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="0">
+                                <TextBlock Text="{Binding OrderID, StringFormat=ID: {0}}" Margin="0, 10, 10, 10"/>
+                                <TextBlock Text="{Binding User.Login, StringFormat=Клиент: {0}}" Margin="0, 10, 10, 10"/>
+                                <TextBlock Text="{Binding Date, StringFormat=Дата: dd.mm.yyyy}" Margin="0, 10, 10, 10"/>
+                                <TextBlock Text="{Binding TotalPrice, StringFormat=Цена: {0}}" Margin="0, 10, 10, 10"/>
+                                <TextBlock Text="{Binding IsDone, StringFormat=Выполнен?: {0}}" Margin="0, 10, 10, 10"/>
+                            </WrapPanel>
+                            <StackPanel Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <Button x:Name="CloseOrderBtn" Content="Закрыть заказ" FontSize="9" Height="20" Click="ChangeButtons_Click"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+
+            <ListBox x:Name="ProductsLB" ItemsSource="{Binding Path=products}" Visibility="Collapsed" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalAlignment="Center" Margin="10" MinHeight="250" MaxHeight="250" Width="700">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Height="80" Width="640" Margin="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="540"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+
+                            <WrapPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="0">
+                                <TextBlock Text="{Binding ProductID, StringFormat=ID: {0}}" Margin="0, 10, 10, 0"/>
+                                <TextBlock Text="{Binding Name, StringFormat=Название: {0}}" Margin="0, 10, 10, 0"/>
+                                <TextBlock Text="{Binding Price, StringFormat=Цена: {0}}" Margin="0, 10, 10, 0"/>
+                                <TextBlock Text="{Binding Description, StringFormat=Описание: {0}}" Margin="0, 10, 10, 0"/>
+                                <TextBlock Text="{Binding Discount.Value, StringFormat=Размер скидки: {0}%}" Margin="0, 10, 10, 0"/>
+                                <TextBlock Text="{Binding Manufacturer.Name, StringFormat=Производитель: {0}}" Margin="0, 10, 10, 10"/>
+                                <TextBlock Text="{Binding ProductType.Name, StringFormat=Тип продукта: {0}}" Margin="0, 10, 10, 10"/>
+                            </WrapPanel>
+                            <StackPanel Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <Button x:Name="ChangeBtn" Content="Изменить товар" FontSize="9" Height="20" Click="ChangeButtons_Click"/>
+                                <Button x:Name="DeleteBtn" Content="Удалить товар" FontSize="9" Height="20" Click="DeleteButtons_Click"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+
+            <ListBox x:Name="ManufacturersLB" ItemsSource="{Binding Path=manufacturers}" Visibility="Collapsed" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalAlignment="Center" Margin="10" MinHeight="250" MaxHeight="250" Width="700">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Height="50" Width="640" Margin="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="520"/>
+                                <ColumnDefinition Width="110"/>
+                            </Grid.ColumnDefinitions>
+
+                            <WrapPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="0">
+                                <TextBlock Text="{Binding ManufacturerID, StringFormat=ID: {0}}" Margin="0, 10, 10, 10"/>
+                                <TextBlock Text="{Binding Name, StringFormat=Название: {0}}" Margin="0, 10, 10, 10"/>
+                            </WrapPanel>
+                            <StackPanel Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <Button x:Name="ChangeBtn" Content="Изменить производителя" FontSize="9" Height="20" Click="ChangeButtons_Click"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+
+            <ListBox x:Name="ProductTypesLB" ItemsSource="{Binding Path=productTypes}" Visibility="Collapsed" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalAlignment="Center" Margin="10" MinHeight="250" MaxHeight="250" Width="700">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Height="50" Width="640" Margin="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="540"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+
+                            <WrapPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="0">
+                                <TextBlock Text="{Binding ProductTypeID, StringFormat=ID: {0}}" Margin="0, 10, 10, 10"/>
+                                <TextBlock Text="{Binding Name, StringFormat=Название: {0}}" Margin="0, 10, 10, 10"/>
+                            </WrapPanel>
+                            <StackPanel Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <Button x:Name="ChangeBtn" Content="Изменить тип товара" FontSize="9" Height="20" Click="ChangeButtons_Click"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+
+            <ListBox x:Name="ServiceTypesLB" ItemsSource="{Binding Path=serviceTypes}" Visibility="Collapsed" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalAlignment="Center" Margin="10" MinHeight="250" MaxHeight="250" Width="700">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Height="50" Width="640" Margin="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="540"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+
+                            <WrapPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="0">
+                                <TextBlock Text="{Binding ServiceTypeID, StringFormat=ID: {0}}" Margin="0, 10, 10, 10"/>
+                                <TextBlock Text="{Binding Name, StringFormat=Название: {0}}" Margin="0, 10, 10, 10"/>
+                            </WrapPanel>
+                            <StackPanel Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <Button x:Name="ChangeBtn" Content="Изменить тип услуги" FontSize="9" Height="20" Click="ChangeButtons_Click"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+
+            <StackPanel x:Name="RecordSP" Visibility="Collapsed" VerticalAlignment="Center" Margin="10" MinHeight="250" MaxHeight="250" Width="700">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                    <TextBlock Text="Номер телефона клиента:" Margin="0,0,10,0"/>
+                    <ComboBox x:Name="RecordClient" Width="100" Height="20"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+                    <TextBlock Text="Логин мастера:" Margin="0,0,10,0"/>
+                    <ComboBox x:Name="RecordMaster" Width="100" Height="20"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10" ToolTip="Формат ввода: 5/3/2023 8:15:10 AM">
+                    <TextBlock Text="Дата и время записи:" Margin="0,0,10,0"/>
+                    <TextBox x:Name="RecordDateTime" Width="100" Height="20"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+                    <TextBlock Text="Тип услуги:" Margin="0,0,10,0"/>
+                    <ComboBox x:Name="RecordServiceType" Width="100" Height="20"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+                    <TextBlock Text="Цена:" Margin="0,0,10,0"/>
+                    <TextBox x:Name="RecordPrice" Width="100" Height="20"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+                    <TextBlock Text="Тип оплаты:" Margin="0,0,10,0"/>
+                    <ComboBox x:Name="RecordPaymentType" Width="100" Height="20"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+                    <TextBlock Text="Комментарий:" Margin="0,0,10,0"/>
+                    <TextBox x:Name="RecordComment" Width="100" Height="20"/>
+                </StackPanel>
+                <Button Content="Добавить запись" Width="110" Height="20" Click="AddEntry_Click"/>
+            </StackPanel>
+
+            <StackPanel x:Name="ProductSP" Visibility="Collapsed" VerticalAlignment="Center" Margin="10" MinHeight="250" MaxHeight="250" Width="700">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                    <TextBlock Text="Название:" Margin="0,0,10,0"/>
+                    <TextBox x:Name="ProductName" Width="100" Height="20"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+                    <TextBlock Text="Цена:" Margin="0,0,10,0"/>
+                    <TextBox x:Name="ProductPrice" Width="100" Height="20"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+                    <TextBlock Text="Описание:" Margin="0,0,10,0"/>
+                    <TextBox x:Name="ProductDescription" Width="100" Height="20"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+                    <TextBlock Text="Скидка:" Margin="0,0,10,0"/>
+                    <ComboBox x:Name="ProductDiscount" Width="100" Height="20"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+                    <TextBlock Text="Производитель:" Margin="0,0,10,0"/>
+                    <ComboBox x:Name="ProductManufacturer" Width="100" Height="20"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+                    <TextBlock Text="Тип продукта:" Margin="0,0,10,0"/>
+                    <ComboBox x:Name="ProductProductType" Width="100" Height="20"/>
+                </StackPanel>
+                <Button Content="Добавить продукт" Width="110" Height="20" Click="AddEntry_Click"/>
+            </StackPanel>
+
+            <StackPanel x:Name="ManufacturerSP" Visibility="Collapsed" VerticalAlignment="Center" Margin="10" MinHeight="250" MaxHeight="250" Width="700">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                    <TextBlock Text="Название:" Margin="0,0,10,0"/>
+                    <TextBox x:Name="ManufacturerName" Width="100" Height="20"/>
+                </StackPanel>
+                <Button Content="Добавить производителя" Width="110" Height="20" Click="AddEntry_Click"/>
+            </StackPanel>
+
+            <StackPanel x:Name="ProductTypeSP" Visibility="Collapsed" VerticalAlignment="Center" Margin="10" MinHeight="250" MaxHeight="250" Width="700">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                    <TextBlock Text="Название:" Margin="0,0,10,0"/>
+                    <TextBox x:Name="ProductTypeName" Width="100" Height="20"/>
+                </StackPanel>
+                <Button Content="Добавить тип товара" Width="110" Height="20" Click="AddEntry_Click"/>
+            </StackPanel>
+
+            <StackPanel x:Name="ServiceTypeSP" Visibility="Collapsed" VerticalAlignment="Center" Margin="10" MinHeight="250" MaxHeight="250" Width="700">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                    <TextBlock Text="Название:" Margin="0,0,10,0"/>
+                    <TextBox x:Name="ServiceTypeName" Width="100" Height="20"/>
+                </StackPanel>
+                <Button Content="Добавить тип услуги" Width="110" Height="20" Click="AddEntry_Click"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="AddRecordBtn" Content="Добавить запись" Height="20" Width="100" Margin="10,0" Visibility="Collapsed" Click="AddButtons_Click"/>
+                <Button x:Name="AddProductBtn" Content="Добавить продукт" Height="20" Width="110" Margin="10,0" Visibility="Collapsed" Click="AddButtons_Click"/>
+                <Button x:Name="AddManufacturerBtn" Content="Добавить производителя" Height="20" Width="150" Margin="10,0" Visibility="Collapsed" Click="AddButtons_Click"/>
+                <Button x:Name="AddProductTypeBtn" Content="Добавить тип товаров" Height="20" Width="140" Margin="10,0" Visibility="Collapsed" Click="AddButtons_Click"/>
+                <Button x:Name="AddServiceTypeBtn" Content="Добавить тип услуг" Height="20" Width="120" Margin="10,0" Visibility="Collapsed" Click="AddButtons_Click"/>
+
+                <Button x:Name="BackBtn" Content="К авторизации" Height="20" Width="100" Margin="10,0" Click="BackBtn_Click"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>
