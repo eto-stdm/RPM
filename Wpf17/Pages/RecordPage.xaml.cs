@@ -20,9 +20,11 @@ namespace Wpf17.Pages
     /// </summary>
     public partial class RecordPage : Page
     {
-        public RecordPage()
+        public ServiceType serviceType {  get; set; }
+        public RecordPage(ServiceType serviceType)
         {
             InitializeComponent();
+            this.serviceType = serviceType;
         }
     }
 }

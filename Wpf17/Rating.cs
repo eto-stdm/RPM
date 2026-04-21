@@ -14,6 +14,7 @@ namespace Wpf17
     
     public partial class Rating
     {
+        public int RatingID { get; set; }
         public int ProductID { get; set; }
         public int UserID { get; set; }
         public int Value { get; set; }

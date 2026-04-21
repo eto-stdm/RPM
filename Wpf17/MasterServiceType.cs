@@ -12,19 +12,21 @@ namespace Wpf17
     using System;
     using System.Collections.Generic;
     
-    public partial class ServiceType
+    public partial class MasterServiceType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ServiceType()
+        public MasterServiceType()
         {
-            this.MasterServiceType = new HashSet<MasterServiceType>();
+            this.Record = new HashSet<Record>();
         }
     
+        public int MasterServiceTypeID { get; set; }
+        public int MasterID { get; set; }
         public int ServiceTypeID { get; set; }
-        public string Name { get; set; }
-        public int Price { get; set; }
     
+        public virtual ServiceType ServiceType { get; set; }
+        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MasterServiceType> MasterServiceType { get; set; }
+        public virtual ICollection<Record> Record { get; set; }
     }
 }

@@ -24,13 +24,19 @@ namespace Wpf17.Pages
         {
             InitializeComponent();
 
-            List<ServiceType> serviceTypes = Core.Context.ServiceType.ToList();
-            ServiceTypesLB.ItemsSource = serviceTypes;
+ 
+            ServiceTypesLB.ItemsSource = Core.Context.ServiceType.ToList();
         }
 
         private void ServiceTypesLB_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            var selectService = ServiceTypesLB.SelectedItem as ServiceType;
 
+            if (selectService == null) return;
+
+            RecordPage page = new RecordPage(selectService);
+
+            NavigationService.Navigate(page);
         }
 
         private void ProductsBtn_Click(object sender, RoutedEventArgs e)

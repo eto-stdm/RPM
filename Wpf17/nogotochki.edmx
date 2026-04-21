@@ -27,6 +27,14 @@
           <Property Name="ManufacturerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
         </EntityType>
+        <EntityType Name="MasterServiceType">
+          <Key>
+            <PropertyRef Name="MasterServiceTypeID" />
+          </Key>
+          <Property Name="MasterServiceTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MasterID" Type="int" Nullable="false" />
+          <Property Name="ServiceTypeID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="OrderID" />
@@ -85,9 +93,9 @@
         </EntityType>
         <EntityType Name="Rating">
           <Key>
-            <PropertyRef Name="ProductID" />
-            <PropertyRef Name="UserID" />
+            <PropertyRef Name="RatingID" />
           </Key>
+          <Property Name="RatingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProductID" Type="int" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="Value" Type="int" Nullable="false" />
@@ -98,13 +106,19 @@
           </Key>
           <Property Name="RecordID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ClientID" Type="int" Nullable="false" />
-          <Property Name="MasterID" Type="int" Nullable="false" />
-          <Property Name="DateTime" Type="datetime" Nullable="false" />
-          <Property Name="ServiceTypeID" Type="int" Nullable="false" />
+          <Property Name="MasterSeviceTypeID" Type="int" Nullable="false" />
+          <Property Name="RecordTimeID" Type="int" Nullable="false" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="PaymentTypeID" Type="int" Nullable="false" />
           <Property Name="Comment" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="IsDone" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RecordTime">
+          <Key>
+            <PropertyRef Name="RecordTimeID" />
+          </Key>
+          <Property Name="RecordTimeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Value" Type="time" Precision="7" Nullable="false" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -119,6 +133,7 @@
           </Key>
           <Property Name="ServiceTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -153,6 +168,30 @@
             </Principal>
             <Dependent Role="Cart">
               <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MasterServiceType_ServiceType">
+          <End Role="ServiceType" Type="Self.ServiceType" Multiplicity="1" />
+          <End Role="MasterServiceType" Type="Self.MasterServiceType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceType">
+              <PropertyRef Name="ServiceTypeID" />
+            </Principal>
+            <Dependent Role="MasterServiceType">
+              <PropertyRef Name="ServiceTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MasterServiceType_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="MasterServiceType" Type="Self.MasterServiceType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="MasterServiceType">
+              <PropertyRef Name="MasterID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -276,6 +315,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Record_MasterServiceType">
+          <End Role="MasterServiceType" Type="Self.MasterServiceType" Multiplicity="1" />
+          <End Role="Record" Type="Self.Record" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterServiceType">
+              <PropertyRef Name="MasterServiceTypeID" />
+            </Principal>
+            <Dependent Role="Record">
+              <PropertyRef Name="MasterSeviceTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Record_PaymentType">
           <End Role="PaymentType" Type="Self.PaymentType" Multiplicity="1" />
           <End Role="Record" Type="Self.Record" Multiplicity="*" />
@@ -288,15 +339,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Record_ServiceType">
-          <End Role="ServiceType" Type="Self.ServiceType" Multiplicity="1" />
+        <Association Name="FK_Record_RecordTime">
+          <End Role="RecordTime" Type="Self.RecordTime" Multiplicity="1" />
           <End Role="Record" Type="Self.Record" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ServiceType">
-              <PropertyRef Name="ServiceTypeID" />
+            <Principal Role="RecordTime">
+              <PropertyRef Name="RecordTimeID" />
             </Principal>
             <Dependent Role="Record">
-              <PropertyRef Name="ServiceTypeID" />
+              <PropertyRef Name="RecordTimeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -309,18 +360,6 @@
             </Principal>
             <Dependent Role="Record">
               <PropertyRef Name="ClientID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Record_User1">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Record" Type="Self.Record" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Record">
-              <PropertyRef Name="MasterID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -340,6 +379,7 @@
           <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Discount" EntityType="Self.Discount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MasterServiceType" EntityType="Self.MasterServiceType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentType" EntityType="Self.PaymentType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
@@ -348,6 +388,7 @@
           <EntitySet Name="ProductType" EntityType="Self.ProductType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rating" EntityType="Self.Rating" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Record" EntityType="Self.Record" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RecordTime" EntityType="Self.RecordTime" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ServiceType" EntityType="Self.ServiceType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -355,6 +396,14 @@
           <AssociationSet Name="FK_Cart_User" Association="Self.FK_Cart_User">
             <End Role="User" EntitySet="User" />
             <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MasterServiceType_ServiceType" Association="Self.FK_MasterServiceType_ServiceType">
+            <End Role="ServiceType" EntitySet="ServiceType" />
+            <End Role="MasterServiceType" EntitySet="MasterServiceType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MasterServiceType_User" Association="Self.FK_MasterServiceType_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="MasterServiceType" EntitySet="MasterServiceType" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_User" Association="Self.FK_Order_User">
             <End Role="User" EntitySet="User" />
@@ -396,19 +445,19 @@
             <End Role="User" EntitySet="User" />
             <End Role="Rating" EntitySet="Rating" />
           </AssociationSet>
+          <AssociationSet Name="FK_Record_MasterServiceType" Association="Self.FK_Record_MasterServiceType">
+            <End Role="MasterServiceType" EntitySet="MasterServiceType" />
+            <End Role="Record" EntitySet="Record" />
+          </AssociationSet>
           <AssociationSet Name="FK_Record_PaymentType" Association="Self.FK_Record_PaymentType">
             <End Role="PaymentType" EntitySet="PaymentType" />
             <End Role="Record" EntitySet="Record" />
           </AssociationSet>
-          <AssociationSet Name="FK_Record_ServiceType" Association="Self.FK_Record_ServiceType">
-            <End Role="ServiceType" EntitySet="ServiceType" />
+          <AssociationSet Name="FK_Record_RecordTime" Association="Self.FK_Record_RecordTime">
+            <End Role="RecordTime" EntitySet="RecordTime" />
             <End Role="Record" EntitySet="Record" />
           </AssociationSet>
           <AssociationSet Name="FK_Record_User" Association="Self.FK_Record_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Record" EntitySet="Record" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Record_User1" Association="Self.FK_Record_User1">
             <End Role="User" EntitySet="User" />
             <End Role="Record" EntitySet="Record" />
           </AssociationSet>
@@ -447,6 +496,17 @@
           <Property Name="ManufacturerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Product_Manufacturer" FromRole="Manufacturer" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="MasterServiceType">
+          <Key>
+            <PropertyRef Name="MasterServiceTypeID" />
+          </Key>
+          <Property Name="MasterServiceTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MasterID" Type="Int32" Nullable="false" />
+          <Property Name="ServiceTypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ServiceType" Relationship="Self.FK_MasterServiceType_ServiceType" FromRole="MasterServiceType" ToRole="ServiceType" />
+          <NavigationProperty Name="User" Relationship="Self.FK_MasterServiceType_User" FromRole="MasterServiceType" ToRole="User" />
+          <NavigationProperty Name="Record" Relationship="Self.FK_Record_MasterServiceType" FromRole="MasterServiceType" ToRole="Record" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -520,9 +580,9 @@
         </EntityType>
         <EntityType Name="Rating">
           <Key>
-            <PropertyRef Name="ProductID" />
-            <PropertyRef Name="UserID" />
+            <PropertyRef Name="RatingID" />
           </Key>
+          <Property Name="RatingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProductID" Type="Int32" Nullable="false" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="Value" Type="Int32" Nullable="false" />
@@ -535,17 +595,24 @@
           </Key>
           <Property Name="RecordID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ClientID" Type="Int32" Nullable="false" />
-          <Property Name="MasterID" Type="Int32" Nullable="false" />
-          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ServiceTypeID" Type="Int32" Nullable="false" />
+          <Property Name="MasterSeviceTypeID" Type="Int32" Nullable="false" />
+          <Property Name="RecordTimeID" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="PaymentTypeID" Type="Int32" Nullable="false" />
           <Property Name="Comment" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IsDone" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="MasterServiceType" Relationship="Self.FK_Record_MasterServiceType" FromRole="Record" ToRole="MasterServiceType" />
           <NavigationProperty Name="PaymentType" Relationship="Self.FK_Record_PaymentType" FromRole="Record" ToRole="PaymentType" />
-          <NavigationProperty Name="ServiceType" Relationship="Self.FK_Record_ServiceType" FromRole="Record" ToRole="ServiceType" />
+          <NavigationProperty Name="RecordTime" Relationship="Self.FK_Record_RecordTime" FromRole="Record" ToRole="RecordTime" />
           <NavigationProperty Name="User" Relationship="Self.FK_Record_User" FromRole="Record" ToRole="User" />
-          <NavigationProperty Name="User1" Relationship="Self.FK_Record_User1" FromRole="Record" ToRole="User" />
+        </EntityType>
+        <EntityType Name="RecordTime">
+          <Key>
+            <PropertyRef Name="RecordTimeID" />
+          </Key>
+          <Property Name="RecordTimeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Record" Relationship="Self.FK_Record_RecordTime" FromRole="RecordTime" ToRole="Record" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -561,7 +628,8 @@
           </Key>
           <Property Name="ServiceTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Record" Relationship="Self.FK_Record_ServiceType" FromRole="ServiceType" ToRole="Record" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MasterServiceType" Relationship="Self.FK_MasterServiceType_ServiceType" FromRole="ServiceType" ToRole="MasterServiceType" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -587,10 +655,10 @@
           <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="PhoneNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Cart" Relationship="Self.FK_Cart_User" FromRole="User" ToRole="Cart" />
+          <NavigationProperty Name="MasterServiceType" Relationship="Self.FK_MasterServiceType_User" FromRole="User" ToRole="MasterServiceType" />
           <NavigationProperty Name="Order" Relationship="Self.FK_Order_User" FromRole="User" ToRole="Order" />
           <NavigationProperty Name="Rating" Relationship="Self.FK_Rating_User" FromRole="User" ToRole="Rating" />
           <NavigationProperty Name="Record" Relationship="Self.FK_Record_User" FromRole="User" ToRole="Record" />
-          <NavigationProperty Name="Record1" Relationship="Self.FK_Record_User1" FromRole="User" ToRole="Record" />
           <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
         </EntityType>
         <Association Name="FK_Cart_User">
@@ -638,6 +706,42 @@
             </Principal>
             <Dependent Role="Product">
               <PropertyRef Name="ManufacturerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MasterServiceType_ServiceType">
+          <End Role="ServiceType" Type="Self.ServiceType" Multiplicity="1" />
+          <End Role="MasterServiceType" Type="Self.MasterServiceType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceType">
+              <PropertyRef Name="ServiceTypeID" />
+            </Principal>
+            <Dependent Role="MasterServiceType">
+              <PropertyRef Name="ServiceTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MasterServiceType_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="MasterServiceType" Type="Self.MasterServiceType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="MasterServiceType">
+              <PropertyRef Name="MasterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Record_MasterServiceType">
+          <End Role="MasterServiceType" Type="Self.MasterServiceType" Multiplicity="1" />
+          <End Role="Record" Type="Self.Record" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterServiceType">
+              <PropertyRef Name="MasterServiceTypeID" />
+            </Principal>
+            <Dependent Role="Record">
+              <PropertyRef Name="MasterSeviceTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -737,15 +841,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Record_ServiceType">
-          <End Role="ServiceType" Type="Self.ServiceType" Multiplicity="1" />
+        <Association Name="FK_Record_RecordTime">
+          <End Role="RecordTime" Type="Self.RecordTime" Multiplicity="1" />
           <End Role="Record" Type="Self.Record" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ServiceType">
-              <PropertyRef Name="ServiceTypeID" />
+            <Principal Role="RecordTime">
+              <PropertyRef Name="RecordTimeID" />
             </Principal>
             <Dependent Role="Record">
-              <PropertyRef Name="ServiceTypeID" />
+              <PropertyRef Name="RecordTimeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -758,18 +862,6 @@
             </Principal>
             <Dependent Role="Record">
               <PropertyRef Name="ClientID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Record_User1">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Record" Type="Self.Record" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Record">
-              <PropertyRef Name="MasterID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -789,6 +881,7 @@
           <EntitySet Name="Cart" EntityType="Self.Cart" />
           <EntitySet Name="Discount" EntityType="Self.Discount" />
           <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" />
+          <EntitySet Name="MasterServiceType" EntityType="Self.MasterServiceType" />
           <EntitySet Name="Order" EntityType="Self.Order" />
           <EntitySet Name="PaymentType" EntityType="Self.PaymentType" />
           <EntitySet Name="Product" EntityType="Self.Product" />
@@ -797,6 +890,7 @@
           <EntitySet Name="ProductType" EntityType="Self.ProductType" />
           <EntitySet Name="Rating" EntityType="Self.Rating" />
           <EntitySet Name="Record" EntityType="Self.Record" />
+          <EntitySet Name="RecordTime" EntityType="Self.RecordTime" />
           <EntitySet Name="Role" EntityType="Self.Role" />
           <EntitySet Name="ServiceType" EntityType="Self.ServiceType" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
@@ -816,6 +910,18 @@
           <AssociationSet Name="FK_Product_Manufacturer" Association="Self.FK_Product_Manufacturer">
             <End Role="Manufacturer" EntitySet="Manufacturer" />
             <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MasterServiceType_ServiceType" Association="Self.FK_MasterServiceType_ServiceType">
+            <End Role="ServiceType" EntitySet="ServiceType" />
+            <End Role="MasterServiceType" EntitySet="MasterServiceType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MasterServiceType_User" Association="Self.FK_MasterServiceType_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="MasterServiceType" EntitySet="MasterServiceType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Record_MasterServiceType" Association="Self.FK_Record_MasterServiceType">
+            <End Role="MasterServiceType" EntitySet="MasterServiceType" />
+            <End Role="Record" EntitySet="Record" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_User" Association="Self.FK_Order_User">
             <End Role="User" EntitySet="User" />
@@ -849,15 +955,11 @@
             <End Role="User" EntitySet="User" />
             <End Role="Rating" EntitySet="Rating" />
           </AssociationSet>
-          <AssociationSet Name="FK_Record_ServiceType" Association="Self.FK_Record_ServiceType">
-            <End Role="ServiceType" EntitySet="ServiceType" />
+          <AssociationSet Name="FK_Record_RecordTime" Association="Self.FK_Record_RecordTime">
+            <End Role="RecordTime" EntitySet="RecordTime" />
             <End Role="Record" EntitySet="Record" />
           </AssociationSet>
           <AssociationSet Name="FK_Record_User" Association="Self.FK_Record_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Record" EntitySet="Record" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Record_User1" Association="Self.FK_Record_User1">
             <End Role="User" EntitySet="User" />
             <End Role="Record" EntitySet="Record" />
           </AssociationSet>
@@ -894,6 +996,15 @@
               <MappingFragment StoreEntitySet="Manufacturer">
                 <ScalarProperty Name="ManufacturerID" ColumnName="ManufacturerID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MasterServiceType">
+            <EntityTypeMapping TypeName="nogotochkiModel.MasterServiceType">
+              <MappingFragment StoreEntitySet="MasterServiceType">
+                <ScalarProperty Name="MasterServiceTypeID" ColumnName="MasterServiceTypeID" />
+                <ScalarProperty Name="MasterID" ColumnName="MasterID" />
+                <ScalarProperty Name="ServiceTypeID" ColumnName="ServiceTypeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -961,6 +1072,7 @@
           <EntitySetMapping Name="Rating">
             <EntityTypeMapping TypeName="nogotochkiModel.Rating">
               <MappingFragment StoreEntitySet="Rating">
+                <ScalarProperty Name="RatingID" ColumnName="RatingID" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
@@ -972,13 +1084,20 @@
               <MappingFragment StoreEntitySet="Record">
                 <ScalarProperty Name="RecordID" ColumnName="RecordID" />
                 <ScalarProperty Name="ClientID" ColumnName="ClientID" />
-                <ScalarProperty Name="MasterID" ColumnName="MasterID" />
-                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
-                <ScalarProperty Name="ServiceTypeID" ColumnName="ServiceTypeID" />
+                <ScalarProperty Name="MasterSeviceTypeID" ColumnName="MasterSeviceTypeID" />
+                <ScalarProperty Name="RecordTimeID" ColumnName="RecordTimeID" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="PaymentTypeID" ColumnName="PaymentTypeID" />
                 <ScalarProperty Name="Comment" ColumnName="Comment" />
                 <ScalarProperty Name="IsDone" ColumnName="IsDone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecordTime">
+            <EntityTypeMapping TypeName="nogotochkiModel.RecordTime">
+              <MappingFragment StoreEntitySet="RecordTime">
+                <ScalarProperty Name="RecordTimeID" ColumnName="RecordTimeID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -995,6 +1114,7 @@
               <MappingFragment StoreEntitySet="ServiceType">
                 <ScalarProperty Name="ServiceTypeID" ColumnName="ServiceTypeID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

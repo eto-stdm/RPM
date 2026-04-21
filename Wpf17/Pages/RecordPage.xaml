@@ -9,6 +9,8 @@
       Title="RecordPage">
 
     <Grid>
-        
+        <StackPanel>
+            
+        </StackPanel>
     </Grid>
 </Page>

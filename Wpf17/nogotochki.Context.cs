@@ -28,6 +28,7 @@ namespace Wpf17
         public virtual DbSet<Cart> Cart { get; set; }
         public virtual DbSet<Discount> Discount { get; set; }
         public virtual DbSet<Manufacturer> Manufacturer { get; set; }
+        public virtual DbSet<MasterServiceType> MasterServiceType { get; set; }
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<PaymentType> PaymentType { get; set; }
         public virtual DbSet<Product> Product { get; set; }
@@ -36,6 +37,7 @@ namespace Wpf17
         public virtual DbSet<ProductType> ProductType { get; set; }
         public virtual DbSet<Rating> Rating { get; set; }
         public virtual DbSet<Record> Record { get; set; }
+        public virtual DbSet<RecordTime> RecordTime { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<ServiceType> ServiceType { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }

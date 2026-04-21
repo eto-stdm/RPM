@@ -12,19 +12,18 @@ namespace Wpf17
     using System;
     using System.Collections.Generic;
     
-    public partial class ServiceType
+    public partial class RecordTime
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ServiceType()
+        public RecordTime()
         {
-            this.MasterServiceType = new HashSet<MasterServiceType>();
+            this.Record = new HashSet<Record>();
         }
     
-        public int ServiceTypeID { get; set; }
-        public string Name { get; set; }
-        public int Price { get; set; }
+        public int RecordTimeID { get; set; }
+        public System.TimeSpan Value { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MasterServiceType> MasterServiceType { get; set; }
+        public virtual ICollection<Record> Record { get; set; }
     }
 }

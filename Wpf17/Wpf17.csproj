@@ -71,11 +71,14 @@
     <Compile Include="Cart.cs">
       <DependentUpon>nogotochki.tt</DependentUpon>
     </Compile>
-    <Compile Include="Core.cs" />
+    <Compile Include="Classes\Core.cs" />
     <Compile Include="Discount.cs">
       <DependentUpon>nogotochki.tt</DependentUpon>
     </Compile>
     <Compile Include="Manufacturer.cs">
+      <DependentUpon>nogotochki.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MasterServiceType.cs">
       <DependentUpon>nogotochki.tt</DependentUpon>
     </Compile>
     <Compile Include="nogotochki.Context.cs">
@@ -102,8 +105,9 @@
     <Compile Include="Pages\RegistrationPage.xaml.cs">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PartalProductOrder.cs" />
-    <Compile Include="PartalUsers.cs" />
+    <Compile Include="Classes\PartalProductOrder.cs" />
+    <Compile Include="Classes\PartalUsers.cs" />
+    <Compile Include="Classes\State.cs" />
     <Compile Include="PaymentType.cs">
       <DependentUpon>nogotochki.tt</DependentUpon>
     </Compile>
@@ -125,13 +129,15 @@
     <Compile Include="Record.cs">
       <DependentUpon>nogotochki.tt</DependentUpon>
     </Compile>
+    <Compile Include="RecordTime.cs">
+      <DependentUpon>nogotochki.tt</DependentUpon>
+    </Compile>
     <Compile Include="Role.cs">
       <DependentUpon>nogotochki.tt</DependentUpon>
     </Compile>
     <Compile Include="ServiceType.cs">
       <DependentUpon>nogotochki.tt</DependentUpon>
     </Compile>
-    <Compile Include="State.cs" />
     <Compile Include="sysdiagrams.cs">
       <DependentUpon>nogotochki.tt</DependentUpon>
     </Compile>
