@@ -14,6 +14,7 @@ namespace Wpf17
     
     public partial class ProductOrder
     {
+        public int ProductOrderID { get; set; }
         public int OrderID { get; set; }
         public int ProductID { get; set; }
         public int Amount { get; set; }

@@ -292,8 +292,10 @@ namespace Wpf17.Pages
             switch (butn.Content)
             {
                 case "Перенести запись":
+
                     break;
                 case "Закрыть заказ":
+
                     break;
                 case "Изменить производителя":
                     break;

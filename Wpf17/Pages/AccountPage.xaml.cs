@@ -23,6 +23,25 @@ namespace Wpf17.Pages
         public AccountPage()
         {
             InitializeComponent();
+
+            User cur = Core.Context.User.First(x => x.UserID == State.CurrentUserID);
+            LoginTB.Text = cur.Login;
+            PasswordTB.Text += cur.Password;
+            RoleTB.Text += cur.Role.Name;
+            FIOTB.Text += cur.FIO;
+            BirthDateTB.Text += cur.BirthDate;
+            PhoneNumberTB.Text += cur.PhoneNumber;
+
+            List<Record> userRecords = Core.Context.Record.ToList().FindAll(x => x.ClientID == State.CurrentUserID);
+            RecordsLB.ItemsSource = userRecords;
+
+            List<Order> userOrders = Core.Context.Order.ToList().FindAll(x => x.UserID == State.CurrentUserID);
+            OrdersLB.ItemsSource = userOrders;
+        }
+
+        private void BackBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
         }
     }
 }

@@ -23,6 +23,29 @@ namespace Wpf17.Pages
         public StartPage()
         {
             InitializeComponent();
+
+            List<ServiceType> serviceTypes = Core.Context.ServiceType.ToList();
+            ServiceTypesLB.ItemsSource = serviceTypes;
+        }
+
+        private void ServiceTypesLB_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void ProductsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ProductsPage());
+        }
+
+        private void AccountBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AccountPage());
+        }
+
+        private void ToAuthBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AuthorizationPage());
         }
     }
 }

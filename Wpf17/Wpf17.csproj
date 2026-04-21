@@ -102,6 +102,7 @@
     <Compile Include="Pages\RegistrationPage.xaml.cs">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PartalProductOrder.cs" />
     <Compile Include="PartalUsers.cs" />
     <Compile Include="PaymentType.cs">
       <DependentUpon>nogotochki.tt</DependentUpon>

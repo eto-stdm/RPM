@@ -15,7 +15,6 @@ namespace Wpf17
             {
                 return $"{Surname} {Name} {Patronym}";
             }
-        }
-            
+        }   
     }
 }
