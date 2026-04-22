@@ -43,8 +43,8 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button x:Name="AddBtn" Content="Добавить услугу" Height="20" Width="100" Margin="5,0" Click="AddBtn_Click"/>
                 <Button x:Name="DeleteBtn" Content="Убрать услугу" Height="20" Width="100" Margin="5,0" Click="DeleteBtn_Click"/>
-                <ComboBox x:Name="ServiceTypesCB" SelectedIndex="0" Margin="5,0"/>
-                <ComboBox x:Name="WeekDayCB" SelectedIndex="0"/>
+                <ComboBox x:Name="ServiceTypesCB" Margin="5,0"/>
+                <ComboBox x:Name="WeekDayCB"/>
                 <Button x:Name="BackBtn" Content="К авторизации" Height="20" Width="100" Margin="20,0" Click="BackBtn_Click"/>
             </StackPanel>
         </StackPanel>

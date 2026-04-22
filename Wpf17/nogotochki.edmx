@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище nogotochkiModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище nogotochkiModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cart">
           <Key>
             <PropertyRef Name="CartID" />
@@ -32,9 +32,9 @@
             <PropertyRef Name="MasterServiceTypeID" />
           </Key>
           <Property Name="MasterServiceTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MasterID" Type="int" Nullable="false" />
-          <Property Name="ServiceTypeID" Type="int" Nullable="false" />
-          <Property Name="WeekDayID" Type="int" Nullable="false" />
+          <Property Name="MasterID" Type="int" />
+          <Property Name="ServiceTypeID" Type="int" />
+          <Property Name="WeekDayID" Type="int" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -177,7 +177,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MasterServiceType_ServiceType">
-          <End Role="ServiceType" Type="Self.ServiceType" Multiplicity="1" />
+          <End Role="ServiceType" Type="Self.ServiceType" Multiplicity="0..1" />
           <End Role="MasterServiceType" Type="Self.MasterServiceType" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ServiceType">
@@ -189,7 +189,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MasterServiceType_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="MasterServiceType" Type="Self.MasterServiceType" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -201,7 +201,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MasterServiceType_WeekDay">
-          <End Role="WeekDay" Type="Self.WeekDay" Multiplicity="1" />
+          <End Role="WeekDay" Type="Self.WeekDay" Multiplicity="0..1" />
           <End Role="MasterServiceType" Type="Self.MasterServiceType" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="WeekDay">
@@ -488,7 +488,8 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="nogotochkiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -523,13 +524,13 @@
             <PropertyRef Name="MasterServiceTypeID" />
           </Key>
           <Property Name="MasterServiceTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MasterID" Type="Int32" Nullable="false" />
-          <Property Name="ServiceTypeID" Type="Int32" Nullable="false" />
-          <Property Name="WeekDayID" Type="Int32" Nullable="false" />
+          <Property Name="MasterID" Type="Int32" />
+          <Property Name="ServiceTypeID" Type="Int32" />
+          <Property Name="WeekDayID" Type="Int32" />
           <NavigationProperty Name="ServiceType" Relationship="Self.FK_MasterServiceType_ServiceType" FromRole="MasterServiceType" ToRole="ServiceType" />
           <NavigationProperty Name="User" Relationship="Self.FK_MasterServiceType_User" FromRole="MasterServiceType" ToRole="User" />
           <NavigationProperty Name="WeekDay" Relationship="Self.FK_MasterServiceType_WeekDay" FromRole="MasterServiceType" ToRole="WeekDay" />
-          <NavigationProperty Name="Record" Relationship="nogotochkiModel.FK_Record_MasterServiceType" FromRole="MasterServiceType" ToRole="Record" />
+          <NavigationProperty Name="Record" Relationship="Self.FK_Record_MasterServiceType" FromRole="MasterServiceType" ToRole="Record" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -621,10 +622,10 @@
           <Property Name="PaymentTypeID" Type="Int32" Nullable="false" />
           <Property Name="Comment" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="IsDone" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="MasterServiceType" Relationship="Self.FK_Record_MasterServiceType" FromRole="Record" ToRole="MasterServiceType" />
           <NavigationProperty Name="PaymentType" Relationship="Self.FK_Record_PaymentType1" FromRole="Record" ToRole="PaymentType" />
           <NavigationProperty Name="RecordTime" Relationship="Self.FK_Record_RecordTime" FromRole="Record" ToRole="RecordTime" />
           <NavigationProperty Name="User" Relationship="Self.FK_Record_User" FromRole="Record" ToRole="User" />
-          <NavigationProperty Name="MasterServiceType" Relationship="nogotochkiModel.FK_Record_MasterServiceType" FromRole="Record" ToRole="MasterServiceType" />
         </EntityType>
         <EntityType Name="RecordTime">
           <Key>
@@ -738,7 +739,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MasterServiceType_ServiceType">
-          <End Role="ServiceType" Type="Self.ServiceType" Multiplicity="1" />
+          <End Role="ServiceType" Type="Self.ServiceType" Multiplicity="0..1" />
           <End Role="MasterServiceType" Type="Self.MasterServiceType" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ServiceType">
@@ -750,7 +751,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MasterServiceType_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="MasterServiceType" Type="Self.MasterServiceType" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -762,7 +763,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MasterServiceType_WeekDay">
-          <End Role="WeekDay" Type="Self.WeekDay" Multiplicity="1" />
+          <End Role="WeekDay" Type="Self.WeekDay" Multiplicity="0..1" />
           <End Role="MasterServiceType" Type="Self.MasterServiceType" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="WeekDay">
@@ -770,6 +771,18 @@
             </Principal>
             <Dependent Role="MasterServiceType">
               <PropertyRef Name="WeekDayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Record_MasterServiceType">
+          <End Role="MasterServiceType" Type="Self.MasterServiceType" Multiplicity="1" />
+          <End Role="Record" Type="Self.Record" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterServiceType">
+              <PropertyRef Name="MasterServiceTypeID" />
+            </Principal>
+            <Dependent Role="Record">
+              <PropertyRef Name="MasterSeviceTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -952,6 +965,10 @@
             <End Role="WeekDay" EntitySet="WeekDay" />
             <End Role="MasterServiceType" EntitySet="MasterServiceType" />
           </AssociationSet>
+          <AssociationSet Name="FK_Record_MasterServiceType" Association="Self.FK_Record_MasterServiceType">
+            <End Role="MasterServiceType" EntitySet="MasterServiceType" />
+            <End Role="Record" EntitySet="Record" />
+          </AssociationSet>
           <AssociationSet Name="FK_Order_User" Association="Self.FK_Order_User">
             <End Role="User" EntitySet="User" />
             <End Role="Order" EntitySet="Order" />
@@ -996,23 +1013,7 @@
             <End Role="Role" EntitySet="Role" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
-          <AssociationSet Name="FK_Record_MasterServiceType" Association="nogotochkiModel.FK_Record_MasterServiceType">
-            <End Role="MasterServiceType" EntitySet="MasterServiceType" />
-            <End Role="Record" EntitySet="Record" />
-          </AssociationSet>
         </EntityContainer>
-        <Association Name="FK_Record_MasterServiceType">
-          <End Type="nogotochkiModel.MasterServiceType" Role="MasterServiceType" Multiplicity="1" />
-          <End Type="nogotochkiModel.Record" Role="Record" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MasterServiceType">
-              <PropertyRef Name="MasterServiceTypeID" />
-            </Principal>
-            <Dependent Role="Record">
-              <PropertyRef Name="MasterSeviceTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

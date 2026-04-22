@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -45,12 +46,73 @@ namespace Wpf17.Pages
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (ServiceTypesCB.Text != "" && WeekDayCB.Text != "")
+            {
+                List<MasterServiceType> masterServiceTypes = Core.Context.MasterServiceType.Where(x => x.MasterID == State.CurrentUserID).ToList();
+                int selectServType = Core.Context.ServiceType.First(x => x.Name == ServiceTypesCB.Text).ServiceTypeID;
+                int selectWeekDay = Core.Context.WeekDay.First(x => x.Name == WeekDayCB.Text).WeekDayID;
 
-        }
+                if (masterServiceTypes.FirstOrDefault(x => x.MasterID == State.CurrentUserID && x.ServiceTypeID == selectServType && x.WeekDayID == selectWeekDay) != null)
+                {
+                    MessageBox.Show("Выбранный тип услуги вместе с днём работы, уже содержатся у вас!");
+                }
+                else
+                {
+                    MasterServiceType newmst = new MasterServiceType
+                    {
+                        MasterID = State.CurrentUserID,
+                        ServiceTypeID = selectServType,
+                        WeekDayID = selectWeekDay,
+                    };
+                    try
+                    {
+                        Core.Context.MasterServiceType.Add(newmst);
+                        Core.Context.SaveChanges();
+                        MessageBox.Show("Добавлено!");
+                    }
+                    catch (System.InvalidOperationException)
+                    {
+                        MessageBox.Show("Чёрт знает, почему происходит эта ошибка. Хотя бы не вылетает.");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Заполните поля!");
+            }
+            }
 
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (ServiceTypesCB.Text != "" && WeekDayCB.Text != "")
+            { 
+                List<MasterServiceType> masterServiceTypes = Core.Context.MasterServiceType.Where(x => x.MasterID == State.CurrentUserID).ToList();
+                int selectServType = Core.Context.ServiceType.First(x => x.Name == ServiceTypesCB.Text).ServiceTypeID;
+                int selectWeekDay = Core.Context.WeekDay.First(x => x.Name == WeekDayCB.Text).WeekDayID;
 
+                if (masterServiceTypes.FirstOrDefault(x => x.MasterID == State.CurrentUserID && x.ServiceTypeID == selectServType && x.WeekDayID == selectWeekDay) != null)
+                {
+                    MasterServiceType tempdeleted = masterServiceTypes.FirstOrDefault(x => x.MasterID == State.CurrentUserID && x.ServiceTypeID == selectServType && x.WeekDayID == selectWeekDay);
+                    Core.Context.MasterServiceType.Remove(tempdeleted);
+                    try
+                    {
+                        Core.Context.SaveChanges();
+                        MessageBox.Show("Удалено!");
+                    }
+                    catch (System.InvalidOperationException)
+                    {
+                        MessageBox.Show("Чёрт знает, почему происходит эта ошибка. Хотя бы не вылетает.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Выбранный тип услуги вместе с днём работы, не содержатся у вас!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Заполните поля!");
+            }
         }
 
         private void EndBtn_Click(object sender, RoutedEventArgs e)
@@ -68,6 +130,7 @@ namespace Wpf17.Pages
                 selectRecord.IsDone = true;
                 Core.Context.SaveChanges();
                 RecordUpdate();
+                MessageBox.Show("Запись успешно завершена!");
             }
         }
 

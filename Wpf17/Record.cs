@@ -24,9 +24,9 @@ namespace Wpf17
         public string Comment { get; set; }
         public bool IsDone { get; set; }
     
+        public virtual MasterServiceType MasterServiceType { get; set; }
         public virtual PaymentType PaymentType { get; set; }
         public virtual RecordTime RecordTime { get; set; }
         public virtual User User { get; set; }
-        public virtual MasterServiceType MasterServiceType { get; set; }
     }
 }

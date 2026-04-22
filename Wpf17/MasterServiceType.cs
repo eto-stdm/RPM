@@ -21,9 +21,9 @@ namespace Wpf17
         }
     
         public int MasterServiceTypeID { get; set; }
-        public int MasterID { get; set; }
-        public int ServiceTypeID { get; set; }
-        public int WeekDayID { get; set; }
+        public Nullable<int> MasterID { get; set; }
+        public Nullable<int> ServiceTypeID { get; set; }
+        public Nullable<int> WeekDayID { get; set; }
     
         public virtual ServiceType ServiceType { get; set; }
         public virtual User User { get; set; }
