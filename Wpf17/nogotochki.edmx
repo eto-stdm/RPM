@@ -34,6 +34,7 @@
           <Property Name="MasterServiceTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MasterID" Type="int" Nullable="false" />
           <Property Name="ServiceTypeID" Type="int" Nullable="false" />
+          <Property Name="WeekDayID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -156,6 +157,13 @@
           <Property Name="BirthDate" Type="date" Nullable="false" />
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="11" Nullable="false" />
         </EntityType>
+        <EntityType Name="WeekDay">
+          <Key>
+            <PropertyRef Name="WeekDayID" />
+          </Key>
+          <Property Name="WeekDayID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Cart_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
@@ -189,6 +197,18 @@
             </Principal>
             <Dependent Role="MasterServiceType">
               <PropertyRef Name="MasterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MasterServiceType_WeekDay">
+          <End Role="WeekDay" Type="Self.WeekDay" Multiplicity="1" />
+          <End Role="MasterServiceType" Type="Self.MasterServiceType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WeekDay">
+              <PropertyRef Name="WeekDayID" />
+            </Principal>
+            <Dependent Role="MasterServiceType">
+              <PropertyRef Name="WeekDayID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -390,6 +410,7 @@
           <EntitySet Name="ServiceType" EntityType="Self.ServiceType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WeekDay" EntityType="Self.WeekDay" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Cart_User" Association="Self.FK_Cart_User">
             <End Role="User" EntitySet="User" />
             <End Role="Cart" EntitySet="Cart" />
@@ -400,6 +421,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_MasterServiceType_User" Association="Self.FK_MasterServiceType_User">
             <End Role="User" EntitySet="User" />
+            <End Role="MasterServiceType" EntitySet="MasterServiceType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MasterServiceType_WeekDay" Association="Self.FK_MasterServiceType_WeekDay">
+            <End Role="WeekDay" EntitySet="WeekDay" />
             <End Role="MasterServiceType" EntitySet="MasterServiceType" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_User" Association="Self.FK_Order_User">
@@ -500,9 +525,11 @@
           <Property Name="MasterServiceTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MasterID" Type="Int32" Nullable="false" />
           <Property Name="ServiceTypeID" Type="Int32" Nullable="false" />
+          <Property Name="WeekDayID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ServiceType" Relationship="Self.FK_MasterServiceType_ServiceType" FromRole="MasterServiceType" ToRole="ServiceType" />
           <NavigationProperty Name="User" Relationship="Self.FK_MasterServiceType_User" FromRole="MasterServiceType" ToRole="User" />
-          <NavigationProperty Name="Record" Relationship="Self.FK_Record_MasterServiceType" FromRole="MasterServiceType" ToRole="Record" />
+          <NavigationProperty Name="WeekDay" Relationship="Self.FK_MasterServiceType_WeekDay" FromRole="MasterServiceType" ToRole="WeekDay" />
+          <NavigationProperty Name="Record" Relationship="nogotochkiModel.FK_Record_MasterServiceType" FromRole="MasterServiceType" ToRole="Record" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -522,7 +549,7 @@
           </Key>
           <Property Name="PaymentTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Record" Relationship="Self.FK_Record_PaymentType" FromRole="PaymentType" ToRole="Record" />
+          <NavigationProperty Name="Record" Relationship="Self.FK_Record_PaymentType1" FromRole="PaymentType" ToRole="Record" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -589,15 +616,15 @@
           <Property Name="ClientID" Type="Int32" Nullable="false" />
           <Property Name="MasterSeviceTypeID" Type="Int32" Nullable="false" />
           <Property Name="RecordTimeID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
           <Property Name="Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="PaymentTypeID" Type="Int32" Nullable="false" />
           <Property Name="Comment" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="IsDone" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="MasterServiceType" Relationship="Self.FK_Record_MasterServiceType" FromRole="Record" ToRole="MasterServiceType" />
-          <NavigationProperty Name="PaymentType" Relationship="Self.FK_Record_PaymentType" FromRole="Record" ToRole="PaymentType" />
+          <NavigationProperty Name="PaymentType" Relationship="Self.FK_Record_PaymentType1" FromRole="Record" ToRole="PaymentType" />
           <NavigationProperty Name="RecordTime" Relationship="Self.FK_Record_RecordTime" FromRole="Record" ToRole="RecordTime" />
           <NavigationProperty Name="User" Relationship="Self.FK_Record_User" FromRole="Record" ToRole="User" />
-          <Property Name="Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="MasterServiceType" Relationship="nogotochkiModel.FK_Record_MasterServiceType" FromRole="Record" ToRole="MasterServiceType" />
         </EntityType>
         <EntityType Name="RecordTime">
           <Key>
@@ -653,6 +680,14 @@
           <NavigationProperty Name="Rating" Relationship="Self.FK_Rating_User" FromRole="User" ToRole="Rating" />
           <NavigationProperty Name="Record" Relationship="Self.FK_Record_User" FromRole="User" ToRole="Record" />
           <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="WeekDay">
+          <Key>
+            <PropertyRef Name="WeekDayID" />
+          </Key>
+          <Property Name="WeekDayID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="MasterServiceType" Relationship="Self.FK_MasterServiceType_WeekDay" FromRole="WeekDay" ToRole="MasterServiceType" />
         </EntityType>
         <Association Name="FK_Cart_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
@@ -726,15 +761,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Record_MasterServiceType">
-          <End Role="MasterServiceType" Type="Self.MasterServiceType" Multiplicity="1" />
-          <End Role="Record" Type="Self.Record" Multiplicity="*" />
+        <Association Name="FK_MasterServiceType_WeekDay">
+          <End Role="WeekDay" Type="Self.WeekDay" Multiplicity="1" />
+          <End Role="MasterServiceType" Type="Self.MasterServiceType" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="MasterServiceType">
-              <PropertyRef Name="MasterServiceTypeID" />
+            <Principal Role="WeekDay">
+              <PropertyRef Name="WeekDayID" />
             </Principal>
-            <Dependent Role="Record">
-              <PropertyRef Name="MasterSeviceTypeID" />
+            <Dependent Role="MasterServiceType">
+              <PropertyRef Name="WeekDayID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -762,7 +797,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Record_PaymentType">
+        <Association Name="FK_Record_PaymentType1">
           <End Role="PaymentType" Type="Self.PaymentType" Multiplicity="1" />
           <End Role="Record" Type="Self.Record" Multiplicity="*" />
           <ReferentialConstraint>
@@ -888,6 +923,7 @@
           <EntitySet Name="ServiceType" EntityType="Self.ServiceType" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="WeekDay" EntityType="Self.WeekDay" />
           <AssociationSet Name="FK_Cart_User" Association="Self.FK_Cart_User">
             <End Role="User" EntitySet="User" />
             <End Role="Cart" EntitySet="Cart" />
@@ -912,9 +948,9 @@
             <End Role="User" EntitySet="User" />
             <End Role="MasterServiceType" EntitySet="MasterServiceType" />
           </AssociationSet>
-          <AssociationSet Name="FK_Record_MasterServiceType" Association="Self.FK_Record_MasterServiceType">
+          <AssociationSet Name="FK_MasterServiceType_WeekDay" Association="Self.FK_MasterServiceType_WeekDay">
+            <End Role="WeekDay" EntitySet="WeekDay" />
             <End Role="MasterServiceType" EntitySet="MasterServiceType" />
-            <End Role="Record" EntitySet="Record" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_User" Association="Self.FK_Order_User">
             <End Role="User" EntitySet="User" />
@@ -924,7 +960,7 @@
             <End Role="Order" EntitySet="Order" />
             <End Role="ProductOrder" EntitySet="ProductOrder" />
           </AssociationSet>
-          <AssociationSet Name="FK_Record_PaymentType" Association="Self.FK_Record_PaymentType">
+          <AssociationSet Name="FK_Record_PaymentType1" Association="Self.FK_Record_PaymentType1">
             <End Role="PaymentType" EntitySet="PaymentType" />
             <End Role="Record" EntitySet="Record" />
           </AssociationSet>
@@ -960,7 +996,23 @@
             <End Role="Role" EntitySet="Role" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
+          <AssociationSet Name="FK_Record_MasterServiceType" Association="nogotochkiModel.FK_Record_MasterServiceType">
+            <End Role="MasterServiceType" EntitySet="MasterServiceType" />
+            <End Role="Record" EntitySet="Record" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Record_MasterServiceType">
+          <End Type="nogotochkiModel.MasterServiceType" Role="MasterServiceType" Multiplicity="1" />
+          <End Type="nogotochkiModel.Record" Role="Record" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MasterServiceType">
+              <PropertyRef Name="MasterServiceTypeID" />
+            </Principal>
+            <Dependent Role="Record">
+              <PropertyRef Name="MasterSeviceTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -998,6 +1050,7 @@
                 <ScalarProperty Name="MasterServiceTypeID" ColumnName="MasterServiceTypeID" />
                 <ScalarProperty Name="MasterID" ColumnName="MasterID" />
                 <ScalarProperty Name="ServiceTypeID" ColumnName="ServiceTypeID" />
+                <ScalarProperty Name="WeekDayID" ColumnName="WeekDayID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1072,11 +1125,11 @@
           <EntitySetMapping Name="Record">
             <EntityTypeMapping TypeName="nogotochkiModel.Record">
               <MappingFragment StoreEntitySet="Record">
-                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="RecordID" ColumnName="RecordID" />
                 <ScalarProperty Name="ClientID" ColumnName="ClientID" />
                 <ScalarProperty Name="MasterSeviceTypeID" ColumnName="MasterSeviceTypeID" />
                 <ScalarProperty Name="RecordTimeID" ColumnName="RecordTimeID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="PaymentTypeID" ColumnName="PaymentTypeID" />
                 <ScalarProperty Name="Comment" ColumnName="Comment" />
@@ -1132,6 +1185,14 @@
                 <ScalarProperty Name="Patronym" ColumnName="Patronym" />
                 <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WeekDay">
+            <EntityTypeMapping TypeName="nogotochkiModel.WeekDay">
+              <MappingFragment StoreEntitySet="WeekDay">
+                <ScalarProperty Name="WeekDayID" ColumnName="WeekDayID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

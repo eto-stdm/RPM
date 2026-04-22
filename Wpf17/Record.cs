@@ -18,15 +18,15 @@ namespace Wpf17
         public int ClientID { get; set; }
         public int MasterSeviceTypeID { get; set; }
         public int RecordTimeID { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
         public decimal Price { get; set; }
         public int PaymentTypeID { get; set; }
         public string Comment { get; set; }
         public bool IsDone { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
     
-        public virtual MasterServiceType MasterServiceType { get; set; }
         public virtual PaymentType PaymentType { get; set; }
         public virtual RecordTime RecordTime { get; set; }
         public virtual User User { get; set; }
+        public virtual MasterServiceType MasterServiceType { get; set; }
     }
 }

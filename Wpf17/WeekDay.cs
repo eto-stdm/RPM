@@ -12,23 +12,18 @@ namespace Wpf17
     using System;
     using System.Collections.Generic;
     
-    public partial class MasterServiceType
+    public partial class WeekDay
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public MasterServiceType()
+        public WeekDay()
         {
-            this.Record = new HashSet<Record>();
+            this.MasterServiceType = new HashSet<MasterServiceType>();
         }
     
-        public int MasterServiceTypeID { get; set; }
-        public int MasterID { get; set; }
-        public int ServiceTypeID { get; set; }
         public int WeekDayID { get; set; }
+        public string Name { get; set; }
     
-        public virtual ServiceType ServiceType { get; set; }
-        public virtual User User { get; set; }
-        public virtual WeekDay WeekDay { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Record> Record { get; set; }
+        public virtual ICollection<MasterServiceType> MasterServiceType { get; set; }
     }
 }

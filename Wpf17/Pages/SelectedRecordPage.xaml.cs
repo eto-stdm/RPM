@@ -21,16 +21,21 @@ namespace Wpf17.Pages
     /// </summary>
     public partial class SelectedRecordPage : Page
     {
-        public SelectedRecordPage()
+        public MasterServiceType mServType { get; set; }
+        public DateTime recordDate { get; set; }
+        public SelectedRecordPage(MasterServiceType mServType, DateTime recordDate)
         {
             InitializeComponent();
 
+            this.mServType = mServType;
+            this.recordDate = recordDate;
+
             User cur = Core.Context.User.First(x => x.UserID == State.CurrentUserID);
             ClientTB.Text += cur.FIO;
-            //MasterTB.Text += ;
-            //ServiceTypeTB.Text += ;
-            //DateTB.Text += ;
-            //PriceTB.Text += ;
+            MasterTB.Text += mServType.User.FIO;
+            ServiceTypeTB.Text += mServType.ServiceType.Name;
+            DateTB.Text += recordDate.ToString("dd.MM.yyyy");
+            PriceTB.Text += mServType.ServiceType.Price + " руб";
 
             List<RecordTime> recordTimes = Core.Context.RecordTime.ToList();
             List<string> recordTimesValue = new List<string>();
@@ -51,13 +56,14 @@ namespace Wpf17.Pages
             }
             else
             {
+                TimeSpan t = TimeSpan.Parse(TimeCB.Text);
                 Record newRecord = new Record
                 {
                     ClientID = State.CurrentUserID,
-                    //MasterSeviceTypeID =,
-                    RecordTimeID = Core.Context.RecordTime.First(x => x.Value == TimeSpan.Parse(TimeCB.Text)).RecordTimeID,
-                    //Date = ,
-                    //Price =,
+                    MasterSeviceTypeID = mServType.MasterID,
+                    RecordTimeID = Core.Context.RecordTime.First(x => x.Value == t).RecordTimeID,
+                    Date = recordDate,
+                    Price = mServType.ServiceType.Price,
                     PaymentTypeID = Core.Context.PaymentType.First(x => x.Name == PaymentTypeCB.Text).PaymentTypeID,
                     Comment = CommentTB.Text,
                 };

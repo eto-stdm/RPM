@@ -42,5 +42,6 @@ namespace Wpf17
         public virtual DbSet<ServiceType> ServiceType { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<WeekDay> WeekDay { get; set; }
     }
 }
