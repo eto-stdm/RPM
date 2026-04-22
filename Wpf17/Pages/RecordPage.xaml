@@ -28,7 +28,6 @@
                     <Grid Height="50" Width="530" Margin="10">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                             <TextBlock Text="{Binding StringFormat=ФИО Мастера: {0}}" Margin="0, 10, 10, 10"/>
-                            <TextBlock Text="{Binding StringFormat=ФИО Мастера: {0}}" Visibility="Collapsed"/>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
