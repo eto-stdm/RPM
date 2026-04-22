@@ -24,9 +24,8 @@ namespace Wpf17.Pages
         {
             InitializeComponent();
 
-            List<Record> rec = Core.Context.Record.Where(x => x.MasterServiceType.MasterID == State.CurrentUserID).ToList();
-            RecordsLB.ItemsSource = rec;
-
+            RecordUpdate();
+            
             List<ServiceType> serviceTypes = Core.Context.ServiceType.ToList();
             List<string> serviceTypesName = new List<string>();
             foreach (ServiceType s in serviceTypes) { serviceTypesName.Add(s.Name); }
@@ -36,6 +35,12 @@ namespace Wpf17.Pages
             List<string> weekDaysName = new List<string>();
             foreach (WeekDay w in weekDays) { weekDaysName.Add(w.Name); }
             WeekDayCB.ItemsSource = weekDaysName;
+        }
+
+        private void RecordUpdate()
+        {
+            List<Record> rec = Core.Context.Record.Where(x => x.MasterServiceType.MasterID == State.CurrentUserID).ToList();
+            RecordsLB.ItemsSource = rec;
         }
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
@@ -50,7 +55,20 @@ namespace Wpf17.Pages
 
         private void EndBtn_Click(object sender, RoutedEventArgs e)
         {
+            var selectRecord = RecordsLB.SelectedItem as Record;
 
+            if (selectRecord == null) return;
+
+            if (selectRecord.IsDone == true)
+            {
+                MessageBox.Show("Запись уже завершена!");
+            }
+            else
+            {
+                selectRecord.IsDone = true;
+                Core.Context.SaveChanges();
+                RecordUpdate();
+            }
         }
 
         private void BackBtn_Click(object sender, RoutedEventArgs e)

@@ -26,6 +26,7 @@
                                 <TextBlock Text="{Binding MasterServiceType.ServiceType.Name, StringFormat=Тип услуги: {0}}" Margin="0, 10, 10, 10"/>
                                 <TextBlock Text="{Binding Date, StringFormat=Дата: dd.mm.yyyy}" Margin="0, 10, 10, 0"/>
                                 <TextBlock Text="{Binding RecordTime.Value, StringFormat=Время: {0}}" Margin="0, 10, 10, 0"/>
+                                <TextBlock Text="{Binding IsDone, StringFormat=Статус: {0}}" Margin="0, 10, 10, 0"/>
                             </WrapPanel>
                             <StackPanel Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
                                 <Button x:Name="EndBtn" Content="Завершить услугу" FontSize="9" Height="20" Click="EndBtn_Click"/>
