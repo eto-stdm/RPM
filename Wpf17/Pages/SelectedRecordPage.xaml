@@ -9,6 +9,38 @@
       Title="SelectedRecordPage">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="600"></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Оформление записи" Grid.Column="1" FontSize="30" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock x:Name="ClientTB" Text="ФИО клиента: " Margin="10"/>
+            <TextBlock x:Name="MasterTB" Text="ФИО мастера: " Margin="10,0,10,10"/>
+            <TextBlock x:Name="ServiceTypeTB" Text="Тип услуги: " Margin="10,0,10,10"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Время: " Margin="10,0,10,10"/>
+                <ComboBox x:Name="TimeCB" Width="100" Height="20"/>
+            </StackPanel>
+            <TextBlock x:Name="DateTB" Text="Дата: " Margin="10,0,10,10"/>
+            <TextBlock x:Name="PriceTB" Text="Цена: " Margin="10,0,10,10"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Тип оплаты: " Margin="10,0,10,10"/>
+                <ComboBox x:Name="PaymentTypeCB" Width="100" Height="20"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Комментарий: " Margin="10,0,10,10"/>
+                <TextBox x:Name="CommentTB" Width="100" Height="20"/>
+            </StackPanel>
+            <Button x:Name="OrderBtn" Grid.Row="1" Grid.Column="2" Content="Записаться" Width="80" Height="30" Margin="0,10,10,10" Click="OrderBtn_Click"/>
+        </StackPanel>
+        <Button Grid.Row="1" x:Name="BackBtn" Content="Назад" Margin="10" Height="30" Width="80" VerticalAlignment="Bottom" Click="BackBtn_Click"/>
     </Grid>
 </Page>

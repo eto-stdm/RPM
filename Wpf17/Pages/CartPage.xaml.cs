@@ -94,6 +94,7 @@ namespace Wpf17.Pages
                 }
                 Core.Context.SaveChanges();
                 MessageBox.Show($"Заказ оформлен!");
+                NavigationService.Navigate(new StartPage());
             }
         }
 

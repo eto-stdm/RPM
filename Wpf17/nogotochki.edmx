@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище nogotochkiModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище nogotochkiModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cart">
           <Key>
             <PropertyRef Name="CartID" />
@@ -104,9 +104,10 @@
           <Property Name="ClientID" Type="int" Nullable="false" />
           <Property Name="MasterSeviceTypeID" Type="int" Nullable="false" />
           <Property Name="RecordTimeID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="PaymentTypeID" Type="int" Nullable="false" />
-          <Property Name="Comment" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="200" />
           <Property Name="IsDone" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="RecordTime">
@@ -323,7 +324,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Record_PaymentType">
+        <Association Name="FK_Record_PaymentType1">
           <End Role="PaymentType" Type="Self.PaymentType" Multiplicity="1" />
           <End Role="Record" Type="Self.Record" Multiplicity="*" />
           <ReferentialConstraint>
@@ -445,7 +446,7 @@
             <End Role="MasterServiceType" EntitySet="MasterServiceType" />
             <End Role="Record" EntitySet="Record" />
           </AssociationSet>
-          <AssociationSet Name="FK_Record_PaymentType" Association="Self.FK_Record_PaymentType">
+          <AssociationSet Name="FK_Record_PaymentType1" Association="Self.FK_Record_PaymentType1">
             <End Role="PaymentType" EntitySet="PaymentType" />
             <End Role="Record" EntitySet="Record" />
           </AssociationSet>
@@ -462,8 +463,7 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="nogotochkiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -591,12 +591,13 @@
           <Property Name="RecordTimeID" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="PaymentTypeID" Type="Int32" Nullable="false" />
-          <Property Name="Comment" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="IsDone" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="MasterServiceType" Relationship="Self.FK_Record_MasterServiceType" FromRole="Record" ToRole="MasterServiceType" />
           <NavigationProperty Name="PaymentType" Relationship="Self.FK_Record_PaymentType" FromRole="Record" ToRole="PaymentType" />
           <NavigationProperty Name="RecordTime" Relationship="Self.FK_Record_RecordTime" FromRole="Record" ToRole="RecordTime" />
           <NavigationProperty Name="User" Relationship="Self.FK_Record_User" FromRole="Record" ToRole="User" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="RecordTime">
           <Key>
@@ -1071,6 +1072,7 @@
           <EntitySetMapping Name="Record">
             <EntityTypeMapping TypeName="nogotochkiModel.Record">
               <MappingFragment StoreEntitySet="Record">
+                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="RecordID" ColumnName="RecordID" />
                 <ScalarProperty Name="ClientID" ColumnName="ClientID" />
                 <ScalarProperty Name="MasterSeviceTypeID" ColumnName="MasterSeviceTypeID" />

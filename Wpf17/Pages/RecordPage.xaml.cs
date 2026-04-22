@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -32,6 +33,11 @@ namespace Wpf17.Pages
             //List<MasterServiceType> mastersService = Core.Context.MasterServiceType.Where(x => x.ServiceType.Name == serviceName).ToList();
             //List<User> mastersUsers = Core.Context.User.Where(x => x.UserID == mastersService.MasterID
             //MastersLB.ItemsSource = mastersService;
+        }
+
+        private void MastersLB_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
         }
 
         private void BackBtn_Click(object sender, RoutedEventArgs e)

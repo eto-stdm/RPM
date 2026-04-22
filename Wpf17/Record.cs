@@ -22,6 +22,7 @@ namespace Wpf17
         public int PaymentTypeID { get; set; }
         public string Comment { get; set; }
         public bool IsDone { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
     
         public virtual MasterServiceType MasterServiceType { get; set; }
         public virtual PaymentType PaymentType { get; set; }

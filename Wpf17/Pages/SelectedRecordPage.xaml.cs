@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +24,54 @@ namespace Wpf17.Pages
         public SelectedRecordPage()
         {
             InitializeComponent();
+
+            User cur = Core.Context.User.First(x => x.UserID == State.CurrentUserID);
+            ClientTB.Text += cur.FIO;
+            //MasterTB.Text += ;
+            //ServiceTypeTB.Text += ;
+            //DateTB.Text += ;
+            //PriceTB.Text += ;
+
+            List<RecordTime> recordTimes = Core.Context.RecordTime.ToList();
+            List<string> recordTimesValue = new List<string>();
+            foreach (RecordTime r in recordTimes) { recordTimesValue.Add(r.Value.ToString()); }
+            TimeCB.ItemsSource = recordTimesValue;
+
+            List<PaymentType> paymentTypes = Core.Context.PaymentType.ToList();
+            List<string> paymentTypesName = new List<string>();
+            foreach (PaymentType p in paymentTypes) { paymentTypesName.Add(p.Name); }
+            PaymentTypeCB.ItemsSource = paymentTypesName;
+        }
+
+        private void OrderBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (TimeCB.Text == "" || PaymentTypeCB.Text == "")
+            {
+                MessageBox.Show("Выберите время записи или тип оплаты!");
+            }
+            else
+            {
+                Record newRecord = new Record
+                {
+                    ClientID = State.CurrentUserID,
+                    //MasterSeviceTypeID =,
+                    RecordTimeID = Core.Context.RecordTime.First(x => x.Value == TimeSpan.Parse(TimeCB.Text)).RecordTimeID,
+                    //Date = ,
+                    //Price =,
+                    PaymentTypeID = Core.Context.PaymentType.First(x => x.Name == PaymentTypeCB.Text).PaymentTypeID,
+                    Comment = CommentTB.Text,
+                };
+
+                Core.Context.Record.Add(newRecord);
+                Core.Context.SaveChanges();
+                MessageBox.Show("Вы были успешно записаны!");
+                NavigationService.Navigate(new StartPage());
+            }
+        }
+
+        private void BackBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
         }
     }
 }
