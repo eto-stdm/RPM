@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace Wpf17.Pages
 {
@@ -38,14 +39,31 @@ namespace Wpf17.Pages
             PriceTB.Text += mServType.ServiceType.Price + " руб";
 
             List<RecordTime> recordTimes = Core.Context.RecordTime.ToList();
-            List<string> recordTimesValue = new List<string>();
-            foreach (RecordTime r in recordTimes) { recordTimesValue.Add(r.Value.ToString()); }
+            List<ComboBoxItem> recordTimesValue = new List<ComboBoxItem>();
+            foreach (RecordTime r in recordTimes) { recordTimesValue.Add(new ComboBoxItem { Content = r.Value.ToString() }); }
             TimeCB.ItemsSource = recordTimesValue;
+
+            
 
             List<PaymentType> paymentTypes = Core.Context.PaymentType.ToList();
             List<string> paymentTypesName = new List<string>();
             foreach (PaymentType p in paymentTypes) { paymentTypesName.Add(p.Name); }
             PaymentTypeCB.ItemsSource = paymentTypesName;
+
+
+            List<Record> records = Core.Context.Record.ToList();
+            List<Record> selrec = records.Where(x => x.MasterSeviceTypeID == mServType.MasterServiceTypeID).ToList();
+            foreach (ComboBoxItem cmi in TimeCB.Items)  // тоха, спасибо за кусок :)
+            {
+                foreach (Record r in selrec)
+                {
+                    if (r.RecordTime.Value.ToString() == cmi.Content.ToString() && r.Date == recordDate)
+                    {
+                        cmi.IsEnabled = false;
+                        cmi.Foreground = Brushes.DarkRed;
+                    }
+                }
+            }
         }
 
         private void OrderBtn_Click(object sender, RoutedEventArgs e)
@@ -60,7 +78,7 @@ namespace Wpf17.Pages
                 Record newRecord = new Record
                 {
                     ClientID = State.CurrentUserID,
-                    MasterSeviceTypeID = mServType.MasterID,
+                    MasterSeviceTypeID = mServType.MasterServiceTypeID,
                     RecordTimeID = Core.Context.RecordTime.First(x => x.Value == t).RecordTimeID,
                     Date = recordDate,
                     Price = mServType.ServiceType.Price,
