@@ -221,9 +221,9 @@ namespace Wpf17.Pages
                         Record newrecord = new Record
                         {
                             ClientID = users.First(u => u.PhoneNumber == RecordClient.Text).UserID,
-                            MasterID = users.First(u => u.Login == RecordMaster.Text).UserID,
-                            DateTime = datetime,
-                            ServiceTypeID = serviceTypes.First(s => s.Name == RecordServiceType.Text).ServiceTypeID,
+                            //MasterID = users.First(u => u.Login == RecordMaster.Text).UserID,
+                            //DateTime = datetime,
+                            //ServiceTypeID = serviceTypes.First(s => s.Name == RecordServiceType.Text).ServiceTypeID,
                             Price = Convert.ToDecimal(RecordPrice),
                             PaymentTypeID = paymentTypes.First(p => p.Name == RecordPaymentType.Text).PaymentTypeID,
                             Comment = RecordComment.Text,

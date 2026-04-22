@@ -14,10 +14,9 @@ namespace Wpf17
     
     public partial class ProductCart
     {
+        public int ProductCart1 { get; set; }
         public int CartID { get; set; }
         public int ProductID { get; set; }
-        public int Amount { get; set; }
-        public decimal Price { get; set; }
     
         public virtual Cart Cart { get; set; }
         public virtual Product Product { get; set; }

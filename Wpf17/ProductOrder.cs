@@ -17,8 +17,6 @@ namespace Wpf17
         public int ProductOrderID { get; set; }
         public int OrderID { get; set; }
         public int ProductID { get; set; }
-        public int Amount { get; set; }
-        public decimal Price { get; set; }
     
         public virtual Order Order { get; set; }
         public virtual Product Product { get; set; }

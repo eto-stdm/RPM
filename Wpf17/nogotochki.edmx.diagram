@@ -4,26 +4,26 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7e38b757d78d453c995d2ee2b3b19c1e" Name="Diagram1">
-        <EntityTypeShape EntityType="nogotochkiModel.Cart" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="nogotochkiModel.Discount" Width="1.5" PointX="0.75" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="nogotochkiModel.Manufacturer" Width="1.5" PointX="0.75" PointY="13.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="nogotochkiModel.MasterServiceType" Width="1.5" PointX="8.25" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="nogotochkiModel.Order" Width="1.5" PointX="5.25" PointY="10.75" IsExpanded="true" />
+      <Diagram DiagramId="3c9e8974d880493cb2a070926986a6cd" Name="Diagram1">
+        <EntityTypeShape EntityType="nogotochkiModel.Cart" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="nogotochkiModel.Discount" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="nogotochkiModel.Manufacturer" Width="1.5" PointX="0.75" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="nogotochkiModel.MasterServiceType" Width="1.5" PointX="8.25" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="nogotochkiModel.Order" Width="1.5" PointX="5.25" PointY="10.625" IsExpanded="true" />
         <EntityTypeShape EntityType="nogotochkiModel.PaymentType" Width="1.5" PointX="8.25" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="nogotochkiModel.Product" Width="1.5" PointX="3" PointY="12.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="nogotochkiModel.ProductCart" Width="1.5" PointX="7.5" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="nogotochkiModel.Product" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="nogotochkiModel.ProductCart" Width="1.5" PointX="7.5" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="nogotochkiModel.ProductOrder" Width="1.5" PointX="7.5" PointY="11.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="nogotochkiModel.ProductType" Width="1.5" PointX="0.75" PointY="15.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="nogotochkiModel.Rating" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="nogotochkiModel.Record" Width="1.5" PointX="10.5" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="nogotochkiModel.RecordTime" Width="1.5" PointX="8.25" PointY="15.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="nogotochkiModel.Role" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="nogotochkiModel.ServiceType" Width="1.5" PointX="6" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="nogotochkiModel.ProductType" Width="1.5" PointX="0.75" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="nogotochkiModel.Rating" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="nogotochkiModel.Record" Width="1.5" PointX="10.5" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="nogotochkiModel.RecordTime" Width="1.5" PointX="8.25" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="nogotochkiModel.Role" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="nogotochkiModel.ServiceType" Width="1.5" PointX="6" PointY="14.625" IsExpanded="true" />
         <EntityTypeShape EntityType="nogotochkiModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="nogotochkiModel.User" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="nogotochkiModel.User" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
         <AssociationConnector Association="nogotochkiModel.FK_Cart_User" ManuallyRouted="false" />
-        <AssociationConnector Association="nogotochkiModel.FK_ProductCart_Cart" ManuallyRouted="false" />
+        <AssociationConnector Association="nogotochkiModel.FK_ProductCart_Cart1" ManuallyRouted="false" />
         <AssociationConnector Association="nogotochkiModel.FK_Product_Discount" ManuallyRouted="false" />
         <AssociationConnector Association="nogotochkiModel.FK_Product_Manufacturer" ManuallyRouted="false" />
         <AssociationConnector Association="nogotochkiModel.FK_MasterServiceType_ServiceType" ManuallyRouted="false" />
@@ -33,7 +33,7 @@
         <AssociationConnector Association="nogotochkiModel.FK_ProductOrder_Order" ManuallyRouted="false" />
         <AssociationConnector Association="nogotochkiModel.FK_Record_PaymentType" ManuallyRouted="false" />
         <AssociationConnector Association="nogotochkiModel.FK_Product_ProductType" ManuallyRouted="false" />
-        <AssociationConnector Association="nogotochkiModel.FK_ProductCart_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="nogotochkiModel.FK_ProductCart_Product1" ManuallyRouted="false" />
         <AssociationConnector Association="nogotochkiModel.FK_ProductOrder_Product" ManuallyRouted="false" />
         <AssociationConnector Association="nogotochkiModel.FK_Rating_Product" ManuallyRouted="false" />
         <AssociationConnector Association="nogotochkiModel.FK_Rating_User" ManuallyRouted="false" />

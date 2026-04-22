@@ -66,13 +66,11 @@
         </EntityType>
         <EntityType Name="ProductCart">
           <Key>
-            <PropertyRef Name="CartID" />
-            <PropertyRef Name="ProductID" />
+            <PropertyRef Name="ProductCart" />
           </Key>
+          <Property Name="ProductCart" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CartID" Type="int" Nullable="false" />
           <Property Name="ProductID" Type="int" Nullable="false" />
-          <Property Name="Amount" Type="int" Nullable="false" />
-          <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductOrder">
           <Key>
@@ -81,8 +79,6 @@
           <Property Name="ProductOrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="OrderID" Type="int" Nullable="false" />
           <Property Name="ProductID" Type="int" Nullable="false" />
-          <Property Name="Amount" Type="int" Nullable="false" />
-          <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductType">
           <Key>
@@ -243,7 +239,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ProductCart_Cart">
+        <Association Name="FK_ProductCart_Cart1">
           <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
           <End Role="ProductCart" Type="Self.ProductCart" Multiplicity="*" />
           <ReferentialConstraint>
@@ -255,7 +251,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ProductCart_Product">
+        <Association Name="FK_ProductCart_Product1">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="ProductCart" Type="Self.ProductCart" Multiplicity="*" />
           <ReferentialConstraint>
@@ -421,11 +417,11 @@
             <End Role="ProductType" EntitySet="ProductType" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProductCart_Cart" Association="Self.FK_ProductCart_Cart">
+          <AssociationSet Name="FK_ProductCart_Cart1" Association="Self.FK_ProductCart_Cart1">
             <End Role="Cart" EntitySet="Cart" />
             <End Role="ProductCart" EntitySet="ProductCart" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProductCart_Product" Association="Self.FK_ProductCart_Product">
+          <AssociationSet Name="FK_ProductCart_Product1" Association="Self.FK_ProductCart_Product1">
             <End Role="Product" EntitySet="Product" />
             <End Role="ProductCart" EntitySet="ProductCart" />
           </AssociationSet>
@@ -479,7 +475,7 @@
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Self.FK_Cart_User" FromRole="Cart" ToRole="User" />
-          <NavigationProperty Name="ProductCart" Relationship="Self.FK_ProductCart_Cart" FromRole="Cart" ToRole="ProductCart" />
+          <NavigationProperty Name="ProductCart" Relationship="Self.FK_ProductCart_Cart1" FromRole="Cart" ToRole="ProductCart" />
         </EntityType>
         <EntityType Name="Discount">
           <Key>
@@ -542,21 +538,19 @@
           <NavigationProperty Name="Discount" Relationship="Self.FK_Product_Discount" FromRole="Product" ToRole="Discount" />
           <NavigationProperty Name="Manufacturer" Relationship="Self.FK_Product_Manufacturer" FromRole="Product" ToRole="Manufacturer" />
           <NavigationProperty Name="ProductType" Relationship="Self.FK_Product_ProductType" FromRole="Product" ToRole="ProductType" />
-          <NavigationProperty Name="ProductCart" Relationship="Self.FK_ProductCart_Product" FromRole="Product" ToRole="ProductCart" />
+          <NavigationProperty Name="ProductCart" Relationship="Self.FK_ProductCart_Product1" FromRole="Product" ToRole="ProductCart" />
           <NavigationProperty Name="ProductOrder" Relationship="Self.FK_ProductOrder_Product" FromRole="Product" ToRole="ProductOrder" />
           <NavigationProperty Name="Rating" Relationship="Self.FK_Rating_Product" FromRole="Product" ToRole="Rating" />
         </EntityType>
         <EntityType Name="ProductCart">
           <Key>
-            <PropertyRef Name="CartID" />
-            <PropertyRef Name="ProductID" />
+            <PropertyRef Name="ProductCart1" />
           </Key>
+          <Property Name="ProductCart1" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CartID" Type="Int32" Nullable="false" />
           <Property Name="ProductID" Type="Int32" Nullable="false" />
-          <Property Name="Amount" Type="Int32" Nullable="false" />
-          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <NavigationProperty Name="Cart" Relationship="Self.FK_ProductCart_Cart" FromRole="ProductCart" ToRole="Cart" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_ProductCart_Product" FromRole="ProductCart" ToRole="Product" />
+          <NavigationProperty Name="Cart" Relationship="Self.FK_ProductCart_Cart1" FromRole="ProductCart" ToRole="Cart" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ProductCart_Product1" FromRole="ProductCart" ToRole="Product" />
         </EntityType>
         <EntityType Name="ProductOrder">
           <Key>
@@ -565,8 +559,6 @@
           <Property Name="ProductOrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="OrderID" Type="Int32" Nullable="false" />
           <Property Name="ProductID" Type="Int32" Nullable="false" />
-          <Property Name="Amount" Type="Int32" Nullable="false" />
-          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <NavigationProperty Name="Order" Relationship="Self.FK_ProductOrder_Order" FromRole="ProductOrder" ToRole="Order" />
           <NavigationProperty Name="Product" Relationship="Self.FK_ProductOrder_Product" FromRole="ProductOrder" ToRole="Product" />
         </EntityType>
@@ -673,7 +665,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ProductCart_Cart">
+        <Association Name="FK_ProductCart_Cart1">
           <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
           <End Role="ProductCart" Type="Self.ProductCart" Multiplicity="*" />
           <ReferentialConstraint>
@@ -793,7 +785,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ProductCart_Product">
+        <Association Name="FK_ProductCart_Product1">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="ProductCart" Type="Self.ProductCart" Multiplicity="*" />
           <ReferentialConstraint>
@@ -899,7 +891,7 @@
             <End Role="User" EntitySet="User" />
             <End Role="Cart" EntitySet="Cart" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProductCart_Cart" Association="Self.FK_ProductCart_Cart">
+          <AssociationSet Name="FK_ProductCart_Cart1" Association="Self.FK_ProductCart_Cart1">
             <End Role="Cart" EntitySet="Cart" />
             <End Role="ProductCart" EntitySet="ProductCart" />
           </AssociationSet>
@@ -939,7 +931,7 @@
             <End Role="ProductType" EntitySet="ProductType" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProductCart_Product" Association="Self.FK_ProductCart_Product">
+          <AssociationSet Name="FK_ProductCart_Product1" Association="Self.FK_ProductCart_Product1">
             <End Role="Product" EntitySet="Product" />
             <End Role="ProductCart" EntitySet="ProductCart" />
           </AssociationSet>
@@ -1043,10 +1035,9 @@
           <EntitySetMapping Name="ProductCart">
             <EntityTypeMapping TypeName="nogotochkiModel.ProductCart">
               <MappingFragment StoreEntitySet="ProductCart">
+                <ScalarProperty Name="ProductCart1" ColumnName="ProductCart" />
                 <ScalarProperty Name="CartID" ColumnName="CartID" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1056,8 +1047,6 @@
                 <ScalarProperty Name="ProductOrderID" ColumnName="ProductOrderID" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

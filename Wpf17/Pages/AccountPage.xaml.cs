@@ -25,7 +25,7 @@ namespace Wpf17.Pages
             InitializeComponent();
 
             User cur = Core.Context.User.First(x => x.UserID == State.CurrentUserID);
-            LoginTB.Text = cur.Login;
+            LoginTB.Text += cur.Login;
             PasswordTB.Text += cur.Password;
             RoleTB.Text += cur.Role.Name;
             FIOTB.Text += cur.FIO;

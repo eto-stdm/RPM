@@ -13,7 +13,7 @@ namespace Wpf17
         {
             get
             {
-                return $"Название: {Product.Name}, Количество: {Amount}, Цена: {Price}";
+                return $"Название: {Product.Name}"; //, Количество: {Amount}, Цена: {Price}
             }
         }
     }

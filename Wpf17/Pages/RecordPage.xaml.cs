@@ -25,6 +25,18 @@ namespace Wpf17.Pages
         {
             InitializeComponent();
             this.serviceType = serviceType;
+
+            string serviceName = serviceType.Name;
+            PageHeaderTB.Text = serviceName;
+
+            //List<MasterServiceType> mastersService = Core.Context.MasterServiceType.Where(x => x.ServiceType.Name == serviceName).ToList();
+            //List<User> mastersUsers = Core.Context.User.Where(x => x.UserID == mastersService.MasterID
+            //MastersLB.ItemsSource = mastersService;
+        }
+
+        private void BackBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
         }
     }
 }
