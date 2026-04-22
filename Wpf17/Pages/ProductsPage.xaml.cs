@@ -54,9 +54,56 @@ namespace Wpf17.Pages
             NavigationService.Navigate(new CartPage());
         }
 
+        private void RatingMaker(int value)
+        {
+            var selitem = ProductsLB.SelectedItem as Product;
+            if (selitem == null) { return; }
+            if (Core.Context.Rating.FirstOrDefault(x => x.UserID == State.CurrentUserID && x.ProductID == selitem.ProductID) == null)
+            {
+                Rating newrating = new Rating
+                {
+                    ProductID = selitem.ProductID,
+                    UserID = State.CurrentUserID,
+                    Value = value,
+                };
+                Core.Context.Rating.Add(newrating);
+                Core.Context.SaveChanges();
+                MessageBox.Show("Вы успешно оставили отзыв!");
+            }
+            else
+            {
+                MessageBox.Show("Вы уже оставляли отзыв на этот товар!");
+            }
+        }
+
         private void BackBtn_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
+        }
+
+        private void RatingOneMI_Click(object sender, RoutedEventArgs e)
+        {
+            RatingMaker(1);
+        }
+
+        private void RatingTwoMI_Click(object sender, RoutedEventArgs e)
+        {
+            RatingMaker(2);
+        }
+
+        private void RatingThreeMI_Click(object sender, RoutedEventArgs e)
+        {
+            RatingMaker(3);
+        }
+
+        private void RatingFourMI_Click(object sender, RoutedEventArgs e)
+        {
+            RatingMaker(4);
+        }
+
+        private void RatingFiveMI_Click(object sender, RoutedEventArgs e)
+        {
+            RatingMaker(5);
         }
     }
 }

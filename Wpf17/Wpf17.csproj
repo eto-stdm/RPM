@@ -108,6 +108,7 @@
     <Compile Include="Classes\PartalProductOrder.cs" />
     <Compile Include="Classes\PartalUsers.cs" />
     <Compile Include="Classes\State.cs" />
+    <Compile Include="Classes\PartalProduct.cs" />
     <Compile Include="PaymentType.cs">
       <DependentUpon>nogotochki.tt</DependentUpon>
     </Compile>
