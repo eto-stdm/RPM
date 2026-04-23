@@ -51,7 +51,6 @@ namespace Wpf17.Pages
                 recordTimesValue.Add(r.Value.ToString());
             }
             RecordRecordTime.ItemsSource = recordTimesValue;
-            
 
             List<Discount> discounts = Core.Context.Discount.ToList();
             List<string> discountsName = new List<string>();
@@ -243,6 +242,7 @@ namespace Wpf17.Pages
                         Core.Context.SaveChanges();
                         RecordSP.Visibility = Visibility.Collapsed;
                     }
+                    UpdateList("records");
                     break;
 
                 case "Добавить продукт":
@@ -258,6 +258,7 @@ namespace Wpf17.Pages
                     Core.Context.Product.Add(newproduct);
                     Core.Context.SaveChanges();
                     ProductSP.Visibility = Visibility.Collapsed;
+                    UpdateList("products");
                     break;
 
                 case "Добавить производителя":
@@ -268,6 +269,7 @@ namespace Wpf17.Pages
                     Core.Context.Manufacturer.Add(newmanufacturer);
                     Core.Context.SaveChanges();
                     ManufacturerSP.Visibility = Visibility.Collapsed;
+                    UpdateList("manufacturers");
                     break;
 
                 case "Добавить тип товара":
@@ -278,6 +280,7 @@ namespace Wpf17.Pages
                     Core.Context.ProductType.Add(newproducttype);
                     Core.Context.SaveChanges();
                     ProductTypeSP.Visibility = Visibility.Collapsed;
+                    UpdateList("productTypes");
                     break;
 
                 case "Добавить тип услуги":
@@ -288,6 +291,7 @@ namespace Wpf17.Pages
                     Core.Context.ServiceType.Add(newservicetype);
                     Core.Context.SaveChanges();
                     ServiceTypeSP.Visibility = Visibility.Collapsed;
+                    UpdateList("serviceTypes");
                     break;
 
                 default: break;
