@@ -34,13 +34,15 @@ namespace Wpf17.Pages
 
         private void SelectPeopleWorking(int dayID)
         {
-            List<MasterServiceType> mastersService = Core.Context.MasterServiceType.Where(x => x.ServiceType.Name == serviceType.Name && x.WeekDayID == dayID).ToList();
+            List<MasterServiceType> mastersService = Core.Context.MasterServiceType.Where(x => x.ServiceType.Name == serviceType.Name && x.WeekDayID == dayID && x.IsActive == true).ToList();
             List<string> masterFIO = new List<string>();
-            foreach (MasterServiceType master in mastersService)
-            {
-                masterFIO.Add(master.User.FIO);
+            if (mastersService != null)
+            { 
+                foreach (MasterServiceType master in mastersService)
+                {
+                    masterFIO.Add(master.User.FIO);
+                }
             }
-
             MastersLB.ItemsSource = masterFIO;
         }
 

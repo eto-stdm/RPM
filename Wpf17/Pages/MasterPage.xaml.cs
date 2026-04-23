@@ -52,18 +52,25 @@ namespace Wpf17.Pages
                 int selectServType = Core.Context.ServiceType.First(x => x.Name == ServiceTypesCB.Text).ServiceTypeID;
                 int selectWeekDay = Core.Context.WeekDay.First(x => x.Name == WeekDayCB.Text).WeekDayID;
 
-                if (masterServiceTypes.FirstOrDefault(x => x.MasterID == State.CurrentUserID && x.ServiceTypeID == selectServType && x.WeekDayID == selectWeekDay) != null)
+                MasterServiceType newmst = new MasterServiceType
                 {
-                    MessageBox.Show("Выбранный тип услуги вместе с днём работы, уже содержатся у вас!");
+                    MasterID = State.CurrentUserID,
+                    ServiceTypeID = selectServType,
+                    WeekDayID = selectWeekDay,
+                };
+
+                if (masterServiceTypes.FirstOrDefault(x => x.MasterID == State.CurrentUserID && x.ServiceTypeID == selectServType && x.WeekDayID == selectWeekDay && x.IsActive == false) != null)
+                {
+                    var temp = masterServiceTypes.FirstOrDefault(x => x.MasterID == State.CurrentUserID && x.ServiceTypeID == selectServType && x.WeekDayID == selectWeekDay && x.IsActive == false);
+                    temp.IsActive = true;
+                    Core.Context.SaveChanges();
                 }
-                else
+                else if (masterServiceTypes.FirstOrDefault(x => x.MasterID == State.CurrentUserID && x.ServiceTypeID == selectServType && x.WeekDayID == selectWeekDay && x.IsActive == true) != null)
                 {
-                    MasterServiceType newmst = new MasterServiceType
-                    {
-                        MasterID = State.CurrentUserID,
-                        ServiceTypeID = selectServType,
-                        WeekDayID = selectWeekDay,
-                    };
+                    MessageBox.Show("Услуга уже добавлена!");
+                }
+                else if (masterServiceTypes.FirstOrDefault(x => x.MasterID == State.CurrentUserID && x.ServiceTypeID == selectServType && x.WeekDayID == selectWeekDay) == null)
+                {
                     try
                     {
                         Core.Context.MasterServiceType.Add(newmst);
@@ -75,12 +82,13 @@ namespace Wpf17.Pages
                         MessageBox.Show("Чёрт знает, почему происходит эта ошибка. Хотя бы не вылетает.");
                     }
                 }
+                else { MessageBox.Show("Необработанное исключение"); }
             }
             else
             {
                 MessageBox.Show("Заполните поля!");
             }
-            }
+        }
 
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -90,24 +98,43 @@ namespace Wpf17.Pages
                 int selectServType = Core.Context.ServiceType.First(x => x.Name == ServiceTypesCB.Text).ServiceTypeID;
                 int selectWeekDay = Core.Context.WeekDay.First(x => x.Name == WeekDayCB.Text).WeekDayID;
 
-                if (masterServiceTypes.FirstOrDefault(x => x.MasterID == State.CurrentUserID && x.ServiceTypeID == selectServType && x.WeekDayID == selectWeekDay) != null)
+                //if (masterServiceTypes.FirstOrDefault(x => x.MasterID == State.CurrentUserID && x.ServiceTypeID == selectServType && x.WeekDayID == selectWeekDay) != null)
+                //{
+                MasterServiceType tempdeleted = masterServiceTypes.FirstOrDefault(x => x.MasterID == State.CurrentUserID && x.ServiceTypeID == selectServType && x.WeekDayID == selectWeekDay);
+                if (tempdeleted == null)
                 {
-                    MasterServiceType tempdeleted = masterServiceTypes.FirstOrDefault(x => x.MasterID == State.CurrentUserID && x.ServiceTypeID == selectServType && x.WeekDayID == selectWeekDay);
-                    Core.Context.MasterServiceType.Remove(tempdeleted);
-                    try
-                    {
-                        Core.Context.SaveChanges();
-                        MessageBox.Show("Удалено!");
-                    }
-                    catch (System.InvalidOperationException)
-                    {
-                        MessageBox.Show("Чёрт знает, почему происходит эта ошибка. Хотя бы не вылетает.");
-                    }
+                    MessageBox.Show("Услуга уже удалена!");
                 }
                 else
-                {
-                    MessageBox.Show("Выбранный тип услуги вместе с днём работы, не содержатся у вас!");
+                { 
+                    List<Record> temprecords = Core.Context.Record.Where(x => x.MasterSeviceTypeID == tempdeleted.MasterServiceTypeID).ToList();
+                    if (tempdeleted.IsActive == true && temprecords.All(x => x.IsDone == true) == true)
+                    {
+                        Core.Context.MasterServiceType.Remove(tempdeleted);
+                        try
+                        {
+                            Core.Context.SaveChanges();
+                            MessageBox.Show("Удалено!");
+                        }
+                        catch (System.InvalidOperationException)
+                        {
+                            MessageBox.Show("Чёрт знает, почему происходит эта ошибка. Хотя бы не вылетает.");
+                        }
+                    }
+                    else if (tempdeleted.IsActive == false && temprecords.All(x => x.IsDone == true) == true)
+                    {
+                        MessageBox.Show("Услуга уже удалена!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Не все записи с таким же набором (услуга, день недели) завершены. Сначала закройте эти записи, а потом удаляйте услугу.");
+                    }
                 }
+                //}
+                //else
+                //{
+                //    MessageBox.Show("Выбранный тип услуги вместе с днём работы, не содержатся у вас!");
+                //}
             }
             else
             {
