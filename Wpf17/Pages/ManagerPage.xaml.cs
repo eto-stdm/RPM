@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,17 +34,24 @@ namespace Wpf17.Pages
             }
             RecordClient.ItemsSource = clientsName;
 
-            List<string> mastersName = new List<string>();
-            foreach (User u in users)
-            {
-                if (u.Role.Name == "Мастер") { mastersName.Add(u.Login); }
-            }
-            RecordMaster.ItemsSource = mastersName;
+            List<MasterServiceType> masterServiceTypes = Core.Context.MasterServiceType.ToList();
+            List<string> masterServiceTypesString = new List<string>();
+            foreach (MasterServiceType m in masterServiceTypes) { masterServiceTypesString.Add(m.All); }
+            RecordMasterServiceType.ItemsSource = masterServiceTypesString;
 
             List<PaymentType> paymentTypes = Core.Context.PaymentType.ToList();
             List<string> paymentTypesName = new List<string>();
             foreach (PaymentType p in paymentTypes) { paymentTypesName.Add(p.Name); }
             RecordPaymentType.ItemsSource = paymentTypesName;
+
+            List<RecordTime> recordTimes = Core.Context.RecordTime.ToList();
+            List<string> recordTimesValue = new List<string>();
+            foreach (RecordTime r in recordTimes) 
+            {
+                recordTimesValue.Add(r.Value.ToString());
+            }
+            RecordRecordTime.ItemsSource = recordTimesValue;
+            
 
             List<Discount> discounts = Core.Context.Discount.ToList();
             List<string> discountsName = new List<string>();
@@ -59,6 +67,8 @@ namespace Wpf17.Pages
             List<string> productTypesName = new List<string>();
             foreach (ProductType p in productTypes) { productTypesName.Add(p.Name); }
             ProductProductType.ItemsSource = productTypesName;
+            
+
 
             UpdateList("records");
             UpdateList("orders");
@@ -69,8 +79,7 @@ namespace Wpf17.Pages
         }
 
         private void ClearTB()
-        {
-            RecordDateTime.Clear();
+        {           
             RecordPrice.Clear();
             RecordComment.Clear();
 
@@ -192,10 +201,10 @@ namespace Wpf17.Pages
                 case "Добавить производителя":
                     ManufacturerSP.Visibility = Visibility.Visible;
                     break;
-                case "Добавить типы товаров":
+                case "Добавить тип товаров":
                     ProductTypeSP.Visibility = Visibility.Visible;
                     break;
-                case "Добавить типы услуг":
+                case "Добавить тип услуг":
                     ServiceTypeSP.Visibility = Visibility.Visible;
                     break;
                 default: break;
@@ -209,6 +218,8 @@ namespace Wpf17.Pages
             List<User> users = new List<User>();
             List<ServiceType> serviceTypes = Core.Context.ServiceType.ToList();
             List<PaymentType> paymentTypes = Core.Context.PaymentType.ToList();
+            List<MasterServiceType> masterServiceTypes = Core.Context.MasterServiceType.ToList();
+            List<RecordTime> recordTimes = Core.Context.RecordTime.ToList();
 
             List<Discount> discounts = Core.Context.Discount.ToList();
             List<Manufacturer> manufacturers = Core.Context.Manufacturer.ToList();
@@ -216,24 +227,22 @@ namespace Wpf17.Pages
             switch (butn.Content)
             {
                 case "Добавить запись":
-                    if (DateTime.TryParse(RecordDateTime.Text, out var datetime))
                     {
                         Record newrecord = new Record
                         {
-                            ClientID = users.First(u => u.PhoneNumber == RecordClient.Text).UserID,
-                            //MasterID = users.First(u => u.Login == RecordMaster.Text).UserID,
-                            //DateTime = datetime,
-                            //ServiceTypeID = serviceTypes.First(s => s.Name == RecordServiceType.Text).ServiceTypeID,
-                            Price = Convert.ToDecimal(RecordPrice),
-                            PaymentTypeID = paymentTypes.First(p => p.Name == RecordPaymentType.Text).PaymentTypeID,
-                            Comment = RecordComment.Text,
-                            IsDone = false,
+                             ClientID = users.First(u => u.PhoneNumber == RecordClient.Text).UserID,
+                             MasterSeviceTypeID = masterServiceTypes[RecordMasterServiceType.SelectedIndex].MasterServiceTypeID,
+                             RecordTimeID = recordTimes.First(s => s.Value == TimeSpan.Parse(RecordRecordTime.Text)).RecordTimeID,
+                             Date = RecordDate.SelectedDate,
+                             Price = Convert.ToDecimal(RecordPrice),
+                             PaymentTypeID = paymentTypes.First(p => p.Name == RecordPaymentType.Text).PaymentTypeID,
+                             Comment = RecordComment.Text,
+                             IsDone = false,
                         };
                         Core.Context.Record.Add(newrecord);
                         Core.Context.SaveChanges();
                         RecordSP.Visibility = Visibility.Collapsed;
                     }
-                    else { System.Windows.Forms.MessageBox.Show("Введите корректный DateTime!\n (Подсказка в ToolTip)"); }
                     break;
 
                 case "Добавить продукт":

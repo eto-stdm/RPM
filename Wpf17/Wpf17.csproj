@@ -72,6 +72,7 @@
       <DependentUpon>nogotochki.tt</DependentUpon>
     </Compile>
     <Compile Include="Classes\Core.cs" />
+    <Compile Include="Classes\PartalMasterServiceType.cs" />
     <Compile Include="Classes\PartalRecord.cs" />
     <Compile Include="Discount.cs">
       <DependentUpon>nogotochki.tt</DependentUpon>

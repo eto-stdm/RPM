@@ -35,9 +35,11 @@
                             <WrapPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="0">
                                 <TextBlock Text="{Binding RecordID, StringFormat=ID: {0}}" Margin="0, 10, 10, 0"/>
                                 <TextBlock Text="{Binding User.Login, StringFormat=Клиент: {0}}" Margin="0, 10, 10, 0"/>
-                                <TextBlock Text="{Binding User1.Login, StringFormat=Мастер: {0}}" Margin="0, 10, 10, 0"/>
-                                <TextBlock Text="{Binding DateTime, StringFormat=Дата: dd.mm.yyyy}" Margin="0, 10, 10, 0"/>
-                                <TextBlock Text="{Binding ServiceType.Name, StringFormat=Тип услуги: {0}}" Margin="0, 10, 10, 0"/>
+                                <TextBlock Text="{Binding MasterServiceType.User.Login, StringFormat=Мастер: {0}}" Margin="0, 10, 10, 0"/>
+                                <TextBlock Text="{Binding RecordTime.Value, StringFormat=Время: {0}}" Margin="0, 10, 10, 0"/>
+                                <TextBlock Text="{Binding Date, StringFormat=Дата: dd.mm.yyyy}" Margin="0, 10, 10, 0"/>
+                                <TextBlock Text="{Binding Price, StringFormat=Цена: {0} руб}" Margin="0, 10, 10, 0"/>
+                                <TextBlock Text="{Binding MasterServiceType.ServiceType.Name, StringFormat=Тип услуги: {0}}" Margin="0, 10, 10, 0"/>
                                 <TextBlock Text="{Binding PaymentType.Name, StringFormat=Тип оплаты: {0}}" Margin="0, 10, 10, 10"/>
                             </WrapPanel>
                             <StackPanel Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
@@ -199,16 +201,16 @@
                     <ComboBox x:Name="RecordClient" Width="100" Height="20"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
-                    <TextBlock Text="Логин мастера:" Margin="0,0,10,0"/>
-                    <ComboBox x:Name="RecordMaster" Width="100" Height="20"/>
+                    <TextBlock Text="Мастер/Услуга/День недели:" Margin="0,0,10,0"/>
+                    <ComboBox x:Name="RecordMasterServiceType" Width="100" Height="20"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10" ToolTip="Формат ввода: 5/3/2023 8:15:10 AM">
-                    <TextBlock Text="Дата и время записи:" Margin="0,0,10,0"/>
-                    <TextBox x:Name="RecordDateTime" Width="100" Height="20"/>
+                    <TextBlock Text="Время записи:" Margin="0,0,10,0"/>
+                    <ComboBox x:Name="RecordRecordTime" Width="100" Height="20"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
-                    <TextBlock Text="Тип услуги:" Margin="0,0,10,0"/>
-                    <ComboBox x:Name="RecordServiceType" Width="100" Height="20"/>
+                    <TextBlock Text="Дата записи:" Margin="0,0,10,0"/>
+                    <DatePicker x:Name="RecordDate" Width="100" Height="20"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
                     <TextBlock Text="Цена:" Margin="0,0,10,0"/>
