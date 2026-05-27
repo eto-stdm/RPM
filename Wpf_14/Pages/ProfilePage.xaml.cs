@@ -24,8 +24,7 @@ namespace Wpf_14.Pages
         {
             InitializeComponent();
 
-            List<Users> users = Core.Context.Users.ToList();
-            
+            List<Users> users = Core.Context.Users.ToList();         
 
             Users curUser = users.First(x => x.ID == State.curr_user_id);
             LoginTB.Text = "Логин: " + curUser.Login;

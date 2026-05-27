@@ -10,7 +10,7 @@
 
     <Grid>
         <StackPanel Orientation="Horizontal" Height="50" VerticalAlignment="Top" HorizontalAlignment="Center">
-            <TextBox x:Name="SearchTB" Width="310" Height="30" Margin="10,10,10,10" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="SearchTB" Width="270" Height="30" Margin="10,10,10,10" VerticalContentAlignment="Center"/>
             <Button x:Name="SerachBtn" Width="40" Content="🔍" Margin="0,10,10,10" Click="SerachBtn_Click"/>
 
             <Menu Width="40" Margin="0,10,10,10">
@@ -28,6 +28,7 @@
                 </MenuItem>
             </Menu>
             <Button x:Name="AccountBtn" Content="👤" Width="40" Margin="0,10,10,10" Click="AccountBtn_Click"/>
+            <Button x:Name="HelpBtn" Content="?" Width="40" Margin="0,10,10,10" Click="HelpBtn_Click"/>
         </StackPanel>
         <ListBox x:Name="FilmsLB" MouseDoubleClick="MouseDoubleClick" ItemsSource="{Binding Path=films}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="460" Height="400" VerticalAlignment="Bottom" Margin="0,0,0,13">
             <ListBox.ItemTemplate>

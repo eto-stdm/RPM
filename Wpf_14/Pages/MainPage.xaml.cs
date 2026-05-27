@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -101,6 +102,11 @@ namespace Wpf_14.Pages
         {
             films = films.OrderByDescending(f => f.AgeRestrID).ToList();
             FilmsLB.ItemsSource = films;
+        }
+
+        private void HelpBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("help.chm");
         }
     }
 }
